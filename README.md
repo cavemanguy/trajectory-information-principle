@@ -1,4 +1,4 @@
-# Attractor Curve Mapping Theory
+ # Attractor Curve Mapping Theory
 
 ![Visualization](visualization.gif)
 
@@ -14,16 +14,22 @@ When data points converge in a dynamical system:
 3. Different initial values create distinguishably different curves
 4. Analysis of curve characteristics enables recovery of initial conditions
 
-## The Insight
+## The Key Distinction
 
-Traditional view: Attractors destroy information (many inputs → one output)
+**Traditional Understanding:**
+- Many-to-one mappings in attractors constitute information loss
+- Multiple initial conditions converging to a single attractor cannot be reversed
+- The attractor represents an information bottleneck where initial state information is destroyed
 
-This work shows: The convergence curve preserves information through:
-- Path taken through phase space
-- Velocity profile during convergence  
-- Sequence of dominant attractors
-- Oscillation patterns
-- Total trajectory length
+**This Work Demonstrates:**
+- Many-to-one convergence occurs via unique trajectories
+- Each trajectory constitutes a distinguishable signature of its initial conditions  
+- Information is not destroyed but rather encoded in the convergence dynamics
+- The curve through phase space preserves sufficient information for initial state recovery
+
+**Relationship to Existing Work:**
+
+This differs from Takens' embedding theorem (which reconstructs the attractor geometry from trajectories) and reservoir computing (which uses trajectory dynamics for computation). Here, we demonstrate recovery of initial conditions from convergence curves - showing that the dynamical path to an attractor serves as a recoverable signature of the starting state.
 
 ## Quick Demo
 
@@ -117,7 +123,7 @@ python comparison_traditional.py
 ```
 Attractor Curve Mapping: Information Preservation in Convergence Dynamics
 Demonstrates that convergence trajectories encode recoverable information
-2025 Zachary Daniels
+2024 Zachary Daniels
 ```
 
 ## Future Directions
@@ -126,6 +132,7 @@ Demonstrates that convergence trajectories encode recoverable information
 - Hardware implementations using analog circuits
 - Integration with reservoir computing
 - Analysis of natural systems with attractors
+- Neural Networks and Machine Learning 
 
 ## License
 
