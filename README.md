@@ -2,6 +2,19 @@
 
 ![Visualization](visualization.gif)
 
+## 
+In this recreational research project, I explore an intriguing phenomenon in dynamical systems: how initial data "chooses" between multiple stable attractors
+based on intrinsic compatibility rather than mere proximity. While tinkering with convergence dynamics, I noticed that data points exhibit selective affinity for certain attractors - a resonance that goes beyond simple distance metrics in phase space. This observation led me to implement a system where each trajectory becomes a unique signature encoding both the initial conditions and the attractor landscape it navigates.
+
+The core insight emerged from watching how different input values, even when numerically close, would sometimes diverge to entirely different stable states.
+Rather than treating this as simple basin boundary crossing, I began exploring whether the data itself carries properties that create preferential "resonance"
+with specific attractors. My implementation demonstrates this through a compatibility function that allows attractors to selectively capture data based on
+intrinsic signatures. Each convergence trajectory thus becomes a rich encoding of how that particular data pattern interacts with the system's structure - a joint signature of both the information and the computational landscape.
+
+What makes this exploration particularly fascinating is that the trajectory serves triple duty: it encodes the original data, reveals the structure of the attractor landscape, and captures their interaction dynamics. This suggests that stable attractors could serve as computational primitives where the selection pattern itself performs computation - a form of morphological computation where the phase space geometry does the work. While established fields like reservoir computing use transient dynamics, this specific angle of selective attractor affinity based on data-attractor resonance appears less explored. The trajectories become a kind of dynamical hash function, where similar inputs might deliberately diverge to different attractors based on subtle property differences, creating a natural classification or encoding scheme.
+
+This work is purely exploratory - a curiosity-driven investigation into whether these dynamics could offer new perspectives on information processing in complex systems. The potential applications range from novel encoding schemes to pattern classification systems that leverage natural dynamics rather than forced computation.
+
 ## Core Theory
 
 Information is encoded in HOW data converges to attractors, not just WHERE it converges. Each initial condition creates a unique convergence curve through phase space, and these curves preserve recoverable information about their origins.
