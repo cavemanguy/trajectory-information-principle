@@ -136,7 +136,7 @@ python comparison_traditional.py
 ```
 Attractor Curve Mapping: Information Preservation in Convergence Dynamics
 Demonstrates that convergence trajectories encode recoverable information
-2024 Zachary Daniels
+2024 Zachary Daniels, Luke Beard, Ryan Longmire
 ```
 
 ## Future Directions
