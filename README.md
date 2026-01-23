@@ -349,7 +349,8 @@ Open for exploration, extension, and collaboration.
 
 ## Author
 
-**[Your Name]**  
+**
+Zachary Daniels
 Independent Researcher  
 Self-taught in dynamical systems, machine learning, and computational theory
 
