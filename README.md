@@ -354,7 +354,7 @@ Zachary Daniels
 Independent Researcher  
 Self-taught in dynamical systems, machine learning, and computational theory
 
-*Working on this while employed in construction at Kennedy Space Center - proving that novel research doesn’t require traditional academic credentials.*
+
 
 -----
 
