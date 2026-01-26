@@ -311,7 +311,7 @@ If you use this work, please cite:
 
 ```bibtex
 @software{trajectory_information_principle,
-  author = {[Your Name]},
+  author = {[Zachary Daniels]},
   title = {Trajectory Information Principle: 
            Information Encoding in Attractor Convergence},
   year = {2025},
@@ -353,6 +353,7 @@ Open for exploration, extension, and collaboration.
 Zachary Daniels
 Independent Researcher  
 Self-taught in dynamical systems, machine learning, and computational theory
+
 
 
 
