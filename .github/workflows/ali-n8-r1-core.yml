@@ -1,0 +1,61 @@
+name: ALI-N8-R1 Core
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: "Primary R1 seed"
+        required: true
+        default: "5"
+        type: choice
+        options:
+          - "5"
+          - "17"
+          - "31"
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    name: Core pretraining seed ${{ inputs.seed }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+
+      - name: Record source commit
+        run: git rev-parse HEAD | tee source_commit.txt
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+
+      - name: Run preregistered core
+        run: |
+          mkdir -p results/reproducible/ali_n8_r1/seed_${{ inputs.seed }}/core
+          cp source_commit.txt results/reproducible/ali_n8_r1/seed_${{ inputs.seed }}/core/source_commit.txt
+          python experiments/ali_n8_r1/run_core.py \
+            --seed ${{ inputs.seed }} \
+            --outdir results/reproducible/ali_n8_r1/seed_${{ inputs.seed }}/core \
+            2>&1 | tee results/reproducible/ali_n8_r1/seed_${{ inputs.seed }}/core/run.log
+
+      - name: Upload core artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-${{ inputs.seed }}
+          path: results/reproducible/ali_n8_r1/seed_${{ inputs.seed }}/core/
+          if-no-files-found: error
+          retention-days: 90
