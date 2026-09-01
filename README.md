@@ -48,25 +48,29 @@ See [`docs/mechanism.md`](docs/mechanism.md) for the architecture, equations, in
 
 On an 8-relation synthetic memory task, the current reported accuracies are:
 
-| Method | Accuracy |
+| Method | Accuracy across seeds 5, 17, and 31 |
 |---|---:|
-| Native query-directed probing | **64.67%** |
-| Wider direct control | 63.60% |
-| Direct frozen-state readout | 62.40% |
-| Query-blind probing | 62.15% |
+| Native query-directed probing | **64.67% ± 1.81% SD** |
+| Wider direct control | 63.60% (dispersion not recovered) |
+| Direct frozen-state readout | 62.40% ± 1.16% SD |
+| Query-blind probing | 62.15% ± 1.28% SD |
 
-The small gap between native probing and the wider direct control is not, by itself, strong evidence for a general advantage. Run-to-run variation, uncertainty intervals, matched optimization, and independent replication are not yet documented here.
+The small gap between native probing and the wider direct control is not, by itself, strong evidence for a general advantage. Three-seed dispersion is documented for the native, direct, and query-blind conditions, but uncertainty remains substantial, the wider direct-control dispersion has not been recovered, and independent replication is absent.
+
+A corrected comparable positional-attention control reached **84.81% ± 7.06% SD** in the 8-relation setting, substantially above the current ALI result. ALI is therefore being studied as a mechanism, not presented as a stronger replacement for attention.
 
 The more informative evidence is the intervention on the learned probe direction:
 
-| Probe-direction condition | Accuracy |
+| Probe-direction condition | Accuracy across seeds 5, 17, and 31 |
 |---|---:|
-| Native query-directed probing | **64.67%** |
-| Wrong query used only for probe selection | 56.94% |
-| Shuffled probe directions | 51.29% |
-| Mean probe direction | 50.29% |
+| Native query-directed probing | **64.67% ± 1.81% SD** |
+| Wrong query used only for probe selection | 56.94% ± 3.22% SD |
+| Shuffled probe directions | 51.29% ± 2.85% SD |
+| Mean probe direction | 50.29% ± 1.17% SD |
 
 These interventions support a narrow causal statement: **in this trained system and task, retrieval performance depends on using the native query-conditioned probe direction.** They do not yet isolate query-only addressing, because the current policy may inspect the memory while selecting the direction: $v=P(h,m,q)$.
+
+Direction measurements connect this causal result to the earlier geometry work: same-memory directions selected for different queries had mean cosine approximately **0.209**, directions associated with the same query had consistency approximately **0.798**, and query-centroid cosine was approximately **-0.035**. This is structured query-dependent geometry, but not proof of query-only addressing.
 
 The next critical control is therefore
 
@@ -92,7 +96,7 @@ $$I(v;m,q) \neq I(v;q).$$
 
 With $v=P(h,m,q)$, the policy can perform content-dependent computation before the perturbation. A query-only policy constrains the addressing channel and tests whether useful selectivity remains when $I(v;m\mid q)$ is removed by construction.
 
-No claim of statistical significance is made until repeated runs, uncertainty estimates, and a fixed evaluation protocol are available.
+The three-seed dispersion supports reporting repeatability, but no claim of statistical significance is made without paired per-example predictions, confidence intervals for condition differences, and independent replication.
 
 ## Repository map
 
@@ -100,11 +104,12 @@ No claim of statistical significance is made until repeated runs, uncertainty es
 - [`docs/experiments.md`](docs/experiments.md): reported results, controls, interpretation, and missing evidence
 - [`docs/research-plan.md`](docs/research-plan.md): next experiments and reporting checklist
 - [`docs/research_history.md`](docs/research_history.md): the observer, trajectory, perturbation, and geometry experiments that narrowed the current hypothesis
+- [`results/`](results/README.md): recovered aggregate CSV summaries for current accuracy, causal interventions, direction mechanics, and attention control
 - [`archive/`](archive/README.md): superseded attractor-era prototype and claims, retained as research history
 
 ## Reproducibility status
 
-The current ALI experiment implementation, configuration, seeds, checkpoints, and raw result files are not present in this repository at this revision. Therefore the numerical results above should be treated as a **reported experimental checkpoint**, not as independently reproducible results from the checked-in code.
+Aggregate result CSVs and the seed set are now present in [`results/`](results/README.md). The current ALI implementation, complete configuration, checkpoints, per-seed rows, and per-example predictions are not yet present. The summaries document repeated runs, but the experiment cannot yet be independently reproduced from the checked-in repository alone.
 
 Before presenting the results as reproducible, the repository should include:
 
@@ -112,7 +117,7 @@ Before presenting the results as reproducible, the repository should include:
 2. model definitions and exact information access for every component;
 3. training and evaluation commands;
 4. parameter counts and matched-compute controls;
-5. multiple seeds, per-seed scores, mean, dispersion, and confidence intervals;
+5. per-seed rows, paired predictions, and confidence intervals (aggregate mean and dispersion are present);
 6. saved configs or checkpoints and machine-readable raw outputs.
 
 ## Scope and limitations
@@ -122,7 +127,7 @@ Before presenting the results as reproducible, the repository should include:
 - The current addressing policy is not query-only.
 - The compressed representation has not yet been characterized by rate, distortion, or an information bottleneck measurement; "compressed" currently describes the architecture, not a demonstrated compression advantage.
 - Direction interventions show dependence within the trained model, not broad causal generalization.
-- There is no demonstrated advantage over attention and no claim that ALI replaces it.
+- Corrected positional attention is substantially more accurate in the current comparable 8-relation result; ALI does not replace it.
 - Novelty relative to active sensing, learned querying, memory networks, perturbation methods, and dynamical readouts has not been established.
 
 ## Citation and contact

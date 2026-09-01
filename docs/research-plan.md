@@ -20,8 +20,8 @@ Run the simplest tests that could disprove the preferred explanation before scal
 
 ### Technical sequence
 
-1. Reproduce all current point estimates from a fixed script.
-2. Run multiple seeds and report uncertainty.
+1. Reproduce the checked-in three-seed aggregate summaries from a fixed script.
+2. Recover or rerun per-seed rows and retain paired per-example predictions for uncertainty on condition differences.
 3. Add query-only $P(q)$ and zero-perturbation controls.
 4. Decode from $v$, $r$, $m$, and allowed combinations to locate information channels.
 5. Sweep perturbation magnitude $\alpha$.
