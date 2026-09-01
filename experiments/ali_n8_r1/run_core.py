@@ -115,7 +115,7 @@ def main():
 
     cfg = {
         "experiment": "ALI-N8-R1",
-        "phase": "core",
+        "phase": "core_train_validation_only",
         "seed": args.seed,
         "train_memories": 20000,
         "validation_memories": 2500,
@@ -127,6 +127,7 @@ def main():
         "patience": 12,
         "min_improvement": 1e-4,
         "gradient_clip": 1.0,
+        "test_policy": "not_generated_or_evaluated_in_core_phase",
     }
 
     out = Path(args.outdir)
@@ -138,11 +139,12 @@ def main():
         "numpy": np.__version__,
     }, indent=2))
 
+    # Clean replication rule: core training creates only train and validation splits.
+    # The test split is generated for the first time by run_r1.py --phase final,
+    # after every downstream checkpoint and diagnostic decoder is frozen.
     train = make_memories(cfg["train_memories"], derive_seed(args.seed, "memory_train"))
     val = make_memories(cfg["validation_memories"], derive_seed(args.seed, "memory_val"))
-    test = make_memories(cfg["test_memories"], derive_seed(args.seed, "memory_test"))
     val_perm = make_perms(len(val), derive_seed(args.seed, "perm_val"))
-    test_perm = make_perms(len(test), derive_seed(args.seed, "perm_test"))
 
     set_seed(derive_seed(args.seed, "core_init"))
     model = Core()
@@ -185,10 +187,9 @@ def main():
             if stale >= 12:
                 break
 
+    if best_state is None:
+        raise RuntimeError("No core checkpoint selected")
     model.load_state_dict(best_state)
-
-    # The preregistration permits test evaluation only after the selected core checkpoint is frozen.
-    test_metric, test_heads = evaluate(model, test, test_perm, 256)
 
     # Alpha is calibrated from training latent states only after core selection.
     model.eval()
@@ -205,12 +206,12 @@ def main():
     summary = {
         "best_epoch": best_epoch,
         "best_validation_metric": best,
-        "test_core_metric": test_metric,
-        "test_head_accuracies": test_heads,
         "median_training_latent_norm": median_norm,
         "alpha": alpha,
         "checkpoint_sha256": ckpt_hash,
-        "status": "core_complete_frozen",
+        "status": "core_complete_frozen_test_unseen",
+        "test_generated": False,
+        "test_evaluated": False,
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2), flush=True)
