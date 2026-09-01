@@ -1,0 +1,166 @@
+name: ALI-N8-R1 Seed 5 Full
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  train_select:
+    name: Train/select ALI systems and controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+      - name: Download frozen seed-5 core
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-5
+          path: core_artifact
+          repository: cavemanguy/trajectory-information-principle
+          run-id: 33538508455
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Train and select without downstream test use
+        run: |
+          mkdir -p stage/main
+          python experiments/ali_n8_r1/run_r1.py \
+            --phase train --seed 5 \
+            --core-path core_artifact/core_best.pt \
+            --core-summary core_artifact/summary.json \
+            --outdir stage/main \
+            2>&1 | tee stage/main/run.log
+      - name: Upload selected main checkpoints
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-seed5-main-selected
+          path: stage/main/
+          if-no-files-found: error
+          retention-days: 90
+
+  diagnostics:
+    name: Diagnostic direction ${{ matrix.direction }}
+    needs: train_select
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        direction: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+      - name: Download frozen seed-5 core
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-5
+          path: core_artifact
+          repository: cavemanguy/trajectory-information-principle
+          run-id: 33538508455
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download selected main checkpoints
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-seed5-main-selected
+          path: stage/main
+      - name: Train/select eight decoders for this direction
+        run: |
+          mkdir -p stage/decode_${{ matrix.direction }}
+          python experiments/ali_n8_r1/run_r1.py \
+            --phase decode --seed 5 --direction ${{ matrix.direction }} \
+            --core-path core_artifact/core_best.pt \
+            --core-summary core_artifact/summary.json \
+            --main-dir stage/main \
+            --outdir stage/decode_${{ matrix.direction }} \
+            2>&1 | tee stage/decode_${{ matrix.direction }}/run.log
+      - name: Upload decoder checkpoints
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-seed5-decode-${{ matrix.direction }}
+          path: stage/decode_${{ matrix.direction }}/
+          if-no-files-found: error
+          retention-days: 90
+
+  final_test:
+    name: Final frozen test evaluation
+    needs: diagnostics
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+      - name: Download frozen seed-5 core
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-5
+          path: core_artifact
+          repository: cavemanguy/trajectory-information-principle
+          run-id: 33538508455
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download selected main checkpoints
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-seed5-main-selected
+          path: stage/main
+      - name: Download all selected diagnostic checkpoints
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ali-n8-r1-seed5-decode-*
+          path: stage/decoders
+          merge-multiple: true
+      - name: Run the single downstream test phase
+        run: |
+          mkdir -p results/reproducible/ali_n8_r1/seed_5/final
+          python experiments/ali_n8_r1/run_r1.py \
+            --phase final --seed 5 \
+            --core-path core_artifact/core_best.pt \
+            --core-summary core_artifact/summary.json \
+            --main-dir stage/main \
+            --decoders-dir stage/decoders \
+            --outdir results/reproducible/ali_n8_r1/seed_5/final \
+            2>&1 | tee results/reproducible/ali_n8_r1/seed_5/final/run.log
+      - name: Upload final seed-5 result bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-seed5-final
+          path: results/reproducible/ali_n8_r1/seed_5/final/
+          if-no-files-found: error
+          retention-days: 90
