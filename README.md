@@ -99,6 +99,7 @@ No claim of statistical significance is made until repeated runs, uncertainty es
 - [`docs/mechanism.md`](docs/mechanism.md): current mechanism, equations, architecture, and leakage boundaries
 - [`docs/experiments.md`](docs/experiments.md): reported results, controls, interpretation, and missing evidence
 - [`docs/research-plan.md`](docs/research-plan.md): next experiments and reporting checklist
+- [`docs/research_history.md`](docs/research_history.md): the observer, trajectory, perturbation, and geometry experiments that narrowed the current hypothesis
 - [`archive/`](archive/README.md): superseded attractor-era prototype and claims, retained as research history
 
 ## Reproducibility status

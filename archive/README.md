@@ -2,6 +2,8 @@
 
 This directory preserves obsolete experiments so development remains inspectable without presenting superseded claims as current evidence.
 
+The original attractor prototype is archived here because its claims and implementation were superseded. The later observer, perturbation, geometry, learned-probe, and causal-ablation work is not discarded; it is summarized in [`../docs/research_history.md`](../docs/research_history.md) as the experimental path that led to the current mechanism.
+
 ## Legacy attractor prototype
 
 ### Plain English
