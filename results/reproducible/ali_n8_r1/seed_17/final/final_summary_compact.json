@@ -1,0 +1,21 @@
+{
+  "experiment": "ALI-N8-R1",
+  "seed": 17,
+  "phase": "final_test",
+  "alpha": 0.20732285976409914,
+  "core_checkpoint_sha256": "0919baae436f62f78f3084585379345d61ee18db4a2e537e93847f5f502e27f6",
+  "test_dataset_sha256": "1281dad6ddd04b01c5538bf4433d188f788db2be64737e138e22c3157a7a7526",
+  "test_latent_sha256": "bf5d59f67eac05cdb008e5d46976470a42741004503afe6e5a0ab13c86bc446b",
+  "systems": {"direct_f": 0.5864250063896179, "direct_m": 0.6565750241279602, "fixed": 0.21074999868869781, "leak_m": 0.6420249938964844, "leak_mq": 0.6542999744415283, "m": 0.4967249929904938, "mq": 0.6247249841690063, "q": 0.2686249911785126, "random": 0.15847499668598175, "zero": 0.05909999832510948},
+  "wrong_memory": {"native_accuracy": 0.6247249841690063, "paired_accuracy_difference": 0.5604499876499176, "prediction_change_rate": 0.9241499900817871, "wrong_memory_accuracy": 0.06427499651908875},
+  "D_native": 0.18554285714285712,
+  "D_decode": 0.08613571338355541,
+  "native_diagonal_advantage_per_relation": [0.242,0.13814285714285712,0.31185714285714283,0.19599999999999998,0.13511428571428571,0.08245714285714284,0.2593142857142857,0.11945714285714285],
+  "decode_diagonal_advantage_per_relation": [0.12337142441953933,0.04874285204069956,0.21188571623393468,0.06665714510849544,0.05179999981607711,0.02991428758416856,0.095714271068573,0.06100001079695566],
+  "core_integrity_test": {"m_mean": 0.6028499999999999, "F_mean": 0.56815},
+  "core_summary": {"alpha": 0.20732285976409914,"best_epoch":100,"best_validation_metric":0.5829,"checkpoint_sha256":"0919baae436f62f78f3084585379345d61ee18db4a2e537e93847f5f502e27f6","median_training_latent_norm":2.073228597640991,"status":"core_complete_frozen_test_unseen","test_evaluated":false,"test_generated":false},
+  "workflow_run_id": 33548609053,
+  "artifact_id": 9817398839,
+  "artifact_zip_sha256": "a336647ad372f005237edc44d19d8c6885477de558f525510365a5e7bdc0218b",
+  "protocol_note": "Clean primary execution; core test set remained unseen until final phase."
+}
