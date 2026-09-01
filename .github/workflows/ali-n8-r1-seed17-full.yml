@@ -1,0 +1,208 @@
+name: ALI-N8-R1 Seed 17 Full
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  core:
+    name: Clean core pretraining seed 17
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+      - name: Record source commit
+        run: git rev-parse HEAD | tee source_commit.txt
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+      - name: Train/select core without generating test data
+        run: |
+          mkdir -p stage/core
+          cp source_commit.txt stage/core/source_commit.txt
+          python experiments/ali_n8_r1/run_core.py \
+            --seed 17 \
+            --outdir stage/core \
+            2>&1 | tee stage/core/run.log
+          python - <<'PY'
+          import json
+          s=json.load(open('stage/core/summary.json'))
+          assert s.get('test_generated') is False
+          assert s.get('test_evaluated') is False
+          assert s.get('status') == 'core_complete_frozen_test_unseen'
+          print('TEST-BLIND CORE ASSERTION PASSED')
+          PY
+      - name: Upload frozen seed-17 core
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-17-clean
+          path: stage/core/
+          if-no-files-found: error
+          retention-days: 90
+
+  train_select:
+    name: Train/select ALI systems and controls
+    needs: core
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+      - name: Download frozen clean seed-17 core
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-17-clean
+          path: core_artifact
+      - name: Train and select without downstream test use
+        run: |
+          mkdir -p stage/main
+          python experiments/ali_n8_r1/run_r1.py \
+            --phase train --seed 17 \
+            --core-path core_artifact/core_best.pt \
+            --core-summary core_artifact/summary.json \
+            --outdir stage/main \
+            2>&1 | tee stage/main/run.log
+      - name: Upload selected main checkpoints
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-seed17-main-selected
+          path: stage/main/
+          if-no-files-found: error
+          retention-days: 90
+
+  diagnostics:
+    name: Diagnostic direction ${{ matrix.direction }}
+    needs: train_select
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        direction: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+      - name: Download frozen clean seed-17 core
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-17-clean
+          path: core_artifact
+      - name: Download selected main checkpoints
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-seed17-main-selected
+          path: stage/main
+      - name: Train/select eight decoders for this direction
+        run: |
+          mkdir -p stage/decode_${{ matrix.direction }}
+          python experiments/ali_n8_r1/run_r1.py \
+            --phase decode --seed 17 --direction ${{ matrix.direction }} \
+            --core-path core_artifact/core_best.pt \
+            --core-summary core_artifact/summary.json \
+            --main-dir stage/main \
+            --outdir stage/decode_${{ matrix.direction }} \
+            2>&1 | tee stage/decode_${{ matrix.direction }}/run.log
+      - name: Upload decoder checkpoints
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-seed17-decode-${{ matrix.direction }}
+          path: stage/decode_${{ matrix.direction }}/
+          if-no-files-found: error
+          retention-days: 90
+
+  final_test:
+    name: Final frozen test evaluation
+    needs: diagnostics
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout locked R1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: reproducibility/ali-n8-r1
+          fetch-depth: 1
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/ali_n8_r1/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/ali_n8_r1/requirements.txt
+      - name: Download frozen clean seed-17 core
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-core-seed-17-clean
+          path: core_artifact
+      - name: Verify core remained test-blind before final phase
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('core_artifact/summary.json'))
+          assert s.get('test_generated') is False
+          assert s.get('test_evaluated') is False
+          print('CORE TEST SET STILL UNSEEN; FINAL PHASE MAY PROCEED')
+          PY
+      - name: Download selected main checkpoints
+        uses: actions/download-artifact@v4
+        with:
+          name: ali-n8-r1-seed17-main-selected
+          path: stage/main
+      - name: Download all selected diagnostic checkpoints
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ali-n8-r1-seed17-decode-*
+          path: stage/decoders
+          merge-multiple: true
+      - name: Run the single test-generating and test-evaluation phase
+        run: |
+          mkdir -p results/reproducible/ali_n8_r1/seed_17/final
+          python experiments/ali_n8_r1/run_r1.py \
+            --phase final --seed 17 \
+            --core-path core_artifact/core_best.pt \
+            --core-summary core_artifact/summary.json \
+            --main-dir stage/main \
+            --decoders-dir stage/decoders \
+            --outdir results/reproducible/ali_n8_r1/seed_17/final \
+            2>&1 | tee results/reproducible/ali_n8_r1/seed_17/final/run.log
+      - name: Upload final seed-17 result bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-n8-r1-seed17-final
+          path: results/reproducible/ali_n8_r1/seed_17/final/
+          if-no-files-found: error
+          retention-days: 90
