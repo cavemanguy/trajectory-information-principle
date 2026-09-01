@@ -1,0 +1,39 @@
+{
+  "experiment": "ALI-N8-R1",
+  "seed": 5,
+  "phase": "final_test",
+  "alpha": 0.21510326862335205,
+  "core_checkpoint_sha256": "6ba3d43bdf54aeaeb601a1ace949d22475246a5757943c0aca835a02d679905b",
+  "test_dataset_sha256": "b9c6427c5b16fb28cbaf7c4c4c3c8a2ae36cee231c1991980e6e37db4b4eb0b1",
+  "test_latent_sha256": "42b9674061f72abee9e0079bd1b76bd722218232bc6d8ae9e86bf21bb20b4f38",
+  "systems": {
+    "mq": 0.7226750254631042,
+    "q": 0.25565001368522644,
+    "m": 0.5171999931335449,
+    "fixed": 0.202674999833107,
+    "random": 0.1506499946117401,
+    "direct_m": 0.7494249939918518,
+    "direct_f": 0.6572999954223633,
+    "zero": 0.06404999643564224,
+    "leak_mq": 0.7605500221252441,
+    "leak_m": 0.7351499795913696
+  },
+  "wrong_memory": {
+    "native_accuracy": 0.7226750254631042,
+    "wrong_memory_accuracy": 0.06382499635219574,
+    "prediction_change_rate": 0.9239000082015991,
+    "paired_accuracy_difference": 0.6588500291109085
+  },
+  "D_native": 0.19116785714285714,
+  "D_decode": 0.10370357095130853,
+  "native_diagonal_advantage_per_relation": [0.2438, 0.27831428571428574, 0.2621428571428571, 0.1843142857142857, 0.18114285714285713, 0.208, 0.15114285714285713, 0.020485714285714288],
+  "decode_diagonal_advantage_per_relation": [0.13497142493724823, 0.13108570447989873, 0.1500857174396515, 0.08074285302843368, 0.08525715555463517, 0.1673428543976375, 0.07088571361133031, 0.009257144161633077],
+  "core_integrity_test": {
+    "m_mean": 0.682175,
+    "F_mean": 0.618575
+  },
+  "workflow_run_id": 33540331282,
+  "artifact_id": 9814060622,
+  "artifact_zip_sha256": "c403818cc6acbb4568d1d6c577d753f28ffe6cbb175ceaf6c7305deaae796e09",
+  "protocol_deviation": "Seed 5 core temporary heads were evaluated on test before downstream selection; see experiments/ali_n8_r1/PROTOCOL_DEVIATIONS.md."
+}
