@@ -1,0 +1,151 @@
+name: Observer-R2 Primary Launcher
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: "Locked Observer-R2 primary seed"
+        required: true
+        type: choice
+        options:
+          - "7"
+          - "19"
+          - "43"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  core:
+    name: Frozen core seed ${{ inputs.seed }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: observer-r2
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/observer_r2/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/observer_r2/requirements.txt
+      - name: Train and select core without test generation
+        run: |
+          mkdir -p stage/core
+          git rev-parse HEAD > stage/core/source_commit.txt
+          python experiments/observer_r2/run_observer_r2.py --phase core --seed ${{ inputs.seed }} --outdir stage/core 2>&1 | tee stage/core/run.log
+          python - <<'PY'
+          import json
+          s=json.load(open('stage/core/core_summary.json'))
+          assert s['test_generated'] is False
+          assert s['test_evaluated'] is False
+          assert s['status'] == 'core_complete_frozen_test_unseen'
+          print('CORE TEST-BLIND ASSERTION PASSED')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: observer-r2-seed${{ inputs.seed }}-core
+          path: stage/core/
+          retention-days: 90
+          if-no-files-found: error
+
+  train_select:
+    name: Train/select observers and controls
+    needs: core
+    runs-on: ubuntu-latest
+    timeout-minutes: 480
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: observer-r2
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/observer_r2/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/observer_r2/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: observer-r2-seed${{ inputs.seed }}-core
+          path: stage/core
+      - name: Train and select all systems without test generation
+        run: |
+          mkdir -p stage/main
+          python experiments/observer_r2/run_observer_r2.py \
+            --phase train --seed ${{ inputs.seed }} \
+            --core-path stage/core/core_best.pt \
+            --core-summary stage/core/core_summary.json \
+            --outdir stage/main 2>&1 | tee stage/main/run.log
+          python - <<'PY'
+          import json
+          m=json.load(open('stage/main/train_manifest.json'))
+          assert m['test_generated'] is False
+          assert m['test_evaluated'] is False
+          expected={'observer','snapshot','reset','shuffled','direction','speed','state','direct_h0','direct_h12'}
+          assert set(m['systems']) == expected
+          print('TRAIN/SELECT TEST-BLIND ASSERTION PASSED')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: observer-r2-seed${{ inputs.seed }}-selected
+          path: stage/main/
+          retention-days: 90
+          if-no-files-found: error
+
+  final_test:
+    name: Single frozen test evaluation
+    needs: train_select
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: observer-r2
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/observer_r2/requirements.txt
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/observer_r2/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: observer-r2-seed${{ inputs.seed }}-core
+          path: stage/core
+      - uses: actions/download-artifact@v4
+        with:
+          name: observer-r2-seed${{ inputs.seed }}-selected
+          path: stage/main
+      - name: Verify frozen prerequisites then generate test for first time
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          c=json.load(open('stage/core/core_summary.json'))
+          m=json.load(open('stage/main/train_manifest.json'))
+          assert c['test_generated'] is False and c['test_evaluated'] is False
+          assert m['test_generated'] is False and m['test_evaluated'] is False
+          for n in ('observer','snapshot','reset','shuffled','direction','speed','state','direct_h0','direct_h12'):
+              assert pathlib.Path(f'stage/main/{n}.pt').exists()
+          print('ALL CHECKPOINTS FROZEN; TEST MAY NOW BE GENERATED')
+          PY
+          mkdir -p results/reproducible/observer_r2/seed_${{ inputs.seed }}/final
+          python experiments/observer_r2/run_observer_r2.py \
+            --phase final --seed ${{ inputs.seed }} \
+            --core-path stage/core/core_best.pt \
+            --core-summary stage/core/core_summary.json \
+            --main-dir stage/main \
+            --outdir results/reproducible/observer_r2/seed_${{ inputs.seed }}/final \
+            2>&1 | tee results/reproducible/observer_r2/seed_${{ inputs.seed }}/final/run.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: observer-r2-seed${{ inputs.seed }}-final
+          path: results/reproducible/observer_r2/seed_${{ inputs.seed }}/final/
+          retention-days: 90
+          if-no-files-found: error
