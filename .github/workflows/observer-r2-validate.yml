@@ -1,0 +1,33 @@
+name: Observer-R2 Validate
+
+on:
+  push:
+    branches:
+      - observer-r2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: observer-r2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Syntax check
+        run: python -m py_compile experiments/observer_r2/run_observer_r2.py
+      - name: Verify locked preregistration markers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('experiments/observer_r2/PREREGISTRATION.md').read_text()
+          assert 'LOCKED BEFORE IMPLEMENTATION OR PRIMARY RUNS' in p
+          assert 'Primary seeds are fixed in advance' in p
+          assert '7' in p and '19' in p and '43' in p
+          print('PREREGISTRATION LOCK CHECK PASSED')
+          PY
