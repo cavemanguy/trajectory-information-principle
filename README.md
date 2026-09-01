@@ -1,138 +1,146 @@
 # Active Latent Interrogation
 
-**Status: early-stage research project. The name is provisional.**
+**Status: early-stage independent research project. The name is provisional.**
 
-Active Latent Interrogation (ALI) studies whether a learned intervention can retrieve query-relevant information from a frozen, compressed latent memory by measuring the memory's dynamical response.
+Active Latent Interrogation (ALI) studies whether controlled, query-dependent perturbations of a frozen latent state can expose query-relevant information through the response of a frozen nonlinear transformation.
 
 The current mechanism is:
 
-> query → learned probe direction → frozen compressed latent memory → controlled perturbation → dynamical response → retrieval
+> query → learned probe direction → frozen latent memory → controlled perturbation → local response → retrieval
 
-This repository was previously organized around a broader "Trajectory Information Principle" and an attractor-curve demonstration. Those materials are preserved in [`archive/`](archive/README.md), but they are not evidence for the current mechanism.
+This repository was previously organized around a broader **Trajectory Information Principle** and an attractor-curve demonstration. Those materials are preserved in [`archive/`](archive/README.md), but they are not evidence for the current mechanism.
 
 ## The idea in plain English
 
-Imagine that a model compresses several facts into one fixed internal memory. Instead of reading that memory only once, ALI asks a query, chooses a small direction in which to nudge the memory, and watches how the frozen memory system responds. A decoder receives the query and that response, then tries to recover the requested relation.
+Suppose a model stores several facts in one fixed-width internal state. Instead of only reading that state directly, ALI asks a question, chooses a small direction in which to perturb the state, observes how a frozen nonlinear transformation responds, and tries to recover the requested fact from that response.
 
-The central question is modest: **does choosing the perturbation direction based on the query contribute useful addressing information?**
+The central question is modest:
 
-The present experiments do not show that ALI replaces attention, improves real language models, discovers a new law of dynamics, or provides a general-purpose memory system.
+> **Can the query select a perturbation direction that preferentially exposes the requested information?**
 
-## Technical summary
+The current experiments do not show that ALI replaces attention, improves real language models, proves a new law of dynamics, or provides a general-purpose memory architecture.
 
-Let an encoder compress an input memory into a latent state
+## Current reproducible experiment: ALI-N8-R1
 
-$$m = E(x), \qquad m \in \mathbb{R}^{d_m}.$$
+ALI-N8-R1 is a preregistered experiment created from first principles rather than reconstructed or tuned to match the older historical aggregate result. The locked specification is in [`experiments/ali_n8_r1/PREREGISTRATION.md`](experiments/ali_n8_r1/PREREGISTRATION.md).
 
-During the probing experiment, the compressed memory mechanism is frozen. A policy chooses a normalized direction
+The task stores eight categorical relations in a 16-dimensional continuous latent state. The encoder and frozen nonlinear transformation `F` are pretrained only to preserve the facts, then frozen. The main response is the symmetric finite difference
 
-$$v = \frac{P(h,m,q)}{\lVert P(h,m,q)\rVert_2 + \varepsilon},$$
+$$
+r(m,v)=\frac{F(m+\alpha v)-F(m-\alpha v)}{2\alpha}.
+$$
 
-where $q$ is the query and $h$ is any policy/controller state used by the implementation. A controlled intervention of magnitude $\alpha$ is applied,
+R1 compares adaptive, query-only, query-blind, fixed, random, zero-perturbation, and direct-read controls. It also preregisters a full 8×8 query/direction swap and 64 independently trained diagnostic decoders.
 
-$$m^{+} = m + \alpha v.$$
+Primary seeds were fixed in advance: **5, 17, and 31**.
 
-A frozen transition or response operator produces a response, for example
+## R1 result
 
-$$r = F(m^{+}) - F(m),$$
+All three primary seeds completed.
 
-and the readout predicts the requested target using only the response and query:
+Seeds **17** and **31** remained test-blind through core selection, ALI/control selection, and all diagnostic-decoder selections. Seed **5** has a documented protocol deviation: temporary core heads were evaluated on test before downstream selection. The deviation is preserved in [`PROTOCOL_DEVIATIONS.md`](experiments/ali_n8_r1/PROTOCOL_DEVIATIONS.md) and is not hidden or repaired post hoc.
 
-$$\hat y = R(r,q).$$
+Across the three primary seeds:
 
-The exact response statistic must be reported with each experiment; a final-state difference, a multi-step trajectory, and a Jacobian-vector response are not interchangeable.
+| Metric | Mean | Sample SD |
+|---|---:|---:|
+| Query-only ALI `P(q)` | **26.5450%** | 0.8661 pp |
+| Adaptive ALI `P(m,q)` | 66.7783% | 5.0036 pp |
+| Direct read from `m` | **69.5700%** | 4.8116 pp |
+| Direct read from `F(m)` | 61.9125% | 3.5753 pp |
+| Zero perturbation | 6.1583% | 0.2475 pp |
+| Adaptive direction-only leakage | 69.8167% | 5.5493 pp |
 
-See [`docs/mechanism.md`](docs/mechanism.md) for the architecture, equations, information boundaries, and controls.
+Chance is **6.25%**.
 
-## Current reported result
+Adaptive ALI does not beat the strongest direct-memory control. It also has substantial direction-only leakage, so the adaptive policy cannot yet be interpreted as a clean interrogation mechanism even though the wrong-memory intervention shows very strong causal dependence on the memory-conditioned direction.
 
-On an 8-relation synthetic memory task, the current reported accuracies are:
+The cleaner test is the query-only system:
 
-| Method | Accuracy across seeds 5, 17, and 31 |
-|---|---:|
-| Native query-directed probing | **64.67% ± 1.81% SD** |
-| Wider direct control | 63.60% (dispersion not recovered) |
-| Direct frozen-state readout | 62.40% ± 1.16% SD |
-| Query-blind probing | 62.15% ± 1.28% SD |
+$$
+v=P(q),
+$$
 
-The small gap between native probing and the wider direct control is not, by itself, strong evidence for a general advantage. Three-seed dispersion is documented for the native, direct, and query-blind conditions, but uncertainty remains substantial, the wider direct-control dispersion has not been recovered, and independent replication is absent.
+which cannot inspect the current memory while choosing its direction.
 
-A corrected comparable positional-attention control reached **84.81% ± 7.06% SD** in the 8-relation setting, substantially above the current ALI result. ALI is therefore being studied as a mechanism, not presented as a stronger replacement for attention.
+### Preregistered query-only selectivity endpoints
 
-The more informative evidence is the intervention on the learned probe direction:
+The native 8×8 swap keeps the reader's true query fixed and substitutes only the perturbation direction. Across the three seeds:
 
-| Probe-direction condition | Accuracy across seeds 5, 17, and 31 |
-|---|---:|
-| Native query-directed probing | **64.67% ± 1.81% SD** |
-| Wrong query used only for probe selection | 56.94% ± 3.22% SD |
-| Shuffled probe directions | 51.29% ± 2.85% SD |
-| Mean probe direction | 50.29% ± 1.17% SD |
+- **`D_native = +19.4327` percentage points mean**
+- sample SD **1.0719 pp**
 
-These interventions support a narrow causal statement: **in this trained system and task, retrieval performance depends on using the native query-conditioned probe direction.** They do not yet isolate query-only addressing, because the current policy may inspect the memory while selecting the direction: $v=P(h,m,q)$.
+Because the native reader could be specialized to its training direction, R1 also trains a separate diagnostic decoder for every relation/direction pair: **64 diagnostic decoders per seed**.
 
-Direction measurements connect this causal result to the earlier geometry work: same-memory directions selected for different queries had mean cosine approximately **0.209**, directions associated with the same query had consistency approximately **0.798**, and query-centroid cosine was approximately **-0.035**. This is structured query-dependent geometry, but not proof of query-only addressing.
+Across the three seeds:
 
-The next critical control is therefore
+- **`D_decode = +9.5751` percentage points mean**
+- sample SD **0.8901 pp**
+- relation-level independent-decoder diagonal advantage was positive in **24/24 seed/relation combinations**
 
-$$v=P(q), \qquad \hat y=R(r,q),$$
+The three primary seeds were:
 
-with the readout still restricted to the probe response and query. This tests whether the query can select an effective intervention without using memory content inside the addressing policy.
+| Seed | Query-only accuracy | `D_native` | `D_decode` |
+|---:|---:|---:|---:|
+| 5 | 25.5650% | +19.1168 pp | +10.3704 pp |
+| 17 | 26.8625% | +18.5543 pp | +8.6136 pp |
+| 31 | 27.2075% | +20.6271 pp | +9.7414 pp |
 
-Full result interpretation and caveats are in [`docs/experiments.md`](docs/experiments.md).
+Under the claim hierarchy locked before the primary runs, this meets the preregistered **Level-4 evidence pattern** for this learned latent system.
 
-## What is established—and what is not
+The narrow supported statement is:
 
-### Plain English
+> **In this learned frozen latent system, query-specific perturbation directions reproducibly produce direction-dependent local responses that preferentially expose information associated with their respective queries under the preregistered diagnostic decoder class.**
 
-The results suggest that the direction of the nudge matters. Giving the probe policy the wrong query, mixing directions among examples, or replacing directions with their average substantially lowers accuracy. That is useful evidence that the policy is not merely adding arbitrary noise.
+## What R1 does not establish
 
-However, the current policy sees both the query and memory. It may be solving part of retrieval while constructing the probe rather than using the query as an independent address. The query-only control is needed to distinguish those possibilities.
+R1 does **not** establish that:
 
-### Technical interpretation
+- ALI beats direct reading or attention;
+- the 16-dimensional state provides a demonstrated compression advantage;
+- the directions are universal, discrete, or orthogonal neural addresses;
+- the mechanism generalizes to language models or transformers;
+- the result is a new computational primitive;
+- the broader Trajectory Information Principle is proven.
 
-The direction interventions manipulate $v$ while leaving the trained response/readout path otherwise fixed. Their accuracy drops are consistent with $v$ carrying task-relevant, example-specific information. They do not uniquely identify the source of that information because
+The current result is deliberately narrower: query-specific perturbation geometry exists reproducibly in this trained frozen latent system under the specified experimental conditions.
 
-$$I(v;m,q) \neq I(v;q).$$
+## Historical evidence
 
-With $v=P(h,m,q)$, the policy can perform content-dependent computation before the perturbation. A query-only policy constrains the addressing channel and tests whether useful selectivity remains when $I(v;m\mid q)$ is removed by construction.
+Before R1, recovered aggregate CSVs showed a historical N=8 query-conditioned probing result around **64.67%**, causal degradation under wrong/shuffled/mean direction interventions, and a corrected positional-attention control around **84.81%**. The exact historical implementation and raw per-seed evidence were not recoverable, so those CSVs remain preserved as historical aggregate evidence rather than reproducible proof.
 
-The three-seed dispersion supports reporting repeatability, but no claim of statistical significance is made without paired per-example predictions, confidence intervals for condition differences, and independent replication.
+R1 is scientifically separate from that historical result and was not tuned to reproduce it.
 
 ## Repository map
 
-- [`docs/mechanism.md`](docs/mechanism.md): current mechanism, equations, architecture, and leakage boundaries
-- [`docs/experiments.md`](docs/experiments.md): reported results, controls, interpretation, and missing evidence
-- [`docs/research-plan.md`](docs/research-plan.md): next experiments and reporting checklist
-- [`docs/research_history.md`](docs/research_history.md): the observer, trajectory, perturbation, and geometry experiments that narrowed the current hypothesis
-- [`results/`](results/README.md): recovered aggregate CSV summaries for current accuracy, causal interventions, direction mechanics, and attention control
-- [`archive/`](archive/README.md): superseded attractor-era prototype and claims, retained as research history
+- [`experiments/ali_n8_r1/PREREGISTRATION.md`](experiments/ali_n8_r1/PREREGISTRATION.md): locked R1 design
+- [`experiments/ali_n8_r1/run_core.py`](experiments/ali_n8_r1/run_core.py): reproducible frozen-core training
+- [`experiments/ali_n8_r1/run_r1.py`](experiments/ali_n8_r1/run_r1.py): staged ALI, controls, diagnostics, and final evaluation
+- [`experiments/ali_n8_r1/PROTOCOL_DEVIATIONS.md`](experiments/ali_n8_r1/PROTOCOL_DEVIATIONS.md): preserved protocol deviations
+- [`results/reproducible/ali_n8_r1/aggregate/`](results/reproducible/ali_n8_r1/aggregate/): three-seed R1 aggregate
+- [`results/reproducible/ali_n8_r1/`](results/reproducible/ali_n8_r1/): frozen per-seed evidence records
+- [`results/`](results/README.md): historical and reproducible result index
+- [`docs/mechanism.md`](docs/mechanism.md): mechanism and information boundaries
+- [`docs/research_history.md`](docs/research_history.md): research path and negative/ambiguous results
+- [`archive/`](archive/README.md): superseded attractor-era prototype and claims
 
 ## Reproducibility status
 
-Aggregate result CSVs and the seed set are now present in [`results/`](results/README.md). The current ALI implementation, complete configuration, checkpoints, per-seed rows, and per-example predictions are not yet present. The summaries document repeated runs, but the experiment cannot yet be independently reproduced from the checked-in repository alone.
+The R1 repository now contains the locked preregistration, implementation, pinned dependencies, seed definitions, frozen compact per-seed records, checkpoint and dataset hashes, intervention/diagnostic evidence references, and the three-seed aggregate.
 
-Before presenting the results as reproducible, the repository should include:
+The original GitHub Actions artifacts remain authoritative for the full generated output bundles, including per-example predictions, logs, matrices, counts, environment metadata, and checkpoint hashes. Compact repository records tie each frozen seed to its workflow run, artifact ID, and artifact SHA-256.
 
-1. synthetic-task generator and fixed train/validation/test split;
-2. model definitions and exact information access for every component;
-3. training and evaluation commands;
-4. parameter counts and matched-compute controls;
-5. per-seed rows, paired predictions, and confidence intervals (aggregate mean and dispersion are present);
-6. saved configs or checkpoints and machine-readable raw outputs.
+The historical aggregate experiments remain non-reproducible from the repository because their original implementation was not recovered.
 
-## Scope and limitations
+## Scope and next questions
 
-- The evidence currently comes from one synthetic 8-relation task.
-- Accuracy is modest and close to strong direct controls.
-- The current addressing policy is not query-only.
-- The compressed representation has not yet been characterized by rate, distortion, or an information bottleneck measurement; "compressed" currently describes the architecture, not a demonstrated compression advantage.
-- Direction interventions show dependence within the trained model, not broad causal generalization.
-- Corrected positional attention is substantially more accurate in the current comparable 8-relation result; ALI does not replace it.
-- Novelty relative to active sensing, learned querying, memory networks, perturbation methods, and dynamical readouts has not been established.
+The evidence still comes from one synthetic eight-relation task. The next scientific work should test **why** the query-only geometry appears and **how general** it is rather than tuning R1 further. Relevant follow-ups include larger relation counts, tighter latent bottlenecks, continuous information, naturally trained representations, and eventually language-model representations.
+
+Any scientific design change belongs in a new experiment version rather than being patched into R1.
 
 ## Citation and contact
 
-This is an evolving independent research prototype by Zachary Daniels. If discussing it, cite the repository and a specific commit rather than treating the working project name or current interpretation as a settled result.
+This is an evolving independent research prototype by **Zachary Daniels**. Cite the repository and a specific commit or experiment version rather than treating the project name or current interpretation as a settled universal result.
 
 Issues and technically critical feedback are welcome.
 
