@@ -1,0 +1,74 @@
+{
+  "experiment": "OBSERVER-R11 — DOES SELECTIVE SURVIVAL CAUSALLY SUPPORT DOWNSTREAM READOUT?",
+  "status": "LOCKED BEFORE R11 TEST EVALUATION",
+  "upstream": {
+    "r10_sha256": "94606733e49dd5d2fbaacecf037a4d7228c49c69d6d371611a626fd1d2a5b6e6",
+    "r9_sha256": "9e58a981f360641bc4f0d3ef047b5644bfff11afde184edeeb52b5980f565c37",
+    "r8_sha256": "45eba94ce9cbf8fb9b739522f35180d04438f0c5846680bb72b8da01c723a165",
+    "seeds": [7, 19, 43],
+    "checkpoint_epoch": 100,
+    "r10_selected_stage": 1
+  },
+  "primary_intervention": {
+    "type": "pairwise semantic-preserving residual rotation of an already-present controlled relation distinction",
+    "controlled_pair": "base memory and relation-j +1 mod16 counterfactual, same permutation",
+    "stage": 1,
+    "strength_ladder": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "construction": "At h1, form pair midpoint m and normalized distinction d. Let e be the validation-trained linear relation decoder value-b minus value-a gradient. Decompose d=a e+b r. Replace residual r by normalized interpolation toward projected J^T J min-gain direction for high-reader suppression or max-gain direction for low-reader rescue. Preserve pair norm and coefficients a and |b| exactly. Apply symmetrically around midpoint.",
+    "primary_baseline": "semantic-matched random residual rotation using same a,b,pair norm and interpolation strength",
+    "high_low_groups": "validation-only top4/bottom4 final-reader relation accuracy, identical rule to R10",
+    "jacobian_location": "pair midpoint at intervention stage"
+  },
+  "semantic_envelope": {
+    "matching_linear_prediction_change_max": 0.02,
+    "full_task_mlp_prediction_change_max": 0.02,
+    "immediate_task_accuracy_abs_change_max_pp": 1.0,
+    "immediate_headT_matching_margin_abs_change_max": 0.02,
+    "selection": "largest strength satisfying every threshold in every seed on validation aggregate; thresholds locked before test"
+  },
+  "primary_endpoints": {
+    "functional_statistic": "matching relation final-reader margin change minus mean off-relation margin change, targeted minus semantic-matched random",
+    "pair_statistic": "change in matching reader-logit pair separation, targeted minus semantic-matched random",
+    "secondary": [
+      "matching CE loss",
+      "matching true-class probability",
+      "matching relation accuracy",
+      "full-task accuracy",
+      "independent h12 ridge probe accuracy"
+    ]
+  },
+  "survival": {
+    "geometric": "||delta h12|| / ||delta h1||",
+    "reader_weighted": "||W_j delta h12|| / ||delta h1||",
+    "terminal_alignment": "cosine between terminal pair distinction and validation-native matching relation terminal template"
+  },
+  "boundary_subset": {
+    "definition": "per seed/relation validation 25th percentile of absolute native matching-reader margin; test membership uses baseline pre-intervention margin only"
+  },
+  "manifold": {
+    "native_reference": "first 5000 unperturbed training h12 states",
+    "metrics": [
+      "1-NN Euclidean distance",
+      "global Mahalanobis distance in h12 covariance coordinates"
+    ],
+    "primary_off_manifold_limit": "validation 95th percentile of native-to-native 1-NN distance"
+  },
+  "same_immediate_different_survival": "targeted and random conditions at identical strength; pair norm and first-order semantic projection exactly matched, semantic diagnostics reported",
+  "same_survival_orientation_control": "validation chooses among 12 semantic-matched random residual directions the one with terminal survival closest to targeted condition; selection is frozen before test",
+  "wrong_stage": {
+    "stage": 4,
+    "construction": "same semantic-preserving projected-J rule recomputed at h4; compare functional effect to stage1"
+  },
+  "independent_probe": "fixed R6-style ridge one-hot decoders trained on unperturbed train h12 and frozen",
+  "rotated_reader": "fixed orthogonal latent rotation per seed applied before frozen W_out, generated from deterministic R11 namespace",
+  "adaptive_reader_secondary": "run only if native rescue fails Level2 while rescued distinction remains semantically valid; fixed ridge + MLP64 battery, trained on systematically modified training trajectories using the same frozen intervention rule",
+  "dose_response": "report all valid ladder strengths; primary inferential contrast uses validation-selected maximum semantic-valid strength",
+  "bootstrap": {
+    "n": 5000,
+    "unit": "controlled memory pair",
+    "paired": true,
+    "seed_namespace": "R11-bootstrap"
+  },
+  "decision_logic": "Use exactly Outcome A-J from user directive. Bidirectional success requires rescue positive and suppression negative for primary functional statistic in all three seeds with bootstrap CIs excluding zero.",
+  "claim_boundary": "Geometric survival is not equated with reader-usable survival. No direct optimization of correct-answer logits. Native W_out remains frozen. Negative R10 reader-margin result is preserved."
+}
