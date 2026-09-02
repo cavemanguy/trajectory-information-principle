@@ -1,0 +1,54 @@
+{
+  "experiment": "Geometric-Shell G1 — Distributed Surface Observers",
+  "phase_dimension": 16,
+  "geometry_embedding_seed": 24681357,
+  "random_geometry_seed": 97531,
+  "initial_condition_seed": 13579,
+  "random_actuation_seed": 86420,
+  "base_dynamics": {
+    "rho": 0.92,
+    "equation": "F(h)=rho*h"
+  },
+  "surface_field": {
+    "b": 0.0,
+    "gamma": 0.7,
+    "w": "exp(-gamma*abs(n_i^T h-b))"
+  },
+  "observer": {
+    "state_dim": 2,
+    "input": [
+      "d_i",
+      "q_i",
+      "tangential_speed_i"
+    ],
+    "equations": [
+      "o1' = 0.80 o1 + 0.20 tanh(1.20 d + 0.60 q)",
+      "o2' = 0.85 o2 + 0.15 tanh(0.90 tangential_speed - 0.50 d)"
+    ],
+    "actuation": "a=tanh(1.20 o1 - 0.80 o2)",
+    "shared_parameters": true,
+    "surface_identity_input": false,
+    "direct_surface_communication": false
+  },
+  "symmetric_observer_initial_state": [0.0, 0.0],
+  "tiny_noise_std": 0.0001,
+  "alpha_sweep": [0.0, 0.02, 0.05, 0.1, 0.2, 0.4, 0.8],
+  "trajectory_steps": 400,
+  "burn_in": 150,
+  "n_initial_conditions": 32,
+  "initial_condition_distribution": "N(0,I_16)",
+  "total_perturbation_bound": 1.0,
+  "lyapunov": {
+    "delta0": 1e-07,
+    "renormalize_every": 1,
+    "burn_in": 100,
+    "steps": 250
+  },
+  "recurrence_threshold_fraction_of_rms_radius": 0.05,
+  "geometry_controls": ["octahedral", "random_orientations", "orthogonal_like", "scrambled_octahedral"],
+  "surface_count_controls": [2, 4, 8, 16],
+  "surface_count_energy_scaling": "divide total P by sqrt(N/8) after norm bound",
+  "observer_controls": ["recurrent", "memoryless", "static_force", "random_actuation", "passive_surface"],
+  "interventions": ["silence_surface", "freeze_observer", "flip_surface_force", "swap_observer_states", "swap_surface_orientations"],
+  "claim_boundary": "G1 is a synthetic dynamical-systems experiment. It does not model consciousness, a brain, intelligence, information creation, neural emergence, or establish that geometry is computation."
+}
