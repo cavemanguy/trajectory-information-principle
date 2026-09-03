@@ -1,0 +1,11 @@
+{
+  "highest_success_level": 2,
+  "primary_outcome": "OUTCOME J — TASK DEPENDENCE DOMINATES the alignability contrast; with secondary evidence for architecture-dependent transport heterogeneity",
+  "secondary_outcomes": [
+    "Task-1 transform-dispersion/correspondence separation consistent with Outcome A locally",
+    "Outcome B not supported as primary: neighborhood-local affine prediction was excellent for GRU/leaky but did not restore AG1 far-stage C alignability",
+    "Outcome F not supported as a unique discriminator: leaky RNN Jacobians were more coherent than attractor despite weak affine rescue"
+  ],
+  "key_result": "Adjacent-stage transport is highly predictable in attractor, GRU, and leaky systems, while far-stage AG1 affine rescue remains weak in GRU/leaky. Therefore their AG1 failure is not explained by absence of local low-complexity transport. Task 2 removes the reference system's high-rescue contrast, preventing a cross-task architecture-level explanation of high affine rescue.",
+  "causal_claim": false
+}
