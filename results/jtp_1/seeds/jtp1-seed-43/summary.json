@@ -1,0 +1,9 @@
+{
+  "core_sha256": "b31ce8063b9dff7f7f2c8ac7c5f19888427a5f636661b9736d99c85a5df7532e",
+  "epsilon_scale": 2.252492904663086,
+  "max_meanop_R_temporal": 0.22872067987918854,
+  "max_pair_R_advantage": 0.06914635002613068,
+  "seed": 43,
+  "stable_cells": 78,
+  "total_cells": 78
+}
