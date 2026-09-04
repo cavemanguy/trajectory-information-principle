@@ -103,7 +103,27 @@ def generate_trajectories(core,memories,perms):
     return torch.cat(chunks,0).contiguous()
 
 
-def build_state_matches(tr):
+def _nearest_norm_match(sn,si,st,q,m):
+    p=int(np.searchsorted(sn,q)); best=None; left=p-1; right=p
+    while left >= 0 or right < len(sn):
+        dl=abs(float(sn[left])-float(q)) if left >= 0 else float('inf')
+        dr=abs(float(sn[right])-float(q)) if right < len(sn) else float('inf')
+        if best is not None and min(dl,dr) > best[0]:
+            break
+        if dl <= dr:
+            cand=left; left-=1
+        else:
+            cand=right; right+=1
+        if 0 <= cand < len(sn) and si[cand] != m:
+            err=abs(float(sn[cand])-float(q))
+            key=(err,int(si[cand]),int(st[cand]))
+            if best is None or key < best:
+                best=key
+    if best is None: raise RuntimeError('failed norm match')
+    return best[1],best[2]
+
+
+def build_norm_matches(tr,cross_time):
     norms=torch.linalg.vector_norm(tr,dim=-1).cpu().numpy()
     out_i=np.empty((N_ANALYSIS,STEPS+1),dtype=np.int64)
     out_t=np.empty((N_ANALYSIS,STEPS+1),dtype=np.int64)
@@ -111,29 +131,13 @@ def build_state_matches(tr):
     all_t=np.tile(np.arange(STEPS+1),N_ANALYSIS)
     flat_norm=norms.reshape(-1)
     for t in range(STEPS+1):
-        valid=all_t != t
+        valid=(all_t != t) if cross_time else (all_t == t)
         pool_n=flat_norm[valid]; pool_i=all_i[valid]; pool_t=all_t[valid]
         order=np.argsort(pool_n,kind='mergesort')
         sn=pool_n[order]; si=pool_i[order]; st=pool_t[order]
-        q=norms[:,t]
-        pos=np.searchsorted(sn,q)
         for m in range(N_ANALYSIS):
-            p=int(pos[m]); best=None; left=p-1; right=p
-            while left >= 0 or right < len(sn):
-                dl=abs(float(sn[left])-float(q[m])) if left >= 0 else float('inf')
-                dr=abs(float(sn[right])-float(q[m])) if right < len(sn) else float('inf')
-                if best is not None and min(dl,dr) > best[0]:
-                    break
-                if dl <= dr:
-                    cand=left; left-=1
-                else:
-                    cand=right; right+=1
-                if cand >= 0 and cand < len(sn) and si[cand] != m:
-                    err=abs(float(sn[cand])-float(q[m]))
-                    if best is None or err < best[0] or (err == best[0] and (int(si[cand]),int(st[cand])) < (best[1],best[2])):
-                        best=(err,int(si[cand]),int(st[cand]))
-            if best is None: raise RuntimeError('failed state match')
-            out_i[m,t]=best[1]; out_t[m,t]=best[2]
+            ii,tt=_nearest_norm_match(sn,si,st,norms[m,t],m)
+            out_i[m,t]=ii; out_t[m,t]=tt
     return out_i,out_t
 
 
@@ -196,8 +200,8 @@ def op_diagnostics(A,B):
     }
 
 
-def bootstrap_advantage(seed,t,ei,r_temp,r_state,nboot=2000):
-    x=(r_temp-r_state).cpu().numpy()
+def bootstrap_advantage(seed,t,ei,r_cross,r_same,nboot=2000):
+    x=(r_cross-r_same).cpu().numpy()
     rng=np.random.default_rng((seed*1000003 + t*1009 + ei*97 + 20260907) % (2**32))
     vals=np.empty(nboot,dtype=np.float64); n=len(x)
     for b in range(nboot): vals[b]=x[rng.integers(0,n,n)].mean()
@@ -221,7 +225,8 @@ def run_seed(args):
     memories,perms,time_perm,directions,bank_hashes=make_fixed_banks()
     tr=generate_trajectories(core,memories,perms)
     scale=float(torch.linalg.vector_norm(tr[:,0],dim=-1).median())
-    match_i,match_t=build_state_matches(tr)
+    cross_i,cross_t=build_norm_matches(tr,True)
+    same_i,same_t=build_norm_matches(tr,False)
     dir_perm=np.roll(np.arange(LATENT),-5)
     V=torch.from_numpy(directions).float(); P=torch.eye(LATENT)[:,torch.from_numpy(dir_perm).long()]
     Q=V.T @ P @ V
@@ -234,34 +239,40 @@ def run_seed(args):
         for t in range(STEPS+1):
             A=J[:,t]
             Btemp=gather_time(J,time_perm,t)
-            Bstate=gather_state(J,match_i,match_t,t)
+            Bcross=gather_state(J,cross_i,cross_t,t)
+            Bsame=gather_state(J,same_i,same_t,t)
             Bdir=A @ Q
             dt,rt,ct,nat_n,temp_n=pair_metrics(A,Btemp)
-            ds,rs,cs,_,state_n=pair_metrics(A,Bstate)
+            dx,rx,cx,_,cross_n=pair_metrics(A,Bcross)
+            dw,rw,cw,_,same_n=pair_metrics(A,Bsame)
             dd,rd,cd,_,dir_n=pair_metrics(A,Bdir)
             _,_,mdt,mrt,mct,mna,mnb=meanop_metrics(A,Btemp)
-            _,_,mds,mrs,mcs,_,msb=meanop_metrics(A,Bstate)
+            _,_,mdx,mrx,mcx,_,mxb=meanop_metrics(A,Bcross)
+            _,_,mdw,mrw,mcw,_,mwb=meanop_metrics(A,Bsame)
             _,_,mdd,mrd,mcd,_,mdb=meanop_metrics(A,Bdir)
             conv_h=frob(A-Jh[:,t])/(frob(A)+ETA)
             conv_d=frob(A-Jd[:,t])/(frob(A)+ETA)
-            adv,adv_ci=bootstrap_advantage(args.seed,t,ei,rt,rs)
+            adv,adv_ci=bootstrap_advantage(args.seed,t,ei,rx,rw)
             diag=op_diagnostics(A,Btemp)
             cell={
                 'seed':args.seed,'t':t,'epsilon_fraction':frac,'epsilon_absolute':eps,
                 'native_state_norm_mean':float(torch.linalg.vector_norm(tr[:,t],dim=-1).mean()),
                 'native_response_norm_pair_mean':float(nat_n.mean()),
                 'temporal_response_norm_pair_mean':float(temp_n.mean()),
-                'state_response_norm_pair_mean':float(state_n.mean()),
+                'cross_time_radius_response_norm_pair_mean':float(cross_n.mean()),
+                'same_time_radius_response_norm_pair_mean':float(same_n.mean()),
                 'direction_response_norm_pair_mean':float(dir_n.mean()),
                 'pair_D_temporal':float(dt.mean()),'pair_R_temporal':float(rt.mean()),'pair_cos_temporal':float(ct.mean()),
-                'pair_D_state':float(ds.mean()),'pair_R_state':float(rs.mean()),'pair_cos_state':float(cs.mean()),
+                'pair_D_cross_time_radius':float(dx.mean()),'pair_R_cross_time_radius':float(rx.mean()),'pair_cos_cross_time_radius':float(cx.mean()),
+                'pair_D_same_time_radius':float(dw.mean()),'pair_R_same_time_radius':float(rw.mean()),'pair_cos_same_time_radius':float(cw.mean()),
                 'pair_D_direction':float(dd.mean()),'pair_R_direction':float(rd.mean()),'pair_cos_direction':float(cd.mean()),
                 'meanop_D_temporal':mdt,'meanop_R_temporal':mrt,'meanop_cos_temporal':mct,
-                'meanop_D_state':mds,'meanop_R_state':mrs,'meanop_cos_state':mcs,
+                'meanop_D_cross_time_radius':mdx,'meanop_R_cross_time_radius':mrx,'meanop_cos_cross_time_radius':mcx,
+                'meanop_D_same_time_radius':mdw,'meanop_R_same_time_radius':mrw,'meanop_cos_same_time_radius':mcw,
                 'meanop_D_direction':mdd,'meanop_R_direction':mrd,'meanop_cos_direction':mcd,
-                'meanop_native_norm':mna,'meanop_temporal_norm':mnb,'meanop_state_norm':msb,'meanop_direction_norm':mdb,
-                'pair_R_temporal_minus_state':adv,'pair_R_advantage_bootstrap_ci95':adv_ci,
-                'pair_cos_state_minus_temporal':float(cs.mean()-ct.mean()),
+                'meanop_native_norm':mna,'meanop_temporal_norm':mnb,'meanop_cross_time_radius_norm':mxb,'meanop_same_time_radius_norm':mwb,'meanop_direction_norm':mdb,
+                'pair_R_cross_minus_same':adv,'pair_R_advantage_bootstrap_ci95':adv_ci,
+                'pair_cos_same_minus_cross':float(cw.mean()-cx.mean()),
                 'convergence_rel_half_mean':float(conv_h.mean()),
                 'convergence_rel_double_mean':float(conv_d.mean()),
                 'numerically_stable_10pct':bool(float(conv_h.mean()) <= .10 and float(conv_d.mean()) <= .10),
@@ -269,19 +280,21 @@ def run_seed(args):
             cell.update(diag); cells.append(cell)
         del J,Jh,Jd
     config={
-        'experiment':'JTP-1','status':'executed_frozen','seed':args.seed,
+        'experiment':'JTP-1','status':'executed_frozen_after_preoutcome_amendment_1','seed':args.seed,
         'source_core_checkpoint_sha256':core_sha,
         'source_core_summary':core_summary,
         'analysis_n':N_ANALYSIS,'times':list(range(STEPS+1)),
         'epsilon_fractions':list(EPS_FRACS),'epsilon_scale_definition':'median ||h0|| over fixed analysis bank',
         'epsilon_scale_value':scale,'direction_bank':'16x16 normalized Sylvester-Hadamard, rows as directions',
         'direction_response_permutation':'cyclic response-column shift by 5',
-        'state_match':'nearest latent norm among different-memory, different-time states',
+        'cross_time_radius_match':'nearest latent norm among different-memory, different-time states',
+        'same_time_radius_match':'nearest latent norm among different-memory states at the same trajectory time',
         'temporal_control':'per-memory fixed-point-free random permutation of the 13 time indices',
         'finite_difference':'symmetric central difference; every primary cell checked at eps/2 and 2eps',
         'bank_hashes':bank_hashes,
         'trajectory_sha256':hashlib.sha256(tr.numpy().tobytes()).hexdigest(),
-        'state_match_memory_index_sha256':sha_array(match_i),'state_match_time_index_sha256':sha_array(match_t),
+        'cross_match_memory_index_sha256':sha_array(cross_i),'cross_match_time_index_sha256':sha_array(cross_t),
+        'same_match_memory_index_sha256':sha_array(same_i),'same_match_time_index_sha256':sha_array(same_t),
         'torch_version':torch.__version__,'numpy_version':np.__version__,'python':sys.version,'platform':platform.platform(),
     }
     save_json(out/'manifest.json',config); save_json(out/'cells.json',cells)
@@ -294,7 +307,7 @@ def run_seed(args):
         'stable_cells':sum(c['numerically_stable_10pct'] for c in cells),
         'total_cells':len(cells),
         'max_meanop_R_temporal':max(c['meanop_R_temporal'] for c in cells),
-        'max_pair_R_advantage':max(c['pair_R_temporal_minus_state'] for c in cells),
+        'max_pair_R_advantage':max(c['pair_R_cross_minus_same'] for c in cells),
     }
     save_json(out/'summary.json',summary)
     print(json.dumps(summary,indent=2))
@@ -320,13 +333,13 @@ def aggregate(args):
         for t in range(STEPS+1):
             cs=[next(c for c in byseed[s] if c['t']==t and c['epsilon_fraction']==frac) for s in PRIMARY_SEEDS]
             row={'t':t,'epsilon_fraction':frac}
-            for key in ('meanop_D_temporal','meanop_R_temporal','meanop_cos_temporal','meanop_R_state','meanop_cos_state','pair_R_temporal_minus_state','pair_cos_state_minus_temporal','native_response_norm_pair_mean','convergence_rel_half_mean','convergence_rel_double_mean'):
+            for key in ('meanop_D_temporal','meanop_R_temporal','meanop_cos_temporal','meanop_R_cross_time_radius','meanop_cos_cross_time_radius','meanop_R_same_time_radius','meanop_cos_same_time_radius','pair_R_cross_minus_same','pair_cos_same_minus_cross','native_response_norm_pair_mean','convergence_rel_half_mean','convergence_rel_double_mean'):
                 vals=[c[key] for c in cs]; row[key+'_seedmean']=float(np.mean(vals)); row[key+'_seedmin']=float(np.min(vals)); row[key+'_seedmax']=float(np.max(vals))
             stable=all(c['numerically_stable_10pct'] for c in cs)
-            geom=all(c['pair_R_temporal_minus_state'] >= .05 and c['pair_R_advantage_bootstrap_ci95'][0] > 0 and c['pair_cos_state_minus_temporal'] > 0 for c in cs)
+            geom=all(c['pair_R_cross_minus_same'] >= .05 and c['pair_R_advantage_bootstrap_ci95'][0] > 0 and c['pair_cos_same_minus_cross'] > 0 for c in cs)
             row['stable_all_seeds']=stable; row['geometric_cell_all_seeds']=bool(stable and geom)
             rows.append(row)
-            if row['geometric_cell_all_seeds']: consensus.append((t,ei,row['pair_R_temporal_minus_state_seedmean']))
+            if row['geometric_cell_all_seeds']: consensus.append((t,ei,row['pair_R_cross_minus_same_seedmean']))
     if consensus:
         cells_set={(t,e) for t,e,_ in consensus}; visited=set(); comps=[]
         for node in cells_set:
@@ -345,30 +358,30 @@ def aggregate(args):
         peak=max(consensus,key=lambda z:z[2]); pt,pe,pv=peak
         def val(t,e):
             rr=next(r for r in rows if r['t']==t and r['epsilon_fraction']==EPS_FRACS[e])
-            return rr['pair_R_temporal_minus_state_seedmean']
+            return rr['pair_R_cross_minus_same_seedmean']
         eps_boundary=max(val(pt,0),val(pt,len(EPS_FRACS)-1))
         time_boundary=max(val(0,pe),val(STEPS,pe))
         qualifies_D=(0<pt<STEPS and 0<pe<len(EPS_FRACS)-1 and len(biggest)>=4 and pv>=1.5*eps_boundary and pv>=1.5*time_boundary)
     if qualifies_D: outcome='D — bounded trajectory–perturbation regime'
-    elif qualifies_C: outcome='C — geometric trajectory structure'
+    elif qualifies_C: outcome='C — time-specific geometric structure beyond radius-matched within-time variation'
     else:
         stable_rows=[r for r in rows if r['stable_all_seeds']]
         if not stable_rows: outcome='A — no valid trajectory-dependent response structure'
         else:
             corr=rankcorr([r['meanop_D_temporal_seedmean'] for r in stable_rows],[r['native_response_norm_pair_mean_seedmean'] for r in stable_rows])
-            maxadv=max(r['pair_R_temporal_minus_state_seedmean'] for r in stable_rows)
-            if abs(corr)>=.80 or maxadv < .05: outcome='B — sensitivity/contraction explanation'
-            else: outcome='A — no preregistered geometric trajectory structure'
+            maxadv=max(r['pair_R_cross_minus_same_seedmean'] for r in stable_rows)
+            if abs(corr)>=.80 or maxadv < .05: outcome='B — sensitivity/contraction or generic state-geometry explanation'
+            else: outcome='A — no preregistered time-specific geometric trajectory structure'
     result={
-        'experiment':'JTP-1','primary_seeds':list(PRIMARY_SEEDS),'outcome':outcome,
+        'experiment':'JTP-1','primary_seeds':list(PRIMARY_SEEDS),'preoutcome_amendment':1,'outcome':outcome,
         'consensus_geometric_cells':len(consensus),'largest_connected_consensus_component':len(biggest),
         'peak_consensus_cell':None if peak is None else {'t':peak[0],'epsilon_fraction':EPS_FRACS[peak[1]],'pair_R_advantage_seedmean':peak[2]},
         'decision_rule':{
             'numerical_stability':'mean relative operator change <= 0.10 for both eps/2 and 2eps in all seeds',
-            'geometric_cell':'all seeds: pair R temporal-state >=0.05, bootstrap CI lower bound >0, cosine(state)-cosine(temporal)>0, and stable',
+            'geometric_cell':'all seeds: cross-time radius-matched R minus same-time radius-matched R >=0.05, bootstrap CI lower bound >0, cosine(same)-cosine(cross)>0, and stable',
             'C':'at least 4 geometric cells spanning >=2 times and >=2 epsilon levels',
             'D':'C plus largest connected component >=4, interior peak, and peak >=1.5x both epsilon-boundary and time-boundary effects',
-            'B':'if C fails, stable-grid |rank corr(D,response norm)|>=0.80 or maximum normalized advantage <0.05',
+            'B':'if C fails, stable-grid |rank corr(D,response norm)|>=0.80 or maximum cross-time-over-same-time radius-matched normalized advantage <0.05',
         }
     }
     save_json(out/'aggregate_result.json',result); save_json(out/'aggregate_cells.json',rows)
@@ -376,8 +389,8 @@ def aggregate(args):
     with (out/'aggregate_cells.csv').open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=keys); w.writeheader(); w.writerows(rows)
     md=['# JTP-1 Final Result','',f"**Primary classification:** {outcome}",'',f"Consensus geometric cells: {len(consensus)} / {len(rows)}",f"Largest connected consensus component: {len(biggest)}"]
-    if peak: md += [f"Peak consensus cell: t={peak[0]}, epsilon fraction={EPS_FRACS[peak[1]]}, seed-mean trajectory-over-state normalized advantage={peak[2]:.6f}"]
-    md += ['','This classification was produced by the frozen decision rule encoded before JTP-1 result inspection.','','See `aggregate_cells.csv`, each seed artifact, and the preregistration for the full diagnostics and claim boundary.']
+    if peak: md += [f"Peak consensus cell: t={peak[0]}, epsilon fraction={EPS_FRACS[peak[1]]}, seed-mean cross-time-over-same-time radius-matched normalized advantage={peak[2]:.6f}"]
+    md += ['','This classification was produced by the frozen decision rule after PREOUTCOME_AMENDMENT_1, committed before replacement-run result inspection.','','See `aggregate_cells.csv`, each seed artifact, the original preregistration, and the pre-outcome amendment for the full diagnostics and claim boundary.']
     (out/'FINAL_RESULT.md').write_text('\n'.join(md)+'\n')
     print(json.dumps(result,indent=2))
 
