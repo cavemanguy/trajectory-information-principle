@@ -1,0 +1,4 @@
+seed,epsilon,mean_locality_cosine,immediate_prediction_change_rate,validation_cosine,validation_explained_variance,validation_normalized_mse,test_opened
+7,0.01725,0.999796,0.0343,0.794,0.672,0.328,false
+19,0.01583,0.999795,0.0312,0.560,0.442,0.558,false
+43,0.01396,0.999785,0.0299,0.556,0.371,0.629,false
