@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: jtp-1
+          ref: ${{ github.sha }}
           fetch-depth: 1
 
       - uses: actions/setup-python@v5
@@ -57,12 +57,15 @@ jobs:
           run-id: ${{ matrix.source_run }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Verify preregistration and source files exist
+      - name: Verify frozen design and source files
         run: |
           test -f experiments/jtp_1/PREREGISTRATION.md
+          test -f experiments/jtp_1/PREOUTCOME_AMENDMENT_1.md
+          test -f experiments/jtp_1/PREOUTCOME_AMENDMENT_2.md
           test -f frozen_core/core_best.pt
           test -f frozen_core/core_summary.json
           python -m py_compile experiments/jtp_1/run_jtp1.py
+          python -m py_compile experiments/jtp_1/classify_jtp1.py
 
       - name: Execute frozen JTP-1 grid
         run: |
@@ -82,14 +85,14 @@ jobs:
           if-no-files-found: error
 
   aggregate:
-    name: Frozen cross-seed classification
+    name: Authoritative frozen cross-seed classification
     needs: analyze
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: jtp-1
+          ref: ${{ github.sha }}
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
@@ -109,28 +112,26 @@ jobs:
           pattern: jtp1-seed-*
           path: collected
 
-      - name: Apply preregistered outcome rule
+      - name: Apply authoritative preregistered outcome rule
         run: |
           mkdir -p results/jtp_1/seeds results/jtp_1/aggregate
           cp -R collected/jtp1-seed-* results/jtp_1/seeds/
-          python experiments/jtp_1/run_jtp1.py \
+          python experiments/jtp_1/classify_jtp1.py \
             --aggregate collected \
             --outdir results/jtp_1/aggregate
           cat results/jtp_1/aggregate/FINAL_RESULT.md
 
       - uses: actions/upload-artifact@v4
         with:
-          name: jtp1-aggregate
+          name: jtp1-authoritative-aggregate
           path: results/jtp_1/
           retention-days: 90
           if-no-files-found: error
 
-      - name: Commit immutable JTP-1 result record to experiment branch
+      - name: Commit authoritative result record to dedicated branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add results/jtp_1
-          if ! git diff --cached --quiet; then
-            git commit -m 'Record frozen JTP-1 results'
-            git push origin HEAD:jtp-1
-          fi
+          git commit -m 'Record authoritative frozen JTP-1 results'
+          git push origin HEAD:refs/heads/jtp-1-results
