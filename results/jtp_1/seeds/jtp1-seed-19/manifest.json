@@ -1,0 +1,62 @@
+{
+  "analysis_n": 1024,
+  "bank_hashes": {
+    "direction_bank_sha256": "d64f9a1707174557fec37dc9535cfd7f806c86b48314c9d092a4e6685eee6769",
+    "encoding_permutation_sha256": "8cae4c20d0efc961714bcb37ad286903d9f1abef970d1add4de5328756d0801d",
+    "memory_sha256": "aea7617fbf9817cecdd29e28d55f4ecdd88678ca56a3312629c42d8f60a3c2a7",
+    "time_derangement_sha256": "143c2843cd97da4a874964717464c603c595839e8d31d634afbc18a9cec2a468"
+  },
+  "cross_match_memory_index_sha256": "06fab64cc215e6df28b0d3228829351ddd5c343eeac7afa68cb57d8b1c2a25cd",
+  "cross_match_time_index_sha256": "57abb084e5381ec046b6876e6b79c845db2518da396a968b74ef92ae4f5dda87",
+  "cross_time_radius_match": "nearest latent norm among different-memory, different-time states",
+  "direction_bank": "16x16 normalized Sylvester-Hadamard, rows as directions",
+  "direction_response_permutation": "cyclic response-column shift by 5",
+  "epsilon_fractions": [
+    0.001,
+    0.003,
+    0.01,
+    0.03,
+    0.1,
+    0.3
+  ],
+  "epsilon_scale_definition": "median ||h0|| over fixed analysis bank",
+  "epsilon_scale_value": 2.191291570663452,
+  "experiment": "JTP-1",
+  "finite_difference": "symmetric central difference; every primary cell checked at eps/2 and 2eps",
+  "numpy_version": "2.3.5",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.13.15 (main, Aug  6 2026, 02:15:18) [GCC 13.3.0]",
+  "same_match_memory_index_sha256": "b010df472f94c635facd817a5839dd05f64207f6be2f5b3f1bf90de8a9e8f205",
+  "same_match_time_index_sha256": "cf83731957716092b6d5e110f90b904f570973a72496a05674870bd0a98400d6",
+  "same_time_radius_match": "nearest latent norm among different-memory states at the same trajectory time",
+  "seed": 19,
+  "source_core_checkpoint_sha256": "2b7d8325e60477b6ac9ce4f3156648de686506d638852a95eac19e94bc5851e6",
+  "source_core_summary": {
+    "best_epoch": 100,
+    "best_validation_metric": 0.43525,
+    "checkpoint_sha256": "2b7d8325e60477b6ac9ce4f3156648de686506d638852a95eac19e94bc5851e6",
+    "seed": 19,
+    "status": "core_complete_frozen_test_unseen",
+    "test_evaluated": false,
+    "test_generated": false
+  },
+  "status": "executed_frozen_after_preoutcome_amendment_1",
+  "temporal_control": "per-memory fixed-point-free random permutation of the 13 time indices",
+  "times": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "torch_version": "2.10.0+cu128",
+  "trajectory_sha256": "a150a39612c8457b222d15723db498eea2bc41d88a554a5a6060a892014b21e9"
+}

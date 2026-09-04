@@ -1,0 +1,20 @@
+{
+  "consensus_geometric_cells": 0,
+  "decision_rule": {
+    "B": "if C fails, stable-grid |rank corr(D,response norm)|>=0.80 or maximum cross-time-over-same-time radius-matched normalized advantage <0.05",
+    "C": "at least 4 geometric cells spanning >=2 times and >=2 epsilon levels",
+    "D": "C plus largest connected component >=4, interior peak, and peak >=1.5x both epsilon-boundary and time-boundary effects",
+    "geometric_cell": "all seeds: cross-time radius-matched R minus same-time radius-matched R >=0.05, bootstrap CI lower bound >0, cosine(same)-cosine(cross)>0, and stable",
+    "numerical_stability": "mean relative operator change <= 0.10 for both eps/2 and 2eps in all seeds"
+  },
+  "experiment": "JTP-1",
+  "largest_connected_consensus_component": 0,
+  "outcome": "A \u2014 no preregistered time-specific geometric trajectory structure",
+  "peak_consensus_cell": null,
+  "preoutcome_amendment": 1,
+  "primary_seeds": [
+    7,
+    19,
+    43
+  ]
+}
