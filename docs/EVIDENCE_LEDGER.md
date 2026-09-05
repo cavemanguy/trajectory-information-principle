@@ -31,8 +31,9 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 | ND-R1 early ranking | Strong secondary candidate | Relation-survival ranking at transition 2 predicted terminal ranking strongly in every fresh seed (mean Spearman about 0.937), echoing the historical R10 early-establishment observation. |
 | ND-R1 native trajectory replication | Mixed result | Highly indirect trajectories replicated across fresh seeds; reversal-dominated motion did not, showing that reversal dominance is not a seed-general native-dynamics property in this reproduction. |
 | R8-M1 | **Established within tested system** | Fresh no-perturbation objective/plasticity decomposition passed its validity gate on seeds 11/37/71. Joint training produced substantially greater relation-selective native survival than joint training with either the recurrent map frozen or the encoder frozen, with paired bootstrap intervals above zero in every seed. Frozen outcome: **M3 — encoder–recurrence coadaptation supported**. Terminal h12 supervision alone was not a stable cross-seed explanation. |
-| R8-M2 | **Established source-narrowing result** | Eight fresh no-perturbation families all passed validity. Frozen outcome: **S0 — neither simple source tracks winner**. Relation-specific initialization bundles did not track winner identity (3/8 mapped matches; aligned-minus-raw rho effect -0.030, 95% CI [-0.360, 0.348]); finite-sample data-column identity did not track it (1/8 mapped matches; effect -0.080, 95% CI [-0.610, 0.381]). Stable winner commitment under the preregistered descriptor appeared at epoch 40. This supports the descriptive phrase training-induced spontaneous dynamical specialization, but does not prove strong emergence. |
-| R8-M3 | Planned / preregistration next | Native no-perturbation study of the commitment transition. Tests whether gradient interactions, encoder placement relative to recurrent geometry, Jacobian anisotropy on native states, or minibatch-order path dependence predict winner selection before/stable through commitment. Prediction must not be paraphrased as causation. |
+| R8-M2 | **Established source-narrowing result** | Eight fresh no-perturbation families all passed validity. Frozen outcome: **S0 — neither simple source tracks winner**. Relation-specific initialization bundles did not track winner identity; finite-sample data-column identity did not track it. Stable winner commitment under the preregistered descriptor appeared at epoch 40. |
+| R8-M3 | **Established negative predictor / path-sensitivity result** | Twelve fresh paired families passed validity. Frozen outcome: **T0 — neither preregistered epoch-20 predictor supported**. Coadaptation synergy and shared-gradient alignment did not meet exact-winner criteria. Changing only deterministic minibatch order shifted commitment onset and changed final winner identity in 5/12 families, showing material optimization-path sensitivity under identical initialization/data. |
+| R8-M4 | **Established functional-intervention result** | Frozen outcome: **F3 — selective-specialization contribution supported**. Equalization reduced relation selectivity in 12/12 fresh seeds and by 66.6% on average. h12 test accuracy fell 3.04 pp versus baseline and 2.57 pp versus the matched mean-survival control, with paired bootstrap intervals below zero. A preregistered secondary localized most loss to the baseline survival winner: winner accuracy fell about 30.36 pp while non-winner accuracy was approximately preserved. This supports a functional contribution under the intervention and motivates a capacity/resource-allocation hypothesis; it is not a universal necessity claim or proof that Euclidean survival magnitude mediates reader use. |
 
 ## Coupled-observer / collective dynamics
 
@@ -83,7 +84,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 
 ## Current priority order
 
-1. R8–R10 training-induced selective preservation: R8-M1 established encoder–recurrence coadaptation; R8-M2 ruled out two obvious fixed symmetry-breaking sources and identified an epoch-40 commitment point under its frozen descriptor. R8-M3 now targets the optimization/geometry transition that selects and stabilizes the winner.
+1. R8–R10 learned selective preservation: R8-M1 established encoder–recurrence coadaptation; R8-M2 narrowed fixed symmetry-breaking sources; R8-M3 established optimization-path sensitivity while rejecting two simple precommitment winner predictors; R8-M4 established a functional contribution under selectivity suppression and localized most loss to the dynamically favored relation. **R8-M5 now tests the specifically motivated capacity/resource-allocation account.**
 2. R6/R8 readout preparation.
 3. R2/R3 native transient structure.
 4. Coupled local-observer collective behavior.
@@ -92,6 +93,6 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 7. R11 survival/use dissociation.
 8. R4E state-conditioned intervention consequences for later practical control/logic work.
 
-After the formation mechanism is characterized, the next R8 stage is functional necessity: determine whether selective native survival is required for task performance or is an optimization side effect. This must remain separate from R11's result that Euclidean survival magnitude alone does not mediate reader use.
+R8-M5 should distinguish “capacity allocation” from the weaker fact that larger models perform better by testing whether wider autonomous state capacity specifically reduces survival/performance winner dominance while improving or preserving h12 performance without a corresponding h0 degradation.
 
-See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, `R8_M1_RESULT.md`, and `R8_M2_RESULT.md`.
+See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, `R8_M1_RESULT.md`, `R8_M2_RESULT.md`, `R8_M3_RESULT.md`, and `R8_M4_RESULT.md`.
