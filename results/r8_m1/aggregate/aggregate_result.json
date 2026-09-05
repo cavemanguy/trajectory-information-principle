@@ -1,0 +1,136 @@
+{
+  "H1_terminal_supervision_supported": false,
+  "H2_recurrent_plasticity_supported": true,
+  "H3_encoder_plasticity_supported": true,
+  "H4_coadaptation_supported": true,
+  "baseline_validity_all_seeds": true,
+  "claim_boundary": "R8-M1 decomposes training-induced native relation-selective survival in one symmetric synthetic recurrent architecture. It does not establish strong emergence, new information creation, chronology, practical advantage, or generality.",
+  "experiment": "R8-M1",
+  "outcome": "M3 \u2014 encoder\u2013recurrence coadaptation supported",
+  "primary_seeds": [
+    11,
+    37,
+    71
+  ],
+  "seed_results": [
+    {
+      "G_EF": 0.019950898364186287,
+      "G_FF": 0.191433385014534,
+      "G_H0": 0.19052907824516296,
+      "G_HT": 1.1711243391036987,
+      "G_J": 0.8175468444824219,
+      "H1": {
+        "ci95_percentile": [
+          0.9655104145407677,
+          0.9961736962199211
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.9805952608585358
+      },
+      "H2": {
+        "ci95_percentile": [
+          0.6129497434943915,
+          0.6402220234274865
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.6261134594678879
+      },
+      "H3": {
+        "ci95_percentile": [
+          0.7813736690673977,
+          0.8069988975534216
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.7975959461182356
+      },
+      "baseline_validity": true,
+      "seed": 11,
+      "winner_EF": 7,
+      "winner_FF": 4,
+      "winner_H0": 4,
+      "winner_HT": 7,
+      "winner_J": 3
+    },
+    {
+      "G_EF": 0.017173776403069496,
+      "G_FF": 0.3067050874233246,
+      "G_H0": 0.28569525480270386,
+      "G_HT": 0.06735572218894958,
+      "G_J": 0.9403773546218872,
+      "H1": {
+        "ci95_percentile": [
+          -0.2428107239305973,
+          -0.1942661600187421
+        ],
+        "n_bootstrap": 5000,
+        "observed": -0.21833953261375427
+      },
+      "H2": {
+        "ci95_percentile": [
+          0.6078152477741241,
+          0.6575527809560299
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.6336722671985626
+      },
+      "H3": {
+        "ci95_percentile": [
+          0.9057899730280041,
+          0.9330694104079157
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.9232035782188177
+      },
+      "baseline_validity": true,
+      "seed": 37,
+      "winner_EF": 6,
+      "winner_FF": 2,
+      "winner_H0": 2,
+      "winner_HT": 7,
+      "winner_J": 5
+    },
+    {
+      "G_EF": 0.013215743936598301,
+      "G_FF": 0.061497606337070465,
+      "G_H0": 0.06178000941872597,
+      "G_HT": 0.07409559935331345,
+      "G_J": 0.7458197474479675,
+      "H1": {
+        "ci95_percentile": [
+          -0.0024853702634572983,
+          0.025009161327034228
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.012315589934587479
+      },
+      "H2": {
+        "ci95_percentile": [
+          0.6697062475606799,
+          0.6965373472310603
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.6843221411108971
+      },
+      "H3": {
+        "ci95_percentile": [
+          0.7121288244612515,
+          0.7397558981087059
+        ],
+        "n_bootstrap": 5000,
+        "observed": 0.7326040035113692
+      },
+      "baseline_validity": true,
+      "seed": 71,
+      "winner_EF": 4,
+      "winner_FF": 5,
+      "winner_H0": 5,
+      "winner_HT": 5,
+      "winner_J": 7
+    }
+  ],
+  "source_files": {
+    "11": "collected/r8-m1-seed-11/seed_summary.json",
+    "37": "collected/r8-m1-seed-37/seed_summary.json",
+    "71": "collected/r8-m1-seed-71/seed_summary.json"
+  }
+}
