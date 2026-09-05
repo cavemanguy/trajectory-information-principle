@@ -38,7 +38,7 @@ They do not overlap the known Observer/ALI/ND-R1/R8-M1 through R8-M7/R8-M5R fres
 
 ## Symmetric baseline training
 
-Train each family under the ordinary symmetric lineage objective. Evaluate every 10 epochs beginning at epoch 60 and continuing through a hard maximum of epoch 400.
+Train each family under the ordinary symmetric lineage objective. Record evaluation checkpoints every 10 epochs beginning at epoch 40 and continuing through a hard maximum of epoch 400. A maturity trigger is not eligible before epoch 60; epochs 40 and 50 exist only so the frozen three-checkpoint competence rule can be evaluated at epoch 60 if appropriate.
 
 A checkpoint is **competent** iff:
 
@@ -49,7 +49,7 @@ At every evaluation checkpoint compute terminal natural-pair survival and record
 
 ## Frozen maturity trigger
 
-The maturity checkpoint **M** is the first evaluated checkpoint satisfying both:
+The maturity checkpoint **M** is the first eligible checkpoint at epoch 60 or later satisfying both:
 
 1. the current checkpoint and the preceding two 10-epoch checkpoints are all competent; and
 2. the terminal-survival winner identity A and loser identity B are unchanged between the current checkpoint and the immediately preceding checkpoint.
