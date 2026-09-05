@@ -16,9 +16,9 @@ Primary hierarchy:
 2. **Observer = measurement / diagnostic instrument**
 3. **Perturbation = optional causal intervention or control / logic input**
 
-## Priority 1 — History-dependent adaptive native dynamics
+## Priority 1 — Mechanism of persistent history-dependent native dynamics
 
-**Phenomenon:** training can produce strong relation-selective native preservation through encoder–recurrence coadaptation. The identity and degree of specialization are optimization-path sensitive, established specialization can contribute functionally, successful wider-state models do not require specialization to move in one fixed direction, and controlled terminal demand can bend an established native organization without usually replacing its dominant specialist.
+**Phenomenon:** training can produce strong relation-selective native preservation through encoder–recurrence coadaptation. Specialist identity and strength are optimization-path sensitive, established specialization can contribute functionally, controlled terminal demand can bend native organization, and R8-M8 now establishes that opposite demand histories can leave the same mature lineage in persistently different native organizations under matched present demand and matched training duration.
 
 ### Discovery sequence
 
@@ -31,31 +31,32 @@ Primary hierarchy:
 - **R8-M6:** **W0 — isolated recurrent-workspace account not supported.** Function-preserving X32 improved h12 but h0 equivalence failed after continued training, preventing a clean isolated-workspace attribution.
 - **R8-M5R:** **R2 — state-dimension-specific terminal benefit supported.** On 12 new families, exact R8-M5 training with no directional specialization requirement showed S32 beating both B16 and near-parameter-matched P16 at h12. Relative to B16, `G` and `D` changes were mixed/indeterminate.
 - **R8-M7R:** **D0 — reversible demand tracking not supported.** All 12 mature families were valid. Terminal demand toward B caused a strong demand-specific Q shift and improved B h12 performance, but B became the exact survival winner in only 1/12; A was again winner after return in 12/12. The system is demand-sensitive but not freely reassigning under the tested schedule.
-- **R8-M7I:** **V0 — baseline lineage reproduction failure.** Four paired mirror families missed the preregistered baseline-Q tolerance of 1e-5 despite reproducing the same maturity epoch and A/B identities. No I0/I1/I2 classification is promoted. Post-primary diagnostics suggest immediate B challenge moves native organization farther toward B than delayed B challenge, while full takeover remains rare.
+- **R8-M7I:** **V0 — baseline lineage reproduction failure.** Four paired mirror families missed the preregistered baseline-Q tolerance of 1e-5 despite reproducing the same maturity epoch and A/B identities. No I0/I1/I2 classification is promoted. Post-primary diagnostics suggested immediate B challenge moves native organization farther toward B than delayed B challenge, while full takeover remains rare.
+- **R8-M8:** **Y3 — persistent history-dependent regime separation supported.** All 12 fresh families passed validity. At matched `lambda=0.50` current demand and matched cumulative training duration, opposite histories produced mean `H_mid=+1.331`, 95% CI [+0.644,+2.057]. Signed sweep area was +1.240, CI [+0.589,+1.887]. After another 120 identical-demand epochs, separation remained +1.208, CI [+0.499,+1.924], retaining about 90.7% of the initial midpoint effect.
 
 ### Current defensible description
 
-> **Training induces optimization-path-sensitive dynamical specialization through encoder–recurrence coadaptation. Established specialization can contribute functionally and can respond substantially to changed terminal demand, but dominant native organization is resistant to complete reassignment and may be history-sensitive. Wider state improves terminal performance even when specialization is free to vary rather than being forced toward a predetermined direction.**
+> **Training induces optimization-path-sensitive dynamical specialization through encoder–recurrence coadaptation. Established specialization can contribute functionally, responds to controlled task demand, and can retain substantial dependence on prior demand history even after prolonged exposure to the same current demand. Wider state improves terminal performance without requiring specialization to move in one predetermined direction.**
 
-This is not a claim of strong emergence, conscious choice, formal hysteresis, universal necessity, or a universal trajectory-information principle.
+This is not a claim of strong emergence, conscious choice, mathematical bistability, formal thermodynamic hysteresis, universal necessity, or a universal trajectory-information principle.
 
-### Immediate study — consolidation versus challenge pressure
+### Immediate study — localization and robustness of the M8 history effect
 
 The next hard test should ask:
 
-> **What determines whether a mature native dynamical regime merely bends under new demand or is actually replaced: prior consolidation duration, new-demand magnitude/duration, or a qualitatively privileged learned basin?**
+> **What internal mechanism maintains the persistent history-dependent separation, and under what conditions does it decay, switch, or generalize?**
 
-A clean confirmatory design should manipulate history and pressure independently. For example, after the same preregistered maturity trigger, vary the duration of additional A consolidation and the strength/duration of subsequent B demand in a factorial design. Freeze all thresholds before outcomes. Primary evidence should distinguish:
+The cleanest mechanistic follow-up should keep the M8 matched-history setup but intervene only after the two midpoint histories have formed. Strong candidate tests include:
 
-- elastic movement toward B without takeover;
-- a reproducible transition into B-dominant native organization;
-- persistence or reversal when demand is removed or restored;
-- functional gain in the demanded relation;
-- matched controls for extra training and h0-only weighting.
+1. **Encoder/recurrent cross-swap:** combine the encoder from one history branch with the recurrent map from the other and test which component carries the native-Q separation.
+2. **Selective freezing during the identical-demand hold:** freeze encoder only, recurrent map only, or readers only to determine which plastic component maintains or erodes the separation.
+3. **Longer hold durations:** extend identical `lambda=0.50` training far beyond 120 epochs to measure whether separation asymptotes, decays slowly, or eventually collapses.
+4. **Fresh demand trajectories:** test whether a history-conditioned regime predicts responses to unseen continuous demand paths without changing the M8 claim.
+5. **Functional necessity of the history state:** only after localization, causally suppress or swap the history-specific organization and test whether the corresponding functional contrast changes.
 
-R8-M7I's post-primary immediate-versus-delayed pattern may motivate this test but cannot count as confirmatory evidence.
+These should be separately preregistered. M8 itself remains Y3 regardless of later mechanism outcomes.
 
-**Possible practical uses:** learned dynamical routing, adaptive memory allocation, selective recurrent filtering, regime-dependent compression, compact recurrent preprocessing, state-dependent computation, and history-dependent adaptive allocation.
+**Possible practical uses:** learned dynamical routing, adaptive memory allocation, selective recurrent filtering, regime-dependent compression, compact recurrent preprocessing, state-dependent computation, history-sensitive anomaly detection, persistent context in small recurrent modules, and controlled resistance to overwriting.
 
 ## Priority 2 — R6/R8 readout preparation
 
@@ -99,7 +100,7 @@ Preserve and keep accessible:
 - ALI historical and reproducible experiments;
 - Observer R2–R11;
 - ND-R1 with formal Outcome A and post-run audit;
-- R8-M1 through R8-M7R and R8-M7I preregistrations/results/protocol notes;
+- R8-M1 through R8-M8 preregistrations/results/protocol notes;
 - R8-M7I post-primary audit, explicitly labeled exploratory;
 - N-series spatial/accessibility work;
 - AG-series affine/reader-robustness work;
@@ -131,16 +132,20 @@ A failed explanation is not the same as a failed phenomenon.
 17. Seed-to-seed heterogeneity alone is not evidence of adaptive demand tracking; the demand must be controlled experimentally.
 18. A demand-specific shift is not equivalent to full regime reassignment.
 19. Post-primary evidence from a protocol-limited run may motivate a new test but cannot rescue the frozen primary outcome.
-20. Do not call history dependence "formal hysteresis" without a dedicated controlled test.
+20. Operational history dependence is not automatically mathematical bistability or formal hysteresis.
+21. Persistent separation under identical present demand does not imply information beyond the complete current state.
+22. Replication/generalization and mechanism localization must be tested separately from the already-frozen M8 Y3 claim.
 
 ## Immediate next step
 
-**Preregister a consolidation-versus-challenge-pressure study before exposing new outcomes.**
+**Preregister a mechanism-localization study for the M8 persistent history effect.**
 
-The core distinction is whether history merely changes the magnitude of an elastic demand response or creates a reproducible barrier/threshold for switching the dominant native regime.
+The core distinction is whether the retained history dependence is carried mainly by encoder-side representation, recurrent-map geometry, or distributed encoder–recurrence coadaptation.
 
 See:
 
+- `docs/R8_M8_RESULT.md`
+- `experiments/r8_m8/PREREGISTRATION.md`
 - `docs/R8_M7I_POSTRUN_AUDIT.md`
 - `docs/R8_M7I_RESULT.md`
 - `docs/R8_M7R_RESULT.md`
