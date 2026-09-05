@@ -1,0 +1,167 @@
+name: E1 Persistent Calibration Engineering Benchmark
+
+on:
+  push:
+    branches:
+      - e1-persistent-calibration
+    paths:
+      - 'engineering/e1_persistent_calibration/**'
+      - '.github/workflows/e1-persistent-calibration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  smoke:
+    name: E1 outcome-free smoke gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout engineering branch
+        uses: actions/checkout@v4
+        with:
+          ref: e1-persistent-calibration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: engineering/e1_persistent_calibration/requirements.txt
+
+      - name: Install frozen dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r engineering/e1_persistent_calibration/requirements.txt
+
+      - name: Compile frozen implementation
+        run: python -m py_compile engineering/e1_persistent_calibration/run_e1.py engineering/e1_persistent_calibration/classify_e1.py
+
+      - name: Outcome-free classifier self-check
+        run: python engineering/e1_persistent_calibration/classify_e1.py --self-test
+
+      - name: Run outcome-free smoke path
+        run: |
+          rm -rf /tmp/e1-smoke
+          python engineering/e1_persistent_calibration/run_e1.py \
+            --seed 9001 \
+            --outdir /tmp/e1-smoke \
+            --smoke
+
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          p='/tmp/e1-smoke/smoke_summary.json'
+          d=json.load(open(p))
+          assert d['status']=='ok'
+          assert set(d['conditions'])=={'A','B'}
+          for drift in ('A','B'):
+              assert set(d['conditions'][drift])=={'FULL','F1','F2','HEAD','NOADAPT'}
+              assert all(v==2 for v in d['hold_lengths'][drift].values())
+              assert all(v==1 for v in d['switch_lengths'][drift].values())
+          print('smoke structure ok')
+          PY
+
+  family:
+    name: E1 benchmark family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [1109, 1127, 1144, 1162, 1181, 1199, 1218, 1237, 1255, 1274, 1292, 1311]
+    steps:
+      - name: Checkout engineering branch
+        uses: actions/checkout@v4
+        with:
+          ref: e1-persistent-calibration
+          fetch-depth: 1
+
+      - name: Record source commit
+        run: git rev-parse HEAD | tee source_commit.txt
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: engineering/e1_persistent_calibration/requirements.txt
+
+      - name: Install frozen dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r engineering/e1_persistent_calibration/requirements.txt
+
+      - name: Execute fresh engineering family
+        run: |
+          mkdir -p results/e1_persistent_calibration/seed_${{ matrix.seed }}
+          cp source_commit.txt results/e1_persistent_calibration/seed_${{ matrix.seed }}/source_commit.txt
+          python engineering/e1_persistent_calibration/run_e1.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/e1_persistent_calibration/seed_${{ matrix.seed }} \
+            2>&1 | tee results/e1_persistent_calibration/seed_${{ matrix.seed }}/run.log
+
+      - name: Upload family artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e1-seed-${{ matrix.seed }}
+          path: results/e1_persistent_calibration/seed_${{ matrix.seed }}/
+          if-no-files-found: error
+          retention-days: 90
+
+  classify:
+    name: E1 frozen cross-family classification
+    needs: family
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout engineering branch
+        uses: actions/checkout@v4
+        with:
+          ref: e1-persistent-calibration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: engineering/e1_persistent_calibration/requirements.txt
+
+      - name: Install frozen dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r engineering/e1_persistent_calibration/requirements.txt
+
+      - name: Download family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: e1-seed-*
+          path: all_e1_families
+
+      - name: Apply frozen engineering classifier
+        run: |
+          rm -rf e1_aggregate
+          python engineering/e1_persistent_calibration/classify_e1.py \
+            --root all_e1_families \
+            --outdir e1_aggregate
+          cat e1_aggregate/FINAL_RESULT.md
+
+      - name: Upload aggregate artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: e1-aggregate
+          path: e1_aggregate/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Commit authoritative E1 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B e1-results
+          mkdir -p results/e1_persistent_calibration/aggregate
+          cp e1_aggregate/FINAL_RESULT.md results/e1_persistent_calibration/aggregate/FINAL_RESULT.md
+          cp e1_aggregate/classification.json results/e1_persistent_calibration/aggregate/classification.json
+          git add results/e1_persistent_calibration/aggregate
+          git commit -m 'Record frozen E1 persistent calibration result' || true
+          git push origin HEAD:e1-results --force
