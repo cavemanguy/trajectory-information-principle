@@ -28,32 +28,34 @@ Perturbation experiments remain preserved, but they are not the trunk of the pro
 - **R8-M1:** **M3 — encoder–recurrence coadaptation supported.** Full relation-selective survival required plasticity in both the encoder and recurrent map across fresh seeds.
 - **R8-M2:** **S0 — neither simple source tracks winner.** Neither relation-specific initialization bundle nor finite-sample data-column identity reliably explained eventual specialist identity.
 - **R8-M3:** **T0 — neither preregistered epoch-20 predictor supported.** Coadaptation synergy and shared-gradient alignment did not reliably identify the final specialist, while changed minibatch order materially shifted commitment timing and sometimes winner identity under identical initialization/data.
-- **R8-M4:** **F3 — selective-specialization contribution supported.** Selectivity equalization reduced `G` in 12/12 fresh seeds by about 66.6% on average. h12 test accuracy fell by 3.04 percentage points versus baseline and 2.57 points versus the matched mean-survival control, with paired bootstrap intervals below zero. A preregistered secondary localized most functional loss to the baseline dynamically favored relation: winner h12 accuracy fell about 30.36 points while non-winner performance was approximately preserved.
+- **R8-M4:** **F3 — selective-specialization contribution supported.** Selectivity equalization reduced `G` in 12/12 fresh seeds by about 66.6% on average. h12 test accuracy fell by 3.04 percentage points versus baseline and 2.57 points versus the matched mean-survival control. A preregistered secondary localized most functional loss to the dynamically favored relation.
+- **R8-M5:** **C0 — simple capacity-allocation account not supported.** Increasing full state width from 16D to 32D improved h12 test accuracy by about 5.55 percentage points but increased survival-winner performance concentration and dynamical selectivity. A near-parameter-matched 16D-state wider-transition control did not reproduce the same concentration. The simple tight-bottleneck compromise account is therefore rejected. However, the 32D model also improved h0 test accuracy by about 34.65 percentage points, so recurrent workspace dimension was not isolated from encoder-side representation quality.
 
 ### Current defensible description
 
-> **Training-induced, optimization-path-sensitive dynamical specialization produced through encoder–recurrence coadaptation, with a demonstrated functional contribution under a controlled suppression intervention in the tested synthetic architecture.**
+> **Training-induced, optimization-path-sensitive dynamical specialization produced through encoder–recurrence coadaptation, with a demonstrated functional contribution under controlled suppression; widening the full latent/state representation improves performance while strengthening rather than relieving specialization in the tested synthetic architecture.**
 
 This is not a claim of strong emergence, universal necessity, or a universal trajectory-information principle.
 
-### Immediate study — R8-M5 capacity allocation
+### Immediate study — R8-M6 isolated recurrent workspace
 
-R8-M4 specifically motivates one more R8 follow-up before returning to the broader trunk:
+R8-M5 creates one sharply preregisterable follow-up:
 
-> **Is the one-relation-dominant specialization a state-capacity/resource-allocation strategy created by the tight autonomous recurrent bottleneck?**
+> **If the encoder output remains 16D, does a function-preserving expansion of only the autonomous recurrent workspace strengthen useful specialization and terminal performance?**
 
-R8-M5 is preregistered on `r8-m5-capacity-allocation` and uses fresh paired families with:
+R8-M6 should begin from one common 16D lineage model before stable commitment, then fork into three matched continuations:
 
-- 16-D lineage baseline (`16 -> 32 -> 16` recurrence);
-- 24-D state;
-- 32-D state;
-- a near-parameter-matched **16-D state** with a 192-wide transition MLP.
+- **B16:** ordinary 16D continuation;
+- **X32:** exact function-preserving recurrent-state expansion from 16D to 32D. The 16D state is zero-padded into 32D; the 16D recurrent map and terminal heads are block-embedded so the X32 trajectory and predictions are initially identical to B16;
+- **P16:** near-parameter-matched wider-transition control that retains the 16D recurrent state. The wider MLP is also initialized by exact function-preserving embedding of the original 16D recurrent map.
 
-The near-parameter-matched control is critical: a larger model simply performing better is not sufficient. The strongest frozen outcome requires wider state dimension to reduce dynamical and functional winner dominance while improving terminal performance, and for the wider-transition 16-D control not to reproduce that redistribution.
+The fork should occur at epoch 20, before the prior stable-commitment window. Encoder, h0 heads, data, presentation permutations, and minibatch order are identical at the fork. No external information enters after h0.
 
-After this targeted capacity test, the planned trunk returns to **Priority 2: R6/R8 readout preparation** unless R8-M5 creates another sharply preregisterable causal question.
+A positive state-workspace result must require better terminal h12 performance together with stronger dynamical/functional specialization under X32, while h0 remains within a frozen equivalence margin and the parameter-matched P16 control does not reproduce the effect.
 
-**Possible practical uses:** capacity-aware dynamical routing, selective memory/compression, learned filtering, sparse channel allocation, compact recurrent preprocessing, state-dependent computation.
+This is intended as the final targeted R8 formation/function isolation before returning to **Priority 2: R6/R8 readout preparation**, unless R8-M6 produces a qualitatively new result that genuinely changes the priority order.
+
+**Possible practical uses:** learned dynamical routing, selective memory/compression, learned filtering, sparse channel allocation, compact recurrent preprocessing, state-dependent computation.
 
 ## Priority 2 — R6/R8 readout preparation
 
@@ -97,7 +99,7 @@ Preserve and keep accessible:
 - ALI historical and reproducible experiments;
 - Observer R2–R11;
 - ND-R1 with formal Outcome A and post-run audit;
-- R8-M1 through R8-M5 preregistrations/results/protocol notes;
+- R8-M1 through R8-M6 preregistrations/results/protocol notes;
 - N-series spatial/accessibility work;
 - AG-series affine/reader-robustness work;
 - R4B/R4C/R4D/R4E causal-control sequence;
@@ -123,19 +125,17 @@ A failed explanation is not the same as a failed phenomenon.
 12. Do not use strong-emergence language merely because simple explanations fail.
 13. A functional effect under one intervention is not a universal necessity theorem.
 14. A wider model performing better is not by itself evidence for state-capacity allocation.
+15. A full-model width effect cannot be attributed specifically to recurrent workspace if encoder-side representation quality changes substantially.
 
 ## Immediate next step
 
-**R8-M5 is the active Priority-1 experiment.**
+**R8-M6 is the active Priority-1 experiment.**
 
-Its frozen primary distinction is:
-
-- does widening autonomous state capacity improve h12 performance while reducing survival selectivity and survival-winner performance dominance;
-- and does a near-parameter-matched model that retains the 16-D state bottleneck fail to reproduce that redistribution?
+Its frozen design should distinguish whether extra post-encoding recurrent state dimension itself can strengthen useful specialization from the alternative that R8-M5 was primarily driven by a better h0 representation or generic parameter growth.
 
 See:
 
-- `experiments/r8_m5/PREREGISTRATION.md`
+- `docs/R8_M5_RESULT.md`
 - `docs/R8_M4_RESULT.md`
 - `docs/R8_M4_SECONDARY_NOTE.md`
 - `docs/CURRENT_CLAIMS.md`
