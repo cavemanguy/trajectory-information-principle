@@ -4,15 +4,25 @@
 
 The project is returning its primary focus to **native dynamical behavior**. All prior ALI, observer, perturbation, control, affine-geometry, and attractor-era work remains preserved and indexed; the reset does not invalidate or delete it.
 
+### Current claim boundary
+
+The central trajectory-information hypothesis remains **open**. The project has established narrower mechanisms and negative constraints, but it has not established a universal trajectory-information principle, essential chronology, strong theoretical emergence, or a practical advantage over conventional architectures.
+
+Use [`CURRENT_CLAIMS.md`](CURRENT_CLAIMS.md) as the concise source of truth for what is established, what remains candidate evidence, and what is explicitly unproven. Use [`EVIDENCE_LEDGER.md`](EVIDENCE_LEDGER.md) for experiment-by-experiment status.
+
 Current priority:
 
-> **Reproduce the R8–R10 transition from initially indiscriminate contraction to learned relation-dependent selective preservation, while measuring R2-style native transient dynamics at the same frozen training checkpoints.**
+> **Confirm the R8–R10-style transition from initially near-uniform contraction/survival to learned relation-dependent selective preservation, while measuring R2-style native transient dynamics at the same frozen training checkpoints.**
 
-The first post-reset experiment, **ND-R1**, uses no perturbations and no active controller in its primary analysis. Observers, where used, are measurement instruments only and must not feed back into the native dynamics.
+The first post-reset experiment, **ND-R1**, used no perturbations and no active controller in its primary analysis. Its frozen Outcome A is preserved because its preregistered competence gate failed. A post-run source-lineage audit showed that gate was miscalibrated above the historical Observer-R2 lineage, so ND-R1 is not reclassified or rescued.
+
+Separately, all three fresh ND-R1 seeds showed a large bootstrap-positive increase in relation-selective natural-distinction survival from initialization to epoch 100, with the favored relation differing by seed. This training-amplified symmetry-breaking/specialization pattern is a **strong post-primary candidate** and must be tested in a new independent confirmation rather than promoted retroactively.
+
+Observers, where used, are measurement instruments only and must not feed back into the native dynamics. Perturbations remain preserved as later causal/control tools and are not assumed to be the source or location of trajectory information.
 
 Forward order:
 
-1. R8–R10 learned selective preservation + R2 native transient geometry.
+1. R8–R10 learned selective preservation + R2 native transient geometry, with fresh confirmation of the specialization candidate.
 2. R6/R8 readout preparation.
 3. R2/R3 transient trajectory structure.
 4. Coupled local-observer collective behavior.
@@ -21,7 +31,9 @@ Forward order:
 7. R11 survival/use dissociation.
 8. R4E state-conditioned intervention consequences as a later practical control/logic branch.
 
-See [`../RESEARCH_PRIORITIES.md`](../RESEARCH_PRIORITIES.md) and [`EVIDENCE_LEDGER.md`](EVIDENCE_LEDGER.md).
+The most promising practical direction currently is **dynamical computation**: recurrent evolution as a selective filter/reformatter for later use. Engineering possibilities such as selective compression, sparse channel allocation, compact recurrent preprocessing, early-step computation, reader-specific formatting, and state-dependent control must be tested separately from scientific mechanism claims.
+
+See [`../RESEARCH_PRIORITIES.md`](../RESEARCH_PRIORITIES.md), [`CURRENT_CLAIMS.md`](CURRENT_CLAIMS.md), [`EVIDENCE_LEDGER.md`](EVIDENCE_LEDGER.md), and [`ND_R1_POSTRUN_AUDIT.md`](ND_R1_POSTRUN_AUDIT.md).
 
 ---
 
