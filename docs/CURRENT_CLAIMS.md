@@ -6,7 +6,7 @@ This file is the concise source of truth for what the project currently does and
 
 ## Core research intent
 
-The central question is again the native dynamics:
+The central question is the native dynamics:
 
 > **What meaningful computational structure emerges in the evolving internal state itself, and can that structure be understood, measured, and eventually used practically?**
 
@@ -20,16 +20,16 @@ The perturbation program is preserved, but perturbation response is not assumed 
 
 ## What has been established within the tested synthetic systems
 
-The project has established several narrower findings:
-
 - **Observer-relative trajectory accessibility:** R2/R3 showed that information available through evolving geometric/directional features can differ from information available from an endpoint snapshot. Exact chronology was not established, and much of the directional signal can be dominated by the earliest transient.
 - **Readout preparation:** R6/R8 showed that recurrence can make task structure less accessible to generic readouts while improving compatibility with its trained downstream reader.
 - **Selective empirical preservation:** R9/R10 showed strongly contractive, ill-conditioned recurrence in which different task distinctions survive by very different amounts. R10 causally established that orientation relative to learned local dynamical geometry changes distinction survival.
-- **Training-induced encoder–recurrence coadaptation:** R8-M1 used matched initialization/data across five no-perturbation training conditions and passed its lineage-validity gate on fresh seeds 11/37/71. Joint training produced substantially more relation-selective native survival than either a frozen recurrent map or frozen encoder in all three seeds, with paired bootstrap intervals above zero. The preregistered outcome was **M3 — encoder–recurrence coadaptation supported**. Terminal h12 supervision alone was not a stable cross-seed explanation.
-- **Symmetry-breaking source narrowing:** R8-M2 used eight fresh no-perturbation paired families to test whether winner identity followed relation-specific initialization bundles or finite-sample data-column identity. All families passed training validity. The frozen result was **S0 — neither simple source tracks winner**: initialization mapped winner matches were 3/8 with aligned-minus-raw rank-correlation effect -0.030, 95% CI [-0.360, 0.348]; data-column mapped winner matches were 1/8 with effect -0.080, 95% CI [-0.610, 0.381]. The preregistered commitment descriptor placed stable winner commitment at epoch 40.
-- **Optimization-path sensitivity:** R8-M3 used twelve fresh paired families. Its frozen primary result was **T0 — neither preregistered epoch-20 precommitment predictor supported**. Coadaptation-synergy and shared-gradient-alignment vectors each had positive mean rank correlations with final survival ranking, but neither met the exact-winner criterion. Changing only deterministic minibatch order shifted commitment onset from epoch 35 in baseline to epoch 20 in the alternate-order path; final winner identity agreed in 7/12 families and final ranking correlation averaged 0.442. This shows material optimization-path sensitivity under identical initialization/data, not strong emergence.
+- **Training-induced encoder–recurrence coadaptation:** R8-M1 passed its fresh-seed validity gate and produced **M3 — encoder–recurrence coadaptation supported**. Full selective survival was substantially stronger than when either the recurrent map or encoder was frozen. Terminal h12 supervision alone was not a stable cross-seed explanation.
+- **Symmetry-breaking source narrowing:** R8-M2 produced **S0 — neither simple source tracks winner**. Neither relation-specific initialization bundles nor finite-sample data-column identity reliably tracked winner identity across eight fresh paired families. Stable commitment under its frozen descriptor appeared at epoch 40.
+- **Optimization-path sensitivity:** R8-M3 produced **T0 — neither preregistered epoch-20 precommitment predictor supported**. Coadaptation synergy and shared-gradient alignment each carried some rank information but failed the frozen exact-winner criteria. Changing only deterministic minibatch order shifted commitment timing and often changed winner identity under identical initialization/data.
+- **Functional contribution of native specialization:** R8-M4 produced **F3 — selective-specialization contribution supported**. Selectivity equalization reduced `G` in 12/12 fresh seeds, by about 66.6% on average. Epoch-100 h12 test accuracy fell by 3.04 percentage points versus baseline and by 2.57 points versus the matched mean-survival control, with paired bootstrap intervals entirely below zero.
+- **Specialist-concentrated functional loss:** the preregistered R8-M4 secondary analysis showed that baseline survival-winning relations averaged 74.34% h12 test accuracy versus 13.93% across the other seven relations. Equalization reduced winner accuracy by about 30.36 points while non-winner accuracy was approximately preserved. This motivates a capacity/resource-allocation interpretation but does not establish it.
 - **Survival/use dissociation:** R11 showed that increasing or decreasing Euclidean survival magnitude does not by itself cause the corresponding improvement or impairment in downstream reader use.
-- **Query-specific perturbation geometry:** ALI-N8-R1 reproducibly showed query-specific direction-dependent responses under its diagnostic decoder class, while also showing that adaptive ALI did not beat direct memory readout and could leak information through the direction itself.
+- **Query-specific perturbation geometry:** ALI-N8-R1 reproducibly showed query-specific direction-dependent responses under its diagnostic decoder class, while adaptive ALI did not beat direct memory readout and could leak information through the direction itself.
 - **Negative causal-control boundaries:** R4C/R4D did not establish useful learned self-steering, R4E failed its Phase-I primary gate, and JTP-1 found no preregistered seed-general instantaneous local-operator marker of trajectory time under its controls.
 
 These are real findings under their stated systems and controls. They are not equivalent to proof of the overarching trajectory-information hypothesis.
@@ -42,7 +42,9 @@ The project has **not** established that:
 - a recurrent trajectory creates new task information independent of the complete earlier state;
 - chronology itself carries the essential information in the tested systems;
 - the observed dynamical organization is genuinely emergent in a strong theoretical sense rather than an ordinary consequence of optimization;
-- the observed relation-selective specialization is functionally necessary for task performance;
+- relation-selective specialization is universally necessary or beneficial;
+- the R8-M4 effect is mediated by Euclidean survival magnitude itself;
+- specialization is caused by a tight latent/recurrent capacity bottleneck;
 - trajectories provide a demonstrated practical advantage over conventional architectures;
 - ALI replaces or outperforms attention or direct readout;
 - the phenomena generalize to language models, transformers, naturalistic data, or physical systems;
@@ -51,43 +53,39 @@ The project has **not** established that:
 
 The central trajectory-information hypothesis therefore remains **open**, not proven and not cleanly falsified by the existing side-branches.
 
-## ND-R1 through R8-M3 discovery sequence
+## ND-R1 through R8-M4 discovery sequence
 
-ND-R1 was the first post-reset no-perturbation native-dynamics study. Its frozen primary classification remains:
+ND-R1 remains formally **Outcome A — training reproduction failure** because all three fresh seeds missed its preregistered h12 competence gate. A post-run provenance audit showed that the threshold was miscalibrated above the historical Observer-R2 lineage itself; the frozen outcome is preserved and not repaired.
 
-> **Outcome A — training reproduction failure**
+Separately, ND-R1 generated the post-primary selective-survival observation: training transformed nearly uniform relation survival into strong seed-dependent relation selectivity.
 
-because all three fresh seeds missed the preregistered `h12 >= 0.50` competence gate.
+R8-M1 independently established the narrow coadaptation mechanism: both encoder and recurrent-map plasticity are needed for the full learned selective-survival pattern.
 
-A post-run provenance audit then showed that this competence threshold was miscalibrated above the historical Observer-R2 source lineage itself. The formal Outcome A is preserved and is not retroactively repaired.
+R8-M2 ruled out two simple fixed explanations of winner identity: relation-specific initialization bundles and finite-sample data-column identity.
 
-Separately, all three ND-R1 fresh seeds showed a large secondary transition from nearly uniform relation survival at initialization to strongly relation-selective survival at epoch 100, with positive bootstrap intervals in every seed and different favored relations across seeds. That pattern was treated as post-primary hypothesis generation rather than a rescued result.
+R8-M3 failed to identify the eventual winner with two simple preregistered epoch-20 predictors, while independently showing material optimization-path sensitivity under changed minibatch order.
 
-R8-M1 then tested the mechanism independently on new fresh seeds with a lineage-calibrated validity gate. Its formal **M3** result established the narrow coadaptation claim: full selective survival under the tested joint regime depends on both encoder and recurrent-map plasticity.
+R8-M4 then moved from formation to function. Its **F3** result showed that specifically suppressing relation-selective native survival impairs terminal task performance beyond a matched mean-survival auxiliary control. Its preregistered secondary analysis localized most of that impairment to the baseline dynamically favored relation.
 
-R8-M2 then tested two obvious fixed sources of seed-dependent winner identity. Its formal **S0** result showed that neither relation-specific initialization bundles nor finite-sample data-column identity reliably tracked the winner across eight fresh paired families.
+The most defensible compact description is now:
 
-R8-M3 then tested two preregistered precommitment predictors on twelve fresh families. Its formal **T0** result showed that neither coadaptation synergy nor shared-gradient alignment reliably identified the final winner at epoch 20 under the frozen criteria. However, alternate minibatch order materially shifted commitment timing and often changed the final specialist despite identical initialization and data.
+> **training-induced, optimization-path-sensitive dynamical specialization produced through encoder–recurrence coadaptation, with a demonstrated functional contribution under a controlled suppression intervention in the tested synthetic architecture.**
 
-This makes **training-induced spontaneous dynamical specialization through encoder–recurrence coadaptation with material optimization-path dependence** a defensible descriptive phrase within this tested architecture. It is still not proof of strong emergence.
+This remains a local mechanistic result, not proof of strong emergence or a universal principle.
 
 ## Current scientific priority
 
-Priority 1 remains R8 native specialization, but the formation branch is now sufficiently characterized to move to **functional necessity**.
+Priority 1 remains R8 native specialization because R8-M4 produced a specifically justified follow-up.
 
-The current preregistered experiment, R8-M4, asks:
+The next question is:
 
-> **Can the system learn comparably when relation-selective native survival is actively suppressed after the precommitment stage, or does suppressing that specialization impair terminal task performance?**
+> **Is the one-relation-dominant specialization a capacity/resource-allocation strategy created by the tight autonomous recurrent bottleneck?**
 
-R8-M4 forks bit-identical models at epoch 20 into:
+R8-M5 should vary latent/recurrent state capacity while holding the task, data generation, encoder hidden width, recurrence depth, optimizer, supervision, and evaluation logic fixed. The primary test must distinguish a capacity-allocation account from the weaker statement that larger models simply perform better.
 
-- ordinary baseline continuation;
-- a natural-pair selectivity-equalization objective;
-- a matched mean-survival auxiliary control.
+A capacity-allocation result would require wider state capacity to reduce dynamical/functional winner dominance while improving or preserving terminal performance without a corresponding degradation at h0. Failure of that pattern would rule against the simple bottleneck-allocation explanation.
 
-The equalization manipulation must first pass a strict suppression gate before performance can be interpreted. The primary endpoint is epoch-100 test h12 accuracy. Successful suppression with preserved performance would argue that the observed specialization is not necessary under this regime; selective performance harm beyond the matched control would support a functional contribution, not a universal necessity theorem.
-
-After R8-M4, the planned next priority is R6/R8 readout preparation unless R8-M4 produces a specifically justified follow-up.
+After this targeted follow-up, the planned trunk returns to R6/R8 readout preparation unless R8-M5 generates another sharply preregisterable causal question.
 
 ## Practical-use direction
 
@@ -95,7 +93,7 @@ The most promising practical interpretation currently is **dynamical computation
 
 > training can organize an encoder and recurrent map together so that task distinctions experience strongly different native survival through the recurrent dynamics.
 
-Potential engineering branches include selective filtering/compression, sparse channel allocation, compact recurrent preprocessing, early-step computation, reader-specific latent formatting, and later state-dependent control/logic.
+R8-M4 suggests that this organization can contribute functionally, but the contribution was strongly concentrated in the favored relation. Potential engineering branches therefore include capacity-aware routing, selective memory/compression, sparse channel allocation, compact recurrent preprocessing, early-step computation, and reader-specific latent formatting.
 
 These remain engineering hypotheses until separately tested.
 
@@ -111,6 +109,7 @@ See:
 - `R8_M1_RESULT.md`
 - `R8_M2_RESULT.md`
 - `R8_M3_RESULT.md`
+- `R8_M4_RESULT.md`
 - `R8_NATIVE_DYNAMICS_INVESTIGATION.md`
 - `observer_program_r2_r11.md`
 - `research_history.md`
