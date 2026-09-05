@@ -2,6 +2,9 @@ name: R8-M1 Objective Decomposition
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - r8-m1-objective-decomposition
 
 permissions:
   contents: write
