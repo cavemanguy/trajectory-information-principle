@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
+N_REL = 8
 FAMILY_SEEDS = (3, 9, 21, 28, 44, 62, 86, 101)
 PI = np.array([3, 4, 5, 6, 7, 0, 1, 2], dtype=np.int64)
 BOOT_N = 5000
