@@ -1,236 +1,210 @@
 # Trajectory Information Project
 
-## Current research priority — September 2026 reset
+Independent research on learned recurrent dynamics, trajectory structure, latent geometry, and history-dependent computation.
 
-**Preservation rule: preserve everything; delete nothing from the scientific record.** Prior successful, negative, ambiguous, superseded, exploratory, and prototype work remains part of the repository and research history.
+**Preservation rule:** preserve successful, negative, ambiguous, superseded, exploratory, and prototype work. A failed explanation is not the same as a failed phenomenon.
 
-The forward research focus returns to the native dynamics:
+The current scientific focus is the native dynamics:
 
 > **What meaningful computational structure emerges in the evolving internal state itself, and can that structure be understood, measured, and eventually used practically?**
 
 Observers are measurement tools. Perturbations are optional causal/control tools. Neither is assumed to be the source of trajectory information.
 
-This README is the public overview. The concise claim source of truth is [`docs/CURRENT_CLAIMS.md`](docs/CURRENT_CLAIMS.md), with detailed evidence and negative-result boundaries in [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md).
+For the current source of truth, see:
 
-## Current R8 architecture in plain terms
+- [`docs/CURRENT_CLAIMS.md`](docs/CURRENT_CLAIMS.md) — current supported claims and boundaries
+- [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md) — evidence map, negative results, and protocol-limited branches
+- [`RESEARCH_PRIORITIES.md`](RESEARCH_PRIORITIES.md) — next experiments and permanent scientific rules
+- [`docs/research_history.md`](docs/research_history.md) — preserved historical development
 
-The current R8 experiments use ordinary neural-network components arranged to create a clean autonomous latent dynamical system.
+## Current R8 system
 
-The task contains **8 statistically symmetric categorical relations**, each taking one of **16 possible values**. A GRU encoder compresses the complete input into a **16-dimensional latent state** `h0`. After that encoding step, the model receives **no new external input**. Instead, the same learned recurrent map
+The active R8 program uses ordinary neural-network components arranged as a clean autonomous latent dynamical system.
 
-`F: 16 -> 32 -> 16`
+The task has **8 statistically symmetric categorical relations**, each taking one of **16 values**. A GRU encoder compresses the complete input into a **16-dimensional latent state** `h0`. After `h0`, the model receives **no new external input**. The same learned recurrent map is then applied for 12 autonomous transitions:
 
-is applied repeatedly for **12 recurrent transitions**:
+```text
+input -> GRU encoder -> h0 -> F -> F -> ... -> F -> h12 -> reader
+```
 
-`input -> GRU encoder -> h0 -> F -> F -> ... -> F -> h12 -> reader`
+with
 
-Separate readers are trained at `h0` and `h12`.
+```text
+h_(t+1) = F(h_t)
+```
 
-This differs from a conventional sequence RNN, where each recurrent update typically receives a new external input, and from a transformer or feed-forward stack, where successive layers usually have different parameters. Here, after encoding, the computation is deliberately closer to an autonomous system:
+The analysis tracks how natural task distinctions evolve through that trajectory. For inputs differing in one relation, the experiments follow
 
-`h_(t+1) = F(h_t)`
+```text
+Delta_t = h_t(x) - h_t(x')
+```
 
-That makes the internal computation directly interpretable as a trajectory through latent state space.
+and measure how strongly each relation survives, contracts, or expands under the learned recurrent dynamics.
 
-The architecture itself is **not claimed to be radically novel**. The interesting finding is what ordinary training organizes inside it. Across the R8 program, the encoder learns where task distinctions are placed in latent space while the recurrent map learns how distinctions placed there evolve. R8-M1 established that the full relation-selective survival pattern depends on **encoder–recurrence coadaptation**.
+The architecture itself is not claimed to be radically novel. The research question is what ordinary training organizes inside it.
 
-The analysis therefore tracks not only task accuracy, but how natural task distinctions evolve. For two valid inputs that differ in only one relation, the experiments follow
+## R8 discovery sequence
 
-`Delta_t = h_t(x) - h_t(x')`
+### R8-M1 — encoder–recurrence coadaptation
 
-through the 12 recurrent transitions and measure whether that distinction contracts, survives, or expands.
+**M3 — supported.** Full relation-selective native survival required plasticity in both the encoder and recurrent map.
 
-### Prioritized phenomena
+### R8-M2 — simple source tests
 
-1. **R8–R10 learned selective preservation** — training transformed initially indiscriminate contraction into relation-dependent anisotropic preservation through encoder–recurrence coadaptation. **Immediate priority.**
-2. **R6/R8 readout preparation** — recurrence can make information less generically accessible while making it more useful to its trained downstream reader.
-3. **R2/R3 native transient trajectory structure** — strongly indirect transient dynamics and nonmonotonic accessibility; directional history exists, chronology not established. Historical reversal dominance is now known not to be seed-general.
-4. **Coupled local-observer collective behavior** — local components differentiated and coordinated through a shared dynamical substrate; chaos/exotic-attractor interpretations remain unsupported.
-5. **Shared-observer transient factor** — historical early transient task signal peaked before the endpoint; requires clean reproduction.
-6. **R7 reader-conditioned recurrent plasticity** — recurrence can adapt terminal format toward altered reader geometry under controlled conditions.
-7. **R11 survival/use dissociation** — geometric survival magnitude alone does not determine reader usefulness.
-8. **R4E state-conditioned intervention consequences** — preserved as a later practical control/logic branch; R4E itself closed at Phase I.
+**S0 — neither simple source tracks winner.** Relation-specific initialization bundles and finite-sample data-column identity did not reliably determine which relation became dynamically favored.
 
-### Priority-1 status
+### R8-M3 — optimization-path sensitivity
 
-**ND-R1** remains formally **Outcome A — training reproduction failure** because its preregistered h12 competence gate was not met. A post-run provenance audit showed that the gate was miscalibrated above the historical source lineage. That formal outcome is preserved and is not retroactively changed.
+**T0 — preregistered early predictors not supported.** Changing only minibatch order altered commitment timing and changed final winner identity in 5/12 paired families.
 
-Separately, ND-R1 generated the post-primary observation that training changed initially near-uniform relation survival into strongly relation-selective survival, with different favored relations across seeds.
+### R8-M4 — functional contribution
 
-**R8-M1** independently confirmed the mechanism on fresh seeds. Frozen outcome: **M3 — encoder–recurrence coadaptation supported**. Joint training produced substantially greater relation-selective native survival than either freezing the recurrent map or freezing the encoder.
+**F3 — selective-specialization contribution supported.** Equalizing established relation-selective survival reduced terminal performance beyond a matched mean-survival control, with most loss concentrated in the dynamically favored relation.
 
-**R8-M2** then tested whether winner identity was simply inherited from relation-specific initialization or finite-sample data-column asymmetry. Frozen outcome: **S0 — neither simple source tracks winner**. Its preregistered commitment descriptor placed stable winner commitment around epoch 40.
+### R8-M5 / M5R / M6 — capacity and workspace
 
-**R8-M3** tested two precommitment predictors on 12 fresh families. Frozen outcome: **T0 — neither preregistered predictor supported**. Coadaptation synergy and shared-gradient alignment had positive rank relationships with the eventual survival geometry but did not reliably identify the eventual winner. Changing only minibatch order materially changed commitment timing and sometimes winner identity, providing evidence for optimization-path dependence without proving strong emergence.
+- **M5: C0** — simple scarce-state-capacity account not supported.
+- **M5R: R2** — wider state produced a fresh state-dimension-specific terminal benefit without requiring specialization to move in one predetermined direction.
+- **M6: W0** — isolated recurrent-workspace attribution not supported because h0 equivalence failed after continued training.
 
-**R8-M4 is the current active experiment.** It asks whether the specialization is functionally necessary. Baseline and intervention models are identical through epoch 20, then fork. One continuation explicitly suppresses between-relation survival specialization using only natural task pairs; a matched control regularizes mean survival without directly equalizing relations. Performance is interpreted only if the preregistered manipulation gate confirms that specialization was actually reduced.
+### R8-M7R — demand sensitivity without free takeover
 
-The current defensible description is:
+**D0 — reversible demand tracking not supported.** All 12 mature families were valid. Terminal demand toward the baseline loser moved native organization strongly toward that relation and improved its terminal performance, but complete specialist reassignment was rare.
 
-> **training-induced spontaneous dynamical specialization through encoder–recurrence coadaptation in the tested synthetic recurrent architecture**
+Detailed result: [`docs/R8_M7R_RESULT.md`](docs/R8_M7R_RESULT.md)
 
-This is a descriptive result, not a claim of strong emergence, universal trajectory information, new information creation, or practical superiority.
+### R8-M7I — inverted mirror
 
-See:
+**V0 — baseline lineage reproduction failure.** The primary mirror result remains invalid because four paired lineages missed an overly tight preregistered numerical baseline-Q tolerance, despite matching maturity epoch and A/B identities. Post-primary diagnostics are preserved separately and are not used to rescue the frozen outcome.
 
-- [`RESEARCH_PRIORITIES.md`](RESEARCH_PRIORITIES.md) — current priority list, practical-use directions, and reset rules
-- [`docs/CURRENT_CLAIMS.md`](docs/CURRENT_CLAIMS.md) — concise source of truth for current claims and boundaries
-- [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md) — preserved evidence/negative-result map
-- [`docs/ND_R1_POSTRUN_AUDIT.md`](docs/ND_R1_POSTRUN_AUDIT.md) — ND-R1 result, gate audit, and candidate phenomena
-- [`docs/R8_M1_RESULT.md`](docs/R8_M1_RESULT.md) — preregistered R8-M1 coadaptation result
-- [`docs/R8_M2_RESULT.md`](docs/R8_M2_RESULT.md) — preregistered R8-M2 symmetry-breaking source result
-- [`docs/R8_M3_RESULT.md`](docs/R8_M3_RESULT.md) — preregistered R8-M3 commitment-transition result
-- [`docs/research_history.md`](docs/research_history.md) — historical path, including failed and ambiguous branches
-- [`docs/research-plan.md`](docs/research-plan.md) — current plan with previous programs preserved below it
+- [`docs/R8_M7I_RESULT.md`](docs/R8_M7I_RESULT.md)
+- [`docs/R8_M7I_POSTRUN_AUDIT.md`](docs/R8_M7I_POSTRUN_AUDIT.md)
 
----
+### R8-M8 — persistent history-dependent regime separation
 
-# Active Latent Interrogation
+**Y3 — persistent history-dependent regime separation supported.**
 
-**Status: early-stage independent research project. The name is provisional.**
+Twelve fresh families were trained to maturity, then forked into opposite continuous demand histories. At the matched midpoint, both branches had:
 
-Active Latent Interrogation (ALI) studies whether controlled, query-dependent perturbations of a frozen latent state can expose query-relevant information through the response of a frozen nonlinear transformation.
+- the same architecture;
+- the same current demand `lambda=0.50`;
+- the same cumulative post-maturity training duration;
+- different controlled demand histories.
 
-The current mechanism is:
+The preregistered native separation was:
 
-> query → learned probe direction → frozen latent memory → controlled perturbation → local response → retrieval
+```text
+H_mid = Q_B-history(0.50) - Q_A-history(0.50)
+```
 
-This repository was previously organized around a broader **Trajectory Information Principle** and an attractor-curve demonstration. Those materials are preserved in [`archive/`](archive/README.md), but they are not evidence for the current mechanism.
+with
 
-## The idea in plain English
+- mean `H_mid = +1.331`
+- 95% CI `[+0.644, +2.057]`
 
-Suppose a model stores several facts in one fixed-width internal state. Instead of only reading that state directly, ALI asks a question, chooses a small direction in which to perturb the state, observes how a frozen nonlinear transformation responds, and tries to recover the requested fact from that response.
+The full matched-demand sweep produced a positive signed separation area:
 
-The central question is modest:
+- mean `AREA = +1.240`
+- 95% CI `[+0.589, +1.887]`
 
-> **Can the query select a perturbation direction that preferentially exposes the requested information?**
+The midpoint states were then trained for another **120 epochs under identical current demand**. The separation remained:
 
-The current experiments do not show that ALI replaces attention, improves real language models, proves a new law of dynamics, or provides a general-purpose memory architecture.
-
-## Current reproducible experiment: ALI-N8-R1
-
-ALI-N8-R1 is a preregistered experiment created from first principles rather than reconstructed or tuned to match the older historical aggregate result. The locked specification is in [`experiments/ali_n8_r1/PREREGISTRATION.md`](experiments/ali_n8_r1/PREREGISTRATION.md).
-
-The task stores eight categorical relations in a 16-dimensional continuous latent state. The encoder and frozen nonlinear transformation `F` are pretrained only to preserve the facts, then frozen. The main response is the symmetric finite difference
-
-$$
-r(m,v)=\frac{F(m+\alpha v)-F(m-\alpha v)}{2\alpha}.
-$$
-
-R1 compares adaptive, query-only, query-blind, fixed, random, zero-perturbation, and direct-read controls. It also preregisters a full 8×8 query/direction swap and 64 independently trained diagnostic decoders.
-
-Primary seeds were fixed in advance: **5, 17, and 31**.
-
-## R1 result
-
-All three primary seeds completed.
-
-Seeds **17** and **31** remained test-blind through core selection, ALI/control selection, and all diagnostic-decoder selections. Seed **5** has a documented protocol deviation: temporary core heads were evaluated on test before downstream selection. The deviation is preserved in [`PROTOCOL_DEVIATIONS.md`](experiments/ali_n8_r1/PROTOCOL_DEVIATIONS.md) and is not hidden or repaired post hoc.
-
-Across the three primary seeds:
-
-| Metric | Mean | Sample SD |
-|---|---:|---:|
-| Query-only ALI `P(q)` | **26.5450%** | 0.8661 pp |
-| Adaptive ALI `P(m,q)` | 66.7783% | 5.0036 pp |
-| Direct read from `m` | **69.5700%** | 4.8116 pp |
-| Direct read from `F(m)` | 61.9125% | 3.5753 pp |
-| Zero perturbation | 6.1583% | 0.2475 pp |
-| Adaptive direction-only leakage | 69.8167% | 5.5493 pp |
-
-Chance is **6.25%**.
-
-Adaptive ALI does not beat the strongest direct-memory control. It also has substantial direction-only leakage, so the adaptive policy cannot yet be interpreted as a clean interrogation mechanism even though the wrong-memory intervention shows very strong causal dependence on the memory-conditioned direction.
-
-The cleaner test is the query-only system:
-
-$$
-v=P(q),
-$$
-
-which cannot inspect the current memory while choosing its direction.
-
-### Preregistered query-only selectivity endpoints
-
-The native 8×8 swap keeps the reader's true query fixed and substitutes only the perturbation direction. Across the three seeds:
-
-- **`D_native = +19.4327` percentage points mean**
-- sample SD **1.0719 pp**
-
-Because the native reader could be specialized to its training direction, R1 also trains a separate diagnostic decoder for every relation/direction pair: **64 diagnostic decoders per seed**.
-
-Across the three seeds:
-
-- **`D_decode = +9.5751` percentage points mean**
-- sample SD **0.8901 pp**
-- relation-level independent-decoder diagonal advantage was positive in **24/24 seed/relation combinations**
-
-The three primary seeds were:
-
-| Seed | Query-only accuracy | `D_native` | `D_decode` |
-|---:|---:|---:|---:|
-| 5 | 25.5650% | +19.1168 pp | +10.3704 pp |
-| 17 | 26.8625% | +18.5543 pp | +8.6136 pp |
-| 31 | 27.2075% | +20.6271 pp | +9.7414 pp |
-
-Under the claim hierarchy locked before the primary runs, this meets the preregistered **Level-4 evidence pattern** for this learned latent system.
+- mean `H_hold120 = +1.208`
+- 95% CI `[+0.499, +1.924]`
+- retention ≈ **90.7%** of the original midpoint effect
 
 The narrow supported statement is:
 
-> **In this learned frozen latent system, query-specific perturbation directions reproducibly produce direction-dependent local responses that preferentially expose information associated with their respective queries under the preregistered diagnostic decoder class.**
+> **Within this symmetric synthetic autonomous recurrent system, opposite controlled demand histories can leave the same mature lineage in persistently different native dynamical organizations under the same current functional demand and matched training duration.**
 
-## What R1 does not establish
+Detailed result: [`docs/R8_M8_RESULT.md`](docs/R8_M8_RESULT.md)
 
-R1 does **not** establish that:
+Frozen preregistration: [`experiments/r8_m8/PREREGISTRATION.md`](experiments/r8_m8/PREREGISTRATION.md)
 
-- ALI beats direct reading or attention;
-- the 16-dimensional state provides a demonstrated compression advantage;
-- the directions are universal, discrete, or orthogonal neural addresses;
-- the mechanism generalizes to language models or transformers;
-- the result is a new computational primitive;
-- the broader Trajectory Information Principle is proven.
+## What M8 does not establish
 
-The current result is deliberately narrower: query-specific perturbation geometry exists reproducibly in this trained frozen latent system under the specified experimental conditions.
+R8-M8 does **not** establish:
 
-## Historical evidence
+- mathematical bistability;
+- formal thermodynamic or strict dynamical-systems hysteresis;
+- conscious choice or intentional regime selection;
+- information beyond the complete current state;
+- essential chronology as a separate information channel;
+- a universal trajectory-information principle;
+- generalization to language models, transformers, biological systems, physical systems, or naturalistic tasks;
+- practical superiority over conventional architectures.
 
-Before R1, recovered aggregate CSVs showed a historical N=8 query-conditioned probing result around **64.67%**, causal degradation under wrong/shuffled/mean direction interventions, and a corrected positional-attention control around **84.81%**. The exact historical implementation and raw per-seed evidence were not recoverable, so those CSVs remain preserved as historical aggregate evidence rather than reproducible proof.
+The current safe terminology is **persistent history-dependent native organization** or **hysteresis-like operational path dependence**.
 
-R1 is scientifically separate from that historical result and was not tuned to reproduce it.
+## Current next question
 
-## Repository map
+The next R8 priority is mechanism localization:
 
-- [`experiments/ali_n8_r1/PREREGISTRATION.md`](experiments/ali_n8_r1/PREREGISTRATION.md): locked R1 design
-- [`experiments/ali_n8_r1/run_core.py`](experiments/ali_n8_r1/run_core.py): reproducible frozen-core training
-- [`experiments/ali_n8_r1/run_r1.py`](experiments/ali_n8_r1/run_r1.py): staged ALI, controls, diagnostics, and final evaluation
-- [`experiments/ali_n8_r1/PROTOCOL_DEVIATIONS.md`](experiments/ali_n8_r1/PROTOCOL_DEVIATIONS.md): preserved protocol deviations
-- [`results/reproducible/ali_n8_r1/aggregate/`](results/reproducible/ali_n8_r1/aggregate/): three-seed R1 aggregate
-- [`results/reproducible/ali_n8_r1/`](results/reproducible/ali_n8_r1/): frozen per-seed evidence records
-- [`results/`](results/README.md): historical and reproducible result index
-- [`docs/mechanism.md`](docs/mechanism.md): mechanism and information boundaries
-- [`docs/research_history.md`](docs/research_history.md): research path and negative/ambiguous results
-- [`archive/`](archive/README.md): superseded attractor-era prototype and claims
+> **What maintains the persistent M8 history separation — encoder-side representation, recurrent-map geometry, or distributed encoder–recurrence coadaptation?**
 
-## Reproducibility status
+Candidate confirmatory tests include encoder/recurrent cross-swaps, selective freezing during long identical-demand holds, longer hold durations, and transfer to unseen demand trajectories.
 
-The R1 repository now contains the locked preregistration, implementation, pinned dependencies, seed definitions, frozen compact per-seed records, checkpoint and dataset hashes, intervention/diagnostic evidence references, and the three-seed aggregate.
+See [`RESEARCH_PRIORITIES.md`](RESEARCH_PRIORITIES.md) for the frozen scientific rules and next-study requirements.
 
-The original GitHub Actions artifacts remain authoritative for the full generated output bundles, including per-example predictions, logs, matrices, counts, environment metadata, and checkpoint hashes. Compact repository records tie each frozen seed to its workflow run, artifact ID, and artifact SHA-256.
+---
 
-The historical aggregate experiments remain non-reproducible from the repository because their original implementation was not recovered.
+# Other preserved research programs
 
-## Scope and next questions
+The repository contains several related programs that remain part of the scientific record but are not substitutes for the current R8 claim.
 
-The evidence still comes from one synthetic eight-relation task. The next scientific work should test **why** the query-only geometry appears and **how general** it is rather than tuning R1 further. Relevant follow-ups include larger relation counts, tighter latent bottlenecks, continuous information, naturally trained representations, and eventually language-model representations.
+## Observer / native-trajectory program
 
-Any scientific design change belongs in a new experiment version rather than being patched into R1.
+R2–R11 studied what information is accessible from evolving trajectory geometry, how recurrence changes generic versus trained-reader accessibility, how selective survival emerges, and where Euclidean preservation fails to predict functional usefulness.
 
-## Citation and contact
+Key boundaries:
 
-This is an evolving independent research prototype by **Zachary Daniels**. Cite the repository and a specific commit or experiment version rather than treating the project name or current interpretation as a settled universal result.
+- geometry-history accessibility can exceed endpoint snapshots;
+- exact chronology was not established as essential;
+- early transients can dominate some directional-history signals;
+- recurrence can improve trained-reader compatibility while generic accessibility worsens;
+- survival magnitude alone does not determine reader usefulness.
 
-Issues and technically critical feedback are welcome.
+See [`docs/observer_program_r2_r11.md`](docs/observer_program_r2_r11.md).
 
-## License
+## Active Latent Interrogation (ALI)
 
-MIT. See [`LICENSE`](LICENSE).
+ALI studies whether controlled query-dependent perturbations of a frozen latent state can expose query-relevant information through the response of a frozen nonlinear transformation.
+
+The reproducible ALI-N8-R1 result supports query-specific direction-dependent local responses under diagnostic decoders, but adaptive ALI did not beat direct memory readout and exhibited direction-only leakage. It does not establish that ALI replaces attention or provides a general memory architecture.
+
+See:
+
+- [`experiments/ali_n8_r1/PREREGISTRATION.md`](experiments/ali_n8_r1/PREREGISTRATION.md)
+- [`docs/mechanism.md`](docs/mechanism.md)
+- [`results/reproducible/ali_n8_r1/`](results/reproducible/ali_n8_r1/)
+
+## Causal-control / perturbation program
+
+R4B/R4C/R4D/R4E and JTP tested controllability, learned self-steering, low-dimensional control, state-conditioned intervention consequences, and instantaneous local-operator signatures.
+
+Important negative boundaries are preserved: learned self-nudging did not produce a strong practical controller, R4E failed its primary Phase-I nonlinear gate, and JTP-1 did not find the preregistered seed-general instantaneous Jacobian-like trajectory-time signature.
+
+## Reader robustness / affine geometry
+
+AG3–AG5 studied why geometrically small representation errors can be functionally catastrophic and why larger errors can sometimes remain functionally acceptable. Local reader robustness matters; Euclidean distance alone is insufficient.
+
+## Historical attractor-era work
+
+The original attractor/trajectory prototypes motivated the project but contained claims that exceeded the available evidence. They remain preserved as project history rather than current proof.
+
+See [`archive/`](archive/README.md) and [`docs/research_history.md`](docs/research_history.md).
+
+## Reproducibility and scientific record
+
+The repository intentionally keeps:
+
+- preregistrations before outcome inspection;
+- fresh seed definitions;
+- negative and protocol-limited outcomes;
+- post-run audits labeled separately from primary results;
+- GitHub Actions workflows and result branches;
+- current claim boundaries separate from historical ideas.
+
+The project-wide rule remains:
+
+> **A failed explanation is not the same as a failed phenomenon, and a promising secondary pattern is not promoted into a primary result after the fact.**
