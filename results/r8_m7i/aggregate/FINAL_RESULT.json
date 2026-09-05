@@ -1,0 +1,70 @@
+{
+  "all_valid": false,
+  "baseline_failures": [
+    {
+      "reference": {
+        "A": 1,
+        "B": 5,
+        "M": 100,
+        "baseline_Q": -2.4851450191598174
+      },
+      "seed": 230,
+      "validity": {
+        "baseline_reference": false,
+        "complete": true,
+        "finite": true,
+        "fork_identity": true,
+        "maturity": true
+      }
+    },
+    {
+      "reference": {
+        "A": 1,
+        "B": 3,
+        "M": 100,
+        "baseline_Q": -2.107939178114615
+      },
+      "seed": 263,
+      "validity": {
+        "baseline_reference": false,
+        "complete": true,
+        "finite": true,
+        "fork_identity": true,
+        "maturity": true
+      }
+    },
+    {
+      "reference": {
+        "A": 0,
+        "B": 5,
+        "M": 100,
+        "baseline_Q": -1.9640562264473456
+      },
+      "seed": 313,
+      "validity": {
+        "baseline_reference": false,
+        "complete": true,
+        "finite": true,
+        "fork_identity": true,
+        "maturity": true
+      }
+    },
+    {
+      "reference": {
+        "A": 3,
+        "B": 6,
+        "M": 100,
+        "baseline_Q": -2.0537316865446194
+      },
+      "seed": 346,
+      "validity": {
+        "baseline_reference": false,
+        "complete": true,
+        "finite": true,
+        "fork_identity": true,
+        "maturity": true
+      }
+    }
+  ],
+  "classification": "V0 \u2014 baseline lineage reproduction failure"
+}
