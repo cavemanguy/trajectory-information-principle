@@ -1,5 +1,34 @@
 # Research Plan
 
+## September 2026 forward reset
+
+The project is returning its primary focus to **native dynamical behavior**. All prior ALI, observer, perturbation, control, affine-geometry, and attractor-era work remains preserved and indexed; the reset does not invalidate or delete it.
+
+Current priority:
+
+> **Reproduce the R8–R10 transition from initially indiscriminate contraction to learned relation-dependent selective preservation, while measuring R2-style native transient dynamics at the same frozen training checkpoints.**
+
+The first post-reset experiment, **ND-R1**, uses no perturbations and no active controller in its primary analysis. Observers, where used, are measurement instruments only and must not feed back into the native dynamics.
+
+Forward order:
+
+1. R8–R10 learned selective preservation + R2 native transient geometry.
+2. R6/R8 readout preparation.
+3. R2/R3 transient trajectory structure.
+4. Coupled local-observer collective behavior.
+5. Historical shared-factor transient reproduction.
+6. R7 reader-conditioned recurrent plasticity.
+7. R11 survival/use dissociation.
+8. R4E state-conditioned intervention consequences as a later practical control/logic branch.
+
+See [`../RESEARCH_PRIORITIES.md`](../RESEARCH_PRIORITIES.md) and [`EVIDENCE_LEDGER.md`](EVIDENCE_LEDGER.md).
+
+---
+
+## Prior ALI-focused plan — preserved verbatim as project history
+
+The plan below was the active forward plan before the September 2026 reset. It is retained to preserve the scientific sequence and must not be read as the current priority.
+
 ## Immediate priority: isolate addressing
 
 ### Plain English
