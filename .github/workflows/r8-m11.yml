@@ -1,0 +1,115 @@
+name: R8-M11 Recurrent Map Substructure Localization
+
+on:
+  push:
+    branches: [r8-m11-recurrent-substructure]
+    paths:
+      - 'experiments/r8_m11/**'
+      - '.github/workflows/r8-m11.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-M11 smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m11/requirements.txt
+      - name: Compile frozen implementation
+        run: |
+          python -m py_compile experiments/r8_m11/m7r_base.py
+          python -m py_compile experiments/r8_m11/m9_base.py
+          python -m py_compile experiments/r8_m11/run_r8_m11.py
+          python -m py_compile experiments/r8_m11/classify_r8_m11.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_m11/classify_r8_m11.py --self-check
+      - name: Run outcome-free substructure smoke path
+        run: python experiments/r8_m11/run_r8_m11.py --seed 839 --outdir /tmp/r8_m11_smoke --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/r8_m11_smoke/smoke_summary.json'))
+          assert d['status']=='ok'
+          assert d['A'] != d['B']
+          assert d['n_hybrids']==8
+          assert d['hashes_ok'] is True
+          for k in ('F_total','F1_effect','F2_effect','I12'):
+              assert isinstance(d['effects'][k], (int,float))
+          print('R8-M11 smoke structure ok')
+          PY
+
+  family:
+    name: R8-M11 fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        seed: [839, 856, 872, 891, 907, 926, 944, 963, 981, 1003, 1021, 1042]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m11/requirements.txt
+      - name: Execute fresh recurrent-substructure family
+        run: |
+          mkdir -p results/r8_m11/seed_${{ matrix.seed }}
+          python experiments/r8_m11/run_r8_m11.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r8_m11/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m11-seed-${{ matrix.seed }}
+          path: results/r8_m11/seed_${{ matrix.seed }}/seed_summary.json
+          if-no-files-found: error
+
+  classify:
+    name: R8-M11 frozen cross-family classification
+    needs: family
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m11/requirements.txt
+      - name: Download family artifacts without flattening
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-m11-seed-*
+          path: results/r8_m11/families
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: |
+          mkdir -p results/r8_m11/aggregate
+          python experiments/r8_m11/classify_r8_m11.py \
+            --root results/r8_m11/families \
+            --outdir results/r8_m11/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m11-aggregate
+          path: results/r8_m11/aggregate/
+          if-no-files-found: error
+      - name: Commit authoritative R8-M11 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B r8-m11-results
+          git add results/r8_m11/aggregate/FINAL_RESULT.json results/r8_m11/aggregate/FINAL_RESULT.md
+          git commit -m 'Record frozen R8-M11 result' || true
+          git push --force origin HEAD:r8-m11-results
