@@ -32,9 +32,13 @@ Perturbation experiments remain preserved and scientifically useful, but they ar
 
 **Why it is first:** this is the strongest candidate for learned dynamical self-organization in the program. It emerged through ordinary task training rather than by explicitly programming relation-specific survival rules.
 
-**Immediate study:** reproduce the R8–R10 training transition from initialization through dense checkpoints and characterize the native trajectories at each stage. Study the R2 transient geometry alongside it without perturbing the system.
+**ND-R1 status:** the first no-perturbation fresh-seed study is complete. Its frozen primary classification is Outcome A because the preregistered h12 competence gate was not met. That formal outcome is preserved. A post-run provenance audit showed the 0.50 h12 gate was miscalibrated above the historical R2 source lineage itself, so ND-R1 is not retroactively rescued or reclassified.
 
-**Possible practical uses:** selective memory/compression, learned filtering, dynamically specialized representation transport, small recurrent preprocessors, state-dependent computation.
+**Important post-primary candidate:** all three fresh seeds nevertheless showed a large transition from nearly uniform relation survival at initialization to strongly relation-selective survival at epoch 100. The favored relation differed by seed despite symmetric relation channels, consistent with training-amplified symmetry breaking / spontaneous specialization. Final survival ranking was already strongly visible by recurrent transition 2. These are candidate phenomena requiring a new preregistered confirmation.
+
+**Immediate study:** run one new fresh-seed no-perturbation confirmation with a competence gate calibrated before execution from the preserved historical Observer source lineage. Continue measuring R2 native transient geometry alongside it. Do not modify ND-R1.
+
+**Possible practical uses:** selective memory/compression, learned filtering, dynamically specialized representation transport, small recurrent preprocessors, state-dependent computation, sparse channel preservation/allocation.
 
 ### Priority 2 — R6/R8: readout preparation
 
@@ -44,7 +48,7 @@ Perturbation experiments remain preserved and scientifically useful, but they ar
 
 ### Priority 3 — R2/R3: native transient trajectory structure
 
-**Phenomenon:** trajectories were strongly indirect and reversal-dominated, with nonmonotonic transient decodability. Geometry-history observers outperformed matched snapshots/reset controls, while exact chronology was not established. Integrated directional history outperformed final direction, but the first direction already carried substantial signal.
+**Phenomenon:** trajectories can be strongly indirect with nonmonotonic transient accessibility. Historical R2 was reversal-dominated, but ND-R1 showed reversal dominance is not seed-general. Geometry-history observers outperformed matched snapshots/reset controls, while exact chronology was not established. Integrated directional history outperformed final direction, but the first direction already carried substantial signal; ND-R1 independently repeated the pattern that first direction is much more informative than final direction.
 
 **Possible practical uses:** transient-state computation, early-exit decoding, trajectory-derived features, dynamic sensing.
 
@@ -90,6 +94,7 @@ Preserve, index, and keep accessible:
 - ALI historical and reproducible experiments;
 - query-only addressing work;
 - Observer R2–R11;
+- ND-R1, including its formal Outcome A, full fresh-seed outputs, and post-run gate audit;
 - N-series spatial/accessibility experiments;
 - AG-series affine/reader-robustness experiments;
 - R4B/R4C/R4D/R4E causal-control sequence;
@@ -110,15 +115,18 @@ A failed explanation is not the same as a failed phenomenon. Negative results re
 7. Use the simplest adequate mechanistic explanation.
 8. Strong unexpected phenomena may trigger a new preregistered branch, but must not silently replace the core research intent.
 9. Practical-use experiments are encouraged, but engineering success and scientific mechanism claims must be reported separately.
+10. A miscalibrated preregistered gate is preserved as a protocol result; it is not repaired after outcome inspection. Any corrected test requires a new experiment and new seeds.
 
-## Immediate next experiment
+## Immediate next step
 
-**Native Dynamics R1 (ND-R1): Training-Emergent Selective Preservation and Transient Geometry**
+**Priority 1 remains unchanged.**
 
-Primary target:
+Create a new independent no-perturbation confirmation of training-emergent selective preservation using the recovered Observer-core lineage, entirely fresh seeds, and a competence gate calibrated in advance from the historical source models rather than from ND-R1 outcomes.
 
-> Reproduce and characterize the transition from initially indiscriminate contraction to learned relation-dependent selective preservation across training, while measuring R2-style native transient dynamics at the same frozen checkpoints.
+The confirmatory study should preregister the seed-dependent symmetry-breaking/specialization pattern as a secondary endpoint and continue R2-style native transient measurements alongside the primary survival analysis.
 
-Primary experiment uses **no perturbations and no active controller**.
+See:
 
-See `experiments/native_dynamics_r1/PREREGISTRATION.md` once frozen.
+- `experiments/native_dynamics_r1/PREREGISTRATION.md`
+- `docs/ND_R1_POSTRUN_AUDIT.md`
+- `docs/EVIDENCE_LEDGER.md`
