@@ -1,0 +1,100 @@
+name: R8-M5 Capacity Allocation
+
+on:
+  push:
+    branches: [r8-m5-capacity-allocation]
+    paths:
+      - 'experiments/r8_m5/**'
+      - '.github/workflows/r8-m5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-M5 smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m5/requirements.txt
+      - name: Compile frozen implementation
+        run: |
+          python -m py_compile experiments/r8_m5/run_r8_m5.py
+          python -m py_compile experiments/r8_m5/classify_r8_m5.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_m5/classify_r8_m5.py --self-check
+      - name: Run outcome-free smoke path
+        run: python experiments/r8_m5/run_r8_m5.py --seed 1001 --outdir smoke_r8_m5 --smoke
+      - name: Verify parameter-match design
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('smoke_r8_m5/smoke_summary.json'))
+          assert d['P16_S32_relative_parameter_difference'] < 0.05
+          print(d['parameter_counts'])
+          print('relative difference', d['P16_S32_relative_parameter_difference'])
+          PY
+
+  fresh:
+    name: R8-M5 fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [18, 33, 46, 61, 76, 91, 106, 121, 141, 156, 173, 188]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m5/requirements.txt
+      - name: Execute paired capacity family
+        run: python experiments/r8_m5/run_r8_m5.py --seed ${{ matrix.seed }} --outdir results/r8_m5/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m5-seed-${{ matrix.seed }}
+          path: results/r8_m5/seed_${{ matrix.seed }}
+          retention-days: 90
+
+  classify:
+    name: R8-M5 frozen cross-family classification
+    needs: fresh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m5/requirements.txt
+      - name: Download family artifacts without flattening
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-m5-seed-*
+          path: all_seed_artifacts
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: python experiments/r8_m5/classify_r8_m5.py --root all_seed_artifacts --outdir results/r8_m5/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m5-aggregate
+          path: results/r8_m5/aggregate
+          retention-days: 90
+      - name: Commit authoritative R8-M5 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -C r8-m5-results
+          git add results/r8_m5/aggregate/FINAL_RESULT.md results/r8_m5/aggregate/FINAL_RESULT.json
+          git commit -m 'Record authoritative R8-M5 results'
+          git push --force origin r8-m5-results
