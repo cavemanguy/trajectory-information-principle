@@ -28,15 +28,21 @@ Perturbation experiments remain preserved and scientifically useful, but they ar
 
 ### Priority 1 — R8–R10: learned selective preservation from initially indiscriminate contraction
 
-**Phenomenon:** training transformed a broadly destructive contractive recurrent system into one with strongly anisotropic, relation-dependent preservation. Encoder–recurrence coadaptation positioned task distinctions differently relative to the recurrent preservation/contraction field.
+**Phenomenon:** training transformed a broadly destructive contractive recurrent system into one with strongly anisotropic, relation-dependent preservation. Encoder–recurrence coadaptation positions task distinctions differently relative to the recurrent preservation/contraction field.
 
-**Why it is first:** this is the strongest candidate for learned dynamical self-organization in the program. It emerged through ordinary task training rather than by explicitly programming relation-specific survival rules.
+**Why it is first:** this is the strongest candidate for learned dynamical self-organization in the program. It appears through ordinary task training rather than by explicitly programming relation-specific survival rules.
 
-**ND-R1 status:** the first no-perturbation fresh-seed study is complete. Its frozen primary classification is Outcome A because the preregistered h12 competence gate was not met. That formal outcome is preserved. A post-run provenance audit showed the 0.50 h12 gate was miscalibrated above the historical R2 source lineage itself, so ND-R1 is not retroactively rescued or reclassified.
+**ND-R1 status:** the first no-perturbation fresh-seed study remains formally Outcome A because the preregistered h12 competence gate was not met. A post-run provenance audit showed that the 0.50 h12 gate was miscalibrated above the historical R2 source lineage itself. ND-R1 is not retroactively rescued or reclassified. Its post-primary selective-survival pattern generated the follow-up program.
 
-**Important post-primary candidate:** all three fresh seeds nevertheless showed a large transition from nearly uniform relation survival at initialization to strongly relation-selective survival at epoch 100. The favored relation differed by seed despite symmetric relation channels, consistent with training-amplified symmetry breaking / spontaneous specialization. Final survival ranking was already strongly visible by recurrent transition 2. These are candidate phenomena requiring a new preregistered confirmation.
+**R8-M1 status:** fresh no-perturbation objective/plasticity decomposition passed its lineage-validity gate on seeds 11/37/71. Frozen outcome: **M3 — encoder–recurrence coadaptation supported**. Joint training produced substantially greater relation-selective native survival than either freezing the recurrent map or freezing the encoder, with paired bootstrap intervals above zero in every seed. Terminal h12 supervision alone was not a stable cross-seed explanation.
 
-**Immediate study:** run one new fresh-seed no-perturbation confirmation with a competence gate calibrated before execution from the preserved historical Observer source lineage. Continue measuring R2 native transient geometry alongside it. Do not modify ND-R1.
+**R8-M2 status:** eight fresh no-perturbation paired families all passed validity. Frozen outcome: **S0 — neither simple source tracks winner**. The eventual specialist did not reliably follow relation-specific initialization bundles (3/8 mapped matches; aligned-minus-raw rho effect -0.030, 95% CI [-0.360, 0.348]) or finite-sample data-column identity (1/8 mapped matches; effect -0.080, 95% CI [-0.610, 0.381]). The preregistered commitment descriptor identified **epoch 40** as stable commitment onset.
+
+**Current defensible description:** **training-induced spontaneous dynamical specialization through encoder–recurrence coadaptation** within the tested synthetic architecture. This is descriptive, not a claim of strong emergence.
+
+**Immediate study — R8-M3:** investigate the native training transition around commitment. Test whether the eventual winner becomes predictable from preregistered optimization/geometric quantities before or through epoch 40, including relation-wise gradient alignment/conflict, encoder placement relative to recurrent local expansion/contraction geometry, recurrent Jacobian anisotropy on the native state distribution, and minibatch-order/path sensitivity. Prediction is not causation.
+
+**After formation mechanism:** test functional necessity — whether specialization is required for task performance or is an optimization side effect.
 
 **Possible practical uses:** selective memory/compression, learned filtering, dynamically specialized representation transport, small recurrent preprocessors, state-dependent computation, sparse channel preservation/allocation.
 
@@ -95,6 +101,7 @@ Preserve, index, and keep accessible:
 - query-only addressing work;
 - Observer R2–R11;
 - ND-R1, including its formal Outcome A, full fresh-seed outputs, and post-run gate audit;
+- R8-M1 and R8-M2, including frozen preregistrations, result branches, source-tracking negatives, and commitment timing;
 - N-series spatial/accessibility experiments;
 - AG-series affine/reader-robustness experiments;
 - R4B/R4C/R4D/R4E causal-control sequence;
@@ -116,17 +123,28 @@ A failed explanation is not the same as a failed phenomenon. Negative results re
 8. Strong unexpected phenomena may trigger a new preregistered branch, but must not silently replace the core research intent.
 9. Practical-use experiments are encouraged, but engineering success and scientific mechanism claims must be reported separately.
 10. A miscalibrated preregistered gate is preserved as a protocol result; it is not repaired after outcome inspection. Any corrected test requires a new experiment and new seeds.
+11. A predictor of specialization is not automatically its cause. Causal claims require a separately justified intervention study.
+12. Do not use strong-emergence language merely because tested fixed asymmetry sources fail.
 
 ## Immediate next step
 
-**Priority 1 remains unchanged.**
+**Priority 1 remains unchanged, but its question has advanced.**
 
-Create a new independent no-perturbation confirmation of training-emergent selective preservation using the recovered Observer-core lineage, entirely fresh seeds, and a competence gate calibrated in advance from the historical source models rather than from ND-R1 outcomes.
+R8-M3 should characterize the **commitment transition** that selects and stabilizes the eventual specialist. It must remain no-perturbation and use fresh preregistered seeds.
 
-The confirmatory study should preregister the seed-dependent symmetry-breaking/specialization pattern as a secondary endpoint and continue R2-style native transient measurements alongside the primary survival analysis.
+Primary focus:
+
+- identify preregistered native optimization/geometric signals that predict the final winner before or through commitment;
+- determine whether commitment timing is reproducible across fresh seeds;
+- distinguish early predictive structure from quantities that merely become correlated after specialization is already established;
+- quantify minibatch-order/path sensitivity without conflating it with fixed initialization or finite-sample data identity.
+
+Only after formation is characterized should the project proceed to functional-necessity tests.
 
 See:
 
 - `experiments/native_dynamics_r1/PREREGISTRATION.md`
 - `docs/ND_R1_POSTRUN_AUDIT.md`
+- `docs/R8_M1_RESULT.md`
+- `docs/R8_M2_RESULT.md`
 - `docs/EVIDENCE_LEDGER.md`
