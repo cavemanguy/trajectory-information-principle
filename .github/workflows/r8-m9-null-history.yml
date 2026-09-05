@@ -1,0 +1,71 @@
+name: R8-M9 Null-History Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: "Preregistered R8-M9 fresh seed"
+        required: true
+        default: "631"
+        type: choice
+        options:
+          - "631"
+          - "648"
+          - "664"
+          - "683"
+          - "701"
+          - "718"
+          - "736"
+          - "754"
+          - "771"
+          - "789"
+          - "806"
+          - "824"
+
+permissions:
+  contents: read
+
+jobs:
+  null-control:
+    name: R8-M9 seed ${{ inputs.seed }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+
+    steps:
+      - name: Checkout locked R8-M9 branch
+        uses: actions/checkout@v4
+        with:
+          ref: r8-m9-null-history
+          fetch-depth: 1
+
+      - name: Record source commit
+        run: git rev-parse HEAD | tee source_commit.txt
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: experiments/r8_m9/requirements.txt
+
+      - name: Install pinned dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r experiments/r8_m9/requirements.txt
+
+      - name: Run preregistered null-history control
+        run: |
+          mkdir -p results/r8_m9/seed_${{ inputs.seed }}
+          cp source_commit.txt results/r8_m9/seed_${{ inputs.seed }}/source_commit.txt
+          cd experiments/r8_m9
+          python run_r8_m9.py \
+            --seed ${{ inputs.seed }} \
+            --outdir ../../results/r8_m9/seed_${{ inputs.seed }} \
+            2>&1 | tee ../../results/r8_m9/seed_${{ inputs.seed }}/run.log
+
+      - name: Upload seed artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r8-m9-seed-${{ inputs.seed }}
+          path: results/r8_m9/seed_${{ inputs.seed }}/
+          if-no-files-found: error
+          retention-days: 90
