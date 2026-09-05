@@ -6,145 +6,138 @@
 
 All prior work remains part of the project history, including successful, ambiguous, negative, superseded, exploratory, and prototype branches. Reorganization must not rewrite chronology, relabel failed experiments as successes, or erase abandoned hypotheses.
 
-The reset changes only the **forward research priority**.
-
 ## Core research intent
-
-The central research question returns to the native dynamics:
 
 > **What meaningful computational structure emerges in the evolving internal state itself, and can that structure be understood, measured, and eventually used practically?**
 
-Observers are measurement tools. Perturbations are optional intervention/control tools. Neither is assumed to be the source of trajectory information.
-
-Primary hierarchy going forward:
+Primary hierarchy:
 
 1. **Native dynamics = phenomenon / computation under study**
 2. **Observer = measurement / diagnostic instrument**
 3. **Perturbation = optional causal intervention or control / logic input**
 
-Perturbation experiments remain preserved and scientifically useful, but they are no longer the trunk of the project.
+Perturbation experiments remain preserved, but they are not the trunk of the project.
 
-## Prioritized phenomena
+## Priority 1 — R8–R10 learned selective preservation
 
-### Priority 1 — R8–R10: learned selective preservation from initially indiscriminate contraction
+**Phenomenon:** task training transforms broadly contractive recurrence into strongly relation-dependent native preservation. Encoder and recurrent map coadapt so that otherwise symmetric task distinctions experience very different recurrent survival.
 
-**Phenomenon:** training transformed a broadly destructive contractive recurrent system into one with strongly anisotropic, relation-dependent preservation. Encoder–recurrence coadaptation positions task distinctions differently relative to the recurrent preservation/contraction field.
+### Discovery sequence
 
-**Why it is first:** this is the strongest candidate for learned dynamical self-organization in the program. It appears through ordinary task training rather than by explicitly programming relation-specific survival rules.
+- **ND-R1:** formally remains Outcome A because its preregistered h12 competence gate failed. A post-run provenance audit showed that gate was miscalibrated above the historical source lineage. Its secondary selective-survival pattern generated the follow-up program; it was not retroactively rescued.
+- **R8-M1:** **M3 — encoder–recurrence coadaptation supported.** Full relation-selective survival required plasticity in both the encoder and recurrent map across fresh seeds.
+- **R8-M2:** **S0 — neither simple source tracks winner.** Neither relation-specific initialization bundle nor finite-sample data-column identity reliably explained eventual specialist identity.
+- **R8-M3:** **T0 — neither preregistered epoch-20 predictor supported.** Coadaptation synergy and shared-gradient alignment did not reliably identify the final specialist, while changed minibatch order materially shifted commitment timing and sometimes winner identity under identical initialization/data.
+- **R8-M4:** **F3 — selective-specialization contribution supported.** Selectivity equalization reduced `G` in 12/12 fresh seeds by about 66.6% on average. h12 test accuracy fell by 3.04 percentage points versus baseline and 2.57 points versus the matched mean-survival control, with paired bootstrap intervals below zero. A preregistered secondary localized most functional loss to the baseline dynamically favored relation: winner h12 accuracy fell about 30.36 points while non-winner performance was approximately preserved.
 
-**ND-R1 status:** the first no-perturbation fresh-seed study remains formally Outcome A because the preregistered h12 competence gate was not met. A post-run provenance audit showed that the 0.50 h12 gate was miscalibrated above the historical R2 source lineage itself. ND-R1 is not retroactively rescued or reclassified. Its post-primary selective-survival pattern generated the follow-up program.
+### Current defensible description
 
-**R8-M1 status:** fresh no-perturbation objective/plasticity decomposition passed its lineage-validity gate on seeds 11/37/71. Frozen outcome: **M3 — encoder–recurrence coadaptation supported**. Joint training produced substantially greater relation-selective native survival than either freezing the recurrent map or freezing the encoder, with paired bootstrap intervals above zero in every seed. Terminal h12 supervision alone was not a stable cross-seed explanation.
+> **Training-induced, optimization-path-sensitive dynamical specialization produced through encoder–recurrence coadaptation, with a demonstrated functional contribution under a controlled suppression intervention in the tested synthetic architecture.**
 
-**R8-M2 status:** eight fresh no-perturbation paired families all passed validity. Frozen outcome: **S0 — neither simple source tracks winner**. The eventual specialist did not reliably follow relation-specific initialization bundles (3/8 mapped matches; aligned-minus-raw rho effect -0.030, 95% CI [-0.360, 0.348]) or finite-sample data-column identity (1/8 mapped matches; effect -0.080, 95% CI [-0.610, 0.381]). The preregistered commitment descriptor identified **epoch 40** as stable commitment onset.
+This is not a claim of strong emergence, universal necessity, or a universal trajectory-information principle.
 
-**Current defensible description:** **training-induced spontaneous dynamical specialization through encoder–recurrence coadaptation** within the tested synthetic architecture. This is descriptive, not a claim of strong emergence.
+### Immediate study — R8-M5 capacity allocation
 
-**Immediate study — R8-M3:** investigate the native training transition around commitment. Test whether the eventual winner becomes predictable from preregistered optimization/geometric quantities before or through epoch 40, including relation-wise gradient alignment/conflict, encoder placement relative to recurrent local expansion/contraction geometry, recurrent Jacobian anisotropy on the native state distribution, and minibatch-order/path sensitivity. Prediction is not causation.
+R8-M4 specifically motivates one more R8 follow-up before returning to the broader trunk:
 
-**After formation mechanism:** test functional necessity — whether specialization is required for task performance or is an optimization side effect.
+> **Is the one-relation-dominant specialization a state-capacity/resource-allocation strategy created by the tight autonomous recurrent bottleneck?**
 
-**Possible practical uses:** selective memory/compression, learned filtering, dynamically specialized representation transport, small recurrent preprocessors, state-dependent computation, sparse channel preservation/allocation.
+R8-M5 is preregistered on `r8-m5-capacity-allocation` and uses fresh paired families with:
 
-### Priority 2 — R6/R8: readout preparation
+- 16-D lineage baseline (`16 -> 32 -> 16` recurrence);
+- 24-D state;
+- 32-D state;
+- a near-parameter-matched **16-D state** with a 192-wide transition MLP.
 
-**Phenomenon:** generic task accessibility could worsen while the trained final reader improved, suggesting recurrence dynamically reformatted information for a particular downstream consumer rather than making it universally easier to decode.
+The near-parameter-matched control is critical: a larger model simply performing better is not sufficient. The strongest frozen outcome requires wider state dimension to reduce dynamical and functional winner dominance while improving terminal performance, and for the wider-transition 16-D control not to reproduce that redistribution.
+
+After this targeted capacity test, the planned trunk returns to **Priority 2: R6/R8 readout preparation** unless R8-M5 creates another sharply preregisterable causal question.
+
+**Possible practical uses:** capacity-aware dynamical routing, selective memory/compression, learned filtering, sparse channel allocation, compact recurrent preprocessing, state-dependent computation.
+
+## Priority 2 — R6/R8 readout preparation
+
+**Phenomenon:** generic task accessibility can worsen while the trained final reader improves, suggesting recurrence reformats information for a particular downstream consumer rather than simply making it universally easier to decode.
 
 **Possible practical uses:** learned interfaces between modules, compact iterative preprocessors, hardware/model adaptation, reader-specific latent formatting.
 
-### Priority 3 — R2/R3: native transient trajectory structure
+## Priority 3 — R2/R3 native transient trajectory structure
 
-**Phenomenon:** trajectories can be strongly indirect with nonmonotonic transient accessibility. Historical R2 was reversal-dominated, but ND-R1 showed reversal dominance is not seed-general. Geometry-history observers outperformed matched snapshots/reset controls, while exact chronology was not established. Integrated directional history outperformed final direction, but the first direction already carried substantial signal; ND-R1 independently repeated the pattern that first direction is much more informative than final direction.
+**Phenomenon:** trajectories can be strongly indirect with nonmonotonic transient accessibility. Geometry-history observers outperformed matched endpoint controls, while exact chronology was not established. Integrated directional history exceeded final direction, but the first transient already carried substantial signal.
 
 **Possible practical uses:** transient-state computation, early-exit decoding, trajectory-derived features, dynamic sensing.
 
-### Priority 4 — coupled local-observer / shared-substrate behavior
+## Priority 4 — coupled local-observer / shared-substrate behavior
 
 **Phenomenon:** identically initialized local observers differentiated under coupling; distributed feedback produced coordinated and anti-synchronized behavior; silencing individual components altered the shared trajectory and other observers.
 
-**Boundary:** later checks argued against chaos or a persistent exotic attractor interpretation. Preserve the transient collective differentiation as the candidate phenomenon.
+**Boundary:** later checks argued against chaos or a persistent exotic-attractor interpretation.
 
-**Possible practical uses:** decentralized control, distributed computation, local agents operating through a shared dynamical substrate.
+## Priority 5 — shared-observer transient factor
 
-### Priority 5 — shared-observer transient factor
+Historical early transient task signal peaked before the endpoint. Clean reproduction remains required before promotion.
 
-**Phenomenon:** an observer-derived shared factor became strongly task-predictive early in the rollout, peaked, then faded. Historical evidence is intriguing but requires clean reproduction before promotion.
+## Priority 6 — R7 reader-conditioned recurrent plasticity
 
-**Possible practical uses:** fast transient feature extraction, early-exit computation, temporary internal workspaces.
+Recurrence can adapt terminal format toward altered reader geometry under controlled conditions, although arbitrary-reader adaptation was not generally established.
 
-### Priority 6 — R7: reader-conditioned recurrent plasticity
+## Priority 7 — R11 survival/use dissociation
 
-**Phenomenon:** retrained recurrence could move terminal representations toward altered reader geometry under controlled conditions, although arbitrary fixed-reader adaptation was not generally established.
+Geometric survival can be increased or suppressed without corresponding reader benefit/harm. Useful representation is not Euclidean persistence alone.
 
-**Possible practical uses:** self-calibrating interfaces, representation translators, adaptive recurrent front-ends.
+## Priority 8 — R4E state-conditioned intervention consequences
 
-### Priority 7 — R11: survival/use dissociation
-
-**Phenomenon:** geometric survival could be strongly increased or suppressed without the corresponding improvement or impairment in reader use. Useful representation is therefore not Euclidean persistence alone.
-
-**Possible practical uses:** reader-aligned compression criteria, task-aware representation quality metrics, avoiding misleading geometric objectives.
-
-### Priority 8 — R4E linear side-result: state-conditioned intervention consequences
-
-**Phenomenon:** local intervention consequences were more predictable from state and recent geometry than from a global response model. This is preserved as evidence that intervention meaning can depend on dynamical context.
-
-**Boundary:** R4E itself closed at Phase I. No later R4E control stage is promoted.
-
-**Possible practical uses:** timed/state-dependent logic, context-sensitive control inputs, dynamical switching.
+Local intervention consequences were more predictable from state/recent geometry than from a global response model. R4E itself remains closed at Phase I; this result is preserved for later practical control/logic work.
 
 ## What is explicitly not being discarded
 
-Preserve, index, and keep accessible:
+Preserve and keep accessible:
 
-- original attractor-era prototypes and their corrected limitations;
+- original attractor-era prototypes and corrected limitations;
 - ALI historical and reproducible experiments;
-- query-only addressing work;
 - Observer R2–R11;
-- ND-R1, including its formal Outcome A, full fresh-seed outputs, and post-run gate audit;
-- R8-M1 and R8-M2, including frozen preregistrations, result branches, source-tracking negatives, and commitment timing;
-- N-series spatial/accessibility experiments;
-- AG-series affine/reader-robustness experiments;
+- ND-R1 with formal Outcome A and post-run audit;
+- R8-M1 through R8-M5 preregistrations/results/protocol notes;
+- N-series spatial/accessibility work;
+- AG-series affine/reader-robustness work;
 - R4B/R4C/R4D/R4E causal-control sequence;
 - JTP-1 and its negative result;
 - coupled-observer experiments;
-- all preregistrations, implementation amendments, protocol deviations, raw/compact result records, failed gates, and negative controls.
+- all failed gates, raw/compact result records, protocol deviations, and negative controls.
 
-A failed explanation is not the same as a failed phenomenon. Negative results remain part of the evidence map.
+A failed explanation is not the same as a failed phenomenon.
 
 ## Scientific rules after reset
 
 1. Freeze hypotheses and primary endpoints before outcome inspection.
 2. Prefer native observation before intervention.
-3. Do not introduce perturbations into a primary native-dynamics experiment unless the observation stage justifies a separate causal follow-up.
+3. Do not introduce perturbations into a primary native-dynamics experiment unless a separately justified causal study requires them.
 4. Separate exploration from confirmation.
 5. Preserve per-seed results and uncertainty, not only aggregate means.
 6. Treat chronology, information content, observer accessibility, geometric survival, reader alignment, and causal importance as distinct claims.
 7. Use the simplest adequate mechanistic explanation.
 8. Strong unexpected phenomena may trigger a new preregistered branch, but must not silently replace the core research intent.
-9. Practical-use experiments are encouraged, but engineering success and scientific mechanism claims must be reported separately.
-10. A miscalibrated preregistered gate is preserved as a protocol result; it is not repaired after outcome inspection. Any corrected test requires a new experiment and new seeds.
-11. A predictor of specialization is not automatically its cause. Causal claims require a separately justified intervention study.
-12. Do not use strong-emergence language merely because tested fixed asymmetry sources fail.
+9. Engineering success and scientific mechanism claims must be reported separately.
+10. Failed or miscalibrated preregistered gates are preserved; they are not repaired after outcome inspection.
+11. Prediction is not causation.
+12. Do not use strong-emergence language merely because simple explanations fail.
+13. A functional effect under one intervention is not a universal necessity theorem.
+14. A wider model performing better is not by itself evidence for state-capacity allocation.
 
 ## Immediate next step
 
-**Priority 1 remains unchanged, but its question has advanced.**
+**R8-M5 is the active Priority-1 experiment.**
 
-R8-M3 should characterize the **commitment transition** that selects and stabilizes the eventual specialist. It must remain no-perturbation and use fresh preregistered seeds.
+Its frozen primary distinction is:
 
-Primary focus:
-
-- identify preregistered native optimization/geometric signals that predict the final winner before or through commitment;
-- determine whether commitment timing is reproducible across fresh seeds;
-- distinguish early predictive structure from quantities that merely become correlated after specialization is already established;
-- quantify minibatch-order/path sensitivity without conflating it with fixed initialization or finite-sample data identity.
-
-Only after formation is characterized should the project proceed to functional-necessity tests.
+- does widening autonomous state capacity improve h12 performance while reducing survival selectivity and survival-winner performance dominance;
+- and does a near-parameter-matched model that retains the 16-D state bottleneck fail to reproduce that redistribution?
 
 See:
 
-- `experiments/native_dynamics_r1/PREREGISTRATION.md`
-- `docs/ND_R1_POSTRUN_AUDIT.md`
-- `docs/R8_M1_RESULT.md`
-- `docs/R8_M2_RESULT.md`
+- `experiments/r8_m5/PREREGISTRATION.md`
+- `docs/R8_M4_RESULT.md`
+- `docs/R8_M4_SECONDARY_NOTE.md`
+- `docs/CURRENT_CLAIMS.md`
 - `docs/EVIDENCE_LEDGER.md`
+- `docs/ND_R1_POSTRUN_AUDIT.md`
