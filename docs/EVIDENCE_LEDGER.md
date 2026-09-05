@@ -8,6 +8,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 - **Strong candidate** — substantial evidence, but replication or broader confirmation still needed.
 - **Historical candidate** — intriguing earlier result not yet fully reproducible from current repository.
 - **Negative constraint** — a hypothesis/mechanism was tested and not supported; preserve as boundary evidence.
+- **Protocol-limited result** — the frozen outcome stands, but a post-run audit identified a design/gate limitation that constrains interpretation.
 - **Prototype/history** — useful provenance, not current empirical support.
 
 ## Native dynamics and observer program
@@ -24,6 +25,11 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 | R9 | Established within tested system | Forward recurrence easy, inversion difficult; dynamics strongly contractive/ill-conditioned; selective empirical recoverability loss rather than fundamental information destruction. |
 | R10 | Established within tested system | Orientation relative to learned local dynamical geometry causally controls distinction survival; encoder and recurrence coadapt. |
 | R11 | Established negative/decoupling result | Geometric survival magnitude is not sufficient to explain reader use; reader-compatible format/alignment matters. |
+| ND-R1 formal outcome | Protocol-limited result | Frozen classification is Outcome A because all three fresh seeds missed the preregistered h12>=0.50 competence gate. Post-run provenance audit showed that this gate was above the historical R2 lineage itself, so Outcome A must not be paraphrased as a clean failure to reproduce source-like training. |
+| ND-R1 selective-preservation pattern | Strong post-primary candidate | All three fresh seeds independently showed near-uniform relation survival at initialization followed by large relation-selective survival by epoch 100; Delta G was positive with bootstrap CIs above zero in all seeds. This is not promoted to the ND-R1 primary outcome because the frozen competence gate failed. |
+| ND-R1 seed-dependent specialization | Strong post-primary candidate | The identity of the strongly preserved relation differed by seed despite symmetric relation channels, consistent with training-amplified symmetry breaking / spontaneous specialization. Requires fresh preregistered confirmation. |
+| ND-R1 early ranking | Strong secondary candidate | Relation-survival ranking at transition 2 predicted terminal ranking strongly in every fresh seed (mean Spearman about 0.937), echoing the historical R10 early-establishment observation. |
+| ND-R1 native trajectory replication | Mixed result | Highly indirect trajectories replicated across fresh seeds; reversal-dominated motion did not, showing that reversal dominance is not a seed-general native-dynamics property in this reproduction. |
 
 ## Coupled-observer / collective dynamics
 
@@ -74,7 +80,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 
 ## Current priority order
 
-1. R8–R10 training-emergent selective preservation, with R2 transient dynamics measured alongside it.
+1. R8–R10 training-emergent selective preservation, now with ND-R1's seed-dependent specialization candidate and R2 transient dynamics studied alongside it.
 2. R6/R8 readout preparation.
 3. R2/R3 native transient structure.
 4. Coupled local-observer collective behavior.
@@ -83,4 +89,6 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 7. R11 survival/use dissociation.
 8. R4E state-conditioned intervention consequences for later practical control/logic work.
 
-See `../RESEARCH_PRIORITIES.md` for the forward plan.
+The immediate scientific follow-up to Priority 1 must be a new fresh-seed confirmation with a competence gate calibrated before execution from the preserved historical Observer source lineage. ND-R1 itself remains unchanged.
+
+See `../RESEARCH_PRIORITIES.md` and `ND_R1_POSTRUN_AUDIT.md`.
