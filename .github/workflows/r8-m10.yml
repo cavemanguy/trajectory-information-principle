@@ -1,0 +1,131 @@
+name: R8-M10 Off-Axis History Specificity Control
+
+on:
+  push:
+    paths:
+      - 'experiments/r8_m10/**'
+      - '.github/workflows/r8-m10.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-M10 smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m10/requirements.txt
+      - name: Compile frozen implementation
+        run: |
+          python -m py_compile experiments/r8_m10/m7r_base.py
+          python -m py_compile experiments/r8_m10/run_r8_m10.py
+          python -m py_compile experiments/r8_m10/classify_r8_m10.py
+      - name: Verify pinned engine matches the frozen R8-M9 lineage engine
+        run: |
+          python - <<'PY'
+          import hashlib, pathlib
+          h = hashlib.sha256(pathlib.Path('experiments/r8_m10/m7r_base.py').read_bytes()).hexdigest()
+          ref = pathlib.Path('experiments/r8_m9/m7r_base.py')
+          if ref.exists():
+              r = hashlib.sha256(ref.read_bytes()).hexdigest()
+              assert h == r, f'pinned engine drifted: {h} != {r}'
+              print('pinned engine byte-identical to R8-M9 engine')
+          else:
+              print(f'R8-M9 engine not present on this ref; M10 engine sha256={h}')
+          PY
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_m10/classify_r8_m10.py --self-check
+      - name: Run outcome-free off-axis smoke path
+        run: python experiments/r8_m10/run_r8_m10.py --seed 1061 --outdir /tmp/r8_m10_smoke --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d = json.load(open('/tmp/r8_m10_smoke/smoke_summary.json'))
+          assert d['status'] == 'ok'
+          assert d['A'] != d['B']
+          assert d['pairs_disjoint'] is True, 'A/B and C/D must be disjoint'
+          assert d['n_lineages'] == 4
+          assert d['hashes_ok'] is True
+          assert d['dual_axis_recorded'] is True, 'both Q_AB and Q_CD must be recorded'
+          for k in ('H_true_AB', 'H_null_AB', 'H_null_CD', 'H_true_CD', 'SPECIFICITY'):
+              assert isinstance(d['effects'][k], (int, float))
+          for arm in ('TRUE_A', 'TRUE_B', 'NULL_C', 'NULL_D'):
+              assert d['diagnostics'][arm]['steps'] > 0
+          print('R8-M10 smoke structure ok')
+          PY
+
+  family:
+    name: R8-M10 fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        seed: [1061, 1078, 1094, 1113, 1129, 1146, 1164, 1183, 1201, 1218, 1236, 1254]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m10/requirements.txt
+      - name: Execute fresh off-axis specificity family
+        run: |
+          mkdir -p results/r8_m10/seed_${{ matrix.seed }}
+          python experiments/r8_m10/run_r8_m10.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r8_m10/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m10-seed-${{ matrix.seed }}
+          path: results/r8_m10/seed_${{ matrix.seed }}/seed_summary.json
+          if-no-files-found: error
+
+  classify:
+    name: R8-M10 frozen cross-family classification
+    needs: family
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m10/requirements.txt
+      - name: Download family artifacts without flattening
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-m10-seed-*
+          path: results/r8_m10/families
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: |
+          mkdir -p results/r8_m10/aggregate
+          python experiments/r8_m10/classify_r8_m10.py \
+            --root results/r8_m10/families \
+            --outdir results/r8_m10/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m10-aggregate
+          path: results/r8_m10/aggregate/
+          if-no-files-found: error
+      - name: Commit authoritative R8-M10 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B r8-m10-results
+          git add results/r8_m10/aggregate/FINAL_RESULT.json results/r8_m10/aggregate/FINAL_RESULT.md
+          git commit -m 'Record frozen R8-M10 result' || true
+          git push --force origin HEAD:r8-m10-results
