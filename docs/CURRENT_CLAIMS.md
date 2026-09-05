@@ -1,6 +1,6 @@
 # Current Claims and Claim Boundaries
 
-**Status: September 2026 reset, updated through R8-M6 and R8-M5R.**
+**Status: September 2026 reset, updated through R8-M7R and R8-M7I.**
 
 This file is the concise source of truth for what the project currently does and does not claim. It complements `EVIDENCE_LEDGER.md`, `RESEARCH_PRIORITIES.md`, and the detailed historical records. Older experiments are preserved and remain scientifically relevant, but they must not be paraphrased into stronger claims than their controls support.
 
@@ -29,6 +29,8 @@ The perturbation program is preserved, but perturbation response is not assumed 
 - **Simple tight-bottleneck allocation account rejected:** R8-M5 remains **C0 — simple capacity-allocation account not supported**. Widening full state from 16D to 32D improved h12 but did not reduce specialization; in that sample both `G` and specialist dominance increased. This rejects the specific prediction that wider state should relieve specialization.
 - **Isolated recurrent-workspace account not supported:** R8-M6 remains **W0**. A function-preserving post-encoding expansion from 16D to 32D improved h12 versus both B16 and the near-parameter-matched P16 control, but h0 equivalence failed after continued training. Therefore the benefit cannot be attributed cleanly to recurrent workspace dimension alone under the frozen rule.
 - **Fresh state-dimension-specific terminal benefit:** R8-M5R produced **R2 — state-dimension-specific terminal benefit supported** on 12 new families using the exact R8-M5 training manipulation but removing any directional success requirement on specialization. S32 improved h12 by 4.94 percentage points versus B16, 95% CI [+2.92,+6.53] pp, and by 3.00 points versus P16, CI [+0.60,+5.20] pp. Relative to B16, changes in `G` and `D` were mixed/indeterminate. Thus wider state can improve terminal performance without requiring specialization to increase or decrease in a fixed direction.
+- **Demand-sensitive but incomplete native reorganization:** R8-M7R produced **D0 — reversible demand tracking not supported**, but all 12 families were valid and the demand-specific controls passed. Switching terminal demand from established specialist A toward baseline loser B shifted Q toward B by +0.957 on average, 95% CI [+0.419,+1.517], and improved B h12 accuracy by about 14.5 pp. B nevertheless became the exact survival winner in only 1/12 families; A was the winner again in 12/12 after A demand returned. Thus established native organization can respond specifically to changed demand without freely reassigning its dominant specialist.
+- **R8-M7I protocol boundary with post-primary history-dependence clue:** R8-M7I formally remains **V0 — baseline lineage reproduction failure** because four same-lineage mirror families missed a preregistered baseline-Q tolerance of 1e-5, despite reproducing the same maturity epoch and A/B identities. No I0/I1/I2 result is promoted. Post-primary diagnostics of the completed B→A→B mirror runs showed substantial demand-aligned functional changes but little exact B takeover, and an immediate B challenge shifted Q farther toward B than the delayed B challenge in M7R by +0.340 on average, exploratory 95% CI [+0.170,+0.520]. This is consistent with, but does not prove, history-dependent resistance/consolidation.
 - **Survival/use dissociation:** R11 showed that increasing or decreasing Euclidean survival magnitude does not by itself cause the corresponding improvement or impairment in downstream reader use.
 - **Query-specific perturbation geometry:** ALI-N8-R1 reproducibly showed query-specific direction-dependent responses under diagnostic decoders, while adaptive ALI did not beat direct memory readout and could leak information through the direction itself.
 - **Negative causal-control boundaries:** R4C/R4D did not establish useful learned self-steering, R4E failed its Phase-I primary gate, and JTP-1 found no preregistered seed-general instantaneous local-operator marker of trajectory time under its controls.
@@ -49,6 +51,9 @@ The project has **not** established that:
 - specialization is caused by a tight latent/recurrent capacity bottleneck;
 - the R8-M5R state-width benefit is caused specifically by one internal mechanism;
 - the R8-M6 terminal benefit can be attributed cleanly to isolated recurrent workspace dimension;
+- R8-M7R establishes free specialist switching or formal hysteresis;
+- R8-M7I establishes reversible reassignment, because its frozen primary result is V0;
+- the post-primary M7I immediate-versus-delayed difference proves a formal dynamical hysteresis mechanism;
 - Euclidean survival magnitude itself mediates reader usefulness;
 - trajectories provide a demonstrated practical advantage over conventional architectures;
 - ALI replaces or outperforms attention or direct readout;
@@ -76,29 +81,31 @@ R8-M6 attempted to isolate post-encoding recurrent workspace by a function-prese
 
 R8-M5R then repeated the full R8-M5 capacity manipulation on 12 new families without defining either more or less specialization as success. Its **R2** result established a state-dimension-specific terminal benefit while specialization response remained free to vary across optimization paths.
 
+R8-M7R allowed each lineage to reach a preregistered competence-and-stability maturity trigger before applying A→B→A terminal demand. Its frozen **D0** result rejected full reversible takeover under the stated thresholds, but the same mature lineage nevertheless moved specifically toward B under B demand, beyond FIX and H0-switch controls, and the demanded relation's function improved. The established specialist usually remained dominant.
+
+R8-M7I then mirrored the same lineages with B→A→B demand. Its frozen result is **V0** because four baselines missed the exact Q reproduction tolerance, so no mirror-tracking classification is promoted. Post-primary diagnostics suggest that challenging B immediately at maturity moves the system farther toward B than challenging B after an extra A-reinforcement phase, while still rarely causing full specialist replacement.
+
 The most defensible compact description is now:
 
-> **Training induces optimization-path-sensitive dynamical specialization through encoder–recurrence coadaptation. Established specialization can contribute functionally, but its strength is not a simple proxy for performance. Wider state improves terminal performance in fresh paired experiments even when specialization is allowed to vary rather than being forced toward a predetermined direction.**
+> **Training induces optimization-path-sensitive dynamical specialization through encoder–recurrence coadaptation. Established specialization can contribute functionally and can be bent by changed functional demand, but its dominant organization is resistant to complete reassignment and appears history-sensitive in post-primary mirror diagnostics. Wider state improves terminal performance even when specialization is free to vary rather than being forced toward a predetermined direction.**
 
-This remains a local mechanistic result, not proof of strong emergence or a universal principle.
+This remains a local mechanistic result, not proof of strong emergence, formal hysteresis, or a universal principle.
 
 ## Current scientific priority
 
-The capacity-bottleneck branch is now sufficiently constrained. The next justified R8 test is not another width sweep. It is a harder test of **adaptive dynamical reorganization under controlled changing demand**:
+The next justified R8 question is no longer simply whether demand affects the dynamics; R8-M7R already shows a controlled demand-specific shift. The harder question is:
 
-> **With architecture, initialization lineage, and data generator fixed, does a controlled change in functional demand reliably reorganize native specialization toward the demanded relation, and does reversing the demand reverse or reassign that organization?**
+> **What governs the resistance of an established native dynamical regime to replacement: duration of prior consolidation, magnitude/duration of new demand, or a qualitatively privileged learned basin?**
 
-The strongest version should use a reversible A→B→A demand schedule, preregister demand-tracking and reversibility criteria, include matched controls for mere extra training and loss weighting, and test whether blocking the demand-aligned reorganization selectively harms the phase in which it is useful.
-
-This would test adaptive regime switching, not merely seed-to-seed heterogeneity. It must be frozen before fresh outcomes are inspected.
+A future confirmatory study should preregister a clean history/pressure manipulation before outcome inspection. It should preserve native observation, separate consolidation duration from challenge strength, and distinguish elastic demand-sensitive deformation from actual regime replacement. The R8-M7I post-primary pattern may motivate such a study but must not be treated as confirmatory evidence.
 
 ## Practical-use direction
 
 The most promising practical interpretation remains **dynamical computation**, not perturbation-based retrieval:
 
-> training can organize an encoder and recurrent map together so that task distinctions experience strongly different native survival through recurrent dynamics, and the amount/pattern of specialization need not be fixed across successful optimization paths.
+> training can organize an encoder and recurrent map together so that task distinctions experience strongly different native survival through recurrent dynamics; established organization can contribute functionally, respond to changed demand, and resist complete overwriting.
 
-Possible engineering branches include learned dynamical routing, selective memory/compression, sparse channel allocation, compact recurrent preprocessing, early-step computation, and reader-specific latent formatting. These remain engineering hypotheses until separately tested.
+Possible engineering branches include learned dynamical routing, selective memory/compression, sparse channel allocation, compact recurrent preprocessing, early-step computation, reader-specific latent formatting, and history-dependent adaptive allocation. These remain engineering hypotheses until separately tested.
 
 ## Preservation rule
 
@@ -116,6 +123,9 @@ See:
 - `R8_M5_RESULT.md`
 - `R8_M6_RESULT.md`
 - `R8_M5R_RESULT.md`
+- `R8_M7R_RESULT.md`
+- `R8_M7I_RESULT.md`
+- `R8_M7I_POSTRUN_AUDIT.md`
 - `R8_NATIVE_DYNAMICS_INVESTIGATION.md`
 - `observer_program_r2_r11.md`
 - `research_history.md`
