@@ -39,6 +39,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 | R8-M5R | **Established fresh replication / capacity result** | Frozen outcome **R2 — state-dimension-specific terminal benefit supported**. On 12 new families using the exact R8-M5 capacity manipulation with no directional specialization requirement, S32 improved h12 by 4.94 pp versus B16 and 3.00 pp versus P16. Relative to B16, `G` and `D` changes were mixed/indeterminate; across-seed DeltaG/DeltaD associations with Deltah12 were near zero. Wider state benefit does not require specialization to move in one fixed direction. |
 | R8-M7R | **Established negative primary / demand-sensitivity result** | Frozen outcome **D0 — reversible demand tracking not supported**. All 12 maturity-triggered families were valid. Terminal B demand shifted native Q toward B by +0.957 on average and beat both preregistered specificity controls; B h12 improved about 14.5 pp. However B became exact survival winner in only 1/12 and A was winner again after return in 12/12. Demand sensitivity is supported; free reversible specialist reassignment is not. |
 | R8-M7I | **Protocol-limited mirror result** | Frozen outcome **V0 — baseline lineage reproduction failure**. Four paired lineages missed the preregistered baseline-Q tolerance 1e-5 despite reproducing the same maturity epoch and A/B identities; no I0/I1/I2 classification is promoted. Post-primary diagnostics show strong demand-aligned functional shifts, little exact B takeover, and a larger immediate-B than delayed-B Q shift, motivating but not confirming a history/consolidation account. |
+| R8-M8 | **Established persistent history-dependence result** | Frozen outcome **Y3 — persistent history-dependent regime separation supported** on 12 fresh families. Under matched current demand `lambda=0.50` and matched cumulative training duration, opposite demand histories produced mean `H_mid=+1.331`, 95% CI [+0.644,+2.057]. The signed sweep area was +1.240, CI [+0.589,+1.887]. After another 120 epochs of identical midpoint demand, separation remained +1.208, CI [+0.499,+1.924], about 90.7% of the original midpoint effect. This supports persistent operational path dependence, not mathematical bistability or formal hysteresis. |
 
 ## Coupled-observer / collective dynamics
 
@@ -89,7 +90,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 
 ## Current priority order
 
-1. **History-dependent resistance under controlled changing demand.** R8-M7R shows that changed terminal demand specifically moves native dynamics and function without usually replacing the established specialist. R8-M7I remains V0, but its post-primary mirror diagnostics motivate a clean preregistered test separating prior consolidation duration from new-demand magnitude/duration.
+1. **Mechanism and robustness of persistent history-dependent native organization.** R8-M8 establishes operational persistent path dependence under matched present demand and prolonged identical-demand hold. The next question is what internal mechanism stores/maintains the separation and under what conditions it collapses, switches, or generalizes.
 2. R6/R8 readout preparation.
 3. R2/R3 native transient structure.
 4. Coupled local-observer collective behavior.
@@ -98,6 +99,6 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 7. R11 survival/use dissociation.
 8. R4E state-conditioned intervention consequences for later practical control/logic work.
 
-The next adaptive-reorganization study should not assume either free switching or formal hysteresis. It should preregister a history/pressure manipulation that distinguishes elastic demand-sensitive deformation from actual specialist replacement, while preserving R8-M7I as V0 and keeping its post-primary pattern exploratory.
+The next R8 study should not simply repeat demand sweeps. It should isolate whether persistent history dependence is carried primarily by encoder-side representation, recurrent-map geometry, or distributed encoder–recurrence coadaptation, while preserving M8's Y3 result and its claim boundary.
 
-See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, `R8_M1_RESULT.md`, `R8_M2_RESULT.md`, `R8_M3_RESULT.md`, `R8_M4_RESULT.md`, `R8_M5_RESULT.md`, `R8_M6_RESULT.md`, `R8_M5R_RESULT.md`, `R8_M7R_RESULT.md`, `R8_M7I_RESULT.md`, and `R8_M7I_POSTRUN_AUDIT.md`.
+See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, `R8_M1_RESULT.md`, `R8_M2_RESULT.md`, `R8_M3_RESULT.md`, `R8_M4_RESULT.md`, `R8_M5_RESULT.md`, `R8_M6_RESULT.md`, `R8_M5R_RESULT.md`, `R8_M7R_RESULT.md`, `R8_M7I_RESULT.md`, `R8_M7I_POSTRUN_AUDIT.md`, and `R8_M8_RESULT.md`.
