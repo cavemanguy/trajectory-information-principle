@@ -16,46 +16,46 @@ Primary hierarchy:
 2. **Observer = measurement / diagnostic instrument**
 3. **Perturbation = optional causal intervention or control / logic input**
 
-Perturbation experiments remain preserved, but they are not the trunk of the project.
+## Priority 1 — Adaptive native-dynamics reorganization
 
-## Priority 1 — R8–R10 learned selective preservation
-
-**Phenomenon:** task training transforms broadly contractive recurrence into strongly relation-dependent native preservation. Encoder and recurrent map coadapt so that otherwise symmetric task distinctions experience very different recurrent survival.
+**Phenomenon:** training can produce strong relation-selective native preservation through encoder–recurrence coadaptation. The identity and degree of specialization are optimization-path sensitive, established specialization can contribute functionally, and successful wider-state models do not require specialization to move in one fixed direction.
 
 ### Discovery sequence
 
-- **ND-R1:** formally remains Outcome A because its preregistered h12 competence gate failed. A post-run provenance audit showed that gate was miscalibrated above the historical source lineage. Its secondary selective-survival pattern generated the follow-up program; it was not retroactively rescued.
-- **R8-M1:** **M3 — encoder–recurrence coadaptation supported.** Full relation-selective survival required plasticity in both the encoder and recurrent map across fresh seeds.
-- **R8-M2:** **S0 — neither simple source tracks winner.** Neither relation-specific initialization bundle nor finite-sample data-column identity reliably explained eventual specialist identity.
-- **R8-M3:** **T0 — neither preregistered epoch-20 predictor supported.** Coadaptation synergy and shared-gradient alignment did not reliably identify the final specialist, while changed minibatch order materially shifted commitment timing and sometimes winner identity under identical initialization/data.
-- **R8-M4:** **F3 — selective-specialization contribution supported.** Selectivity equalization reduced `G` in 12/12 fresh seeds by about 66.6% on average. h12 test accuracy fell by 3.04 percentage points versus baseline and 2.57 points versus the matched mean-survival control. A preregistered secondary localized most functional loss to the dynamically favored relation.
-- **R8-M5:** **C0 — simple capacity-allocation account not supported.** Increasing full state width from 16D to 32D improved h12 test accuracy by about 5.55 percentage points but increased survival-winner performance concentration and dynamical selectivity. A near-parameter-matched 16D-state wider-transition control did not reproduce the same concentration. The simple tight-bottleneck compromise account is therefore rejected. However, the 32D model also improved h0 test accuracy by about 34.65 percentage points, so recurrent workspace dimension was not isolated from encoder-side representation quality.
+- **ND-R1:** formally remains Outcome A because its preregistered h12 competence gate failed. Its post-primary selective-survival pattern generated the follow-up program; it was not retroactively rescued.
+- **R8-M1:** **M3 — encoder–recurrence coadaptation supported.** Full relation-selective survival required plasticity in both encoder and recurrent map.
+- **R8-M2:** **S0 — neither simple source tracks winner.** Neither relation-specific initialization bundles nor finite-sample data-column identity reliably explained specialist identity.
+- **R8-M3:** **T0 — neither preregistered epoch-20 predictor supported.** Changing only minibatch order shifted commitment timing and changed final winner identity in 5/12 paired families.
+- **R8-M4:** **F3 — selective-specialization contribution supported.** Suppressing established selectivity reduced terminal performance, with most loss concentrated in the dynamically favored relation.
+- **R8-M5:** **C0 — simple capacity-allocation account not supported.** Wider full state improved h12 but did not relieve specialization; the directional scarce-capacity prediction failed.
+- **R8-M6:** **W0 — isolated recurrent-workspace account not supported.** Function-preserving X32 improved h12 but h0 equivalence failed after continued training, preventing a clean isolated-workspace attribution.
+- **R8-M5R:** **R2 — state-dimension-specific terminal benefit supported.** On 12 new families, exact R8-M5 training with no directional specialization requirement showed S32 beating both B16 and near-parameter-matched P16 at h12. Relative to B16, `G` and `D` changes were mixed/indeterminate.
 
 ### Current defensible description
 
-> **Training-induced, optimization-path-sensitive dynamical specialization produced through encoder–recurrence coadaptation, with a demonstrated functional contribution under controlled suppression; widening the full latent/state representation improves performance while strengthening rather than relieving specialization in the tested synthetic architecture.**
+> **Training induces optimization-path-sensitive dynamical specialization through encoder–recurrence coadaptation. Established specialization can contribute functionally, but specialization strength is not a simple scalar proxy for performance. Wider state improves terminal performance even when specialization is free to vary rather than being forced toward a predetermined direction.**
 
 This is not a claim of strong emergence, universal necessity, or a universal trajectory-information principle.
 
-### Immediate study — R8-M6 isolated recurrent workspace
+### Immediate study — reversible demand tracking
 
-R8-M5 creates one sharply preregisterable follow-up:
+The next hard test should ask:
 
-> **If the encoder output remains 16D, does a function-preserving expansion of only the autonomous recurrent workspace strengthen useful specialization and terminal performance?**
+> **Does controlled functional demand cause native specialization to reorganize toward the demanded relation, and does changing that demand cause the organization to reassign or reverse?**
 
-R8-M6 should begin from one common 16D lineage model before stable commitment, then fork into three matched continuations:
+The study should keep architecture fixed and use a reversible schedule, ideally **A → B → A**, with matched controls for mere extra training and for objective/loss weighting. A convincing result requires more than seed heterogeneity: the same lineage must track the controlled demand over time.
 
-- **B16:** ordinary 16D continuation;
-- **X32:** exact function-preserving recurrent-state expansion from 16D to 32D. The 16D state is zero-padded into 32D; the 16D recurrent map and terminal heads are block-embedded so the X32 trajectory and predictions are initially identical to B16;
-- **P16:** near-parameter-matched wider-transition control that retains the 16D recurrent state. The wider MLP is also initialized by exact function-preserving embedding of the original 16D recurrent map.
+Primary evidence should include:
 
-The fork should occur at epoch 20, before the prior stable-commitment window. Encoder, h0 heads, data, presentation permutations, and minibatch order are identical at the fork. No external information enters after h0.
+- demand-aligned change in relation-selective native survival;
+- reassignment when demand changes from A to B;
+- return toward A when A is restored;
+- functional benefit associated with the demand-aligned regime;
+- a matched control showing that the effect is not merely caused by extra epochs or generic loss scaling.
 
-A positive state-workspace result must require better terminal h12 performance together with stronger dynamical/functional specialization under X32, while h0 remains within a frozen equivalence margin and the parameter-matched P16 control does not reproduce the effect.
+A later causal add-on may suppress the demand-aligned reorganization to test whether impairment is phase-specific, but intervention should not contaminate the primary native-dynamics observation.
 
-This is intended as the final targeted R8 formation/function isolation before returning to **Priority 2: R6/R8 readout preparation**, unless R8-M6 produces a qualitatively new result that genuinely changes the priority order.
-
-**Possible practical uses:** learned dynamical routing, selective memory/compression, learned filtering, sparse channel allocation, compact recurrent preprocessing, state-dependent computation.
+**Possible practical uses:** learned dynamical routing, adaptive memory allocation, selective recurrent filtering, regime-dependent compression, compact recurrent preprocessing, state-dependent computation.
 
 ## Priority 2 — R6/R8 readout preparation
 
@@ -99,7 +99,7 @@ Preserve and keep accessible:
 - ALI historical and reproducible experiments;
 - Observer R2–R11;
 - ND-R1 with formal Outcome A and post-run audit;
-- R8-M1 through R8-M6 preregistrations/results/protocol notes;
+- R8-M1 through R8-M6 and R8-M5R preregistrations/results/protocol notes;
 - N-series spatial/accessibility work;
 - AG-series affine/reader-robustness work;
 - R4B/R4C/R4D/R4E causal-control sequence;
@@ -126,18 +126,21 @@ A failed explanation is not the same as a failed phenomenon.
 13. A functional effect under one intervention is not a universal necessity theorem.
 14. A wider model performing better is not by itself evidence for state-capacity allocation.
 15. A full-model width effect cannot be attributed specifically to recurrent workspace if encoder-side representation quality changes substantially.
+16. Specialization is not assumed to be a defect, nor is more specialization assumed to be better.
+17. Seed-to-seed heterogeneity alone is not evidence of adaptive demand tracking; the demand must be controlled experimentally.
 
 ## Immediate next step
 
-**R8-M6 is the active Priority-1 experiment.**
+**Preregister and freeze the reversible-demand native-dynamics experiment before exposing any fresh outcomes.**
 
-Its frozen design should distinguish whether extra post-encoding recurrent state dimension itself can strengthen useful specialization from the alternative that R8-M5 was primarily driven by a better h0 representation or generic parameter growth.
+The core distinction is whether the same model lineage reorganizes its native relation-selective dynamics when the task demand changes A → B → A, beyond matched continued-training and objective-weight controls.
 
 See:
 
+- `docs/R8_M5R_RESULT.md`
+- `docs/R8_M6_RESULT.md`
 - `docs/R8_M5_RESULT.md`
 - `docs/R8_M4_RESULT.md`
-- `docs/R8_M4_SECONDARY_NOTE.md`
 - `docs/CURRENT_CLAIMS.md`
 - `docs/EVIDENCE_LEDGER.md`
 - `docs/ND_R1_POSTRUN_AUDIT.md`
