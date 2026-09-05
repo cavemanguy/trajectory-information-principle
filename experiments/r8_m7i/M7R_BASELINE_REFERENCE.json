@@ -1,0 +1,20 @@
+{
+  "source_run": 33950849016,
+  "source_result": "R8-M7R D0",
+  "deterministic_namespace": "R8-M7R",
+  "seeds": {
+    "214": {"M": 100, "A": 2, "B": 0, "baseline_Q": -2.063911188453737},
+    "230": {"M": 100, "A": 1, "B": 5, "baseline_Q": -2.4851450191598174},
+    "247": {"M": 110, "A": 1, "B": 3, "baseline_Q": -2.5164544751125413},
+    "263": {"M": 100, "A": 1, "B": 3, "baseline_Q": -2.107939178114615},
+    "279": {"M": 110, "A": 3, "B": 1, "baseline_Q": -2.3861303296287355},
+    "296": {"M": 100, "A": 2, "B": 3, "baseline_Q": -1.972433499545735},
+    "313": {"M": 100, "A": 0, "B": 5, "baseline_Q": -1.9640562264473456},
+    "329": {"M": 110, "A": 5, "B": 1, "baseline_Q": -2.6933495657365665},
+    "346": {"M": 100, "A": 3, "B": 6, "baseline_Q": -2.0537316865446194},
+    "362": {"M": 100, "A": 2, "B": 3, "baseline_Q": -2.3682937487781244},
+    "378": {"M": 100, "A": 7, "B": 4, "baseline_Q": -2.707116},
+    "397": {"M": 120, "A": 3, "B": 5, "baseline_Q": -2.239276}
+  },
+  "validity_rule": "M, A and B must match exactly; baseline_Q must match within 1e-5 before inverted outcomes are interpreted."
+}
