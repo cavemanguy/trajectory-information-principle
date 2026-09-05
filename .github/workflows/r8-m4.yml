@@ -1,0 +1,91 @@
+name: R8-M4 Functional Necessity
+
+on:
+  push:
+    branches: [r8-m4-functional-necessity]
+    paths:
+      - 'experiments/r8_m4/**'
+      - '.github/workflows/r8-m4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-M4 smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m4/requirements.txt
+      - name: Compile frozen implementation
+        run: |
+          python -m py_compile experiments/r8_m4/run_r8_m4.py
+          python -m py_compile experiments/r8_m4/classify_r8_m4.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_m4/classify_r8_m4.py --self-check
+      - name: Run outcome-free smoke path
+        run: python experiments/r8_m4/run_r8_m4.py --seed 1001 --outdir smoke_r8_m4 --smoke
+
+  fresh:
+    name: R8-M4 fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [16, 26, 39, 52, 64, 78, 93, 109, 122, 136, 148, 163]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m4/requirements.txt
+      - name: Execute paired functional-necessity family
+        run: python experiments/r8_m4/run_r8_m4.py --seed ${{ matrix.seed }} --outdir results/r8_m4/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m4-seed-${{ matrix.seed }}
+          path: results/r8_m4/seed_${{ matrix.seed }}
+          retention-days: 90
+
+  classify:
+    name: R8-M4 frozen cross-family classification
+    needs: fresh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m4/requirements.txt
+      - name: Download family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-m4-seed-*
+          path: all_seed_artifacts
+          merge-multiple: true
+      - name: Apply frozen classifier
+        run: python experiments/r8_m4/classify_r8_m4.py --root all_seed_artifacts --outdir results/r8_m4/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m4-aggregate
+          path: results/r8_m4/aggregate
+          retention-days: 90
+      - name: Commit authoritative R8-M4 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -C r8-m4-results
+          git add results/r8_m4/aggregate/FINAL_RESULT.md results/r8_m4/aggregate/FINAL_RESULT.json
+          git commit -m 'Record authoritative R8-M4 results'
+          git push --force origin r8-m4-results
