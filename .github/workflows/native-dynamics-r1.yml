@@ -1,6 +1,12 @@
 name: ND-R1 Native Dynamics
 
 on:
+  push:
+    branches:
+      - native-dynamics-r1
+    paths:
+      - 'experiments/native_dynamics_r1/**'
+      - '.github/workflows/native-dynamics-r1.yml'
   workflow_dispatch:
 
 permissions:
