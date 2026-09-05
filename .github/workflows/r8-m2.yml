@@ -1,7 +1,8 @@
 name: R8-M2 Symmetry-Breaking Provenance
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [r8-m2-symmetry-breaking]
 
 permissions:
   contents: write
@@ -31,6 +32,19 @@ jobs:
           test -f experiments/r8_m2/PREREGISTRATION.md
           python -m py_compile experiments/r8_m2/run_r8_m2.py
           python -m py_compile experiments/r8_m2/classify_r8_m2.py
+      - name: Outcome-free classifier self-check
+        run: |
+          python - <<'PY'
+          import importlib.util
+          import numpy as np
+          spec = importlib.util.spec_from_file_location('c', 'experiments/r8_m2/classify_r8_m2.py')
+          c = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(c)
+          assert c.map_to_identity(np.arange(8)).tolist() == [5.0, 6.0, 7.0, 0.0, 1.0, 2.0, 3.0, 4.0]
+          assert abs(c.spearman(np.arange(8), np.arange(8)) - 1.0) < 1e-12
+          assert c.binomial_tail(8, 4, 1.0 / 8.0) < 0.05
+          print('classifier self-check ok')
+          PY
       - name: Run outcome-free smoke path
         run: |
           rm -rf /tmp/r8m2-smoke
