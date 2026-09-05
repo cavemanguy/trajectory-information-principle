@@ -1,0 +1,26 @@
+{
+  "baseline_valid_all": true,
+  "suppression_gate": true,
+  "E_lower_G_count": 12,
+  "mean_DeltaG_EB": -0.5063148933953998,
+  "DeltaG_EB_ci95": [-0.5623199751534643, -0.44721747566849246],
+  "mean_relative_G_reduction": 0.6663483028167344,
+  "mean_Delta_EB": -0.0304125,
+  "Delta_EB_ci95": [-0.04150442708333332, -0.01812682291666667],
+  "mean_Delta_EM": -0.025745833333333332,
+  "Delta_EM_ci95": [-0.03661880208333333, -0.014522500000000018],
+  "mean_GM_minus_GE": 0.5771848135147636,
+  "GM_minus_GE_ci95": [0.49776687400612796, 0.6463599162511577],
+  "F1_criteria": false,
+  "F3_criteria": true,
+  "classification": "F3 — selective-specialization contribution supported",
+  "recovery": {
+    "original_aggregate_job": 101234104834,
+    "original_run": 33938705077,
+    "failure": "artifact flattening from merge-multiple: true overwrote identically named seed_summary.json files",
+    "recovered_from_exact_preserved_family_artifacts": true,
+    "frozen_classifier_commit": "77ad4069b090d3fd7d9c9c72edf387442a00ef40",
+    "models_retrained": false,
+    "scientific_thresholds_changed": false
+  }
+}
