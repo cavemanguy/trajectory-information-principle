@@ -1,0 +1,55 @@
+{
+  "bootstrap_n": 5000,
+  "numpy_version": "2.3.5",
+  "pair_bank_hashes": {
+    "0": {
+      "alt_sha256": "583579ec355e75b439cb453ceba9f6d9ce4d314902f056e58a49c14650d949a4",
+      "base_sha256": "f473d649810c6c41077e7bc7babc33d57ea4e0bad8e24463f4014adf2af5d38a",
+      "perm_sha256": "425b50ec19cafb3837c5341259ef84f4094605931f748bc261aa436a8fac7384"
+    },
+    "1": {
+      "alt_sha256": "7f01f47c2c6a56ed107dfa8cda7eeaebcb79b5b8a6b038c5ce9f5e56994033a5",
+      "base_sha256": "4dc45a9fa4274a87d55d5b007b591316a45305abbb15c9b9247877a95409e647",
+      "perm_sha256": "79046d9506787d94543e8ca7401c1903e444ef4b47489c4db5a4c1a829443e7b"
+    },
+    "2": {
+      "alt_sha256": "634576dc229680de69ccda27a22777c16ac2af4741fcb100d5aa745a283153dd",
+      "base_sha256": "015047b6ed238f5e75afa1de5c7c33629885a6996303e5b25daea357dd8a7706",
+      "perm_sha256": "eb81c5cfe810e1ea4e2edabab0fd627c90b8b40e306fa44d91b55a32026204c1"
+    },
+    "3": {
+      "alt_sha256": "6640819191b5ea8d5557d7d79345dde68f889dbd620c7c9eeeb16d8b2b40de31",
+      "base_sha256": "6c7b1b5a8f7176411500026c1fa5f025553e4ce0c915d4207a01bcff95ec8b08",
+      "perm_sha256": "07c085542091259e0363a62f55ee30ba29c047c2d7ae352bbce83fd110880cef"
+    },
+    "4": {
+      "alt_sha256": "2b959349d8099ec1e213bb3a9950c40b5cdd5949712740eef19a363b822215c9",
+      "base_sha256": "192db780cb76cf69656cb11ac060f431c6d6a4d1d78a58fa6cb1d2a06a2381fa",
+      "perm_sha256": "ebf38fe17f469ef146123944742425d0a78d36b90355d86c7e6dd6c5dc3e79cb"
+    },
+    "5": {
+      "alt_sha256": "fac5b32837f89d7b6d804d57827455179e928ce88ce9a7ee6634824642022b64",
+      "base_sha256": "92439bca859f6df310afb8b4f8b76c6540f7ef06f61303b500f9e7ce2e7c213c",
+      "perm_sha256": "18a8b500d2662ad1d48ade70b379b1e68425e3557a990f382a807a4d6f15d17e"
+    },
+    "6": {
+      "alt_sha256": "9cc7a83728a137f50c26577cf9036758d069e9ce6135f11969944fb65527dad8",
+      "base_sha256": "3bd5f506bce7164314a1308fb92280f68f16a90db007a9ca82a7a8f0f538325c",
+      "perm_sha256": "5ae92fe7be56284e3a066ecaa195b5d4e25bb378fc75b561799a0c679587e249"
+    },
+    "7": {
+      "alt_sha256": "1f247c5ffbc8a5f0a1a9d4a2e5b44cded7d1ff233b71e6eb731258c1a3769547",
+      "base_sha256": "9b46b9e738a65795f642070679905d9e42e7cac06fa00fa7617ed89c25eafd06",
+      "perm_sha256": "8db53cd91af93ec76596c0d8753e2b6dd2eb1300046fd96f8e0339077f1550d1"
+    }
+  },
+  "pair_survival_npz_sha256": "bab0b2d01b4e21773a0c5ef88e3a5b9b47bbc56690c876afe824d829ac269195",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "probe_train_permutation_sha256": "36ce92510f7a74c3387b8e320b246c9fa8f88f852fdf287eaac1e76e85ec505d",
+  "python": "3.13.15 (main, Aug  6 2026, 02:15:18) [GCC 13.3.0]",
+  "ridge_lambda": 0.001,
+  "seed": 29,
+  "test_memory_sha256": "9ed73d738c3d22dd1e9d5f053bdf84920600457440f75968d1ef337dc593b97b",
+  "test_permutation_sha256": "df1fe1bab769c143d96291aabf3db8f871d9fa9b7fb6f516e0d92764ebdfd733",
+  "torch_version": "2.10.0+cu128"
+}

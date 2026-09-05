@@ -1,0 +1,96 @@
+{
+  "all_seed_competence_gate_pass": false,
+  "all_seed_selective_preservation_criterion_pass": true,
+  "claim_boundary": "Outcome C supports a training-induced change in how natural task distinctions survive native recurrent evolution in this architecture. It does not establish new information creation, chronology, reader causation, perturbation necessity, attractors/chaos, universality, or practical utility.",
+  "cross_seed_summary": {
+    "C0_mean": -7.11525837580363,
+    "G0_mean": 0.019676121572653454,
+    "G100_mean": 0.7523720463116964,
+    "delta_G_mean": 0.7326959247390429,
+    "early_establishment_spearman_mean": 0.9365079365079366,
+    "epoch100_h12_validation_accuracy_mean": 0.19399999999999998
+  },
+  "experiment": "ND-R1",
+  "frozen_decision_rule": {
+    "A": "at least one fresh seed has epoch-100 native h12 validation accuracy < 0.50",
+    "B": "all seeds competent but C criterion fails",
+    "C": "all seeds competent and, in every seed, C0<0, delta_G>0, and bootstrap 95% CI lower bound for delta_G>0"
+  },
+  "outcome": "A \u2014 training reproduction failure",
+  "primary_seeds": [
+    13,
+    29,
+    53
+  ],
+  "seed_results": [
+    {
+      "C0_initial_terminal_mean_log_survival": -6.768089294433594,
+      "G0_initial_relation_selectivity": 0.0180722214281559,
+      "G100_final_relation_selectivity": 0.8280121684074402,
+      "competence_gate_pass": false,
+      "delta_G": 0.8099399469792843,
+      "delta_G_bootstrap": {
+        "bootstrap_mean": 0.8044876330038271,
+        "ci95_percentile": [
+          0.7908407715327028,
+          0.8181161171115451
+        ],
+        "n_bootstrap": 5000
+      },
+      "early_establishment_spearman_t2_vs_t12": 0.9761904761904763,
+      "epoch100_h12_validation_accuracy": 0.19735,
+      "experiment": "ND-R1",
+      "fresh_primary_seed": true,
+      "natural_pair_count_per_relation": 2048,
+      "population_sd_ddof_for_G": 0,
+      "seed": 13,
+      "selective_preservation_seed_criterion_pass": true
+    },
+    {
+      "C0_initial_terminal_mean_log_survival": -7.1788201332092285,
+      "G0_initial_relation_selectivity": 0.024535752832889557,
+      "G100_final_relation_selectivity": 0.8112367987632751,
+      "competence_gate_pass": false,
+      "delta_G": 0.7867010459303856,
+      "delta_G_bootstrap": {
+        "bootstrap_mean": 0.7774633851493593,
+        "ci95_percentile": [
+          0.7589687939195102,
+          0.7966420544006351
+        ],
+        "n_bootstrap": 5000
+      },
+      "early_establishment_spearman_t2_vs_t12": 0.9285714285714287,
+      "epoch100_h12_validation_accuracy": 0.1992,
+      "experiment": "ND-R1",
+      "fresh_primary_seed": true,
+      "natural_pair_count_per_relation": 2048,
+      "population_sd_ddof_for_G": 0,
+      "seed": 29,
+      "selective_preservation_seed_criterion_pass": true
+    },
+    {
+      "C0_initial_terminal_mean_log_survival": -7.398865699768066,
+      "G0_initial_relation_selectivity": 0.0164203904569149,
+      "G100_final_relation_selectivity": 0.6178671717643738,
+      "competence_gate_pass": false,
+      "delta_G": 0.6014467813074589,
+      "delta_G_bootstrap": {
+        "bootstrap_mean": 0.5941544554543542,
+        "ci95_percentile": [
+          0.5807996919694046,
+          0.6070840913374252
+        ],
+        "n_bootstrap": 5000
+      },
+      "early_establishment_spearman_t2_vs_t12": 0.9047619047619048,
+      "epoch100_h12_validation_accuracy": 0.18544999999999998,
+      "experiment": "ND-R1",
+      "fresh_primary_seed": true,
+      "natural_pair_count_per_relation": 2048,
+      "population_sd_ddof_for_G": 0,
+      "seed": 53,
+      "selective_preservation_seed_criterion_pass": true
+    }
+  ]
+}

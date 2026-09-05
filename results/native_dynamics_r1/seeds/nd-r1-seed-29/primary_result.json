@@ -1,0 +1,23 @@
+{
+  "C0_initial_terminal_mean_log_survival": -7.1788201332092285,
+  "G0_initial_relation_selectivity": 0.024535752832889557,
+  "G100_final_relation_selectivity": 0.8112367987632751,
+  "competence_gate_pass": false,
+  "delta_G": 0.7867010459303856,
+  "delta_G_bootstrap": {
+    "bootstrap_mean": 0.7774633851493593,
+    "ci95_percentile": [
+      0.7589687939195102,
+      0.7966420544006351
+    ],
+    "n_bootstrap": 5000
+  },
+  "early_establishment_spearman_t2_vs_t12": 0.9285714285714287,
+  "epoch100_h12_validation_accuracy": 0.1992,
+  "experiment": "ND-R1",
+  "fresh_primary_seed": true,
+  "natural_pair_count_per_relation": 2048,
+  "population_sd_ddof_for_G": 0,
+  "seed": 29,
+  "selective_preservation_seed_criterion_pass": true
+}
