@@ -1,0 +1,105 @@
+name: R8-M7I Inverted Same-Lineage Mirror
+
+on:
+  push:
+    branches: [r8-m7i-inverted-demand]
+    paths:
+      - 'experiments/r8_m7i/**'
+      - '.github/workflows/r8-m7i.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-M7I smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m7i/requirements.txt
+      - name: Compile frozen implementation
+        run: |
+          python -m py_compile experiments/r8_m7i/m7r_base.py
+          python -m py_compile experiments/r8_m7i/run_r8_m7i.py
+          python -m py_compile experiments/r8_m7i/classify_r8_m7i.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_m7i/classify_r8_m7i.py --self-check
+      - name: Run outcome-free mirror smoke path
+        run: python experiments/r8_m7i/run_r8_m7i.py --seed 1007 --outdir smoke_r8_m7i --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('smoke_r8_m7i/smoke_summary.json'))
+          assert d['status']=='ok'
+          assert d['experiment']=='R8-M7I'
+          assert d['schedule']==['B','A','B']
+          assert d['A'] != d['B']
+          assert set(d['condition_Q']) == {'MIRROR','FIXB','H0MIRROR'}
+          assert all(len(v)==3 for v in d['condition_Q'].values())
+          print('mirror smoke A,B', d['A'], d['B'])
+          PY
+
+  paired:
+    name: R8-M7I paired family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [214, 230, 247, 263, 279, 296, 313, 329, 346, 362, 378, 397]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m7i/requirements.txt
+      - name: Execute exact-lineage inverted mirror family
+        run: python experiments/r8_m7i/run_r8_m7i.py --seed ${{ matrix.seed }} --outdir results/r8_m7i/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m7i-seed-${{ matrix.seed }}
+          path: results/r8_m7i/seed_${{ matrix.seed }}
+          retention-days: 90
+
+  classify:
+    name: R8-M7I frozen paired classification
+    needs: paired
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m7i/requirements.txt
+      - name: Download paired artifacts without flattening
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-m7i-seed-*
+          path: all_seed_artifacts
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: python experiments/r8_m7i/classify_r8_m7i.py --root all_seed_artifacts --outdir results/r8_m7i/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m7i-aggregate
+          path: results/r8_m7i/aggregate
+          retention-days: 90
+      - name: Commit authoritative R8-M7I result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -C r8-m7i-results
+          git add results/r8_m7i/aggregate/FINAL_RESULT.md results/r8_m7i/aggregate/FINAL_RESULT.json
+          git commit -m 'Record authoritative R8-M7I results'
+          git push --force origin r8-m7i-results
