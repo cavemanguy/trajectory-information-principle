@@ -1,0 +1,1538 @@
+{
+  "H1_initialization_bundle_tracking_supported": false,
+  "H2_data_column_tracking_supported": false,
+  "all_conditions_all_families_valid": true,
+  "claim_boundary": "R8-M2 tests ordinary sources of seed-dependent native survival specialization in one symmetric synthetic recurrent architecture. S0 does not prove strong emergence; S1/S2/S3 do not imply universality or practical advantage.",
+  "experiment": "R8-M2",
+  "family_seeds": [
+    3,
+    9,
+    21,
+    28,
+    44,
+    62,
+    86,
+    101
+  ],
+  "outcome": "S0 \u2014 neither simple source tracks winner",
+  "pi": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    0,
+    1,
+    2
+  ],
+  "primary": {
+    "data_column": {
+      "exact_binomial_tail_p_at_observed_or_more": 0.6563910841941833,
+      "mapped_winner_matches": 1,
+      "mean_delta_rho_aligned_minus_raw": {
+        "ci95_percentile": [
+          -0.6101190476190477,
+          0.380952380952381
+        ],
+        "mean": -0.0803571428571429,
+        "n_bootstrap": 5000
+      },
+      "n_families": 8
+    },
+    "initialization": {
+      "exact_binomial_tail_p_at_observed_or_more": 0.06734722852706909,
+      "mapped_winner_matches": 3,
+      "mean_delta_rho_aligned_minus_raw": {
+        "ci95_percentile": [
+          -0.3601190476190476,
+          0.34821428571428575
+        ],
+        "mean": -0.02976190476190474,
+        "n_bootstrap": 5000
+      },
+      "n_families": 8
+    }
+  },
+  "secondary": {
+    "commitment_onset_epoch": 40,
+    "early_commitment": {
+      "0": {
+        "commitment_criterion_met": false,
+        "positive_rho_count": 5,
+        "rho": {
+          "ci95_percentile": [
+            -0.2619047619047619,
+            0.18750000000000003
+          ],
+          "mean": -0.029761904761904767,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 1
+      },
+      "1": {
+        "commitment_criterion_met": false,
+        "positive_rho_count": 5,
+        "rho": {
+          "ci95_percentile": [
+            -0.04166666666666666,
+            0.34821428571428575
+          ],
+          "mean": 0.1577380952380953,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 0
+      },
+      "10": {
+        "commitment_criterion_met": false,
+        "positive_rho_count": 7,
+        "rho": {
+          "ci95_percentile": [
+            0.08333333333333337,
+            0.37202380952380965
+          ],
+          "mean": 0.21726190476190482,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 3
+      },
+      "2": {
+        "commitment_criterion_met": false,
+        "positive_rho_count": 6,
+        "rho": {
+          "ci95_percentile": [
+            -0.24404761904761904,
+            0.27976190476190477
+          ],
+          "mean": 0.06547619047619052,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 3
+      },
+      "20": {
+        "commitment_criterion_met": false,
+        "positive_rho_count": 6,
+        "rho": {
+          "ci95_percentile": [
+            -0.059523809523809534,
+            0.4732142857142858
+          ],
+          "mean": 0.19047619047619052,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 3
+      },
+      "40": {
+        "commitment_criterion_met": true,
+        "positive_rho_count": 8,
+        "rho": {
+          "ci95_percentile": [
+            0.6607142857142858,
+            0.773809523809524
+          ],
+          "mean": 0.7113095238095238,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 7
+      },
+      "5": {
+        "commitment_criterion_met": false,
+        "positive_rho_count": 5,
+        "rho": {
+          "ci95_percentile": [
+            -0.15773809523809526,
+            0.42559523809523814
+          ],
+          "mean": 0.13988095238095244,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 1
+      },
+      "60": {
+        "commitment_criterion_met": true,
+        "positive_rho_count": 8,
+        "rho": {
+          "ci95_percentile": [
+            0.8571428571428572,
+            0.955357142857143
+          ],
+          "mean": 0.9136904761904763,
+          "n_bootstrap": 5000
+        },
+        "winner_match_count": 7
+      }
+    },
+    "initial_shared_gradient_predictor": {
+      "ci95_percentile": [
+        -0.25900297619047624,
+        0.27976190476190477
+      ],
+      "mean": 0.014880952380952356,
+      "n_bootstrap": 5000
+    },
+    "minibatch_order": {
+      "mean_spearman_B_vs_O": {
+        "ci95_percentile": [
+          0.31250000000000006,
+          0.6488095238095238
+        ],
+        "mean": 0.47916666666666674,
+        "n_bootstrap": 5000
+      },
+      "winner_matches": 6
+    }
+  },
+  "seed_results": [
+    {
+      "G_B": 0.8929001092910767,
+      "G_D": 0.7732547521591187,
+      "G_O": 0.8944413661956787,
+      "G_P": 0.8406041264533997,
+      "data_source_winner_match": false,
+      "delta_rho_data": -1.5714285714285716,
+      "delta_rho_init": 0.4285714285714286,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": -0.4285714285714286,
+          "winner_matches_epoch100": false,
+          "winner_relation": 4
+        },
+        "1": {
+          "rho_to_epoch100": -0.28571428571428575,
+          "winner_matches_epoch100": false,
+          "winner_relation": 6
+        },
+        "10": {
+          "rho_to_epoch100": 0.2380952380952381,
+          "winner_matches_epoch100": true,
+          "winner_relation": 5
+        },
+        "2": {
+          "rho_to_epoch100": 0.30952380952380953,
+          "winner_matches_epoch100": true,
+          "winner_relation": 5
+        },
+        "20": {
+          "rho_to_epoch100": 0.19047619047619052,
+          "winner_matches_epoch100": true,
+          "winner_relation": 5
+        },
+        "40": {
+          "rho_to_epoch100": 0.6904761904761906,
+          "winner_matches_epoch100": true,
+          "winner_relation": 5
+        },
+        "5": {
+          "rho_to_epoch100": -0.5476190476190477,
+          "winner_matches_epoch100": false,
+          "winner_relation": 4
+        },
+        "60": {
+          "rho_to_epoch100": 0.9761904761904763,
+          "winner_matches_epoch100": true,
+          "winner_relation": 5
+        }
+      },
+      "init_bundle_winner_match": false,
+      "initial_shared_gradient_rho_to_final": -0.3571428571428572,
+      "order_winner_match": true,
+      "rho_data_raw": 0.7380952380952381,
+      "rho_data_source_aligned": -0.8333333333333335,
+      "rho_init_bundle_aligned": -0.14285714285714288,
+      "rho_init_raw": -0.5714285714285715,
+      "rho_order_B_vs_O": 0.5000000000000001,
+      "seed": 3,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.385175,
+          "h0_overall": 0.5898,
+          "h0_per_relation": [
+            0.6224,
+            0.3048,
+            0.4968,
+            0.3116,
+            0.7484,
+            0.9832,
+            0.87,
+            0.3812
+          ],
+          "h12_overall": 0.18055,
+          "h12_per_relation": [
+            0.0676,
+            0.072,
+            0.0608,
+            0.07,
+            0.0728,
+            0.9676,
+            0.0636,
+            0.07
+          ]
+        },
+        "D": {
+          "combined": 0.402825,
+          "h0_overall": 0.6125499999999999,
+          "h0_per_relation": [
+            0.556,
+            0.6016,
+            0.5868,
+            0.6792,
+            0.3504,
+            0.8984,
+            0.8616,
+            0.3664
+          ],
+          "h12_overall": 0.1931,
+          "h12_per_relation": [
+            0.0696,
+            0.0652,
+            0.0712,
+            0.3416,
+            0.0712,
+            0.7888,
+            0.0708,
+            0.0664
+          ]
+        },
+        "O": {
+          "combined": 0.402375,
+          "h0_overall": 0.58165,
+          "h0_per_relation": [
+            0.6564,
+            0.4632,
+            0.4672,
+            0.2812,
+            0.5956,
+            0.992,
+            0.9252,
+            0.2724
+          ],
+          "h12_overall": 0.2231,
+          "h12_per_relation": [
+            0.4884,
+            0.0684,
+            0.0624,
+            0.0672,
+            0.0684,
+            0.9056,
+            0.0596,
+            0.0648
+          ]
+        },
+        "P": {
+          "combined": 0.39904999999999996,
+          "h0_overall": 0.63155,
+          "h0_per_relation": [
+            0.7536,
+            0.6796,
+            0.7288,
+            0.856,
+            0.1408,
+            0.732,
+            0.6928,
+            0.4688
+          ],
+          "h12_overall": 0.16655,
+          "h12_per_relation": [
+            0.3196,
+            0.0624,
+            0.064,
+            0.5392,
+            0.0592,
+            0.0516,
+            0.1712,
+            0.0652
+          ]
+        }
+      },
+      "winner_B": 5,
+      "winner_D": 5,
+      "winner_D_source_identity": 0,
+      "winner_O": 5,
+      "winner_P": 3,
+      "winner_P_bundle_identity": 6
+    },
+    {
+      "G_B": 0.7941148281097412,
+      "G_D": 0.8450865149497986,
+      "G_O": 0.7746914029121399,
+      "G_P": 0.6942974328994751,
+      "data_source_winner_match": false,
+      "delta_rho_data": -0.16666666666666669,
+      "delta_rho_init": -0.38095238095238093,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": -0.2380952380952381,
+          "winner_matches_epoch100": false,
+          "winner_relation": 4
+        },
+        "1": {
+          "rho_to_epoch100": 0.19047619047619052,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "10": {
+          "rho_to_epoch100": -0.023809523809523815,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "2": {
+          "rho_to_epoch100": 0.3333333333333334,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "20": {
+          "rho_to_epoch100": 0.880952380952381,
+          "winner_matches_epoch100": true,
+          "winner_relation": 0
+        },
+        "40": {
+          "rho_to_epoch100": 0.6904761904761906,
+          "winner_matches_epoch100": true,
+          "winner_relation": 0
+        },
+        "5": {
+          "rho_to_epoch100": -0.38095238095238104,
+          "winner_matches_epoch100": false,
+          "winner_relation": 7
+        },
+        "60": {
+          "rho_to_epoch100": 0.9047619047619048,
+          "winner_matches_epoch100": true,
+          "winner_relation": 0
+        }
+      },
+      "init_bundle_winner_match": false,
+      "initial_shared_gradient_rho_to_final": 0.2142857142857143,
+      "order_winner_match": true,
+      "rho_data_raw": -0.04761904761904763,
+      "rho_data_source_aligned": -0.2142857142857143,
+      "rho_init_bundle_aligned": 0.1666666666666667,
+      "rho_init_raw": 0.5476190476190477,
+      "rho_order_B_vs_O": 0.4761904761904762,
+      "seed": 9,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.41052500000000003,
+          "h0_overall": 0.6073500000000001,
+          "h0_per_relation": [
+            0.8244,
+            0.7952,
+            0.3048,
+            0.848,
+            0.6332,
+            0.5444,
+            0.158,
+            0.7508
+          ],
+          "h12_overall": 0.2137,
+          "h12_per_relation": [
+            0.8536,
+            0.0752,
+            0.0604,
+            0.4592,
+            0.0652,
+            0.0696,
+            0.0632,
+            0.0632
+          ]
+        },
+        "D": {
+          "combined": 0.405225,
+          "h0_overall": 0.60665,
+          "h0_per_relation": [
+            0.8328,
+            0.7748,
+            0.3076,
+            0.8176,
+            0.5592,
+            0.5972,
+            0.1076,
+            0.8564
+          ],
+          "h12_overall": 0.2038,
+          "h12_per_relation": [
+            0.0716,
+            0.0712,
+            0.066,
+            0.5188,
+            0.068,
+            0.0684,
+            0.0644,
+            0.702
+          ]
+        },
+        "O": {
+          "combined": 0.38705,
+          "h0_overall": 0.6014,
+          "h0_per_relation": [
+            0.9608,
+            0.8692,
+            0.246,
+            0.8984,
+            0.3832,
+            0.6576,
+            0.156,
+            0.64
+          ],
+          "h12_overall": 0.17270000000000002,
+          "h12_per_relation": [
+            0.9192,
+            0.0672,
+            0.066,
+            0.0644,
+            0.0688,
+            0.07,
+            0.054,
+            0.072
+          ]
+        },
+        "P": {
+          "combined": 0.46305,
+          "h0_overall": 0.68115,
+          "h0_per_relation": [
+            0.6928,
+            0.8416,
+            0.8764,
+            0.168,
+            0.8716,
+            0.8572,
+            0.7524,
+            0.3892
+          ],
+          "h12_overall": 0.24495,
+          "h12_per_relation": [
+            0.096,
+            0.0696,
+            0.8868,
+            0.0704,
+            0.0764,
+            0.1224,
+            0.564,
+            0.074
+          ]
+        }
+      },
+      "winner_B": 0,
+      "winner_D": 7,
+      "winner_D_source_identity": 2,
+      "winner_O": 0,
+      "winner_P": 2,
+      "winner_P_bundle_identity": 5
+    },
+    {
+      "G_B": 0.7348206639289856,
+      "G_D": 0.7505491375923157,
+      "G_O": 0.8693562746047974,
+      "G_P": 0.5908436179161072,
+      "data_source_winner_match": false,
+      "delta_rho_data": -0.04761904761904763,
+      "delta_rho_init": 0.9761904761904763,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": 0.07142857142857144,
+          "winner_matches_epoch100": false,
+          "winner_relation": 7
+        },
+        "1": {
+          "rho_to_epoch100": 0.38095238095238104,
+          "winner_matches_epoch100": false,
+          "winner_relation": 2
+        },
+        "10": {
+          "rho_to_epoch100": 0.1666666666666667,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "2": {
+          "rho_to_epoch100": 0.38095238095238104,
+          "winner_matches_epoch100": true,
+          "winner_relation": 4
+        },
+        "20": {
+          "rho_to_epoch100": -0.261904761904762,
+          "winner_matches_epoch100": false,
+          "winner_relation": 1
+        },
+        "40": {
+          "rho_to_epoch100": 0.6190476190476191,
+          "winner_matches_epoch100": true,
+          "winner_relation": 4
+        },
+        "5": {
+          "rho_to_epoch100": 0.1666666666666667,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "60": {
+          "rho_to_epoch100": 0.9523809523809524,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        }
+      },
+      "init_bundle_winner_match": true,
+      "initial_shared_gradient_rho_to_final": -0.6666666666666669,
+      "order_winner_match": false,
+      "rho_data_raw": 0.09523809523809526,
+      "rho_data_source_aligned": 0.04761904761904763,
+      "rho_init_bundle_aligned": 0.6904761904761906,
+      "rho_init_raw": -0.28571428571428575,
+      "rho_order_B_vs_O": 0.261904761904762,
+      "seed": 21,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.4362,
+          "h0_overall": 0.66045,
+          "h0_per_relation": [
+            0.524,
+            0.4012,
+            0.754,
+            0.222,
+            0.8824,
+            0.8712,
+            0.7356,
+            0.8932
+          ],
+          "h12_overall": 0.21194999999999997,
+          "h12_per_relation": [
+            0.0592,
+            0.0684,
+            0.3844,
+            0.0716,
+            0.5044,
+            0.4376,
+            0.0984,
+            0.0716
+          ]
+        },
+        "D": {
+          "combined": 0.4319,
+          "h0_overall": 0.6665,
+          "h0_per_relation": [
+            0.4292,
+            0.7492,
+            0.6672,
+            0.5788,
+            0.668,
+            0.5984,
+            0.8268,
+            0.8144
+          ],
+          "h12_overall": 0.1973,
+          "h12_per_relation": [
+            0.064,
+            0.0636,
+            0.396,
+            0.3068,
+            0.06,
+            0.0856,
+            0.5056,
+            0.0968
+          ]
+        },
+        "O": {
+          "combined": 0.41290000000000004,
+          "h0_overall": 0.6172000000000001,
+          "h0_per_relation": [
+            0.8728,
+            0.5292,
+            0.51,
+            0.2064,
+            0.664,
+            0.6004,
+            0.8428,
+            0.712
+          ],
+          "h12_overall": 0.2086,
+          "h12_per_relation": [
+            0.0672,
+            0.0612,
+            0.0604,
+            0.0592,
+            0.0652,
+            0.6052,
+            0.684,
+            0.0664
+          ]
+        },
+        "P": {
+          "combined": 0.421275,
+          "h0_overall": 0.6306,
+          "h0_per_relation": [
+            0.46,
+            0.9396,
+            0.498,
+            0.4864,
+            0.6796,
+            0.3684,
+            0.8112,
+            0.8016
+          ],
+          "h12_overall": 0.21194999999999997,
+          "h12_per_relation": [
+            0.088,
+            0.8748,
+            0.092,
+            0.1276,
+            0.0856,
+            0.0676,
+            0.1104,
+            0.2496
+          ]
+        }
+      },
+      "winner_B": 4,
+      "winner_D": 6,
+      "winner_D_source_identity": 1,
+      "winner_O": 6,
+      "winner_P": 1,
+      "winner_P_bundle_identity": 4
+    },
+    {
+      "G_B": 0.8100332617759705,
+      "G_D": 0.6006405353546143,
+      "G_O": 0.8129087090492249,
+      "G_P": 0.7193000316619873,
+      "data_source_winner_match": false,
+      "delta_rho_data": 0.1190476190476191,
+      "delta_rho_init": -0.11904761904761907,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": -0.5714285714285715,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "1": {
+          "rho_to_epoch100": -0.14285714285714288,
+          "winner_matches_epoch100": false,
+          "winner_relation": 0
+        },
+        "10": {
+          "rho_to_epoch100": 0.5000000000000001,
+          "winner_matches_epoch100": false,
+          "winner_relation": 2
+        },
+        "2": {
+          "rho_to_epoch100": -0.9047619047619048,
+          "winner_matches_epoch100": false,
+          "winner_relation": 0
+        },
+        "20": {
+          "rho_to_epoch100": 0.6904761904761906,
+          "winner_matches_epoch100": false,
+          "winner_relation": 2
+        },
+        "40": {
+          "rho_to_epoch100": 0.6904761904761906,
+          "winner_matches_epoch100": true,
+          "winner_relation": 7
+        },
+        "5": {
+          "rho_to_epoch100": 0.5952380952380953,
+          "winner_matches_epoch100": true,
+          "winner_relation": 7
+        },
+        "60": {
+          "rho_to_epoch100": 0.880952380952381,
+          "winner_matches_epoch100": true,
+          "winner_relation": 7
+        }
+      },
+      "init_bundle_winner_match": true,
+      "initial_shared_gradient_rho_to_final": 0.2380952380952381,
+      "order_winner_match": true,
+      "rho_data_raw": 0.14285714285714288,
+      "rho_data_source_aligned": 0.261904761904762,
+      "rho_init_bundle_aligned": -0.07142857142857144,
+      "rho_init_raw": 0.04761904761904763,
+      "rho_order_B_vs_O": 0.7857142857142858,
+      "seed": 28,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.406775,
+          "h0_overall": 0.60205,
+          "h0_per_relation": [
+            0.7084,
+            0.4364,
+            0.764,
+            0.2856,
+            0.4184,
+            0.5104,
+            0.7104,
+            0.9828
+          ],
+          "h12_overall": 0.21150000000000002,
+          "h12_per_relation": [
+            0.068,
+            0.0644,
+            0.4876,
+            0.0608,
+            0.054,
+            0.058,
+            0.0648,
+            0.8344
+          ]
+        },
+        "D": {
+          "combined": 0.42045,
+          "h0_overall": 0.6282,
+          "h0_per_relation": [
+            0.6604,
+            0.4612,
+            0.4908,
+            0.7532,
+            0.552,
+            0.418,
+            0.7564,
+            0.9336
+          ],
+          "h12_overall": 0.2127,
+          "h12_per_relation": [
+            0.102,
+            0.2212,
+            0.068,
+            0.1044,
+            0.0888,
+            0.0792,
+            0.0904,
+            0.9476
+          ]
+        },
+        "O": {
+          "combined": 0.38705,
+          "h0_overall": 0.5608,
+          "h0_per_relation": [
+            0.556,
+            0.2416,
+            0.42,
+            0.5416,
+            0.7928,
+            0.5516,
+            0.4916,
+            0.8912
+          ],
+          "h12_overall": 0.2133,
+          "h12_per_relation": [
+            0.0656,
+            0.06,
+            0.0636,
+            0.0636,
+            0.5492,
+            0.062,
+            0.072,
+            0.7704
+          ]
+        },
+        "P": {
+          "combined": 0.42217499999999997,
+          "h0_overall": 0.628,
+          "h0_per_relation": [
+            0.628,
+            0.5048,
+            0.8076,
+            0.8484,
+            0.8844,
+            0.5324,
+            0.3984,
+            0.42
+          ],
+          "h12_overall": 0.21635,
+          "h12_per_relation": [
+            0.0732,
+            0.0612,
+            0.3196,
+            0.278,
+            0.7904,
+            0.0636,
+            0.0752,
+            0.0696
+          ]
+        }
+      },
+      "winner_B": 7,
+      "winner_D": 7,
+      "winner_D_source_identity": 2,
+      "winner_O": 7,
+      "winner_P": 4,
+      "winner_P_bundle_identity": 7
+    },
+    {
+      "G_B": 0.7773434519767761,
+      "G_D": 0.8049027919769287,
+      "G_O": 0.8371663689613342,
+      "G_P": 0.6388826370239258,
+      "data_source_winner_match": true,
+      "delta_rho_data": 0.7380952380952381,
+      "delta_rho_init": -0.8095238095238095,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": 0.11904761904761905,
+          "winner_matches_epoch100": false,
+          "winner_relation": 1
+        },
+        "1": {
+          "rho_to_epoch100": 0.5476190476190477,
+          "winner_matches_epoch100": false,
+          "winner_relation": 2
+        },
+        "10": {
+          "rho_to_epoch100": 0.04761904761904763,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "2": {
+          "rho_to_epoch100": 0.28571428571428575,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "20": {
+          "rho_to_epoch100": -0.28571428571428575,
+          "winner_matches_epoch100": false,
+          "winner_relation": 0
+        },
+        "40": {
+          "rho_to_epoch100": 0.6190476190476191,
+          "winner_matches_epoch100": true,
+          "winner_relation": 4
+        },
+        "5": {
+          "rho_to_epoch100": -0.023809523809523815,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "60": {
+          "rho_to_epoch100": 0.9285714285714287,
+          "winner_matches_epoch100": true,
+          "winner_relation": 4
+        }
+      },
+      "init_bundle_winner_match": false,
+      "initial_shared_gradient_rho_to_final": 0.6190476190476191,
+      "order_winner_match": true,
+      "rho_data_raw": -0.11904761904761905,
+      "rho_data_source_aligned": 0.6190476190476191,
+      "rho_init_bundle_aligned": -0.4523809523809524,
+      "rho_init_raw": 0.3571428571428572,
+      "rho_order_B_vs_O": 0.14285714285714288,
+      "seed": 44,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.44615,
+          "h0_overall": 0.65905,
+          "h0_per_relation": [
+            0.8484,
+            0.5204,
+            0.7764,
+            0.686,
+            0.8856,
+            0.5832,
+            0.7524,
+            0.22
+          ],
+          "h12_overall": 0.23324999999999999,
+          "h12_per_relation": [
+            0.4888,
+            0.0676,
+            0.4024,
+            0.07,
+            0.6492,
+            0.0668,
+            0.0592,
+            0.062
+          ]
+        },
+        "D": {
+          "combined": 0.41122500000000006,
+          "h0_overall": 0.6375500000000001,
+          "h0_per_relation": [
+            0.5872,
+            0.7228,
+            0.6832,
+            0.5096,
+            0.4412,
+            0.6988,
+            0.6548,
+            0.8028
+          ],
+          "h12_overall": 0.1849,
+          "h12_per_relation": [
+            0.0672,
+            0.6676,
+            0.0672,
+            0.0636,
+            0.0696,
+            0.406,
+            0.0656,
+            0.0724
+          ]
+        },
+        "O": {
+          "combined": 0.42317499999999997,
+          "h0_overall": 0.634,
+          "h0_per_relation": [
+            0.8044,
+            0.3964,
+            0.596,
+            0.718,
+            0.8648,
+            0.756,
+            0.7708,
+            0.1656
+          ],
+          "h12_overall": 0.21234999999999998,
+          "h12_per_relation": [
+            0.0704,
+            0.0764,
+            0.0636,
+            0.5332,
+            0.7624,
+            0.0596,
+            0.0692,
+            0.064
+          ]
+        },
+        "P": {
+          "combined": 0.4332,
+          "h0_overall": 0.6517499999999999,
+          "h0_per_relation": [
+            0.808,
+            0.676,
+            0.2536,
+            0.8612,
+            0.9432,
+            0.7352,
+            0.7424,
+            0.1944
+          ],
+          "h12_overall": 0.21465,
+          "h12_per_relation": [
+            0.192,
+            0.0796,
+            0.072,
+            0.2472,
+            0.8932,
+            0.0876,
+            0.0764,
+            0.0692
+          ]
+        }
+      },
+      "winner_B": 4,
+      "winner_D": 1,
+      "winner_D_source_identity": 4,
+      "winner_O": 4,
+      "winner_P": 4,
+      "winner_P_bundle_identity": 7
+    },
+    {
+      "G_B": 0.727868914604187,
+      "G_D": 0.6891903281211853,
+      "G_O": 0.6513500809669495,
+      "G_P": 0.7789989709854126,
+      "data_source_winner_match": false,
+      "delta_rho_data": 0.380952380952381,
+      "delta_rho_init": 0.0,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": 0.28571428571428575,
+          "winner_matches_epoch100": true,
+          "winner_relation": 2
+        },
+        "1": {
+          "rho_to_epoch100": 0.28571428571428575,
+          "winner_matches_epoch100": false,
+          "winner_relation": 1
+        },
+        "10": {
+          "rho_to_epoch100": 0.1666666666666667,
+          "winner_matches_epoch100": true,
+          "winner_relation": 2
+        },
+        "2": {
+          "rho_to_epoch100": -0.023809523809523815,
+          "winner_matches_epoch100": false,
+          "winner_relation": 1
+        },
+        "20": {
+          "rho_to_epoch100": 0.04761904761904763,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "40": {
+          "rho_to_epoch100": 0.9047619047619048,
+          "winner_matches_epoch100": true,
+          "winner_relation": 2
+        },
+        "5": {
+          "rho_to_epoch100": 0.11904761904761905,
+          "winner_matches_epoch100": false,
+          "winner_relation": 5
+        },
+        "60": {
+          "rho_to_epoch100": 0.9523809523809524,
+          "winner_matches_epoch100": true,
+          "winner_relation": 2
+        }
+      },
+      "init_bundle_winner_match": false,
+      "initial_shared_gradient_rho_to_final": 0.2142857142857143,
+      "order_winner_match": true,
+      "rho_data_raw": -0.2380952380952381,
+      "rho_data_source_aligned": 0.14285714285714288,
+      "rho_init_bundle_aligned": -0.14285714285714288,
+      "rho_init_raw": -0.14285714285714288,
+      "rho_order_B_vs_O": 0.5714285714285715,
+      "seed": 62,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.436,
+          "h0_overall": 0.616,
+          "h0_per_relation": [
+            0.9648,
+            0.9524,
+            0.966,
+            0.4716,
+            0.5676,
+            0.376,
+            0.2432,
+            0.3864
+          ],
+          "h12_overall": 0.256,
+          "h12_per_relation": [
+            0.078,
+            0.6352,
+            0.9276,
+            0.0848,
+            0.0756,
+            0.08,
+            0.0844,
+            0.0824
+          ]
+        },
+        "D": {
+          "combined": 0.41779999999999995,
+          "h0_overall": 0.60015,
+          "h0_per_relation": [
+            0.9348,
+            0.9452,
+            0.9284,
+            0.5696,
+            0.2472,
+            0.2824,
+            0.1752,
+            0.7184
+          ],
+          "h12_overall": 0.23545,
+          "h12_per_relation": [
+            0.7484,
+            0.0744,
+            0.5168,
+            0.0776,
+            0.0692,
+            0.0648,
+            0.0736,
+            0.2588
+          ]
+        },
+        "O": {
+          "combined": 0.43355,
+          "h0_overall": 0.6446999999999999,
+          "h0_per_relation": [
+            0.9444,
+            0.9284,
+            0.9012,
+            0.494,
+            0.8172,
+            0.3828,
+            0.2764,
+            0.4132
+          ],
+          "h12_overall": 0.2224,
+          "h12_per_relation": [
+            0.186,
+            0.502,
+            0.7116,
+            0.0736,
+            0.0828,
+            0.0724,
+            0.08,
+            0.0708
+          ]
+        },
+        "P": {
+          "combined": 0.39865,
+          "h0_overall": 0.59865,
+          "h0_per_relation": [
+            0.4796,
+            0.612,
+            0.2604,
+            0.3368,
+            0.6008,
+            0.9664,
+            0.9276,
+            0.6056
+          ],
+          "h12_overall": 0.19865,
+          "h12_per_relation": [
+            0.0628,
+            0.0616,
+            0.0536,
+            0.0604,
+            0.0708,
+            0.954,
+            0.2604,
+            0.0656
+          ]
+        }
+      },
+      "winner_B": 2,
+      "winner_D": 0,
+      "winner_D_source_identity": 3,
+      "winner_O": 2,
+      "winner_P": 5,
+      "winner_P_bundle_identity": 0
+    },
+    {
+      "G_B": 0.692086398601532,
+      "G_D": 0.688965380191803,
+      "G_O": 0.6637126803398132,
+      "G_P": 0.8547664880752563,
+      "data_source_winner_match": false,
+      "delta_rho_data": 0.642857142857143,
+      "delta_rho_init": -0.4285714285714286,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": 0.3571428571428572,
+          "winner_matches_epoch100": false,
+          "winner_relation": 7
+        },
+        "1": {
+          "rho_to_epoch100": -0.11904761904761905,
+          "winner_matches_epoch100": false,
+          "winner_relation": 2
+        },
+        "10": {
+          "rho_to_epoch100": 0.04761904761904763,
+          "winner_matches_epoch100": true,
+          "winner_relation": 0
+        },
+        "2": {
+          "rho_to_epoch100": 0.09523809523809526,
+          "winner_matches_epoch100": false,
+          "winner_relation": 7
+        },
+        "20": {
+          "rho_to_epoch100": 0.1666666666666667,
+          "winner_matches_epoch100": true,
+          "winner_relation": 0
+        },
+        "40": {
+          "rho_to_epoch100": 0.7619047619047621,
+          "winner_matches_epoch100": true,
+          "winner_relation": 0
+        },
+        "5": {
+          "rho_to_epoch100": 0.4047619047619048,
+          "winner_matches_epoch100": false,
+          "winner_relation": 2
+        },
+        "60": {
+          "rho_to_epoch100": 0.7380952380952381,
+          "winner_matches_epoch100": true,
+          "winner_relation": 0
+        }
+      },
+      "init_bundle_winner_match": false,
+      "initial_shared_gradient_rho_to_final": -0.2380952380952381,
+      "order_winner_match": true,
+      "rho_data_raw": -0.261904761904762,
+      "rho_data_source_aligned": 0.38095238095238104,
+      "rho_init_bundle_aligned": 0.11904761904761905,
+      "rho_init_raw": 0.5476190476190477,
+      "rho_order_B_vs_O": 0.2380952380952381,
+      "seed": 86,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.4355,
+          "h0_overall": 0.63225,
+          "h0_per_relation": [
+            0.9236,
+            0.372,
+            0.734,
+            0.528,
+            0.7308,
+            0.1572,
+            0.7356,
+            0.8768
+          ],
+          "h12_overall": 0.23875000000000002,
+          "h12_per_relation": [
+            0.9036,
+            0.07,
+            0.0776,
+            0.0732,
+            0.068,
+            0.0692,
+            0.0864,
+            0.562
+          ]
+        },
+        "D": {
+          "combined": 0.43079999999999996,
+          "h0_overall": 0.6563,
+          "h0_per_relation": [
+            0.7956,
+            0.802,
+            0.6928,
+            0.3516,
+            0.6916,
+            0.3924,
+            0.6852,
+            0.8392
+          ],
+          "h12_overall": 0.20529999999999998,
+          "h12_per_relation": [
+            0.3928,
+            0.0708,
+            0.564,
+            0.0864,
+            0.0836,
+            0.0756,
+            0.2828,
+            0.0864
+          ]
+        },
+        "O": {
+          "combined": 0.407675,
+          "h0_overall": 0.6218,
+          "h0_per_relation": [
+            0.9884,
+            0.682,
+            0.5528,
+            0.1936,
+            0.6816,
+            0.1924,
+            0.8212,
+            0.8624
+          ],
+          "h12_overall": 0.19355,
+          "h12_per_relation": [
+            0.9652,
+            0.094,
+            0.1284,
+            0.0728,
+            0.068,
+            0.074,
+            0.076,
+            0.07
+          ]
+        },
+        "P": {
+          "combined": 0.42107500000000003,
+          "h0_overall": 0.6182000000000001,
+          "h0_per_relation": [
+            0.8212,
+            0.226,
+            0.3736,
+            0.9292,
+            0.8792,
+            0.8992,
+            0.1692,
+            0.648
+          ],
+          "h12_overall": 0.22395,
+          "h12_per_relation": [
+            0.768,
+            0.0596,
+            0.0752,
+            0.072,
+            0.0652,
+            0.6064,
+            0.0732,
+            0.072
+          ]
+        }
+      },
+      "winner_B": 0,
+      "winner_D": 2,
+      "winner_D_source_identity": 5,
+      "winner_O": 0,
+      "winner_P": 0,
+      "winner_P_bundle_identity": 3
+    },
+    {
+      "G_B": 0.7538742423057556,
+      "G_D": 1.0056008100509644,
+      "G_O": 0.6367571949958801,
+      "G_P": 0.7010329961776733,
+      "data_source_winner_match": false,
+      "delta_rho_data": -0.7380952380952382,
+      "delta_rho_init": 0.09523809523809534,
+      "early_commitment": {
+        "0": {
+          "rho_to_epoch100": 0.1666666666666667,
+          "winner_matches_epoch100": false,
+          "winner_relation": 3
+        },
+        "1": {
+          "rho_to_epoch100": 0.4047619047619048,
+          "winner_matches_epoch100": false,
+          "winner_relation": 4
+        },
+        "10": {
+          "rho_to_epoch100": 0.5952380952380953,
+          "winner_matches_epoch100": false,
+          "winner_relation": 4
+        },
+        "2": {
+          "rho_to_epoch100": 0.04761904761904763,
+          "winner_matches_epoch100": true,
+          "winner_relation": 2
+        },
+        "20": {
+          "rho_to_epoch100": 0.09523809523809526,
+          "winner_matches_epoch100": false,
+          "winner_relation": 3
+        },
+        "40": {
+          "rho_to_epoch100": 0.7142857142857144,
+          "winner_matches_epoch100": false,
+          "winner_relation": 4
+        },
+        "5": {
+          "rho_to_epoch100": 0.7857142857142858,
+          "winner_matches_epoch100": false,
+          "winner_relation": 4
+        },
+        "60": {
+          "rho_to_epoch100": 0.9761904761904763,
+          "winner_matches_epoch100": true,
+          "winner_relation": 2
+        }
+      },
+      "init_bundle_winner_match": true,
+      "initial_shared_gradient_rho_to_final": 0.09523809523809526,
+      "order_winner_match": false,
+      "rho_data_raw": 0.6666666666666669,
+      "rho_data_source_aligned": -0.07142857142857144,
+      "rho_init_bundle_aligned": 0.7142857142857144,
+      "rho_init_raw": 0.6190476190476191,
+      "rho_order_B_vs_O": 0.8571428571428572,
+      "seed": 101,
+      "valid": true,
+      "validation": {
+        "B": {
+          "combined": 0.3874,
+          "h0_overall": 0.60535,
+          "h0_per_relation": [
+            0.5508,
+            0.8392,
+            0.9688,
+            0.5584,
+            0.4488,
+            0.5188,
+            0.7884,
+            0.1696
+          ],
+          "h12_overall": 0.16945,
+          "h12_per_relation": [
+            0.0628,
+            0.0736,
+            0.7492,
+            0.0668,
+            0.1308,
+            0.1436,
+            0.0632,
+            0.0656
+          ]
+        },
+        "D": {
+          "combined": 0.39585,
+          "h0_overall": 0.6195499999999999,
+          "h0_per_relation": [
+            0.3684,
+            0.6732,
+            0.9976,
+            0.7532,
+            0.1788,
+            0.6452,
+            0.7176,
+            0.6224
+          ],
+          "h12_overall": 0.17215000000000003,
+          "h12_per_relation": [
+            0.0652,
+            0.0584,
+            0.92,
+            0.0668,
+            0.062,
+            0.0644,
+            0.0732,
+            0.0672
+          ]
+        },
+        "O": {
+          "combined": 0.44214999999999993,
+          "h0_overall": 0.6608499999999999,
+          "h0_per_relation": [
+            0.2276,
+            0.828,
+            0.8768,
+            0.8108,
+            0.744,
+            0.7792,
+            0.8148,
+            0.2056
+          ],
+          "h12_overall": 0.22344999999999998,
+          "h12_per_relation": [
+            0.0784,
+            0.0908,
+            0.4372,
+            0.1264,
+            0.128,
+            0.7756,
+            0.088,
+            0.0632
+          ]
+        },
+        "P": {
+          "combined": 0.39802499999999996,
+          "h0_overall": 0.6012,
+          "h0_per_relation": [
+            0.6116,
+            0.488,
+            0.3472,
+            0.874,
+            0.3388,
+            0.4132,
+            0.9168,
+            0.82
+          ],
+          "h12_overall": 0.19485,
+          "h12_per_relation": [
+            0.076,
+            0.0848,
+            0.0892,
+            0.0704,
+            0.0792,
+            0.1212,
+            0.0764,
+            0.9616
+          ]
+        }
+      },
+      "winner_B": 2,
+      "winner_D": 2,
+      "winner_D_source_identity": 5,
+      "winner_O": 5,
+      "winner_P": 7,
+      "winner_P_bundle_identity": 2
+    }
+  ]
+}
