@@ -1,0 +1,26 @@
+{
+  "classification": "F3 — selective-specialization contribution supported",
+  "baseline_valid_all": true,
+  "suppression_gate": true,
+  "E_lower_G_count": 12,
+  "mean_DeltaG_EB": -0.506315,
+  "DeltaG_EB_ci95": [-0.562320, -0.447217],
+  "mean_relative_G_reduction": 0.666,
+  "mean_Delta_EB": -0.030413,
+  "Delta_EB_ci95": [-0.041504, -0.018127],
+  "mean_Delta_EM": -0.025746,
+  "Delta_EM_ci95": [-0.036619, -0.014523],
+  "mean_GM_minus_GE": 0.577185,
+  "GM_minus_GE_ci95": [0.497767, 0.646360],
+  "secondary": {
+    "baseline_winner_h12_mean": 0.7434,
+    "baseline_nonwinner_h12_mean": 0.1393214286,
+    "winner_Delta_EB_mean": -0.30355,
+    "winner_Delta_EB_ci95": [-0.39018542, -0.22393292],
+    "nonwinner_Delta_EB_mean": 0.0086071429,
+    "nonwinner_Delta_EB_ci95": [-0.00393345, 0.02059560],
+    "winner_minus_nonwinner_Delta_EB": -0.3121571429,
+    "winner_minus_nonwinner_Delta_EB_ci95": [-0.40471982, -0.22801577]
+  },
+  "recovery_note": "Original aggregate workflow flattened 12 artifact directories with merge-multiple=true. Exact preserved per-seed artifacts were recovered and the unchanged frozen classifier was applied. No training, thresholds, seeds, or decision rules changed."
+}
