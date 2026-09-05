@@ -166,18 +166,19 @@ def classify(summaries):
             "this system."
         )
     elif SEP:
-        classification = "S3 — partial specificity; true arm exceeds a nonzero off-axis baseline"
+        classification = "S3 — partial specificity supported; null A/B effect not equivalent to zero"
         boundary = (
-            "The demanded axis reorganizes more than an arbitrary off-axis history does, but the "
-            "off-axis history is not flat on A/B, so part of the effect is generic post-fork "
-            "divergence."
+            "The demanded-axis history exceeds the off-axis history by the frozen specificity "
+            "criterion, but the off-axis A/B effect did not satisfy the preregistered equivalence "
+            "test for flatness. Failure of equivalence does not by itself establish a nonzero "
+            "off-axis effect."
         )
     else:
-        classification = "S4 — no specificity detected; off-axis history produces comparable A/B reorganization"
+        classification = "S4 — specificity criterion not met"
         boundary = (
-            "Arbitrary off-axis demand history produced A/B reorganization comparable to the "
-            "demanded-axis history. This substantially weakens the axis-specific reading of R8-M8 "
-            "and is a frozen outcome, not to be repaired or re-run."
+            "The preregistered separation criterion was not met. This does not establish that the "
+            "demanded-axis and off-axis effects are equivalent or comparable; it means this run "
+            "did not demonstrate the preregistered degree of axis specificity."
         )
 
     return {
