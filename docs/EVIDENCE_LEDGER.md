@@ -21,15 +21,17 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 | R5 | Strong candidate / partial mechanism | Later directions contain relation-specific residual structure; evolving local geometry explains part of the reformatting. |
 | R6 | Established within tested system | Readout preparation: trained reader improves while generic linear accessibility can worsen; several alternative mechanisms were not established. |
 | R7 | Strong candidate with boundary | Reader-conditioned recurrent plasticity exists under controlled conditions; arbitrary-reader adaptation not generally established. |
-| R8 | Strong candidate | Training is multiphase; contraction precedes learning; readout preparation and later directional structure emerge at different stages. |
+| R8 historical | Strong candidate / historical mechanism record | Training is multiphase; contraction precedes learning; readout preparation and later directional structure appeared at different stages in the historical program. |
 | R9 | Established within tested system | Forward recurrence easy, inversion difficult; dynamics strongly contractive/ill-conditioned; selective empirical recoverability loss rather than fundamental information destruction. |
 | R10 | Established within tested system | Orientation relative to learned local dynamical geometry causally controls distinction survival; encoder and recurrence coadapt. |
 | R11 | Established negative/decoupling result | Geometric survival magnitude is not sufficient to explain reader use; reader-compatible format/alignment matters. |
 | ND-R1 formal outcome | Protocol-limited result | Frozen classification is Outcome A because all three fresh seeds missed the preregistered h12>=0.50 competence gate. Post-run provenance audit showed that this gate was above the historical R2 lineage itself, so Outcome A must not be paraphrased as a clean failure to reproduce source-like training. |
-| ND-R1 selective-preservation pattern | Strong post-primary candidate | All three fresh seeds independently showed near-uniform relation survival at initialization followed by large relation-selective survival by epoch 100; Delta G was positive with bootstrap CIs above zero in all seeds. This is not promoted to the ND-R1 primary outcome because the frozen competence gate failed. |
-| ND-R1 seed-dependent specialization | Strong post-primary candidate | The identity of the strongly preserved relation differed by seed despite symmetric relation channels, consistent with training-amplified symmetry breaking / spontaneous specialization. Requires fresh preregistered confirmation. |
+| ND-R1 selective-preservation pattern | Strong post-primary candidate | All three fresh seeds independently showed near-uniform relation survival at initialization followed by large relation-selective survival by epoch 100; Delta G was positive with bootstrap CIs above zero in all seeds. This was not promoted to the ND-R1 primary outcome because the frozen competence gate failed. |
+| ND-R1 seed-dependent specialization | Strong post-primary candidate | The identity of the strongly preserved relation differed by seed despite symmetric relation channels, motivating independent confirmation. |
 | ND-R1 early ranking | Strong secondary candidate | Relation-survival ranking at transition 2 predicted terminal ranking strongly in every fresh seed (mean Spearman about 0.937), echoing the historical R10 early-establishment observation. |
 | ND-R1 native trajectory replication | Mixed result | Highly indirect trajectories replicated across fresh seeds; reversal-dominated motion did not, showing that reversal dominance is not a seed-general native-dynamics property in this reproduction. |
+| R8-M1 | **Established within tested system** | Fresh no-perturbation objective/plasticity decomposition passed its validity gate on seeds 11/37/71. Joint training produced substantially greater relation-selective native survival than joint training with either the recurrent map frozen or the encoder frozen, with paired bootstrap intervals above zero in every seed. Frozen outcome: **M3 — encoder–recurrence coadaptation supported**. Terminal h12 supervision alone was not a stable cross-seed explanation. |
+| R8-M2 | Preregistered / running | Tests whether winner identity tracks relation-specific initialization bundles or finite-sample data-column identity, while quantifying minibatch-order sensitivity, early commitment, and initial shared-gradient asymmetry. No perturbations. |
 
 ## Coupled-observer / collective dynamics
 
@@ -80,7 +82,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 
 ## Current priority order
 
-1. R8–R10 training-emergent selective preservation, now with ND-R1's seed-dependent specialization candidate and R2 transient dynamics studied alongside it.
+1. R8–R10 training-induced selective preservation: R8-M1 has now established encoder–recurrence coadaptation within the tested system; R8-M2 is testing the ordinary source of the seed-dependent symmetry breaking before any stronger emergence language.
 2. R6/R8 readout preparation.
 3. R2/R3 native transient structure.
 4. Coupled local-observer collective behavior.
@@ -89,6 +91,6 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 7. R11 survival/use dissociation.
 8. R4E state-conditioned intervention consequences for later practical control/logic work.
 
-The immediate scientific follow-up to Priority 1 must be a new fresh-seed confirmation with a competence gate calibrated before execution from the preserved historical Observer source lineage. ND-R1 itself remains unchanged.
+If R8-M2 resolves symmetry-breaking provenance, the next R8 stage is functional necessity: determine whether selective native survival is required for task performance or is an optimization side effect. This must remain separate from R11's result that Euclidean survival magnitude alone does not mediate reader use.
 
-See `../RESEARCH_PRIORITIES.md` and `ND_R1_POSTRUN_AUDIT.md`.
+See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, and `R8_M1_RESULT.md`.
