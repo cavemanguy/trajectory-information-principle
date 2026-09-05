@@ -1,0 +1,125 @@
+name: R8-M3 Commitment Transition
+
+on:
+  push:
+    branches:
+      - r8-m3-commitment-transition
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  smoke:
+    name: R8-M3 smoke gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: experiments/r8_m3/requirements.txt
+      - name: Install frozen dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r experiments/r8_m3/requirements.txt
+      - name: Compile frozen implementation
+        run: |
+          test -f experiments/r8_m3/PREREGISTRATION.md
+          python -m py_compile experiments/r8_m3/run_r8_m3.py
+          python -m py_compile experiments/r8_m3/classify_r8_m3.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_m3/classify_r8_m3.py --self-check
+      - name: Run outcome-free smoke path
+        run: |
+          rm -rf /tmp/r8m3-smoke
+          python experiments/r8_m3/run_r8_m3.py --seed 2 --outdir /tmp/r8m3-smoke --smoke
+          test -f /tmp/r8m3-smoke/smoke_summary.json
+          cat /tmp/r8m3-smoke/smoke_summary.json
+
+  primary:
+    name: R8-M3 fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [14, 24, 34, 47, 58, 73, 89, 107, 116, 127, 139, 151]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: experiments/r8_m3/requirements.txt
+      - name: Install frozen dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r experiments/r8_m3/requirements.txt
+      - name: Execute paired commitment family
+        run: |
+          mkdir -p results/r8_m3/seed_${{ matrix.seed }}
+          python experiments/r8_m3/run_r8_m3.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r8_m3/seed_${{ matrix.seed }} \
+            2>&1 | tee results/r8_m3/seed_${{ matrix.seed }}/run.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m3-seed-${{ matrix.seed }}
+          path: results/r8_m3/seed_${{ matrix.seed }}/
+          retention-days: 90
+          if-no-files-found: error
+
+  aggregate:
+    name: R8-M3 frozen cross-family classification
+    needs: primary
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: experiments/r8_m3/requirements.txt
+      - name: Install frozen dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r experiments/r8_m3/requirements.txt
+      - name: Download family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-m3-seed-*
+          path: collected
+      - name: Apply frozen classifier
+        run: |
+          mkdir -p results/r8_m3/aggregate results/r8_m3/seeds
+          cp -R collected/r8-m3-seed-* results/r8_m3/seeds/
+          python experiments/r8_m3/classify_r8_m3.py --root collected --outdir results/r8_m3/aggregate
+          cat results/r8_m3/aggregate/FINAL_RESULT.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m3-authoritative-aggregate
+          path: results/r8_m3/
+          retention-days: 90
+          if-no-files-found: error
+      - name: Commit authoritative R8-M3 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add results/r8_m3
+          git commit -m 'Record authoritative R8-M3 results'
+          git push origin HEAD:refs/heads/r8-m3-results
