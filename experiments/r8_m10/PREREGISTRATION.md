@@ -173,12 +173,13 @@ SEP : mean(SPECIFICITY) >= 0.50  AND  ci95_lower(SPECIFICITY) > 0
 | `S0` | `R` fails | True-arm replication failure; contrast uninterpretable |
 | `S1` | `R` passes, `MC` fails | Off-axis manipulation ineffective; specificity untestable this run |
 | `S2` | `R`, `MC` pass; `SEP` passes and `FLAT(H_null_AB)` | Strong specificity: demanded axis reorganizes, off-axis history does not spill onto A/B |
-| `S3` | `R`, `MC` pass; `SEP` passes, `FLAT` fails | Partial specificity: true arm exceeds a nonzero off-axis baseline |
-| `S4` | `R`, `MC` pass; `SEP` fails | No specificity detected: arbitrary off-axis history produces comparable A/B reorganization |
+| `S3` | `R`, `MC` pass; `SEP` passes, `FLAT` fails | Partial specificity supported; null A/B effect is not established equivalent to zero |
+| `S4` | `R`, `MC` pass; `SEP` fails | Specificity criterion not met; equivalence/comparability is not established by this failure |
 
-`S4` is a real and publishable outcome. It would substantially weaken the
-axis-specific reading of R8-M8, and it is not to be repaired, re-run, or
-reframed after the fact.
+`S4` is a real and publishable outcome. It would mean the preregistered degree
+of axis specificity was not demonstrated in this run. It does **not** by itself
+establish that the demanded-axis and off-axis effects are equivalent or
+comparable, and it is not to be repaired, re-run, or reframed after the fact.
 
 ## 6. Mandatory distribution reporting
 
