@@ -16,9 +16,9 @@ Primary hierarchy:
 2. **Observer = measurement / diagnostic instrument**
 3. **Perturbation = optional causal intervention or control / logic input**
 
-## Priority 1 — Adaptive native-dynamics reorganization
+## Priority 1 — History-dependent adaptive native dynamics
 
-**Phenomenon:** training can produce strong relation-selective native preservation through encoder–recurrence coadaptation. The identity and degree of specialization are optimization-path sensitive, established specialization can contribute functionally, and successful wider-state models do not require specialization to move in one fixed direction.
+**Phenomenon:** training can produce strong relation-selective native preservation through encoder–recurrence coadaptation. The identity and degree of specialization are optimization-path sensitive, established specialization can contribute functionally, successful wider-state models do not require specialization to move in one fixed direction, and controlled terminal demand can bend an established native organization without usually replacing its dominant specialist.
 
 ### Discovery sequence
 
@@ -30,32 +30,32 @@ Primary hierarchy:
 - **R8-M5:** **C0 — simple capacity-allocation account not supported.** Wider full state improved h12 but did not relieve specialization; the directional scarce-capacity prediction failed.
 - **R8-M6:** **W0 — isolated recurrent-workspace account not supported.** Function-preserving X32 improved h12 but h0 equivalence failed after continued training, preventing a clean isolated-workspace attribution.
 - **R8-M5R:** **R2 — state-dimension-specific terminal benefit supported.** On 12 new families, exact R8-M5 training with no directional specialization requirement showed S32 beating both B16 and near-parameter-matched P16 at h12. Relative to B16, `G` and `D` changes were mixed/indeterminate.
+- **R8-M7R:** **D0 — reversible demand tracking not supported.** All 12 mature families were valid. Terminal demand toward B caused a strong demand-specific Q shift and improved B h12 performance, but B became the exact survival winner in only 1/12; A was again winner after return in 12/12. The system is demand-sensitive but not freely reassigning under the tested schedule.
+- **R8-M7I:** **V0 — baseline lineage reproduction failure.** Four paired mirror families missed the preregistered baseline-Q tolerance of 1e-5 despite reproducing the same maturity epoch and A/B identities. No I0/I1/I2 classification is promoted. Post-primary diagnostics suggest immediate B challenge moves native organization farther toward B than delayed B challenge, while full takeover remains rare.
 
 ### Current defensible description
 
-> **Training induces optimization-path-sensitive dynamical specialization through encoder–recurrence coadaptation. Established specialization can contribute functionally, but specialization strength is not a simple scalar proxy for performance. Wider state improves terminal performance even when specialization is free to vary rather than being forced toward a predetermined direction.**
+> **Training induces optimization-path-sensitive dynamical specialization through encoder–recurrence coadaptation. Established specialization can contribute functionally and can respond substantially to changed terminal demand, but dominant native organization is resistant to complete reassignment and may be history-sensitive. Wider state improves terminal performance even when specialization is free to vary rather than being forced toward a predetermined direction.**
 
-This is not a claim of strong emergence, universal necessity, or a universal trajectory-information principle.
+This is not a claim of strong emergence, conscious choice, formal hysteresis, universal necessity, or a universal trajectory-information principle.
 
-### Immediate study — reversible demand tracking
+### Immediate study — consolidation versus challenge pressure
 
 The next hard test should ask:
 
-> **Does controlled functional demand cause native specialization to reorganize toward the demanded relation, and does changing that demand cause the organization to reassign or reverse?**
+> **What determines whether a mature native dynamical regime merely bends under new demand or is actually replaced: prior consolidation duration, new-demand magnitude/duration, or a qualitatively privileged learned basin?**
 
-The study should keep architecture fixed and use a reversible schedule, ideally **A → B → A**, with matched controls for mere extra training and for objective/loss weighting. A convincing result requires more than seed heterogeneity: the same lineage must track the controlled demand over time.
+A clean confirmatory design should manipulate history and pressure independently. For example, after the same preregistered maturity trigger, vary the duration of additional A consolidation and the strength/duration of subsequent B demand in a factorial design. Freeze all thresholds before outcomes. Primary evidence should distinguish:
 
-Primary evidence should include:
+- elastic movement toward B without takeover;
+- a reproducible transition into B-dominant native organization;
+- persistence or reversal when demand is removed or restored;
+- functional gain in the demanded relation;
+- matched controls for extra training and h0-only weighting.
 
-- demand-aligned change in relation-selective native survival;
-- reassignment when demand changes from A to B;
-- return toward A when A is restored;
-- functional benefit associated with the demand-aligned regime;
-- a matched control showing that the effect is not merely caused by extra epochs or generic loss scaling.
+R8-M7I's post-primary immediate-versus-delayed pattern may motivate this test but cannot count as confirmatory evidence.
 
-A later causal add-on may suppress the demand-aligned reorganization to test whether impairment is phase-specific, but intervention should not contaminate the primary native-dynamics observation.
-
-**Possible practical uses:** learned dynamical routing, adaptive memory allocation, selective recurrent filtering, regime-dependent compression, compact recurrent preprocessing, state-dependent computation.
+**Possible practical uses:** learned dynamical routing, adaptive memory allocation, selective recurrent filtering, regime-dependent compression, compact recurrent preprocessing, state-dependent computation, and history-dependent adaptive allocation.
 
 ## Priority 2 — R6/R8 readout preparation
 
@@ -99,7 +99,8 @@ Preserve and keep accessible:
 - ALI historical and reproducible experiments;
 - Observer R2–R11;
 - ND-R1 with formal Outcome A and post-run audit;
-- R8-M1 through R8-M6 and R8-M5R preregistrations/results/protocol notes;
+- R8-M1 through R8-M7R and R8-M7I preregistrations/results/protocol notes;
+- R8-M7I post-primary audit, explicitly labeled exploratory;
 - N-series spatial/accessibility work;
 - AG-series affine/reader-robustness work;
 - R4B/R4C/R4D/R4E causal-control sequence;
@@ -128,15 +129,21 @@ A failed explanation is not the same as a failed phenomenon.
 15. A full-model width effect cannot be attributed specifically to recurrent workspace if encoder-side representation quality changes substantially.
 16. Specialization is not assumed to be a defect, nor is more specialization assumed to be better.
 17. Seed-to-seed heterogeneity alone is not evidence of adaptive demand tracking; the demand must be controlled experimentally.
+18. A demand-specific shift is not equivalent to full regime reassignment.
+19. Post-primary evidence from a protocol-limited run may motivate a new test but cannot rescue the frozen primary outcome.
+20. Do not call history dependence "formal hysteresis" without a dedicated controlled test.
 
 ## Immediate next step
 
-**Preregister and freeze the reversible-demand native-dynamics experiment before exposing any fresh outcomes.**
+**Preregister a consolidation-versus-challenge-pressure study before exposing new outcomes.**
 
-The core distinction is whether the same model lineage reorganizes its native relation-selective dynamics when the task demand changes A → B → A, beyond matched continued-training and objective-weight controls.
+The core distinction is whether history merely changes the magnitude of an elastic demand response or creates a reproducible barrier/threshold for switching the dominant native regime.
 
 See:
 
+- `docs/R8_M7I_POSTRUN_AUDIT.md`
+- `docs/R8_M7I_RESULT.md`
+- `docs/R8_M7R_RESULT.md`
 - `docs/R8_M5R_RESULT.md`
 - `docs/R8_M6_RESULT.md`
 - `docs/R8_M5_RESULT.md`
