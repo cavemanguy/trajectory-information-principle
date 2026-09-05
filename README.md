@@ -10,6 +10,36 @@ The forward research focus returns to the native dynamics:
 
 Observers are measurement tools. Perturbations are optional causal/control tools. Neither is assumed to be the source of trajectory information.
 
+This README is the public overview. The concise claim source of truth is [`docs/CURRENT_CLAIMS.md`](docs/CURRENT_CLAIMS.md), with detailed evidence and negative-result boundaries in [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md).
+
+## Current R8 architecture in plain terms
+
+The current R8 experiments use ordinary neural-network components arranged to create a clean autonomous latent dynamical system.
+
+The task contains **8 statistically symmetric categorical relations**, each taking one of **16 possible values**. A GRU encoder compresses the complete input into a **16-dimensional latent state** `h0`. After that encoding step, the model receives **no new external input**. Instead, the same learned recurrent map
+
+`F: 16 -> 32 -> 16`
+
+is applied repeatedly for **12 recurrent transitions**:
+
+`input -> GRU encoder -> h0 -> F -> F -> ... -> F -> h12 -> reader`
+
+Separate readers are trained at `h0` and `h12`.
+
+This differs from a conventional sequence RNN, where each recurrent update typically receives a new external input, and from a transformer or feed-forward stack, where successive layers usually have different parameters. Here, after encoding, the computation is deliberately closer to an autonomous system:
+
+`h_(t+1) = F(h_t)`
+
+That makes the internal computation directly interpretable as a trajectory through latent state space.
+
+The architecture itself is **not claimed to be radically novel**. The interesting finding is what ordinary training organizes inside it. Across the R8 program, the encoder learns where task distinctions are placed in latent space while the recurrent map learns how distinctions placed there evolve. R8-M1 established that the full relation-selective survival pattern depends on **encoder–recurrence coadaptation**.
+
+The analysis therefore tracks not only task accuracy, but how natural task distinctions evolve. For two valid inputs that differ in only one relation, the experiments follow
+
+`Delta_t = h_t(x) - h_t(x')`
+
+through the 12 recurrent transitions and measure whether that distinction contracts, survives, or expands.
+
 ### Prioritized phenomena
 
 1. **R8–R10 learned selective preservation** — training transformed initially indiscriminate contraction into relation-dependent anisotropic preservation through encoder–recurrence coadaptation. **Immediate priority.**
@@ -23,19 +53,35 @@ Observers are measurement tools. Perturbations are optional causal/control tools
 
 ### Priority-1 status
 
-**ND-R1 — Training-Emergent Selective Preservation and Transient Geometry** is complete. Its frozen primary classification is **Outcome A** because the preregistered h12 competence gate was not met; that result is preserved and is not retroactively changed.
+**ND-R1** remains formally **Outcome A — training reproduction failure** because its preregistered h12 competence gate was not met. A post-run provenance audit showed that the gate was miscalibrated above the historical source lineage. That formal outcome is preserved and is not retroactively changed.
 
-A post-run provenance audit found that the 0.50 h12 gate was miscalibrated above the historical Observer-R2 source lineage itself. Separately, all three fresh ND-R1 seeds showed a large, bootstrap-positive transition from nearly uniform relation survival at initialization to strongly relation-selective survival at epoch 100. The identity of the strongly preserved relation differed by seed, making **training-amplified symmetry breaking / spontaneous specialization** a strong post-primary candidate rather than a rescued ND-R1 claim.
+Separately, ND-R1 generated the post-primary observation that training changed initially near-uniform relation survival into strongly relation-selective survival, with different favored relations across seeds.
 
-The next Priority-1 experiment should therefore be one fresh, preregistered, **no-perturbation** confirmation with a competence gate calibrated in advance from the preserved historical source models. R2-style native transient measurements remain alongside the primary study.
+**R8-M1** independently confirmed the mechanism on fresh seeds. Frozen outcome: **M3 — encoder–recurrence coadaptation supported**. Joint training produced substantially greater relation-selective native survival than either freezing the recurrent map or freezing the encoder.
+
+**R8-M2** then tested whether winner identity was simply inherited from relation-specific initialization or finite-sample data-column asymmetry. Frozen outcome: **S0 — neither simple source tracks winner**. Its preregistered commitment descriptor placed stable winner commitment around epoch 40.
+
+**R8-M3** tested two precommitment predictors on 12 fresh families. Frozen outcome: **T0 — neither preregistered predictor supported**. Coadaptation synergy and shared-gradient alignment had positive rank relationships with the eventual survival geometry but did not reliably identify the eventual winner. Changing only minibatch order materially changed commitment timing and sometimes winner identity, providing evidence for optimization-path dependence without proving strong emergence.
+
+**R8-M4 is the current active experiment.** It asks whether the specialization is functionally necessary. Baseline and intervention models are identical through epoch 20, then fork. One continuation explicitly suppresses between-relation survival specialization using only natural task pairs; a matched control regularizes mean survival without directly equalizing relations. Performance is interpreted only if the preregistered manipulation gate confirms that specialization was actually reduced.
+
+The current defensible description is:
+
+> **training-induced spontaneous dynamical specialization through encoder–recurrence coadaptation in the tested synthetic recurrent architecture**
+
+This is a descriptive result, not a claim of strong emergence, universal trajectory information, new information creation, or practical superiority.
 
 See:
 
 - [`RESEARCH_PRIORITIES.md`](RESEARCH_PRIORITIES.md) — current priority list, practical-use directions, and reset rules
+- [`docs/CURRENT_CLAIMS.md`](docs/CURRENT_CLAIMS.md) — concise source of truth for current claims and boundaries
 - [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md) — preserved evidence/negative-result map
 - [`docs/ND_R1_POSTRUN_AUDIT.md`](docs/ND_R1_POSTRUN_AUDIT.md) — ND-R1 result, gate audit, and candidate phenomena
+- [`docs/R8_M1_RESULT.md`](docs/R8_M1_RESULT.md) — preregistered R8-M1 coadaptation result
+- [`docs/R8_M2_RESULT.md`](docs/R8_M2_RESULT.md) — preregistered R8-M2 symmetry-breaking source result
+- [`docs/R8_M3_RESULT.md`](docs/R8_M3_RESULT.md) — preregistered R8-M3 commitment-transition result
 - [`docs/research_history.md`](docs/research_history.md) — historical path, including failed and ambiguous branches
-- [`docs/research-plan.md`](docs/research-plan.md) — current plan with the previous ALI-focused plan preserved below it
+- [`docs/research-plan.md`](docs/research-plan.md) — current plan with previous programs preserved below it
 
 ---
 
