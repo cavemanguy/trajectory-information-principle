@@ -1,0 +1,102 @@
+{
+  "all_valid": false,
+  "classification": "V \u2014 reversible-demand training validity failure",
+  "invalid": [
+    {
+      "seed": 207,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 223,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 239,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 254,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 271,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 288,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 304,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 321,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 337,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 354,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 371,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    },
+    {
+      "seed": 389,
+      "validity": {
+        "baseline_gate": false,
+        "complete": true,
+        "finite": true
+      }
+    }
+  ]
+}
