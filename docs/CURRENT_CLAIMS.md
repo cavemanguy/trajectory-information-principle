@@ -25,6 +25,7 @@ The project has established several narrower findings:
 - **Observer-relative trajectory accessibility:** R2/R3 showed that information available through evolving geometric/directional features can differ from information available from an endpoint snapshot. Exact chronology was not established, and much of the directional signal can be dominated by the earliest transient.
 - **Readout preparation:** R6/R8 showed that recurrence can make task structure less accessible to generic readouts while improving compatibility with its trained downstream reader.
 - **Selective empirical preservation:** R9/R10 showed strongly contractive, ill-conditioned recurrence in which different task distinctions survive by very different amounts. R10 causally established that orientation relative to learned local dynamical geometry changes distinction survival.
+- **Training-induced encoder–recurrence coadaptation:** R8-M1 used matched initialization/data across five no-perturbation training conditions and passed its lineage-validity gate on fresh seeds 11/37/71. Joint training produced substantially more relation-selective native survival than either a frozen recurrent map or frozen encoder in all three seeds, with paired bootstrap intervals above zero. The preregistered outcome was **M3 — encoder–recurrence coadaptation supported**. Terminal h12 supervision alone was not a stable cross-seed explanation.
 - **Survival/use dissociation:** R11 showed that increasing or decreasing Euclidean survival magnitude does not by itself cause the corresponding improvement or impairment in downstream reader use.
 - **Query-specific perturbation geometry:** ALI-N8-R1 reproducibly showed query-specific direction-dependent responses under its diagnostic decoder class, while also showing that adaptive ALI did not beat direct memory readout and could leak information through the direction itself.
 - **Negative causal-control boundaries:** R4C/R4D did not establish useful learned self-steering, R4E failed its Phase-I primary gate, and JTP-1 found no preregistered seed-general instantaneous local-operator marker of trajectory time under its controls.
@@ -47,7 +48,7 @@ The project has **not** established that:
 
 The central trajectory-information hypothesis therefore remains **open**, not proven and not cleanly falsified by the existing side-branches.
 
-## ND-R1 and the current strongest candidate phenomenon
+## ND-R1 and the discovery path to R8-M1
 
 ND-R1 was the first post-reset no-perturbation native-dynamics study. Its frozen primary classification remains:
 
@@ -57,40 +58,30 @@ because all three fresh seeds missed the preregistered `h12 >= 0.50` competence 
 
 A post-run provenance audit then showed that this competence threshold was miscalibrated above the historical Observer-R2 source lineage itself. The formal Outcome A is preserved and is not retroactively repaired.
 
-Separately, all three fresh seeds showed the same large secondary transition:
+Separately, all three ND-R1 fresh seeds showed a large secondary transition from nearly uniform relation survival at initialization to strongly relation-selective survival at epoch 100, with positive bootstrap intervals in every seed and different favored relations across seeds. That pattern was treated as post-primary hypothesis generation rather than a rescued result.
 
-- relation survival was nearly uniform at initialization (`G0` about 0.016–0.025);
-- relation survival became strongly selective by epoch 100 (`G100` about 0.618–0.828);
-- `Delta G` was strongly positive with bootstrap 95% confidence intervals above zero in every seed;
-- the strongly preserved relation differed across seeds despite symmetric relation channels;
-- terminal relation-survival ranking was already strongly visible by recurrent transition 2 (mean Spearman about 0.937).
-
-This is consistent with **training-amplified symmetry breaking / spontaneous relation specialization**, but it is currently a **strong post-primary candidate**, not a confirmed ND-R1 primary claim.
-
-The fresh run also narrowed the R2 trajectory story: highly indirect trajectories replicated, while reversal dominance did not replicate across all seeds. The earliest direction remained substantially more task-informative than the final direction.
+R8-M1 then tested the mechanism independently on new fresh seeds with a lineage-calibrated validity gate. Its formal **M3** result established the narrow coadaptation claim: full selective survival under the tested joint regime depends on both encoder and recurrent-map plasticity. See `R8_M1_RESULT.md`.
 
 ## Current scientific priority
 
-Priority 1 remains:
+Priority 1 remains R8 native specialization, but the question has advanced from whether the specialization appears to **why its symmetry breaks**.
 
-> **Confirm whether ordinary training reproducibly transforms initially near-uniform recurrent survival into relation-selective native dynamical specialization, while measuring transient geometry alongside it without perturbing the system.**
+The current preregistered experiment, R8-M2, asks whether the seed-dependent winning relation tracks ordinary asymmetry sources:
 
-The next confirmatory experiment must use:
+- relation-specific initialization bundles;
+- finite-sample data-column identity;
+- minibatch-order path sensitivity;
+- early training commitment and initial shared-gradient asymmetry.
 
-- fresh seeds;
-- the recovered Observer-core lineage;
-- no perturbation or active controller in the primary study;
-- a competence gate calibrated before execution from preserved historical source models;
-- preregistered primary and secondary endpoints;
-- explicit separation between selective survival, generic accessibility, reader usefulness, and chronology.
+R8-M2 remains no-perturbation. Its primary source-tracking outcomes do not use the word emergence: even failure of the tested simple sources would not by itself prove strong emergence.
 
-If the specialization replicates, the next questions are mechanistic and practical: why it forms, whether it is necessary for task performance, whether specialization can be predicted or controlled without destroying function, whether recurrence is necessary, and whether the effect scales.
+After source provenance is understood, the next R8 question is functional necessity: whether the specialization is actually required for task performance or is an optimization side effect.
 
 ## Practical-use direction
 
 The most promising practical interpretation currently is **dynamical computation**, not perturbation-based retrieval:
 
-> training may organize a recurrent system into a selective dynamical filter that preferentially preserves, amplifies, or reformats some task distinctions for later use.
+> training can organize an encoder and recurrent map together so that task distinctions experience strongly different native survival through the recurrent dynamics.
 
 Potential engineering branches include selective filtering/compression, sparse channel allocation, compact recurrent preprocessing, early-step computation, reader-specific latent formatting, and later state-dependent control/logic.
 
@@ -105,5 +96,7 @@ See:
 - `../RESEARCH_PRIORITIES.md`
 - `EVIDENCE_LEDGER.md`
 - `ND_R1_POSTRUN_AUDIT.md`
+- `R8_M1_RESULT.md`
+- `R8_NATIVE_DYNAMICS_INVESTIGATION.md`
 - `observer_program_r2_r11.md`
 - `research_history.md`
