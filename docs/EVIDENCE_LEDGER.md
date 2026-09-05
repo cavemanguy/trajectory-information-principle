@@ -37,6 +37,8 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 | R8-M5 | **Established negative mechanism result** | Frozen outcome **C0 — simple capacity-allocation account not supported**. Wider full state improved h12 but did not reduce specialization; in this sample both `G` and survival-winner functional concentration increased. This rejects the specific scarce-state-capacity directional account, not specialization itself. |
 | R8-M6 | **Established negative isolation result** | Frozen outcome **W0 — isolated recurrent-workspace account not supported**. Function-preserving X32 improved h12 by 5.72 pp versus B16 and 3.37 pp versus near-parameter-matched P16, but h0 equivalence failed after continued training. The terminal benefit therefore cannot be attributed cleanly to isolated recurrent workspace dimension under the frozen rule. |
 | R8-M5R | **Established fresh replication / capacity result** | Frozen outcome **R2 — state-dimension-specific terminal benefit supported**. On 12 new families using the exact R8-M5 capacity manipulation with no directional specialization requirement, S32 improved h12 by 4.94 pp versus B16 and 3.00 pp versus P16. Relative to B16, `G` and `D` changes were mixed/indeterminate; across-seed DeltaG/DeltaD associations with Deltah12 were near zero. Wider state benefit does not require specialization to move in one fixed direction. |
+| R8-M7R | **Established negative primary / demand-sensitivity result** | Frozen outcome **D0 — reversible demand tracking not supported**. All 12 maturity-triggered families were valid. Terminal B demand shifted native Q toward B by +0.957 on average and beat both preregistered specificity controls; B h12 improved about 14.5 pp. However B became exact survival winner in only 1/12 and A was winner again after return in 12/12. Demand sensitivity is supported; free reversible specialist reassignment is not. |
+| R8-M7I | **Protocol-limited mirror result** | Frozen outcome **V0 — baseline lineage reproduction failure**. Four paired lineages missed the preregistered baseline-Q tolerance 1e-5 despite reproducing the same maturity epoch and A/B identities; no I0/I1/I2 classification is promoted. Post-primary diagnostics show strong demand-aligned functional shifts, little exact B takeover, and a larger immediate-B than delayed-B Q shift, motivating but not confirming a history/consolidation account. |
 
 ## Coupled-observer / collective dynamics
 
@@ -87,7 +89,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 
 ## Current priority order
 
-1. **Adaptive native-dynamics reorganization under controlled changing demand.** R8-M4 establishes functional contribution of established specialization; R8-M3 establishes path sensitivity; R8-M5/M6 constrain simple capacity explanations; R8-M5R establishes a wider-state terminal benefit without requiring a fixed specialization direction. The next hard test asks whether controlled demand changes cause reversible/reassignable native specialization.
+1. **History-dependent resistance under controlled changing demand.** R8-M7R shows that changed terminal demand specifically moves native dynamics and function without usually replacing the established specialist. R8-M7I remains V0, but its post-primary mirror diagnostics motivate a clean preregistered test separating prior consolidation duration from new-demand magnitude/duration.
 2. R6/R8 readout preparation.
 3. R2/R3 native transient structure.
 4. Coupled local-observer collective behavior.
@@ -96,6 +98,6 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 7. R11 survival/use dissociation.
 8. R4E state-conditioned intervention consequences for later practical control/logic work.
 
-The next adaptive-reorganization study should be preregistered before fresh outcomes and use a reversible demand schedule with controls for mere extra training and loss weighting. Success must require demand-aligned reorganization and reversibility/reassignment; seed-to-seed heterogeneity alone is insufficient.
+The next adaptive-reorganization study should not assume either free switching or formal hysteresis. It should preregister a history/pressure manipulation that distinguishes elastic demand-sensitive deformation from actual specialist replacement, while preserving R8-M7I as V0 and keeping its post-primary pattern exploratory.
 
-See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, `R8_M1_RESULT.md`, `R8_M2_RESULT.md`, `R8_M3_RESULT.md`, `R8_M4_RESULT.md`, `R8_M5_RESULT.md`, `R8_M6_RESULT.md`, and `R8_M5R_RESULT.md`.
+See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, `R8_M1_RESULT.md`, `R8_M2_RESULT.md`, `R8_M3_RESULT.md`, `R8_M4_RESULT.md`, `R8_M5_RESULT.md`, `R8_M6_RESULT.md`, `R8_M5R_RESULT.md`, `R8_M7R_RESULT.md`, `R8_M7I_RESULT.md`, and `R8_M7I_POSTRUN_AUDIT.md`.
