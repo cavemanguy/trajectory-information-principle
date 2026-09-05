@@ -31,7 +31,8 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 | ND-R1 early ranking | Strong secondary candidate | Relation-survival ranking at transition 2 predicted terminal ranking strongly in every fresh seed (mean Spearman about 0.937), echoing the historical R10 early-establishment observation. |
 | ND-R1 native trajectory replication | Mixed result | Highly indirect trajectories replicated across fresh seeds; reversal-dominated motion did not, showing that reversal dominance is not a seed-general native-dynamics property in this reproduction. |
 | R8-M1 | **Established within tested system** | Fresh no-perturbation objective/plasticity decomposition passed its validity gate on seeds 11/37/71. Joint training produced substantially greater relation-selective native survival than joint training with either the recurrent map frozen or the encoder frozen, with paired bootstrap intervals above zero in every seed. Frozen outcome: **M3 — encoder–recurrence coadaptation supported**. Terminal h12 supervision alone was not a stable cross-seed explanation. |
-| R8-M2 | Preregistered / running | Tests whether winner identity tracks relation-specific initialization bundles or finite-sample data-column identity, while quantifying minibatch-order sensitivity, early commitment, and initial shared-gradient asymmetry. No perturbations. |
+| R8-M2 | **Established source-narrowing result** | Eight fresh no-perturbation families all passed validity. Frozen outcome: **S0 — neither simple source tracks winner**. Relation-specific initialization bundles did not track winner identity (3/8 mapped matches; aligned-minus-raw rho effect -0.030, 95% CI [-0.360, 0.348]); finite-sample data-column identity did not track it (1/8 mapped matches; effect -0.080, 95% CI [-0.610, 0.381]). Stable winner commitment under the preregistered descriptor appeared at epoch 40. This supports the descriptive phrase training-induced spontaneous dynamical specialization, but does not prove strong emergence. |
+| R8-M3 | Planned / preregistration next | Native no-perturbation study of the commitment transition. Tests whether gradient interactions, encoder placement relative to recurrent geometry, Jacobian anisotropy on native states, or minibatch-order path dependence predict winner selection before/stable through commitment. Prediction must not be paraphrased as causation. |
 
 ## Coupled-observer / collective dynamics
 
@@ -82,7 +83,7 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 
 ## Current priority order
 
-1. R8–R10 training-induced selective preservation: R8-M1 has now established encoder–recurrence coadaptation within the tested system; R8-M2 is testing the ordinary source of the seed-dependent symmetry breaking before any stronger emergence language.
+1. R8–R10 training-induced selective preservation: R8-M1 established encoder–recurrence coadaptation; R8-M2 ruled out two obvious fixed symmetry-breaking sources and identified an epoch-40 commitment point under its frozen descriptor. R8-M3 now targets the optimization/geometry transition that selects and stabilizes the winner.
 2. R6/R8 readout preparation.
 3. R2/R3 native transient structure.
 4. Coupled local-observer collective behavior.
@@ -91,6 +92,6 @@ This ledger organizes the research without deleting or rewriting any branch. It 
 7. R11 survival/use dissociation.
 8. R4E state-conditioned intervention consequences for later practical control/logic work.
 
-If R8-M2 resolves symmetry-breaking provenance, the next R8 stage is functional necessity: determine whether selective native survival is required for task performance or is an optimization side effect. This must remain separate from R11's result that Euclidean survival magnitude alone does not mediate reader use.
+After the formation mechanism is characterized, the next R8 stage is functional necessity: determine whether selective native survival is required for task performance or is an optimization side effect. This must remain separate from R11's result that Euclidean survival magnitude alone does not mediate reader use.
 
-See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, and `R8_M1_RESULT.md`.
+See `../RESEARCH_PRIORITIES.md`, `ND_R1_POSTRUN_AUDIT.md`, `R8_M1_RESULT.md`, and `R8_M2_RESULT.md`.
