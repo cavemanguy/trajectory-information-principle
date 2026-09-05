@@ -1,0 +1,102 @@
+name: R8-M7R Maturity-Triggered Reversible Demand
+
+on:
+  push:
+    branches: [r8-m7r-maturity-trigger]
+    paths:
+      - 'experiments/r8_m7r/**'
+      - '.github/workflows/r8-m7r.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-M7R smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m7r/requirements.txt
+      - name: Compile frozen implementation
+        run: |
+          python -m py_compile experiments/r8_m7r/run_r8_m7r.py
+          python -m py_compile experiments/r8_m7r/classify_r8_m7r.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_m7r/classify_r8_m7r.py --self-check
+      - name: Run outcome-free maturity/fork/schedule smoke path
+        run: python experiments/r8_m7r/run_r8_m7r.py --seed 1003 --outdir smoke_r8_m7r --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('smoke_r8_m7r/smoke_summary.json'))
+          assert d['status']=='ok'
+          assert d['A'] != d['B']
+          assert set(d['condition_Q']) == {'SWITCH','FIX','H0SWITCH'}
+          assert all(len(v)==3 for v in d['condition_Q'].values())
+          print('smoke A,B', d['A'], d['B'])
+          PY
+
+  fresh:
+    name: R8-M7R fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [214, 230, 247, 263, 279, 296, 313, 329, 346, 362, 378, 397]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m7r/requirements.txt
+      - name: Execute competence-triggered reversible-demand family
+        run: python experiments/r8_m7r/run_r8_m7r.py --seed ${{ matrix.seed }} --outdir results/r8_m7r/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m7r-seed-${{ matrix.seed }}
+          path: results/r8_m7r/seed_${{ matrix.seed }}
+          retention-days: 90
+
+  classify:
+    name: R8-M7R frozen cross-family classification
+    needs: fresh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_m7r/requirements.txt
+      - name: Download family artifacts without flattening
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-m7r-seed-*
+          path: all_seed_artifacts
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: python experiments/r8_m7r/classify_r8_m7r.py --root all_seed_artifacts --outdir results/r8_m7r/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-m7r-aggregate
+          path: results/r8_m7r/aggregate
+          retention-days: 90
+      - name: Commit authoritative R8-M7R result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -C r8-m7r-results
+          git add results/r8_m7r/aggregate/FINAL_RESULT.md results/r8_m7r/aggregate/FINAL_RESULT.json
+          git commit -m 'Record authoritative R8-M7R results'
+          git push --force origin r8-m7r-results
