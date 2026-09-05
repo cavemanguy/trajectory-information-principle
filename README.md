@@ -14,25 +14,26 @@ Observers are measurement tools. Perturbations are optional causal/control tools
 
 1. **R8–R10 learned selective preservation** — training transformed initially indiscriminate contraction into relation-dependent anisotropic preservation through encoder–recurrence coadaptation. **Immediate priority.**
 2. **R6/R8 readout preparation** — recurrence can make information less generically accessible while making it more useful to its trained downstream reader.
-3. **R2/R3 native transient trajectory structure** — indirect, reversal-dominated trajectories and nonmonotonic transient accessibility; directional history exists, chronology not established.
+3. **R2/R3 native transient trajectory structure** — strongly indirect transient dynamics and nonmonotonic accessibility; directional history exists, chronology not established. Historical reversal dominance is now known not to be seed-general.
 4. **Coupled local-observer collective behavior** — local components differentiated and coordinated through a shared dynamical substrate; chaos/exotic-attractor interpretations remain unsupported.
 5. **Shared-observer transient factor** — historical early transient task signal peaked before the endpoint; requires clean reproduction.
 6. **R7 reader-conditioned recurrent plasticity** — recurrence can adapt terminal format toward altered reader geometry under controlled conditions.
 7. **R11 survival/use dissociation** — geometric survival magnitude alone does not determine reader usefulness.
 8. **R4E state-conditioned intervention consequences** — preserved as a later practical control/logic branch; R4E itself closed at Phase I.
 
-### Immediate experiment
+### Priority-1 status
 
-**ND-R1 — Training-Emergent Selective Preservation and Transient Geometry**
+**ND-R1 — Training-Emergent Selective Preservation and Transient Geometry** is complete. Its frozen primary classification is **Outcome A** because the preregistered h12 competence gate was not met; that result is preserved and is not retroactively changed.
 
-Reproduce the R8–R10 transition from initially indiscriminate contraction to learned relation-dependent selective preservation, while measuring **R2-style native transient dynamics at the same frozen training checkpoints**.
+A post-run provenance audit found that the 0.50 h12 gate was miscalibrated above the historical Observer-R2 source lineage itself. Separately, all three fresh ND-R1 seeds showed a large, bootstrap-positive transition from nearly uniform relation survival at initialization to strongly relation-selective survival at epoch 100. The identity of the strongly preserved relation differed by seed, making **training-amplified symmetry breaking / spontaneous specialization** a strong post-primary candidate rather than a rescued ND-R1 claim.
 
-**Primary ND-R1 uses no perturbations and no active controller.**
+The next Priority-1 experiment should therefore be one fresh, preregistered, **no-perturbation** confirmation with a competence gate calibrated in advance from the preserved historical source models. R2-style native transient measurements remain alongside the primary study.
 
 See:
 
 - [`RESEARCH_PRIORITIES.md`](RESEARCH_PRIORITIES.md) — current priority list, practical-use directions, and reset rules
 - [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md) — preserved evidence/negative-result map
+- [`docs/ND_R1_POSTRUN_AUDIT.md`](docs/ND_R1_POSTRUN_AUDIT.md) — ND-R1 result, gate audit, and candidate phenomena
 - [`docs/research_history.md`](docs/research_history.md) — historical path, including failed and ambiguous branches
 - [`docs/research-plan.md`](docs/research-plan.md) — current plan with the previous ALI-focused plan preserved below it
 
