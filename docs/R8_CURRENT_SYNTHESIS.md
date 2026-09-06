@@ -1,16 +1,18 @@
-# R8 Current Synthesis — Updated through R8-AD4
+# R8 Current Synthesis — Updated through R8-AD6
 
 **Status: September 6, 2026**
 
-This file is the current concise synthesis for the late R8 mechanistic sequence. It supplements older `CURRENT_CLAIMS.md` / `EVIDENCE_LEDGER.md` entries that were written before M9–M12 and AD1–AD4 completed.
+This file is the current concise synthesis for the late R8 mechanistic sequence. It supplements older `CURRENT_CLAIMS.md` / `EVIDENCE_LEDGER.md` entries that were written before M9–M12 and AD1–AD6 completed.
 
 ## Current narrow claim
 
-Within the tested synthetic autonomous recurrent system, ordinary training organizes a learned recurrent flow whose structure is sensitive to optimization history and task demand. That organization can persist after present demand is matched, is substantially carried by the learned recurrent map, and makes task distinctions differentially accessible along native trajectories.
+Within the tested synthetic autonomous recurrent system, ordinary training organizes a learned recurrent flow whose structure is sensitive to optimization history and task demand. That organization can persist after present demand is matched, is substantially carried by the learned recurrent map, and gives rise to strong anisotropy around native trajectories.
 
-The strongest current trajectory-accessibility result is not that the trajectory creates information beyond the Markov state. It is:
+The strongest current trajectory result is no longer only an accessibility result. The combined AD3–AD6 evidence supports this narrower mechanistic statement:
 
-> **Correctly paired recent trajectory history makes task information substantially more accessible to a simple linear reader than the instantaneous latent state alone, and most of that one-step gain is carried by displacement direction rather than displacement magnitude. A vector-valued second difference adds further accessibility beyond the full one-step displacement.**
+> **Recent native motion makes task information easier for simple readers to access, while norm-matched causal perturbations reveal that the learned flow preferentially corrects transverse deviations and preserves/amplifies along-flow deviations, which also cause larger downstream functional damage.**
+
+This is still a statement about organization inside a deterministic Markov state-plus-map system. It does not establish an independent hidden phase variable or information beyond the complete state.
 
 ## M8–M12 mechanism chain
 
@@ -24,17 +26,13 @@ Boundary: operational persistent path dependence is supported; formal bistabilit
 
 **C2 — recurrent-map-carried contribution supported.** Most of the persistent history-specific contribution followed the learned recurrent map under component swaps. Optimizer state was not necessary for the effect under the tested controls.
 
-Boundary: this does not imply the encoder contributes nothing or that all history is stored in one parameter block.
-
 ### R8-M10 — axis specificity
 
 **S2 — strong axis specificity supported.** History targeted at one task axis reorganized that axis strongly while matched off-axis history reorganized its own axis without comparable effect on the first axis.
 
-Boundary: this is task-axis specificity in the tested synthetic system, not a universal memory law or formal hysteresis theorem.
-
 ### R8-M11 — recurrent-map localization
 
-**L1 — input-stage contribution supported.** The input-facing linear layer of the recurrent map (`F1`, 16→32) made a reproducible causal contribution to the persistent history effect. The downstream linear layer did not independently pass its frozen gate, and the interaction gate also failed.
+**L1 — input-stage contribution supported.** The input-facing linear layer of the recurrent map (`F1`, 16→32) made a reproducible causal contribution to the persistent history effect.
 
 Boundary: do not paraphrase this as “history is stored only in F1” or “F2 has no effect.”
 
@@ -44,13 +42,11 @@ Boundary: do not paraphrase this as “history is stored only in F1” or “F2 
 
 Boundary: a failed predictor is not a failed phenomenon.
 
-## AD1–AD4 native-dynamics / accessibility sequence
+## AD1–AD6 native-dynamics sequence
 
 ### R8-AD1 — long-run attractor diagnostic
 
-**A3 — fixed-point attractor behavior not supported.** Across 12 mature lineages, 0/12 were classified FIXED under the frozen 512-step native-state criterion; 1/12 was a short cycle and 11/12 remained unresolved at that horizon. The ordinary `h12` state was generally far from the long-run state.
-
-Boundary: this does not prove that mathematical fixed points do not exist, that all dynamics are periodic, or that unresolved dynamics are chaotic.
+**A3 — fixed-point attractor behavior not supported.** Across 12 mature lineages, 0/12 were classified FIXED under the frozen 512-step native-state criterion; 1/12 was a short cycle and 11/12 remained unresolved at that horizon.
 
 ### R8-AD2 — long-run regime classification
 
@@ -63,65 +59,88 @@ Boundary: this does not prove that mathematical fixed points do not exist, that 
 - REGULAR_NONPERIODIC: 1/12
 - MIXED: 3/12
 
-Boundary: `SENSITIVE` is a finite-time sensitivity label, not formal proof of chaos; `QUASIPERIODIC_LIKE` is descriptive rather than a theorem about an invariant set.
+Boundary: `SENSITIVE` is a finite-time sensitivity label, not proof of chaos; `QUASIPERIODIC_LIKE` is descriptive rather than a theorem about an invariant set.
 
 ### R8-AD3 — one-step path-history accessibility
 
-**H1 — one-step path-history accessibility supported.** Using fresh probe splits and frozen mature lineages, a closed-form linear ridge reader given
+**H1 — one-step path-history accessibility supported.** A closed-form linear ridge reader given `[h_t, h_t-h_(t-1)]` outperformed a reader given `h_t` alone by **+5.72 pp**, 95% CI **[+5.39,+6.05] pp**, positive in **12/12 lineages**.
 
-`[h_t, h_t - h_{t-1}]`
+Against a dimension-matched shuffled-history control, the gain was **+5.88 pp**, CI **[+5.55,+6.21]**, also positive in **12/12**.
 
-outperformed a reader given `h_t` alone across the internal `t=1..11` window by:
+A larger quadratic static reader still beat the one-step representation by about 1.42 pp, so AD3 supports improved simple-readout accessibility rather than information unavailable from the instantaneous state under nonlinear readout.
 
-- mean gain: **+0.057197** absolute accuracy (+5.72 pp)
-- 95% CI: **[+0.053912, +0.060489]**
-- positive: **12/12 lineages**
+### R8-AD4 — direction carries nearly all of the one-step accessibility gain
 
-Against the dimension-matched shuffled-history control, the gain was:
+**D1 — direction-preserving decomposition.** The AD3 effect replicated on fresh probe data.
 
-- mean: **+0.058760**
-- 95% CI: **[+0.055487, +0.062062]**
-- positive: **12/12**
+- full displacement gain over state: **+5.72 pp**
+- normalized displacement direction gain: **+5.41 pp**
+- retained fraction of full gain by direction: **~94.4%**
+- scalar displacement magnitude gain: **+0.28 pp**
+- retained fraction by magnitude: **~4.8%**
 
-A generous 152-feature quadratic static reader beat the 32-feature one-step representation by about 1.42 pp on average. Therefore AD3 supports improved **linear accessibility from correctly paired path history**, not information unavailable from the instantaneous state under nonlinear readout.
+Adding the vector second difference `a_t=(h_t-h_(t-1))-(h_(t-1)-h_(t-2))` added another **+4.50 pp** of linear accessibility, CI **[+4.34,+4.66] pp**, positive in **12/12 lineages**. A scalar turning-angle cosine added only about **+0.08 pp**.
 
-The effect was strongest early but remained positive later, including at `t=12`.
+### R8-AD5 — causal transition splices reverse the accessibility intuition
 
-### R8-AD4 — motion-component decomposition
+**K0 — neither preregistered causal contrast supported.** AD5 intervened on native transitions while keeping the pre-splice state identical and matching Euclidean splice size.
 
-**D1 — direction-preserving decomposition.** The AD3 one-step effect replicated on fresh AD4 probe data:
+Direction rotation versus magnitude-only change:
 
-- full displacement gain over state: **+0.057168**, CI **[+0.053932, +0.060424]**, positive 12/12
-- full displacement gain over shuffled displacement: **+0.058621**, CI **[+0.055524, +0.061697]**, positive 12/12
+- direction-rotation terminal accuracy drop: **+1.92 pp**
+- magnitude-only terminal accuracy drop: **+3.60 pp**
+- generic norm-matched random drop: **+2.01 pp**
+- `K_DIR = DROP_DIR - DROP_MAG`: **-1.68 pp**
+- 95% CI: **[-2.21,-1.15] pp**
+- positive in **1/12** lineages
 
-The decomposition was strongly directional:
+Turn-orientation versus scalar-turn change:
 
-- normalized displacement direction gain: **+0.054076**, CI **[+0.050327, +0.058123]**, positive 12/12
-- mean fraction of the full gain retained by direction: **0.943787** (~94.4%), CI **[0.922595, 0.964752]**
-- scalar displacement magnitude gain: **+0.002780**, CI **[+0.002189, +0.003365]**, positive 12/12
-- mean fraction retained by magnitude: **0.048052** (~4.8%), CI **[0.039207, 0.056724]**
+- azimuth/turn-orientation drop: **+4.80 pp**
+- polar/scalar-turn drop: **+7.85 pp**
+- `K_CURV`: **-3.05 pp**
+- 95% CI: **[-4.00,-2.00] pp**
+- positive in **1/12** lineages
 
-Thus the frozen direction-preservation gate passed and the magnitude-preservation gate failed.
+Both preregistered gates failed. This established a readability–causality dissociation: direction is highly informative to a simple reader, yet moving forward/backward along the native transition is more damaging than rotating the transition direction under matched splices.
 
-AD4 also preregistered a higher-order test. Adding the vector second difference
+### R8-AD6 — tangent versus transverse recovery
 
-`a_t = (h_t - h_{t-1}) - (h_{t-1} - h_{t-2})`
+**P1 — tangent persistence with functional asymmetry supported.** AD6 directly tested the tangent/phase explanation generated after AD5 using norm-matched perturbations from the same native state.
 
-to the full one-step representation improved linear accessibility by:
+After three recurrent updates:
 
-- **+0.044996** (+4.50 pp)
-- 95% CI **[+0.043355, +0.046567]**
-- positive **12/12**
+- tangent total-error retention: **1.2308×**
+- transverse total-error retention: **0.7256×**
+- `D_REC = RET_TAN - RET_TRANS`: **+0.5052**
+- 95% CI: **[+0.4093,+0.5969]**
+- positive in **12/12 lineages**
 
-so `G_CURVATURE_ADDS` passed.
+The recovery curves were strongly anisotropic:
 
-By contrast, adding only the scalar cosine turning measure produced a much smaller **+0.000754** mean gain. This supports a useful higher-order **vector-valued second-difference** feature; it does not justify saying that a single turning angle is the code.
+- step 1: tangent **1.069×**, transverse **0.646×**
+- step 2: tangent **1.187×**, transverse **0.686×**
+- step 3: tangent **1.231×**, transverse **0.726×**
+- step 4: tangent **1.280×**, transverse **0.751×**
 
-Coordinate-level results are preserved as secondary because latent axes are arbitrary/basis-dependent. The preregistered best-single-coordinate and top-four-coordinate probes were positive across lineages, but they are not promoted over the rotation-sensitive claim boundary.
+The signed along-flow offset also persisted: `PHASE_RET` at step 3 was **0.5355**, 95% CI **[0.4278,0.6407]**, and remained about **0.5244** at step 4.
+
+Functional asymmetry also passed its frozen gate:
+
+- tangent terminal accuracy drop: **+4.02 pp**
+- transverse terminal accuracy drop: **+2.13 pp**
+- `D_FUNC = DROP_TAN - DROP_TRANS`: **+1.90 pp**
+- 95% CI: **[+1.29,+2.49] pp**
+- positive in **11/12 lineages**
+- cross-entropy contrast mean: **+0.0534**
+
+The effect was present across all preregistered splice times and perturbation scales.
+
+Boundary: AD6 supports strong tangent–transverse anisotropy around native learned trajectories. It does not establish an independent hidden phase variable, information beyond the complete Markov state-plus-map, essential chronology, or a universal trajectory code.
 
 ## Current mechanistic picture
 
-The current evidence is most naturally summarized as:
+The strongest current sequence is:
 
 `training history`
 
@@ -133,42 +152,46 @@ The current evidence is most naturally summarized as:
 
 → `ongoing heterogeneous native dynamics rather than generic fixed-point settling`
 
-→ `task information becomes substantially easier for a linear reader when recent native motion is supplied`
+→ `recent native motion improves simple task readout`
 
-→ `most of the one-step accessibility benefit is directional, not speed-based`
+→ `one-step accessibility is overwhelmingly directional, not speed-based`
 
-→ `a second vector difference exposes still more linearly accessible task structure`.
+→ `a second vector difference exposes additional accessible structure`
 
-A compact mathematical description of the newest result is:
+→ `causal splices reveal greater vulnerability along the native flow than under matched direction rotation`
 
-`h_t` < `[h_t, d_t / ||d_t||]` ≈ `[h_t, d_t]` < `[h_t, d_t, d_t-d_{t-1}]`
+→ `direct tangent/transverse tests show transverse errors are preferentially corrected while tangent errors persist/amplify and cause larger functional damage`.
 
-for simple linear task readout in the tested internal trajectory window, while
+A compact description is:
 
-`[h_t, log ||d_t||]`
+> **The learned recurrent flow behaves locally like a computational path with transverse robustness and along-flow sensitivity.**
 
-adds very little.
+This is stronger than saying the trajectory is merely readable, but weaker than saying “the trajectory is the code.”
 
 ## What is still open
 
 The project has **not** established that:
 
 - trajectory history contains information beyond the complete Markov state-plus-map;
-- temporal order is causally necessary;
-- displacement direction or curvature is a universal neural code;
-- the AD3/AD4 accessibility gains are causally necessary for the trained network's own task solution;
-- changing phase/direction while controlling state will change function in the predicted way;
-- these findings generalize to natural systems, transformers, LLMs, biological networks, or physical dynamical systems;
-- the heterogeneous AD2 regimes themselves are functionally necessary;
+- temporal order is an independent information source;
+- displacement direction, second difference, or phase is a universal neural code;
+- an independent latent phase variable exists outside the state;
+- tangent persistence is more than the dominant local Jacobian / finite-time sensitivity direction;
+- heterogeneous AD2 regimes themselves are functionally necessary;
+- the findings generalize to natural systems, transformers, LLMs, biological networks, or physical systems;
 - a practical architecture advantage has been demonstrated.
 
 ## Next justified experiment
 
-The most direct next scientific step is a **causal motion intervention** that changes native direction / higher-order trajectory structure while controlling instantaneous-state displacement as tightly as possible, then measures whether task-relevant functional consequences change.
+The next clean mechanistic question is:
 
-That experiment should be designed so a positive result cannot be reduced to simply moving the state farther across the frozen reader boundary.
+> **Is the AD6 tangent–transverse asymmetry specifically aligned with native trajectory progress, or is it simply the dominant local Jacobian/singular-vector direction of the recurrent map?**
 
-A separate future engineering branch is preserved for **query-conditioned active interrogation of a learned recurrent vector field**. That should remain downstream of the current native-system causal tests rather than being used to force a preferred geometry into the present system.
+That comparison should test native tangent perturbations against equal-norm perturbations along leading and non-leading local Jacobian singular directions, then compare persistence, rejoining, and functional damage over the same finite horizon.
+
+A positive native-tangent-specific result would support a trajectory-organized progress coordinate beyond generic local sensitivity. A null result would reduce the mechanism to ordinary local anisotropy of the learned map without invalidating AD3–AD6.
+
+A separate future engineering branch is preserved for **query-conditioned active interrogation of a learned recurrent vector field**. It remains downstream of the native-system mechanistic tests.
 
 ## Authoritative result records
 
@@ -176,9 +199,14 @@ A separate future engineering branch is preserved for **query-conditioned active
 - `results/r8_ad2/aggregate/FINAL_RESULT.md`
 - `results/r8_ad3/aggregate/FINAL_RESULT.md`
 - `results/r8_ad4/aggregate/FINAL_RESULT.md`
+- `results/r8_ad5/aggregate/FINAL_RESULT.md`
+- `results/r8_ad6/aggregate/FINAL_RESULT.md`
 
-The experiment preregistrations, runners, classifiers, and workflows are preserved under `experiments/r8_ad1/` through `experiments/r8_ad4/` and `.github/workflows/`.
+Interpretive notes:
+
+- `docs/R8_AD5_RESULT.md`
+- `docs/R8_AD6_RESULT.md`
 
 ## Permanent boundary
 
-> **A failed explanation is not the same as a failed phenomenon, and a positive accessibility result is not automatically a causal or ontological claim about where information “really lives.”**
+> **A failed explanation is not the same as a failed phenomenon, a positive accessibility result is not automatically causal, and a causal anisotropy result is not automatically an ontological claim about where information “really lives.”**
