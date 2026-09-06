@@ -1,0 +1,115 @@
+name: R8-AD2 Native Dynamical Regime Classification
+
+on:
+  push:
+    paths:
+      - 'experiments/r8_ad2/**'
+      - '.github/workflows/r8-ad2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-AD2 outcome-free smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_ad2/requirements.txt
+      - name: Compile implementation
+        run: |
+          python -m py_compile experiments/r8_ad2/run_r8_ad2.py
+          python -m py_compile experiments/r8_ad2/classify_r8_ad2.py
+      - name: Verify parent R8 engine exists
+        run: test -f experiments/r8_m10/m7r_base.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_ad2/classify_r8_ad2.py --self-check
+      - name: Run smoke path
+        run: python experiments/r8_ad2/run_r8_ad2.py --seed 1782 --outdir /tmp/r8_ad2_smoke --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/r8_ad2_smoke/smoke_summary.json'))
+          assert d['experiment']=='R8-AD2'
+          assert d['all_valid'] is True
+          q=d['diagnostic']
+          assert q['family_class'] in ('FIXED','PERIODIC','SENSITIVE','QUASIPERIODIC_LIKE','REGULAR_NONPERIODIC','MIXED')
+          assert abs(sum(q['state_class_fractions'].values()) - 1.0) < 1e-9
+          assert q['finite'] is True
+          print('R8-AD2 smoke structure ok')
+          PY
+
+  family:
+    name: R8-AD2 fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        seed: [1782, 1801, 1819, 1838, 1856, 1875, 1893, 1912, 1930, 1949, 1967, 1986]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_ad2/requirements.txt
+      - name: Execute fresh native regime family
+        run: |
+          mkdir -p results/r8_ad2/seed_${{ matrix.seed }}
+          python experiments/r8_ad2/run_r8_ad2.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r8_ad2/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-ad2-seed-${{ matrix.seed }}
+          path: results/r8_ad2/seed_${{ matrix.seed }}/seed_summary.json
+          if-no-files-found: error
+
+  classify:
+    name: R8-AD2 frozen cross-family classification
+    needs: family
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_ad2/requirements.txt
+      - name: Download family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-ad2-seed-*
+          path: results/r8_ad2/families
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: |
+          mkdir -p results/r8_ad2/aggregate
+          python experiments/r8_ad2/classify_r8_ad2.py \
+            --root results/r8_ad2/families \
+            --outdir results/r8_ad2/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-ad2-aggregate
+          path: results/r8_ad2/aggregate/
+          if-no-files-found: error
+      - name: Commit authoritative R8-AD2 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B r8-ad2-results
+          git add results/r8_ad2/aggregate/FINAL_RESULT.json results/r8_ad2/aggregate/FINAL_RESULT.md
+          git commit -m 'Record frozen R8-AD2 result' || true
+          git push --force origin HEAD:r8-ad2-results
