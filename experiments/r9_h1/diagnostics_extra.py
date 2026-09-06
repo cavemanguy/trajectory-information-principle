@@ -91,7 +91,6 @@ def local_order_controls(model, train_batch, test_batch, shuffle_seed):
         ordered_te = np.concatenate([te2, te1, te0], 1)
         reversed_tr = np.concatenate([tr0, tr1, tr2], 1)
         reversed_te = np.concatenate([te0, te1, te2], 1)
-        # Per-example random permutation destroys consistent chronology while preserving the same three displacements.
         tr_stack = np.stack([tr2, tr1, tr0], 1)
         te_stack = np.stack([te2, te1, te0], 1)
         for arr in (tr_stack, te_stack):
@@ -220,8 +219,8 @@ def perturbation_response(model, train_batch, test_batch, kind):
     tei = te_mask.nonzero(as_tuple=False)
     trX = tr_resp[tri[:, 0], tri[:, 1]].numpy()
     teX = te_resp[tei[:, 0], tei[:, 1]].numpy()
-    shy = te_shuf[tei[:, 0], tei[:, 1]].numpy()
-    ray = te_rand[tei[:, 0], tei[:, 1]].numpy()
+    shy = shuf_resp[tei[:, 0], tei[:, 1]].numpy()
+    ray = rand_resp[tei[:, 0], tei[:, 1]].numpy()
     tr_y = train_batch["active_key"][tri[:, 0], tri[:, 1]].numpy()
     te_y = test_batch["active_key"][tei[:, 0], tei[:, 1]].numpy()
     fit = base.fit_ridge(trX, tr_y)
@@ -230,8 +229,8 @@ def perturbation_response(model, train_batch, test_batch, kind):
     rand_key = base.ridge_acc(fit, ray, te_y)
     return {
         "response_norm_native": float(torch.linalg.vector_norm(te_resp, dim=-1)[te_mask].mean()),
-        "response_norm_shuffled": float(torch.linalg.vector_norm(te_shuf if kind == "INTERROGATOR" else shuf_resp, dim=-1)[te_mask].mean()),
-        "response_norm_random": float(torch.linalg.vector_norm(te_rand if kind == "INTERROGATOR" else rand_resp, dim=-1)[te_mask].mean()),
+        "response_norm_shuffled": float(torch.linalg.vector_norm(shuf_resp, dim=-1)[te_mask].mean()),
+        "response_norm_random": float(torch.linalg.vector_norm(rand_resp, dim=-1)[te_mask].mean()),
         "response_key_acc_native": native_key,
         "response_key_acc_shuffled": shuf_key,
         "response_key_acc_random": rand_key,
