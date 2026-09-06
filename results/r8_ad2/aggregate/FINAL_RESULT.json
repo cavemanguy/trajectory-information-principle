@@ -26,22 +26,22 @@
   },
   "median_ftle_across_families": {
     "max": 0.022717876359820366,
-    "mean": -0.010665640205843374,
-    "median": -0.0015504607581533492,
+    "mean": -0.01064569578981415,
+    "median": -0.0015474616084247828,
     "min": -0.06866375356912613,
     "n": 12
   },
   "median_spectral_entropy_across_families": {
     "max": 0.42050832509994507,
-    "mean": 0.2353925807401538,
-    "median": 0.2504119761288166,
-    "min": 0.08564770221710205,
+    "mean": 0.2354026244332393,
+    "median": 0.2504217140376568,
+    "min": 0.08564117923378944,
     "n": 12
   },
   "median_top8_across_families": {
-    "max": 0.9858790040016174,
-    "mean": 0.9166509012381235,
-    "median": 0.9177466183900833,
+    "max": 0.9858634769916534,
+    "mean": 0.9166437784830729,
+    "median": 0.9177459329366684,
     "min": 0.7584338486194611,
     "n": 12
   },
@@ -66,17 +66,17 @@
     },
     {
       "M": 120,
-      "dominant_state_fraction": 0.984375,
+      "dominant_state_fraction": 0.9921875,
       "family_class": "QUASIPERIODIC_LIKE",
-      "median_ftle": -0.0016940279747359455,
-      "median_spectral_entropy": 0.24262165278196335,
-      "median_top8": 0.9169757664203644,
+      "median_ftle": -0.0016348845674656332,
+      "median_spectral_entropy": 0.24262263625860214,
+      "median_top8": 0.9169754087924957,
       "seed": 1801,
       "state_class_fractions": {
         "FIXED": 0.0,
         "PERIODIC": 0.0,
-        "QUASIPERIODIC_LIKE": 0.984375,
-        "REGULAR_NONPERIODIC": 0.015625,
+        "QUASIPERIODIC_LIKE": 0.9921875,
+        "REGULAR_NONPERIODIC": 0.0078125,
         "SENSITIVE": 0.0
       },
       "valid": true
@@ -119,9 +119,9 @@
       "M": 100,
       "dominant_state_fraction": 1.0,
       "family_class": "PERIODIC",
-      "median_ftle": -0.05353190749883652,
-      "median_spectral_entropy": 0.13226521015167236,
-      "median_top8": 0.9828080534934998,
+      "median_ftle": -0.05320313014090061,
+      "median_spectral_entropy": 0.13226492702960968,
+      "median_top8": 0.9828081130981445,
       "seed": 1856,
       "state_class_fractions": {
         "FIXED": 0.0,
@@ -168,17 +168,17 @@
     },
     {
       "M": 100,
-      "dominant_state_fraction": 0.99609375,
+      "dominant_state_fraction": 1.0,
       "family_class": "QUASIPERIODIC_LIKE",
-      "median_ftle": -0.0007979311922099441,
-      "median_spectral_entropy": 0.25820229947566986,
-      "median_top8": 0.9185174703598022,
+      "median_ftle": -0.0009217136248480529,
+      "median_spectral_entropy": 0.2582207918167114,
+      "median_top8": 0.9185164570808411,
       "seed": 1912,
       "state_class_fractions": {
         "FIXED": 0.0,
         "PERIODIC": 0.0,
-        "QUASIPERIODIC_LIKE": 0.99609375,
-        "REGULAR_NONPERIODIC": 0.00390625,
+        "QUASIPERIODIC_LIKE": 1.0,
+        "REGULAR_NONPERIODIC": 0.0,
         "SENSITIVE": 0.0
       },
       "valid": true
@@ -204,9 +204,9 @@
       "M": 120,
       "dominant_state_fraction": 0.9921875,
       "family_class": "REGULAR_NONPERIODIC",
-      "median_ftle": -0.0004984554543625563,
-      "median_spectral_entropy": 0.2744946926832199,
-      "median_top8": 0.8905883431434631,
+      "median_ftle": -0.0005607642233371735,
+      "median_spectral_entropy": 0.274602547287941,
+      "median_top8": 0.8905197083950043,
       "seed": 1949,
       "state_class_fractions": {
         "FIXED": 0.0078125,
@@ -236,47 +236,47 @@
     },
     {
       "M": 100,
-      "dominant_state_fraction": 0.3046875,
+      "dominant_state_fraction": 0.359375,
       "family_class": "MIXED",
-      "median_ftle": -0.02557220496237278,
-      "median_spectral_entropy": 0.08564770221710205,
-      "median_top8": 0.9858790040016174,
+      "median_ftle": -0.02553470153361559,
+      "median_spectral_entropy": 0.08564117923378944,
+      "median_top8": 0.9858634769916534,
       "seed": 1986,
       "state_class_fractions": {
-        "FIXED": 0.2421875,
-        "PERIODIC": 0.3046875,
+        "FIXED": 0.359375,
+        "PERIODIC": 0.30078125,
         "QUASIPERIODIC_LIKE": 0.24609375,
-        "REGULAR_NONPERIODIC": 0.20703125,
+        "REGULAR_NONPERIODIC": 0.09375,
         "SENSITIVE": 0.0
       },
       "valid": true
     }
   ],
   "state_fraction_FIXED": {
-    "max": 0.296875,
-    "mean": 0.045572916666666664,
+    "max": 0.359375,
+    "mean": 0.055338541666666664,
     "median": 0.0,
     "min": 0.0,
     "n": 12
   },
   "state_fraction_PERIODIC": {
     "max": 1.0,
-    "mean": 0.18912760416666666,
+    "mean": 0.18880208333333334,
     "median": 0.0,
     "min": 0.0,
     "n": 12
   },
   "state_fraction_QUASIPERIODIC_LIKE": {
     "max": 1.0,
-    "mean": 0.5013020833333334,
+    "mean": 0.5022786458333334,
     "median": 0.470703125,
     "min": 0.0,
     "n": 12
   },
   "state_fraction_REGULAR_NONPERIODIC": {
     "max": 0.9921875,
-    "mean": 0.15559895833333334,
-    "median": 0.009765625,
+    "mean": 0.14518229166666666,
+    "median": 0.0078125,
     "min": 0.0,
     "n": 12
   },
