@@ -1,0 +1,768 @@
+{
+  "claim_boundary": "R8-AD4 decomposes the previously established one-step linear-accessibility gain into normalized displacement direction and scalar magnitude, with prespecified curvature and basis-dependent coordinate analyses. It does not establish information beyond the complete Markov state-plus-map, causal necessity, essential chronology, or a universal trajectory code.",
+  "classification": "D1 \u2014 direction-preserving decomposition",
+  "expected_seeds": [
+    1782,
+    1801,
+    1819,
+    1838,
+    1856,
+    1875,
+    1893,
+    1912,
+    1930,
+    1949,
+    1967,
+    1986
+  ],
+  "experiment": "R8-AD4",
+  "gates": {
+    "G_CURVATURE_ADDS": true,
+    "G_DIRECTION_PRESERVES": true,
+    "G_FULL_REPLICATION": true,
+    "G_MAGNITUDE_PRESERVES": false
+  },
+  "n_valid": 12,
+  "per_time_secondary": {
+    "1": {
+      "ABS_PATTERN": {
+        "mean": 0.29966796874999996,
+        "median": 0.294875
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.2502278645833333
+      },
+      "DELTA_FULL": {
+        "mean": 0.257734375
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.005964843750000018
+      },
+      "DIRECTION": {
+        "mean": 0.4830872395833332,
+        "median": 0.481234375
+      },
+      "FULL": {
+        "mean": 0.4905937500000001,
+        "median": 0.4906328125
+      },
+      "MAGNITUDE": {
+        "mean": 0.23882421875,
+        "median": 0.235734375
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.3050911458333334,
+        "median": 0.3038515625
+      },
+      "STATE": {
+        "mean": 0.232859375,
+        "median": 0.2284609375
+      }
+    },
+    "10": {
+      "ABS_PATTERN": {
+        "mean": 0.18728255208333333,
+        "median": 0.1885
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.024526041666666665
+      },
+      "DELTA_FULL": {
+        "mean": 0.025104166666666667
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.0021992187499999933
+      },
+      "DIRECTION": {
+        "mean": 0.1864674479166667,
+        "median": 0.1863125
+      },
+      "FULL": {
+        "mean": 0.18704557291666668,
+        "median": 0.18565625
+      },
+      "MAGNITUDE": {
+        "mean": 0.16414062499999998,
+        "median": 0.15715625
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.1755989583333333,
+        "median": 0.1741015625
+      },
+      "STATE": {
+        "mean": 0.16194140625,
+        "median": 0.15514062499999998
+      }
+    },
+    "11": {
+      "ABS_PATTERN": {
+        "mean": 0.18652213541666665,
+        "median": 0.1853203125
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.026981770833333335
+      },
+      "DELTA_FULL": {
+        "mean": 0.02828776041666668
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.0022864583333333335
+      },
+      "DIRECTION": {
+        "mean": 0.18704817708333335,
+        "median": 0.1862421875
+      },
+      "FULL": {
+        "mean": 0.18835416666666663,
+        "median": 0.1868515625
+      },
+      "MAGNITUDE": {
+        "mean": 0.16235286458333334,
+        "median": 0.160125
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.17681510416666668,
+        "median": 0.17521875
+      },
+      "STATE": {
+        "mean": 0.16006640625,
+        "median": 0.15957812500000002
+      }
+    },
+    "2": {
+      "ABS_PATTERN": {
+        "mean": 0.2226809895833333,
+        "median": 0.2224453125
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.08800390625
+      },
+      "DELTA_FULL": {
+        "mean": 0.09614192708333334
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.0034023437500000087
+      },
+      "DIRECTION": {
+        "mean": 0.2690221354166667,
+        "median": 0.267875
+      },
+      "FULL": {
+        "mean": 0.27716015624999996,
+        "median": 0.2753671875
+      },
+      "MAGNITUDE": {
+        "mean": 0.18442057291666666,
+        "median": 0.1828828125
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.20373177083333335,
+        "median": 0.20178125
+      },
+      "STATE": {
+        "mean": 0.18101822916666666,
+        "median": 0.178359375
+      }
+    },
+    "3": {
+      "ABS_PATTERN": {
+        "mean": 0.19711328124999997,
+        "median": 0.1949375
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.044000000000000004
+      },
+      "DELTA_FULL": {
+        "mean": 0.04854427083333334
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.0020611979166666786
+      },
+      "DIRECTION": {
+        "mean": 0.21102213541666662,
+        "median": 0.2061953125
+      },
+      "FULL": {
+        "mean": 0.21556640625,
+        "median": 0.2113671875
+      },
+      "MAGNITUDE": {
+        "mean": 0.16908333333333334,
+        "median": 0.16664062500000001
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.18505208333333334,
+        "median": 0.1838125
+      },
+      "STATE": {
+        "mean": 0.16702213541666666,
+        "median": 0.16565625
+      }
+    },
+    "4": {
+      "ABS_PATTERN": {
+        "mean": 0.18989713541666664,
+        "median": 0.186953125
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.03225260416666668
+      },
+      "DELTA_FULL": {
+        "mean": 0.035946614583333335
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.003170572916666672
+      },
+      "DIRECTION": {
+        "mean": 0.1944205729166667,
+        "median": 0.19175
+      },
+      "FULL": {
+        "mean": 0.19811458333333332,
+        "median": 0.1987421875
+      },
+      "MAGNITUDE": {
+        "mean": 0.16533854166666664,
+        "median": 0.1645859375
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.1775846354166667,
+        "median": 0.17591406250000002
+      },
+      "STATE": {
+        "mean": 0.16216796875,
+        "median": 0.1635390625
+      }
+    },
+    "5": {
+      "ABS_PATTERN": {
+        "mean": 0.18573958333333332,
+        "median": 0.186
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.028201822916666675
+      },
+      "DELTA_FULL": {
+        "mean": 0.029313802083333326
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.002080729166666661
+      },
+      "DIRECTION": {
+        "mean": 0.1885455729166667,
+        "median": 0.18921875000000002
+      },
+      "FULL": {
+        "mean": 0.18965755208333335,
+        "median": 0.1886171875
+      },
+      "MAGNITUDE": {
+        "mean": 0.1624244791666667,
+        "median": 0.16009374999999998
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.17511588541666667,
+        "median": 0.17526562499999998
+      },
+      "STATE": {
+        "mean": 0.16034375,
+        "median": 0.15833593750000002
+      }
+    },
+    "6": {
+      "ABS_PATTERN": {
+        "mean": 0.18771875000000002,
+        "median": 0.1893984375
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.024839843749999996
+      },
+      "DELTA_FULL": {
+        "mean": 0.026828125000000005
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.002486979166666674
+      },
+      "DIRECTION": {
+        "mean": 0.18753645833333332,
+        "median": 0.18810156249999999
+      },
+      "FULL": {
+        "mean": 0.18952473958333335,
+        "median": 0.1868828125
+      },
+      "MAGNITUDE": {
+        "mean": 0.16518359375,
+        "median": 0.1604609375
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.17623828125,
+        "median": 0.173046875
+      },
+      "STATE": {
+        "mean": 0.16269661458333334,
+        "median": 0.15825
+      }
+    },
+    "7": {
+      "ABS_PATTERN": {
+        "mean": 0.18867317708333334,
+        "median": 0.19121093749999998
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.022497395833333333
+      },
+      "DELTA_FULL": {
+        "mean": 0.025013020833333333
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.001506510416666669
+      },
+      "DIRECTION": {
+        "mean": 0.18711328125,
+        "median": 0.18744531250000002
+      },
+      "FULL": {
+        "mean": 0.18962890624999998,
+        "median": 0.1886875
+      },
+      "MAGNITUDE": {
+        "mean": 0.16612239583333335,
+        "median": 0.1650390625
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.17809244791666665,
+        "median": 0.1791875
+      },
+      "STATE": {
+        "mean": 0.16461588541666664,
+        "median": 0.1630390625
+      }
+    },
+    "8": {
+      "ABS_PATTERN": {
+        "mean": 0.1871770833333333,
+        "median": 0.18689843750000001
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.026755208333333332
+      },
+      "DELTA_FULL": {
+        "mean": 0.028257812499999996
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.002559895833333337
+      },
+      "DIRECTION": {
+        "mean": 0.18740494791666662,
+        "median": 0.1869296875
+      },
+      "FULL": {
+        "mean": 0.18890755208333332,
+        "median": 0.188515625
+      },
+      "MAGNITUDE": {
+        "mean": 0.16320963541666667,
+        "median": 0.15911718750000003
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.17430729166666667,
+        "median": 0.1721953125
+      },
+      "STATE": {
+        "mean": 0.1606497395833333,
+        "median": 0.15585937500000002
+      }
+    },
+    "9": {
+      "ABS_PATTERN": {
+        "mean": 0.1841328125,
+        "median": 0.18151562499999999
+      },
+      "DELTA_DIRECTION": {
+        "mean": 0.026553385416666672
+      },
+      "DELTA_FULL": {
+        "mean": 0.027671874999999995
+      },
+      "DELTA_MAGNITUDE": {
+        "mean": 0.002864583333333339
+      },
+      "DIRECTION": {
+        "mean": 0.18530208333333334,
+        "median": 0.183234375
+      },
+      "FULL": {
+        "mean": 0.18642057291666667,
+        "median": 0.18410156249999998
+      },
+      "MAGNITUDE": {
+        "mean": 0.16161328125,
+        "median": 0.15590625
+      },
+      "SIGN_PATTERN": {
+        "mean": 0.17483984374999997,
+        "median": 0.17260156249999997
+      },
+      "STATE": {
+        "mean": 0.15874869791666668,
+        "median": 0.153015625
+      }
+    }
+  },
+  "rows": [
+    {
+      "M": 100,
+      "delta_curvature": 0.042287500000000006,
+      "delta_direction": 0.04628409090909097,
+      "delta_full": 0.049360795454545525,
+      "delta_magnitude": 0.0016676136363636407,
+      "delta_turn": 0.00099374999999996,
+      "direction": 0.21552130681818185,
+      "full": 0.2185980113636364,
+      "magnitude": 0.17090482954545452,
+      "ret_direction": 0.9376690647482013,
+      "ret_magnitude": 0.033784172661870546,
+      "seed": 1782,
+      "state": 0.16923721590909088
+    },
+    {
+      "M": 120,
+      "delta_curvature": 0.046029687500000055,
+      "delta_direction": 0.06214488636363638,
+      "delta_full": 0.0635539772727273,
+      "delta_magnitude": 0.004316761363636401,
+      "delta_turn": 0.0009906249999999672,
+      "direction": 0.22732954545454545,
+      "full": 0.22873863636363637,
+      "magnitude": 0.16950142045454547,
+      "ret_direction": 0.9778284386035492,
+      "ret_magnitude": 0.06792275714094197,
+      "seed": 1801,
+      "state": 0.16518465909090907
+    },
+    {
+      "M": 100,
+      "delta_curvature": 0.04322499999999996,
+      "delta_direction": 0.050578125,
+      "delta_full": 0.0561875,
+      "delta_magnitude": 0.0027798295454545263,
+      "delta_turn": 0.00014843749999998712,
+      "direction": 0.24079261363636364,
+      "full": 0.24640198863636364,
+      "magnitude": 0.19299431818181817,
+      "ret_direction": 0.9001668520578421,
+      "ret_magnitude": 0.049474163211648964,
+      "seed": 1819,
+      "state": 0.19021448863636364
+    },
+    {
+      "M": 110,
+      "delta_curvature": 0.04463124999999998,
+      "delta_direction": 0.04819034090909091,
+      "delta_full": 0.05343607954545454,
+      "delta_magnitude": 0.0021178977272727495,
+      "delta_turn": 0.0007156249999999975,
+      "direction": 0.21224857954545454,
+      "full": 0.21749431818181816,
+      "magnitude": 0.16617613636363637,
+      "ret_direction": 0.9018315213057233,
+      "ret_magnitude": 0.03963422738509838,
+      "seed": 1838,
+      "state": 0.16405823863636362
+    },
+    {
+      "M": 100,
+      "delta_curvature": 0.044271874999999905,
+      "delta_direction": 0.05377130681818185,
+      "delta_full": 0.05604829545454548,
+      "delta_magnitude": 0.001355113636363675,
+      "delta_turn": 0.000854687499999951,
+      "direction": 0.23785795454545455,
+      "full": 0.2401349431818182,
+      "magnitude": 0.18544176136363638,
+      "ret_direction": 0.9593745248111917,
+      "ret_magnitude": 0.024177606569010766,
+      "seed": 1856,
+      "state": 0.1840866477272727
+    },
+    {
+      "M": 110,
+      "delta_curvature": 0.04854374999999997,
+      "delta_direction": 0.0652911931818182,
+      "delta_full": 0.06498863636363633,
+      "delta_magnitude": 0.004313920454545428,
+      "delta_turn": 0.001037499999999969,
+      "direction": 0.22397159090909094,
+      "full": 0.22366903409090907,
+      "magnitude": 0.16299431818181817,
+      "ret_direction": 1.0046555341842986,
+      "ret_magnitude": 0.06637961182024792,
+      "seed": 1875,
+      "state": 0.15868039772727274
+    },
+    {
+      "M": 100,
+      "delta_curvature": 0.04732343750000001,
+      "delta_direction": 0.0582883522727273,
+      "delta_full": 0.060848011363636406,
+      "delta_magnitude": 0.003920454545454588,
+      "delta_turn": 0.0003999999999999837,
+      "direction": 0.22438352272727274,
+      "full": 0.22694318181818185,
+      "magnitude": 0.17001562500000003,
+      "ret_direction": 0.9579335621075237,
+      "ret_magnitude": 0.06443028223265,
+      "seed": 1893,
+      "state": 0.16609517045454544
+    },
+    {
+      "M": 100,
+      "delta_curvature": 0.04853593749999999,
+      "delta_direction": 0.05109090909090913,
+      "delta_full": 0.05829119318181816,
+      "delta_magnitude": 0.001411931818181833,
+      "delta_turn": 0.0005046875000000173,
+      "direction": 0.2158579545454546,
+      "full": 0.22305823863636362,
+      "magnitude": 0.1661789772727273,
+      "ret_direction": 0.8764773253405473,
+      "ret_magnitude": 0.024222043521700192,
+      "seed": 1912,
+      "state": 0.16476704545454546
+    },
+    {
+      "M": 100,
+      "delta_curvature": 0.04842500000000005,
+      "delta_direction": 0.06474857954545454,
+      "delta_full": 0.06631107954545454,
+      "delta_magnitude": 0.0033892045454545217,
+      "delta_turn": 0.0008828125000000242,
+      "direction": 0.2252627840909091,
+      "full": 0.2268252840909091,
+      "magnitude": 0.16390340909090909,
+      "ret_direction": 0.9764368185420818,
+      "ret_magnitude": 0.051110682689629705,
+      "seed": 1930,
+      "state": 0.16051420454545456
+    },
+    {
+      "M": 120,
+      "delta_curvature": 0.045229687499999977,
+      "delta_direction": 0.05125000000000002,
+      "delta_full": 0.05333664772727276,
+      "delta_magnitude": 0.003528409090909096,
+      "delta_turn": 0.0015249999999999986,
+      "direction": 0.21383664772727273,
+      "full": 0.21592329545454547,
+      "magnitude": 0.1661150568181818,
+      "ret_direction": 0.9608777863591572,
+      "ret_magnitude": 0.06615355934911721,
+      "seed": 1949,
+      "state": 0.16258664772727272
+    },
+    {
+      "M": 100,
+      "delta_curvature": 0.042312499999999975,
+      "delta_direction": 0.05411221590909093,
+      "delta_full": 0.055992897727272783,
+      "delta_magnitude": 0.002049715909090921,
+      "delta_turn": 0.0005421874999999854,
+      "direction": 0.21903977272727274,
+      "full": 0.2209204545454546,
+      "magnitude": 0.16697727272727272,
+      "ret_direction": 0.9664121362794585,
+      "ret_magnitude": 0.036606712499048864,
+      "seed": 1967,
+      "state": 0.1649275568181818
+    },
+    {
+      "M": 100,
+      "delta_curvature": 0.03913593750000002,
+      "delta_direction": 0.04316619318181822,
+      "delta_full": 0.04765625000000001,
+      "delta_magnitude": 0.0025127840909091037,
+      "delta_turn": 0.0004531250000000264,
+      "direction": 0.23513778409090913,
+      "full": 0.23962784090909092,
+      "magnitude": 0.19448437500000001,
+      "ret_direction": 0.905782414307005,
+      "ret_magnitude": 0.052727272727272984,
+      "seed": 1986,
+      "state": 0.1919715909090909
+    }
+  ],
+  "secondary": {
+    "ABS_PATTERN_GAIN": {
+      "bootstrap_95_ci": [
+        0.02773131806344699,
+        0.035021368963068185
+      ],
+      "max": 0.04226846590909086,
+      "mean": 0.03131593276515152,
+      "median": 0.028805397727272752,
+      "min": 0.020683238636363677,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "BEST_SINGLE_COORD_GAIN": {
+      "bootstrap_95_ci": [
+        0.006801609848484856,
+        0.007939198626893929
+      ],
+      "max": 0.009106534090909113,
+      "mean": 0.007358783143939393,
+      "median": 0.007321732954545454,
+      "min": 0.005846590909090954,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "SIGN_PATTERN_GAIN": {
+      "bootstrap_95_ci": [
+        0.018283454663825763,
+        0.023629876893939396
+      ],
+      "max": 0.028987215909090924,
+      "mean": 0.0209397490530303,
+      "median": 0.01958451704545458,
+      "min": 0.013747159090909039,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "TOP4_COORD_GAIN": {
+      "bootstrap_95_ci": [
+        0.020570913233901526,
+        0.023422481652462128
+      ],
+      "max": 0.025465909090909122,
+      "mean": 0.02204356060606062,
+      "median": 0.0224396306818182,
+      "min": 0.017863636363636387,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "best_coordinate_selection_counts": {
+      "0": 10,
+      "1": 8,
+      "10": 11,
+      "11": 11,
+      "12": 4,
+      "13": 7,
+      "14": 2,
+      "15": 5,
+      "2": 7,
+      "3": 10,
+      "4": 11,
+      "5": 10,
+      "6": 10,
+      "7": 9,
+      "8": 10,
+      "9": 7
+    }
+  },
+  "summaries": {
+    "DELTA_CURVATURE": {
+      "bootstrap_95_ci": [
+        0.04335544270833333,
+        0.04656693359375001
+      ],
+      "max": 0.04854374999999997,
+      "mean": 0.044995963541666656,
+      "median": 0.04493046874999998,
+      "min": 0.03913593750000002,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "DELTA_DIRECTION": {
+      "bootstrap_95_ci": [
+        0.050327059659090935,
+        0.0581226384943182
+      ],
+      "max": 0.0652911931818182,
+      "mean": 0.05407634943181821,
+      "median": 0.05251065340909093,
+      "min": 0.04316619318181822,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "DELTA_FULL": {
+      "bootstrap_95_ci": [
+        0.05393193655303034,
+        0.060424153645833346
+      ],
+      "max": 0.06631107954545454,
+      "mean": 0.057167613636363655,
+      "median": 0.05611789772727274,
+      "min": 0.04765625000000001,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "DELTA_MAGNITUDE": {
+      "bootstrap_95_ci": [
+        0.0021893732244318235,
+        0.003364701704545462
+      ],
+      "max": 0.004316761363636401,
+      "mean": 0.0027803030303030405,
+      "median": 0.002646306818181815,
+      "min": 0.001355113636363675,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "DELTA_SHUFFLE": {
+      "bootstrap_95_ci": [
+        0.05552427497632578,
+        0.06169651396780304
+      ],
+      "max": 0.06722017045454548,
+      "mean": 0.05862121212121213,
+      "median": 0.05794389204545457,
+      "min": 0.04955539772727274,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "DELTA_TURN": {
+      "bootstrap_95_ci": [
+        0.0005622363281249897,
+        0.0009602864583333228
+      ],
+      "max": 0.0015249999999999986,
+      "mean": 0.0007540364583333223,
+      "median": 0.0007851562499999742,
+      "min": 0.00014843749999998712,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "RET_DIRECTION": {
+      "bootstrap_95_ci": [
+        0.922595066522642,
+        0.9647524657398517
+      ],
+      "max": 1.0046555341842986,
+      "mean": 0.943787164887215,
+      "median": 0.9586540434593577,
+      "min": 0.8764773253405473,
+      "n": 12,
+      "positive_lineages": 12
+    },
+    "RET_MAGNITUDE": {
+      "bootstrap_95_ci": [
+        0.03920655837904083,
+        0.05672415410940358
+      ],
+      "max": 0.06792275714094197,
+      "mean": 0.04805192431735312,
+      "median": 0.050292422950639334,
+      "min": 0.024177606569010766,
+      "n": 12,
+      "positive_lineages": 12
+    }
+  },
+  "thresholds": {
+    "bootstrap_resamples": 10000,
+    "min_gain": 0.005,
+    "min_positive_lineages": 10,
+    "min_retained_fraction_ci_lower": 0.5,
+    "min_retained_fraction_mean": 0.75
+  }
+}
