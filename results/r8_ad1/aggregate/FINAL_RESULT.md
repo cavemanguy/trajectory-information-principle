@@ -4,33 +4,33 @@
 
 ## Family classifications
 
-- FIXED: **0/12**
+- FIXED: **1/12**
 - SHORT_CYCLE: **1/12**
-- UNRESOLVED: **11/12**
+- UNRESOLVED: **10/12**
 
 ## Cross-family diagnostics
 
-- fixed fraction: mean 0.077555; median 0.000000; range [0.000000, 0.867676]
-- family median `||h12-h512||`: mean 4.42007; median 4.65164; range [2.0394, 5.63282]
-- family median `||F(h512)-h512||`: mean 3.79976; median 4.08108; range [1.07454e-07, 5.4753]
-- family median final-state spread from centroid: mean 2.49656; median 2.6346; range [0.546866, 3.31517]
+- fixed fraction: mean 0.088216; median 0.000000; range [0.000000, 0.996094]
+- family median `||h12-h512||`: mean 4.41717; median 4.651; range [2.0394, 5.63282]
+- family median `||F(h512)-h512||`: mean 3.79634; median 4.08101; range [1.19209e-07, 5.4753]
+- family median final-state spread from centroid: mean 2.60192; median 2.64089; range [1.82065, 3.31517]
 
 ## Per-family values
 
 | seed | M | class | fixed fraction | median d12→512 | median end residual | median final spread |
 |---:|---:|---|---:|---:|---:|---:|
-| 1561 | 110 | UNRESOLVED | 0.0000 | 4.83602 | 3.72773 | 2.65318 |
+| 1561 | 110 | UNRESOLVED | 0.0000 | 4.89313 | 3.69499 | 2.66442 |
 | 1579 | 110 | UNRESOLVED | 0.0000 | 5.06066 | 5.4753 | 2.94194 |
 | 1597 | 100 | SHORT_CYCLE | 0.0000 | 5.63282 | 2.56366 | 2.53575 |
-| 1616 | 90 | UNRESOLVED | 0.0625 | 5.15272 | 4.16599 | 2.29977 |
-| 1634 | 120 | UNRESOLVED | 0.0000 | 3.53255 | 3.74218 | 2.52466 |
+| 1616 | 90 | UNRESOLVED | 0.0615 | 5.09017 | 4.16689 | 2.26738 |
+| 1634 | 120 | UNRESOLVED | 0.0000 | 3.55015 | 3.74349 | 2.53347 |
 | 1652 | 130 | UNRESOLVED | 0.0000 | 2.0394 | 4.06792 | 2.73671 |
-| 1671 | 100 | UNRESOLVED | 0.0000 | 4.16256 | 4.63512 | 3.31517 |
-| 1689 | 110 | UNRESOLVED | 0.0000 | 3.80043 | 3.46584 | 2.02926 |
-| 1708 | 90 | UNRESOLVED | 0.8677 | 4.50366 | 1.07454e-07 | 0.546866 |
+| 1671 | 100 | UNRESOLVED | 0.0000 | 4.16277 | 4.63504 | 3.31517 |
+| 1689 | 110 | UNRESOLVED | 0.0000 | 3.79599 | 3.45559 | 2.03082 |
+| 1708 | 100 | FIXED | 0.9961 | 4.46229 | 1.19209e-07 | 1.82065 |
 | 1726 | 100 | UNRESOLVED | 0.0000 | 5.0167 | 5.25975 | 2.85591 |
 | 1745 | 90 | UNRESOLVED | 0.0000 | 4.64506 | 4.39934 | 2.90344 |
-| 1763 | 100 | UNRESOLVED | 0.0005 | 4.65822 | 4.09424 | 2.61601 |
+| 1763 | 100 | UNRESOLVED | 0.0010 | 4.65693 | 4.0941 | 2.61735 |
 
 ## Claim boundary
 
