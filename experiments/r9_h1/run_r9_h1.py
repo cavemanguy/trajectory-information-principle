@@ -18,6 +18,7 @@ import torch.nn.functional as F
 from experiments.r9_t1 import run_r9_t1 as base
 from experiments.r9_h1.models import build_arms, count_params, UpdateGateModel
 from experiments.r9_h1 import diagnostics as dx
+from experiments.r9_h1 import diagnostics_extra as ex
 
 SEEDS = (2311, 2333, 2357, 2381, 2411, 2437, 2467, 2491)
 TRAIN_STEPS = 360
@@ -114,8 +115,10 @@ def learning_beta(trace):
     gate = np.asarray([r["controller_mean"] for r in rows[:-1]], np.float64)
     loss = np.asarray([r["loss"] for r in rows[:-1]], np.float64)
     nxt = np.asarray([r["transformer_update_norm"] for r in rows[1:]], np.float64)
+
     def z(x):
         return (x - x.mean()) / (x.std() + 1e-8)
+
     X = np.column_stack([np.ones(len(gate)), z(loss), z(gate)])
     y = z(nxt)
     beta, *_ = np.linalg.lstsq(X, y, rcond=None)
@@ -146,7 +149,6 @@ def smoke_run(seed, outdir):
             "controller_signal": model.controller_signal,
             "finite": bool(ok),
         }
-    # Structural anti-leak assertion: all model calls above receive only event type/payload.
     summary = {
         "experiment": "R9-H1",
         "protocol_version": PROTOCOL_VERSION,
@@ -187,7 +189,7 @@ def run_family(seed, outdir):
     audits = {}
     finite = True
 
-    for i, (name, model) in enumerate(arms.items()):
+    for name, model in arms.items():
         tm = dx.task_metrics(model, test_batch)
         architecture[name] = {
             "params": count_params(model),
@@ -197,6 +199,18 @@ def run_family(seed, outdir):
         md = dx.mechanistic_diagnostics(
             model, probe_train, probe_test, derive_seed(seed, f"diag_shuffle_{name}")
         )
+        md["answer_history"] = ex.answer_history(
+            model, probe_train, probe_test, derive_seed(seed, f"answer_shuffle_{name}")
+        )
+        md["order_controls"] = ex.local_order_controls(
+            model, probe_train, probe_test, derive_seed(seed, f"order_shuffle_{name}")
+        )
+        if name in ("TEACHER", "INTERROGATOR"):
+            md["perturbation_response"] = ex.perturbation_response(
+                model, probe_train, probe_test, name
+            )
+        else:
+            md["perturbation_response"] = None
         anomaly_metrics[name] = md
         controls[name] = dx.control_effects(model, test_batch)
         audits[name] = dx.controller_audit(model, probe_train, probe_test)
@@ -231,6 +245,7 @@ def run_family(seed, outdir):
         "par_h": par["history"]["RNN"]["h1"] - par["history"]["T"]["h1"],
         "complementarity": par["complementarity"],
         "linear_cka": par["pair_similarity"]["linear_cka"],
+        "branch_ablation": ex.parallel_branch_ablation(arms["PARALLEL"], test_batch),
     }
 
     learn_beta = learning_beta(traces["UPDATE_GATE"])
