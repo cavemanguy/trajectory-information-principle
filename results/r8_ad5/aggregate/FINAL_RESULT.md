@@ -9,22 +9,22 @@
 
 ## Primary summaries
 
-- K_DIR: mean -0.016792; 95% CI [-0.022087, -0.011519]; positive 1/12
+- K_DIR: mean -0.016768; 95% CI [-0.022089, -0.011453]; positive 1/12
 - K_DIR_CE: mean -0.044629; positive 1/12
-- direction accuracy drop: mean +0.019214
-- magnitude-only accuracy drop: mean +0.036006
-- generic random accuracy drop: mean +0.020128
-- K_CURV: mean -0.030533; 95% CI [-0.040005, -0.020050]; positive 1/12
-- K_CURV_CE: mean -0.237109; positive 1/12
-- azimuth/turn-orientation accuracy drop: mean +0.047970
-- polar/scalar-turn accuracy drop: mean +0.078503
-- maximum frozen geometry mismatch: 3.744e-06
+- direction accuracy drop: mean +0.019194
+- magnitude-only accuracy drop: mean +0.035962
+- generic random accuracy drop: mean +0.020108
+- K_CURV: mean -0.030544; 95% CI [-0.040007, -0.020060]; positive 1/12
+- K_CURV_CE: mean -0.237157; positive 1/12
+- azimuth/turn-orientation accuracy drop: mean +0.047965
+- polar/scalar-turn accuracy drop: mean +0.078509
+- maximum frozen geometry mismatch: 2.375e-06
 
 ## Per-lineage values
 
 | seed | M | AD2 regime | drop dir | drop mag | K_DIR | drop az | drop pol | K_CURV |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|
-| 1782 | 100 | QUASIPERIODIC_LIKE | +0.0038 | +0.0033 | +0.0005 | +0.0162 | +0.0265 | -0.0104 |
+| 1782 | 100 | QUASIPERIODIC_LIKE | +0.0036 | +0.0027 | +0.0008 | +0.0161 | +0.0266 | -0.0105 |
 | 1801 | 120 | QUASIPERIODIC_LIKE | +0.0196 | +0.0355 | -0.0159 | +0.0717 | +0.1262 | -0.0545 |
 | 1819 | 100 | PERIODIC | +0.0212 | +0.0374 | -0.0162 | +0.0308 | +0.0478 | -0.0170 |
 | 1838 | 110 | MIXED | +0.0188 | +0.0345 | -0.0157 | +0.0261 | +0.0378 | -0.0117 |
@@ -35,7 +35,7 @@
 | 1930 | 100 | MIXED | +0.0077 | +0.0220 | -0.0143 | +0.0414 | +0.0804 | -0.0390 |
 | 1949 | 120 | REGULAR_NONPERIODIC | +0.0204 | +0.0359 | -0.0155 | +0.0763 | +0.1165 | -0.0402 |
 | 1967 | 100 | QUASIPERIODIC_LIKE | +0.0248 | +0.0519 | -0.0271 | +0.0557 | +0.0878 | -0.0321 |
-| 1986 | 100 | MIXED | +0.0208 | +0.0283 | -0.0076 | +0.0149 | +0.0089 | +0.0060 |
+| 1986 | 100 | MIXED | +0.0208 | +0.0283 | -0.0075 | +0.0149 | +0.0089 | +0.0060 |
 
 ## Claim boundary
 
