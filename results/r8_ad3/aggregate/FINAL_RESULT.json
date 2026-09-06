@@ -1,23 +1,23 @@
 {
   "ad2_regime_groups_secondary": {
     "MIXED": {
-      "mean_delta_state": 0.055424715909090906,
+      "mean_delta_state": 0.055426136363636365,
       "median_delta_state": 0.05303835227272724,
       "n": 3
     },
     "PERIODIC": {
-      "mean_delta_state": 0.05649005681818178,
-      "median_delta_state": 0.05649005681818178,
+      "mean_delta_state": 0.056487926136363636,
+      "median_delta_state": 0.056487926136363636,
       "n": 2
     },
     "QUASIPERIODIC_LIKE": {
-      "mean_delta_state": 0.057993465909090915,
+      "mean_delta_state": 0.057963352272727274,
       "median_delta_state": 0.058714488636363665,
       "n": 5
     },
     "REGULAR_NONPERIODIC": {
-      "mean_delta_state": 0.05244886363636367,
-      "median_delta_state": 0.05244886363636367,
+      "mean_delta_state": 0.0524502840909091,
+      "median_delta_state": 0.0524502840909091,
       "n": 1
     },
     "SENSITIVE": {
@@ -30,19 +30,19 @@
   "classification": "H1 \u2014 one-step path-history accessibility supported",
   "delta_quadratic_secondary": {
     "bootstrap_95_ci": [
-      -0.018609709398674228,
-      -0.009804196259469693
+      -0.018619365530303005,
+      -0.009884117542613625
     ],
-    "mean": -0.014220880681818175,
+    "mean": -0.014249999999999997,
     "median": -0.013525568181818201,
     "positive_lineages": 0
   },
   "endpoint_t12_delta_joint_minus_state_secondary": {
     "bootstrap_95_ci": [
-      0.011268098958333332,
-      0.016430989583333316
+      0.011540299479166663,
+      0.016441438802083326
     ],
-    "mean": 0.013811197916666663,
+    "mean": 0.01391536458333333,
     "median": 0.013109374999999979
   },
   "expected_seeds": [
@@ -63,13 +63,13 @@
   "gates": {
     "G_SHUFFLE": {
       "bootstrap_95_ci": [
-        0.0554867986505682,
-        0.06206158262310605
+        0.05549854699337122,
+        0.06206078657670456
       ],
       "max": 0.06823721590909093,
-      "mean": 0.05875970643939396,
-      "median": 0.058949573863636376,
-      "min": 0.04871164772727274,
+      "mean": 0.05876455965909092,
+      "median": 0.05889417613636365,
+      "min": 0.048718750000000005,
       "min_effect_required": 0.005,
       "min_positive_required": 10,
       "pass": true,
@@ -77,13 +77,13 @@
     },
     "G_STATE": {
       "bootstrap_95_ci": [
-        0.053912029474431813,
-        0.06048931403882577
+        0.053891876775568184,
+        0.06048510002367423
       ],
-      "max": 0.06665767045454546,
-      "mean": 0.05719708806818181,
-      "median": 0.05698153409090907,
-      "min": 0.046578125000000026,
+      "max": 0.06665767045454549,
+      "mean": 0.057184659090909085,
+      "median": 0.05698082386363634,
+      "min": 0.046582386363636374,
       "min_effect_required": 0.005,
       "min_positive_required": 10,
       "pass": true,
@@ -93,42 +93,42 @@
   "n_valid": 12,
   "per_relation_secondary": {
     "0": {
-      "mean_delta_joint_minus_state": 0.038476325757575765,
-      "median_delta_joint_minus_state": 0.03517613636363636,
+      "mean_delta_joint_minus_state": 0.03846022727272727,
+      "median_delta_joint_minus_state": 0.035181818181818175,
       "positive_lineages": 12
     },
     "1": {
-      "mean_delta_joint_minus_state": 0.04837878787878789,
-      "median_delta_joint_minus_state": 0.04663068181818183,
+      "mean_delta_joint_minus_state": 0.04842518939393939,
+      "median_delta_joint_minus_state": 0.04664204545454546,
       "positive_lineages": 12
     },
     "2": {
-      "mean_delta_joint_minus_state": 0.06798958333333331,
+      "mean_delta_joint_minus_state": 0.06803314393939393,
       "median_delta_joint_minus_state": 0.05076136363636362,
       "positive_lineages": 12
     },
     "3": {
-      "mean_delta_joint_minus_state": 0.06166856060606058,
-      "median_delta_joint_minus_state": 0.057471590909090854,
+      "mean_delta_joint_minus_state": 0.061586174242424234,
+      "median_delta_joint_minus_state": 0.057460227272727225,
       "positive_lineages": 12
     },
     "4": {
-      "mean_delta_joint_minus_state": 0.04323484848484849,
-      "median_delta_joint_minus_state": 0.04902272727272725,
+      "mean_delta_joint_minus_state": 0.04316666666666665,
+      "median_delta_joint_minus_state": 0.04901704545454544,
       "positive_lineages": 12
     },
     "5": {
-      "mean_delta_joint_minus_state": 0.06789962121212122,
-      "median_delta_joint_minus_state": 0.03903977272727273,
+      "mean_delta_joint_minus_state": 0.06789583333333334,
+      "median_delta_joint_minus_state": 0.03904545454545454,
       "positive_lineages": 12
     },
     "6": {
-      "mean_delta_joint_minus_state": 0.06526515151515151,
-      "median_delta_joint_minus_state": 0.047420454545454564,
+      "mean_delta_joint_minus_state": 0.06529261363636363,
+      "median_delta_joint_minus_state": 0.04740909090909092,
       "positive_lineages": 12
     },
     "7": {
-      "mean_delta_joint_minus_state": 0.06466382575757577,
+      "mean_delta_joint_minus_state": 0.06461742424242424,
       "median_delta_joint_minus_state": 0.04888636363636364,
       "positive_lineages": 12
     }
@@ -136,313 +136,313 @@
   "per_time_secondary": {
     "1": {
       "DELTA_STATE": {
-        "mean": 0.2585208333333333,
-        "median": 0.25889843749999997
+        "mean": 0.25847265625,
+        "median": 0.2589140625
       },
       "STATE": {
-        "mean": 0.2327213541666667,
+        "mean": 0.23273307291666667,
         "median": 0.22981250000000003
       },
       "STATE_QUADRATIC": {
-        "mean": 0.33379557291666667,
-        "median": 0.33394531250000004
+        "mean": 0.33373958333333337,
+        "median": 0.333625
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.22971874999999997,
+        "mean": 0.22977864583333338,
         "median": 0.226875
       },
       "STATE_VELOCITY": {
-        "mean": 0.4912421875,
+        "mean": 0.4912057291666667,
         "median": 0.49013281249999996
       },
       "VELOCITY": {
-        "mean": 0.3967825520833334,
-        "median": 0.394671875
+        "mean": 0.3967643229166667,
+        "median": 0.39454687499999996
       }
     },
     "10": {
       "DELTA_STATE": {
-        "mean": 0.024373697916666662,
-        "median": 0.024585937499999988
+        "mean": 0.02442838541666666,
+        "median": 0.024593749999999984
       },
       "STATE": {
-        "mean": 0.16278125000000002,
-        "median": 0.15771093749999998
+        "mean": 0.1627447916666667,
+        "median": 0.157484375
       },
       "STATE_QUADRATIC": {
-        "mean": 0.22336067708333332,
+        "mean": 0.22338411458333332,
         "median": 0.227296875
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.16172005208333332,
-        "median": 0.1571171875
+        "mean": 0.16166796875,
+        "median": 0.15680468749999998
       },
       "STATE_VELOCITY": {
-        "mean": 0.18715494791666668,
-        "median": 0.18598437499999998
+        "mean": 0.18717317708333336,
+        "median": 0.1859921875
       },
       "VELOCITY": {
-        "mean": 0.15489322916666667,
-        "median": 0.15409375
+        "mean": 0.15498697916666668,
+        "median": 0.1546328125
       }
     },
     "11": {
       "DELTA_STATE": {
-        "mean": 0.02808463541666667,
+        "mean": 0.02812760416666667,
         "median": 0.027953125000000023
       },
       "STATE": {
-        "mean": 0.16137890624999998,
-        "median": 0.15947656249999997
+        "mean": 0.16133723958333332,
+        "median": 0.15923437499999998
       },
       "STATE_QUADRATIC": {
-        "mean": 0.22394661458333331,
+        "mean": 0.22399869791666668,
         "median": 0.2293203125
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.1600611979166667,
-        "median": 0.1581875
+        "mean": 0.16002604166666667,
+        "median": 0.157984375
       },
       "STATE_VELOCITY": {
-        "mean": 0.18946354166666668,
+        "mean": 0.18946484375000003,
         "median": 0.18806250000000002
       },
       "VELOCITY": {
-        "mean": 0.1540520833333333,
+        "mean": 0.15407421875,
         "median": 0.15203125
       }
     },
     "12": {
       "DELTA_STATE": {
-        "mean": 0.013811197916666663,
+        "mean": 0.01391536458333333,
         "median": 0.013109374999999979
       },
       "STATE": {
-        "mean": 0.18672265624999998,
+        "mean": 0.1866328125,
         "median": 0.18703906250000002
       },
       "STATE_QUADRATIC": {
-        "mean": 0.22806510416666667,
+        "mean": 0.22805338541666667,
         "median": 0.231203125
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.18550651041666666,
+        "mean": 0.18548567708333333,
         "median": 0.18553125
       },
       "STATE_VELOCITY": {
-        "mean": 0.20053385416666666,
+        "mean": 0.20054817708333336,
         "median": 0.200171875
       },
       "VELOCITY": {
-        "mean": 0.16818489583333338,
-        "median": 0.17060156249999997
+        "mean": 0.16820052083333334,
+        "median": 0.1706171875
       }
     },
     "2": {
       "DELTA_STATE": {
-        "mean": 0.09594010416666665,
-        "median": 0.0948046875
+        "mean": 0.09585937499999997,
+        "median": 0.09434375000000002
       },
       "STATE": {
-        "mean": 0.1811705729166667,
+        "mean": 0.18122395833333335,
         "median": 0.17890625
       },
       "STATE_QUADRATIC": {
-        "mean": 0.27482421875,
+        "mean": 0.2747955729166667,
         "median": 0.2737734375
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.17872395833333332,
+        "mean": 0.1787395833333333,
         "median": 0.17675
       },
       "STATE_VELOCITY": {
-        "mean": 0.2771106770833333,
+        "mean": 0.27708333333333335,
         "median": 0.2746875
       },
       "VELOCITY": {
-        "mean": 0.21274218749999999,
+        "mean": 0.2126796875,
         "median": 0.2147578125
       }
     },
     "3": {
       "DELTA_STATE": {
-        "mean": 0.04995052083333334,
+        "mean": 0.049960937500000004,
         "median": 0.050906250000000014
       },
       "STATE": {
-        "mean": 0.16640234375,
-        "median": 0.16597656249999998
+        "mean": 0.16641666666666663,
+        "median": 0.16607031249999998
       },
       "STATE_QUADRATIC": {
-        "mean": 0.24972916666666667,
+        "mean": 0.24970312500000003,
         "median": 0.2480546875
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.1641640625,
-        "median": 0.16362500000000002
+        "mean": 0.16397135416666667,
+        "median": 0.16246875
       },
       "STATE_VELOCITY": {
-        "mean": 0.21635286458333336,
-        "median": 0.2120546875
+        "mean": 0.2163776041666667,
+        "median": 0.2122265625
       },
       "VELOCITY": {
-        "mean": 0.17073567708333337,
+        "mean": 0.17067057291666668,
         "median": 0.16746875
       }
     },
     "4": {
       "DELTA_STATE": {
-        "mean": 0.03559505208333333,
+        "mean": 0.03560546875,
         "median": 0.035304687500000015
       },
       "STATE": {
-        "mean": 0.1626393229166667,
+        "mean": 0.16267968750000003,
         "median": 0.16211718749999998
       },
       "STATE_QUADRATIC": {
-        "mean": 0.23531770833333332,
-        "median": 0.235328125
+        "mean": 0.23529036458333333,
+        "median": 0.2353515625
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.16146744791666667,
-        "median": 0.15955468750000001
+        "mean": 0.16144791666666666,
+        "median": 0.159546875
       },
       "STATE_VELOCITY": {
-        "mean": 0.19823437500000005,
+        "mean": 0.19828515625,
         "median": 0.19665625
       },
       "VELOCITY": {
-        "mean": 0.1584127604166667,
+        "mean": 0.15841406249999998,
         "median": 0.15865625
       }
     },
     "5": {
       "DELTA_STATE": {
-        "mean": 0.02953125000000001,
+        "mean": 0.029440104166666675,
         "median": 0.029671874999999986
       },
       "STATE": {
-        "mean": 0.1610325520833333,
-        "median": 0.15821093749999998
+        "mean": 0.16108333333333333,
+        "median": 0.15819531250000002
       },
       "STATE_QUADRATIC": {
-        "mean": 0.22725000000000004,
+        "mean": 0.22732031250000004,
         "median": 0.23047656249999998
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.15965755208333332,
+        "mean": 0.15962760416666663,
         "median": 0.15661718749999998
       },
       "STATE_VELOCITY": {
-        "mean": 0.19056380208333334,
+        "mean": 0.19052343750000003,
         "median": 0.19008593750000002
       },
       "VELOCITY": {
-        "mean": 0.15546484375,
-        "median": 0.15559374999999998
+        "mean": 0.15545703125000002,
+        "median": 0.155609375
       }
     },
     "6": {
       "DELTA_STATE": {
-        "mean": 0.02641927083333333,
+        "mean": 0.02642317708333333,
         "median": 0.026148437499999982
       },
       "STATE": {
-        "mean": 0.16299869791666668,
-        "median": 0.1572265625
+        "mean": 0.16298307291666667,
+        "median": 0.15715625
       },
       "STATE_QUADRATIC": {
-        "mean": 0.22420963541666672,
-        "median": 0.22826562500000003
+        "mean": 0.22423046875000005,
+        "median": 0.2282734375
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.16179947916666668,
-        "median": 0.1561875
+        "mean": 0.16187500000000002,
+        "median": 0.15603125
       },
       "STATE_VELOCITY": {
-        "mean": 0.18941796875000003,
+        "mean": 0.18940625,
         "median": 0.187375
       },
       "VELOCITY": {
-        "mean": 0.15355598958333336,
-        "median": 0.1525390625
+        "mean": 0.15360026041666666,
+        "median": 0.1528046875
       }
     },
     "7": {
       "DELTA_STATE": {
-        "mean": 0.02564192708333333,
+        "mean": 0.02563671875,
         "median": 0.0274921875
       },
       "STATE": {
-        "mean": 0.16411588541666666,
-        "median": 0.1644140625
+        "mean": 0.16412369791666667,
+        "median": 0.16445312499999998
       },
       "STATE_QUADRATIC": {
-        "mean": 0.22332161458333333,
-        "median": 0.2284921875
+        "mean": 0.22343229166666667,
+        "median": 0.22848437499999996
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.16366406249999998,
-        "median": 0.16453125000000002
+        "mean": 0.16363541666666664,
+        "median": 0.16434375
       },
       "STATE_VELOCITY": {
-        "mean": 0.1897578125,
+        "mean": 0.18976041666666665,
         "median": 0.1901328125
       },
       "VELOCITY": {
-        "mean": 0.15799348958333334,
-        "median": 0.1627421875
+        "mean": 0.15802473958333332,
+        "median": 0.162734375
       }
     },
     "8": {
       "DELTA_STATE": {
-        "mean": 0.028162760416666672,
+        "mean": 0.028175781250000004,
         "median": 0.024257812500000017
       },
       "STATE": {
-        "mean": 0.16064192708333333,
-        "median": 0.15700000000000003
+        "mean": 0.16059635416666665,
+        "median": 0.15669531250000002
       },
       "STATE_QUADRATIC": {
-        "mean": 0.22316927083333335,
-        "median": 0.22890624999999998
+        "mean": 0.2231744791666667,
+        "median": 0.22889062500000001
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.15911718749999998,
-        "median": 0.1551484375
+        "mean": 0.1591223958333333,
+        "median": 0.1551796875
       },
       "STATE_VELOCITY": {
-        "mean": 0.18880468750000004,
-        "median": 0.18678125
+        "mean": 0.18877213541666668,
+        "median": 0.18677343750000003
       },
       "VELOCITY": {
-        "mean": 0.15327734375000002,
-        "median": 0.1587890625
+        "mean": 0.1532578125,
+        "median": 0.158796875
       }
     },
     "9": {
       "DELTA_STATE": {
-        "mean": 0.026947916666666665,
+        "mean": 0.026901041666666663,
         "median": 0.025796874999999997
       },
       "STATE": {
-        "mean": 0.16029817708333335,
-        "median": 0.155109375
+        "mean": 0.16026692708333332,
+        "median": 0.15490625000000002
       },
       "STATE_QUADRATIC": {
-        "mean": 0.2228541666666667,
+        "mean": 0.2229010416666667,
         "median": 0.22852343749999998
       },
       "STATE_SHUFFLED_VELOCITY": {
-        "mean": 0.1588984375,
-        "median": 0.1538046875
+        "mean": 0.15891796875,
+        "median": 0.15390625000000002
       },
       "STATE_VELOCITY": {
-        "mean": 0.18724609375,
-        "median": 0.1842734375
+        "mean": 0.18716796875,
+        "median": 0.18428125
       },
       "VELOCITY": {
-        "mean": 0.15200651041666666,
+        "mean": 0.15201302083333332,
         "median": 0.15014062500000003
       }
     }
@@ -451,15 +451,15 @@
     {
       "M": 100,
       "ad2_regime": "QUASIPERIODIC_LIKE",
-      "delta_quadratic": -0.0002855113636363593,
-      "delta_shuffle": 0.05126136363636366,
-      "delta_state": 0.049850852272727286,
-      "joint": 0.21921732954545456,
-      "quadratic": 0.21950284090909092,
+      "delta_quadratic": -0.0006079545454545365,
+      "delta_shuffle": 0.05141761363636363,
+      "delta_state": 0.04968465909090908,
+      "joint": 0.21906107954545453,
+      "quadratic": 0.21966903409090907,
       "seed": 1782,
-      "shuffle": 0.1679559659090909,
-      "state": 0.16936647727272727,
-      "velocity": 0.18158380681818184
+      "shuffle": 0.1676434659090909,
+      "state": 0.16937642045454546,
+      "velocity": 0.1816065340909091
     },
     {
       "M": 120,
@@ -503,15 +503,15 @@
     {
       "M": 100,
       "ad2_regime": "PERIODIC",
-      "delta_quadratic": -0.01126704545454546,
-      "delta_shuffle": 0.0571619318181818,
-      "delta_state": 0.05590767045454542,
-      "joint": 0.24010369318181815,
-      "quadratic": 0.2513707386363636,
+      "delta_quadratic": -0.011269886363636378,
+      "delta_shuffle": 0.05715482954545459,
+      "delta_state": 0.05590340909090913,
+      "joint": 0.2401008522727273,
+      "quadratic": 0.25137073863636367,
       "seed": 1856,
-      "shuffle": 0.18294176136363635,
-      "state": 0.18419602272727273,
-      "velocity": 0.20133948863636364
+      "shuffle": 0.1829460227272727,
+      "state": 0.18419744318181816,
+      "velocity": 0.20133806818181818
     },
     {
       "M": 110,
@@ -529,15 +529,15 @@
     {
       "M": 100,
       "ad2_regime": "QUASIPERIODIC_LIKE",
-      "delta_quadratic": -0.018181818181818188,
-      "delta_shuffle": 0.061907670454545455,
-      "delta_state": 0.06036363636363637,
-      "joint": 0.2267372159090909,
-      "quadratic": 0.2449190340909091,
+      "delta_quadratic": -0.018169034090909114,
+      "delta_shuffle": 0.06191903409090907,
+      "delta_state": 0.06038068181818182,
+      "joint": 0.22675142045454544,
+      "quadratic": 0.24492045454545455,
       "seed": 1893,
-      "shuffle": 0.16482954545454545,
-      "state": 0.16637357954545454,
-      "velocity": 0.188671875
+      "shuffle": 0.16483238636363637,
+      "state": 0.16637073863636362,
+      "velocity": 0.1886690340909091
     },
     {
       "M": 100,
@@ -555,54 +555,54 @@
     {
       "M": 100,
       "ad2_regime": "MIXED",
-      "delta_quadratic": -0.01290198863636366,
+      "delta_quadratic": -0.01290340909090909,
       "delta_shuffle": 0.06823721590909093,
-      "delta_state": 0.06665767045454546,
+      "delta_state": 0.06665767045454549,
       "joint": 0.22782102272727273,
-      "quadratic": 0.24072301136363639,
+      "quadratic": 0.24072443181818182,
       "seed": 1930,
       "shuffle": 0.1595838068181818,
-      "state": 0.16116335227272727,
+      "state": 0.16116335227272724,
       "velocity": 0.1803678977272727
     },
     {
       "M": 120,
       "ad2_regime": "REGULAR_NONPERIODIC",
-      "delta_quadratic": -0.0276491477272727,
-      "delta_shuffle": 0.0532258522727273,
-      "delta_state": 0.05244886363636367,
-      "joint": 0.2176420454545455,
-      "quadratic": 0.2452911931818182,
+      "delta_quadratic": -0.027654829545454535,
+      "delta_shuffle": 0.053227272727272734,
+      "delta_state": 0.0524502840909091,
+      "joint": 0.21764346590909092,
+      "quadratic": 0.24529829545454546,
       "seed": 1949,
       "shuffle": 0.1644161931818182,
       "state": 0.16519318181818182,
-      "velocity": 0.17084801136363637
+      "velocity": 0.17085227272727274
     },
     {
       "M": 100,
       "ad2_regime": "QUASIPERIODIC_LIKE",
-      "delta_quadratic": -0.0047585227272727015,
-      "delta_shuffle": 0.05894744318181819,
-      "delta_state": 0.056890625,
+      "delta_quadratic": -0.004762784090909106,
+      "delta_shuffle": 0.058836647727272734,
+      "delta_state": 0.05688920454545454,
       "joint": 0.22213920454545455,
-      "quadratic": 0.22689772727272725,
+      "quadratic": 0.22690198863636366,
       "seed": 1967,
-      "shuffle": 0.16319176136363636,
-      "state": 0.16524857954545455,
-      "velocity": 0.18757102272727275
+      "shuffle": 0.16330255681818182,
+      "state": 0.16525,
+      "velocity": 0.18757244318181818
     },
     {
       "M": 100,
       "ad2_regime": "MIXED",
-      "delta_quadratic": -0.0064318181818181774,
-      "delta_shuffle": 0.04871164772727274,
-      "delta_state": 0.046578125000000026,
-      "joint": 0.23903693181818184,
-      "quadratic": 0.24546875,
+      "delta_quadratic": -0.006457386363636353,
+      "delta_shuffle": 0.048718750000000005,
+      "delta_state": 0.046582386363636374,
+      "joint": 0.23903977272727275,
+      "quadratic": 0.2454971590909091,
       "seed": 1986,
-      "shuffle": 0.1903252840909091,
-      "state": 0.1924588068181818,
-      "velocity": 0.196640625
+      "shuffle": 0.19032102272727275,
+      "state": 0.19245738636363638,
+      "velocity": 0.1966448863636364
     }
   ]
 }
