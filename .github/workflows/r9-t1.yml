@@ -1,0 +1,115 @@
+name: R9-T1 Temporal Substrate Benchmark
+
+on:
+  push:
+    paths:
+      - 'experiments/r9_t1/**'
+      - '.github/workflows/r9-t1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R9-T1 outcome-free smoke gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_t1/requirements.txt
+      - name: Compile implementation
+        run: |
+          python -m py_compile experiments/r9_t1/run_r9_t1.py
+          python -m py_compile experiments/r9_t1/classify_r9_t1.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r9_t1/classify_r9_t1.py --self-check
+      - name: Run smoke path
+        run: python experiments/r9_t1/run_r9_t1.py --seed 2111 --outdir /tmp/r9_t1_smoke --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/r9_t1_smoke/smoke_summary.json'))
+          assert d['experiment']=='R9-T1'
+          assert d['all_valid'] is True
+          assert set(d['architecture']) == {'GRR','GRU','TRANSFORMER','SANDWICH'}
+          assert 'h_gain' in d['history_transfer']
+          assert 'd_rec' in d['anisotropy_transfer']
+          assert d['anisotropy_transfer']['n_points'] > 0
+          print('R9-T1 smoke structure ok')
+          PY
+
+  family:
+    name: R9-T1 seed ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        seed: [2111, 2131, 2153, 2179, 2203, 2221, 2243, 2267]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_t1/requirements.txt
+      - name: Execute frozen family
+        run: |
+          mkdir -p results/r9_t1/seed_${{ matrix.seed }}
+          python experiments/r9_t1/run_r9_t1.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r9_t1/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r9-t1-seed-${{ matrix.seed }}
+          path: results/r9_t1/seed_${{ matrix.seed }}/seed_summary.json
+          if-no-files-found: error
+
+  classify:
+    name: R9-T1 frozen cross-seed classification
+    needs: family
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_t1/requirements.txt
+      - name: Download family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r9-t1-seed-*
+          path: results/r9_t1/families
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: |
+          mkdir -p results/r9_t1/aggregate
+          python experiments/r9_t1/classify_r9_t1.py \
+            --root results/r9_t1/families \
+            --outdir results/r9_t1/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r9-t1-aggregate
+          path: results/r9_t1/aggregate/
+          if-no-files-found: error
+      - name: Commit authoritative R9-T1 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B r9-t1-results
+          git add results/r9_t1/aggregate/FINAL_RESULT.json results/r9_t1/aggregate/FINAL_RESULT.md
+          git commit -m 'Record frozen R9-T1 result' || true
+          git push --force origin HEAD:r9-t1-results
