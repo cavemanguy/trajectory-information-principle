@@ -12,16 +12,17 @@ Observers are measurement tools. Perturbations are optional causal/control tools
 
 ## Current source of truth
 
-Start here for the newest R8 synthesis:
+Start here:
 
-- [`docs/R8_CURRENT_SYNTHESIS.md`](docs/R8_CURRENT_SYNTHESIS.md) — synthesis through R8-AD4
-- [`docs/R8_AD5_RESULT.md`](docs/R8_AD5_RESULT.md) — **latest causal intervention result**
+- [`docs/R8_CURRENT_SYNTHESIS.md`](docs/R8_CURRENT_SYNTHESIS.md) — **current synthesis through R8-AD6**
+- [`docs/R8_AD6_RESULT.md`](docs/R8_AD6_RESULT.md) — tangent/transverse recovery interpretation
+- [`docs/R8_AD5_RESULT.md`](docs/R8_AD5_RESULT.md) — preserved negative causal-splice result and phase/tangent hypothesis origin
 - [`docs/CURRENT_CLAIMS.md`](docs/CURRENT_CLAIMS.md) — older claim ledger and boundaries
 - [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md) — preserved evidence map, negatives, and protocol-limited branches
 - [`RESEARCH_PRIORITIES.md`](RESEARCH_PRIORITIES.md) — scientific rules and experiment priorities
 - [`docs/research_history.md`](docs/research_history.md) — preserved historical development
 
-The newer R8 synthesis/result files supplement older claim/ledger files that were written before M9–M12 and AD1–AD5 completed.
+The newer R8 synthesis/result files supplement older claim/ledger files written before M9–M12 and AD1–AD6 completed.
 
 ## Current R8 system
 
@@ -39,13 +40,7 @@ with
 h_(t+1) = F(h_t)
 ```
 
-The analysis tracks how natural task distinctions evolve through that trajectory. For inputs differing in one relation, the experiments follow
-
-```text
-Delta_t = h_t(x) - h_t(x')
-```
-
-and measure how distinctions survive, contract, expand, reorganize, become accessible to simple readers, and respond to controlled interventions.
+The analysis tracks how natural task distinctions evolve through that trajectory and how controlled perturbations propagate through the frozen recurrent flow.
 
 The architecture itself is not claimed to be radically novel. The research question is what ordinary training organizes inside it.
 
@@ -73,7 +68,7 @@ The architecture itself is not claimed to be radically novel. The research quest
 
 A failed predictor is not a failed phenomenon.
 
-## AD1–AD5: native motion, accessibility, and causality
+## AD1–AD6: native motion, accessibility, and causal anisotropy
 
 ### AD1 — no generic fixed-point settling
 
@@ -94,81 +89,61 @@ These are finite-horizon descriptive classifications. `SENSITIVE` is not formal 
 
 ### AD3 — one-step path history improves linear accessibility
 
-**H1 — one-step path-history accessibility supported.** A closed-form linear ridge reader given
-
-```text
-[h_t, h_t - h_(t-1)]
-```
-
-outperformed a reader given `h_t` alone by **+5.72 percentage points on average**, with a 95% bootstrap CI of **[+5.39,+6.05] pp**, positive in **12/12 lineages**.
+**H1 — one-step path-history accessibility supported.** A closed-form linear ridge reader given `[h_t, h_t-h_(t-1)]` outperformed a reader given `h_t` alone by **+5.72 pp**, with 95% CI **[+5.39,+6.05] pp**, positive in **12/12 lineages**.
 
 Against a dimension-matched shuffled-history control, the gain was **+5.88 pp**, CI **[+5.55,+6.21]**, also positive in **12/12**.
 
-A much larger quadratic static reader still beat the 32-feature one-step representation by about 1.42 pp, so the supported claim is **improved simple-readout accessibility**, not information unavailable from the instantaneous state under nonlinear readout.
-
-Authoritative result: [`results/r8_ad3/aggregate/FINAL_RESULT.md`](results/r8_ad3/aggregate/FINAL_RESULT.md)
+A larger quadratic static reader still beat the one-step representation by about 1.42 pp, so the supported claim is improved simple-readout accessibility rather than information unavailable from the instantaneous state under nonlinear readout.
 
 ### AD4 — direction carries nearly all of the one-step accessibility gain
 
-**D1 — direction-preserving decomposition.** The AD3 effect replicated on fresh AD4 probe data.
-
-Full signed displacement:
-
-- gain over state: **+5.72 pp**
-- CI: **[+5.39,+6.04] pp**
-- positive: **12/12**
-
-Normalized displacement direction:
-
-- gain over state: **+5.41 pp**
-- CI: **[+5.03,+5.81] pp**
-- positive: **12/12**
-- retained fraction of full gain: **~94.4%**
-
-Scalar displacement magnitude:
-
-- gain over state: **+0.28 pp**
-- retained fraction: **~4.8%**
-- frozen magnitude-preservation gate: **failed**
-
-Adding the vector second difference
-
-```text
-a_t = (h_t - h_(t-1)) - (h_(t-1) - h_(t-2))
-```
-
-to the full one-step representation added another **+4.50 pp** of linear accessibility, CI **[+4.34,+4.66] pp**, positive in **12/12 lineages**. A scalar cosine turning-angle measure added only about **+0.08 pp**.
-
-Authoritative result: [`results/r8_ad4/aggregate/FINAL_RESULT.md`](results/r8_ad4/aggregate/FINAL_RESULT.md)
+**D1 — direction-preserving decomposition.** The AD3 effect replicated. Normalized displacement direction retained about **94.4%** of the one-step gain, while scalar speed retained about **4.8%**. Adding a vector second difference added another **+4.50 pp** of linear accessibility.
 
 ### AD5 — causal transition splices reverse the accessibility intuition
 
-**K0 — neither preregistered causal contrast supported.** AD5 explicitly intervened on native transitions while keeping the pre-splice state identical and matching Euclidean splice size.
+**K0 — neither preregistered causal contrast supported.** Direction rotations caused a smaller terminal accuracy drop (**+1.92 pp**) than matched magnitude/tangent changes (**+3.60 pp**). The preregistered `K_DIR` contrast was **-1.68 pp**, CI **[-2.21,-1.15]**, positive in only **1/12** lineages.
 
-Direction rotation versus magnitude-only change:
-
-- direction-rotation terminal accuracy drop: **+1.92 pp**
-- magnitude-only terminal accuracy drop: **+3.60 pp**
-- generic norm-matched random drop: **+2.01 pp**
-- frozen contrast `K_DIR = DROP_DIR - DROP_MAG`: **-1.68 pp**
-- 95% CI: **[-2.21,-1.15] pp**
-- positive in **1/12** lineages
-
-Turn-orientation versus scalar-turn change:
-
-- azimuth/turn-orientation drop: **+4.80 pp**
-- polar/scalar-turn drop: **+7.85 pp**
-- frozen contrast `K_CURV`: **-3.05 pp**
-- 95% CI: **[-4.00,-2.00] pp**
-- positive in **1/12** lineages
-
-Both preregistered gates failed. The reversal was consistent across all tested splice times and all frozen perturbation scales/angles. Maximum geometry mismatch remained below the preregistered validity tolerance.
-
-AD5 therefore establishes an important **readability–causality dissociation** in this system: displacement direction is highly useful to a simple diagnostic reader, but rotating that direction is not the direction of greatest functional vulnerability. Moving forward/backward along the native transition is more damaging under the tested matched splices.
+Likewise, turn-orientation interventions were less damaging than matched scalar-turn interventions. AD5 therefore established a **readability–causality dissociation** rather than the hoped-for direction-causality result.
 
 Authoritative result: [`results/r8_ad5/aggregate/FINAL_RESULT.md`](results/r8_ad5/aggregate/FINAL_RESULT.md)
 
-Interpretive note: [`docs/R8_AD5_RESULT.md`](docs/R8_AD5_RESULT.md)
+### AD6 — tangent persistence with transverse recovery
+
+**P1 — tangent persistence with functional asymmetry supported.** AD6 directly tested the post-AD5 tangent/phase explanation using equal-norm perturbations from the same native state.
+
+After three recurrent updates:
+
+- tangent total-error retention: **1.231×**
+- transverse total-error retention: **0.726×**
+- `D_REC`: **+0.505**
+- 95% CI: **[+0.409,+0.597]**
+- positive: **12/12 lineages**
+
+The stepwise recovery curves were:
+
+```text
+step 0: tangent 1.000x | transverse 1.000x
+step 1: tangent 1.069x | transverse 0.646x
+step 2: tangent 1.187x | transverse 0.686x
+step 3: tangent 1.231x | transverse 0.726x
+step 4: tangent 1.280x | transverse 0.751x
+```
+
+The signed along-flow offset remained about **0.536×** after three steps and **0.524×** after four.
+
+Functionally:
+
+- tangent perturbation terminal accuracy drop: **+4.02 pp**
+- transverse perturbation terminal accuracy drop: **+2.13 pp**
+- `D_FUNC`: **+1.90 pp**
+- 95% CI: **[+1.29,+2.49] pp**
+- positive: **11/12 lineages**
+
+Thus the learned flow shows reproducible **tangent–transverse anisotropy**: transverse errors are preferentially corrected, while along-flow errors persist/amplify and have larger downstream task consequences.
+
+Authoritative result: [`results/r8_ad6/aggregate/FINAL_RESULT.md`](results/r8_ad6/aggregate/FINAL_RESULT.md)
+
+Interpretive note: [`docs/R8_AD6_RESULT.md`](docs/R8_AD6_RESULT.md)
 
 ## Current compact picture
 
@@ -183,10 +158,15 @@ training history
     -> recent native motion improves simple task readout
     -> one-step accessibility is overwhelmingly directional, not speed-based
     -> a second vector difference exposes additional accessible structure
-    -> but matched causal splices show greater vulnerability along transition magnitude/tangent than under direction rotation
+    -> causal splices reveal greater vulnerability along the native flow than under matched direction rotation
+    -> transverse perturbations are preferentially corrected while tangent perturbations persist/amplify and cause larger functional damage
 ```
 
-This means **what is easiest to read from the motion is not automatically what is most causally fragile**.
+A concise present interpretation is:
+
+> **The learned recurrent flow behaves locally like a computational path with transverse robustness and along-flow sensitivity.**
+
+That is stronger than saying the trajectory is merely readable. It is still weaker than saying “the trajectory is the code.”
 
 ## What this does not establish
 
@@ -194,9 +174,9 @@ The project has **not** established that:
 
 - trajectory history contains information beyond the complete Markov state-plus-map;
 - chronology itself is an independent information source;
-- displacement direction or second difference is a universal neural code;
-- the AD3/AD4 accessibility features are causally necessary for the trained network's own task solution;
-- AD5 proves a phase code or tangent-manifold mechanism;
+- displacement direction, second difference, or phase is a universal neural code;
+- an independent hidden phase variable exists outside the state;
+- AD6 tangent persistence is more than the dominant local Jacobian / finite-time sensitivity direction;
 - heterogeneous AD2 regimes are themselves functionally necessary;
 - the system exhibits formal bistability or strict dynamical-systems hysteresis;
 - unresolved long-run dynamics are chaotic;
@@ -205,68 +185,23 @@ The project has **not** established that:
 
 ## Current next question
 
-AD5 suggests, but does not prove, a more specific mechanism:
+The next clean test is:
 
-> **Are native trajectories transversely robust but tangent/phase sensitive?**
+> **Is the AD6 tangent–transverse asymmetry specifically aligned with native trajectory progress, or is it simply the dominant local Jacobian/singular-vector direction of the recurrent map?**
 
-The next justified test is to apply norm-matched tangent and transverse perturbations at the same native state, then follow their error decomposition over every subsequent recurrent step. A phase/tangent account predicts that transverse deviations should preferentially contract or rejoin the native flow while along-trajectory deviations persist as a phase/timing offset and better predict terminal functional damage.
+That comparison can tell us whether the observed robustness/sensitivity is trajectory-organized in a stronger sense or reducible to ordinary local anisotropy of the learned map.
 
-This is an exploratory mechanism motivated by the frozen AD5 reversal. It must not be used to rescue the failed AD5 direction/curvature gates.
-
-A separate future engineering experiment is preserved for **query-conditioned active interrogation of a learned recurrent vector field**. That experiment remains downstream of the native-system mechanistic tests so it does not force a preferred geometry into the discovery system.
+A separate future engineering experiment is preserved for **query-conditioned active interrogation of a learned recurrent vector field**. It remains downstream of the native-system mechanistic tests so it does not force a preferred geometry into the discovery system.
 
 ## Other preserved research programs
 
-### Observer / native-trajectory program
+Observer/native-trajectory, ALI, causal-control/perturbation, reader-robustness, and historical attractor-era work remain preserved in the repository with their negative and protocol-limited outcomes.
 
-R2–R11 studied what information is accessible from evolving trajectory geometry, how recurrence changes generic versus trained-reader accessibility, how selective survival emerges, and where Euclidean preservation fails to predict functional usefulness.
-
-Key boundaries:
-
-- geometry-history accessibility can exceed endpoint snapshots;
-- exact chronology was not established as essential;
-- early transients can dominate some directional-history signals;
-- recurrence can improve trained-reader compatibility while generic accessibility worsens;
-- survival magnitude alone does not determine reader usefulness.
-
-See [`docs/observer_program_r2_r11.md`](docs/observer_program_r2_r11.md).
-
-### Active Latent Interrogation (ALI)
-
-ALI studies whether controlled query-dependent perturbations of a frozen latent state can expose query-relevant information through the response of a frozen nonlinear transformation.
-
-The reproducible ALI-N8-R1 result supports query-specific direction-dependent local responses under diagnostic decoders, but adaptive ALI did not beat direct memory readout and exhibited direction-only leakage. It does not establish that ALI replaces attention or provides a general memory architecture.
-
-The future active-interrogation architecture idea is preserved separately and is not treated as an established result.
-
-### Causal-control / perturbation program
-
-R4B/R4C/R4D/R4E and JTP tested controllability, learned self-steering, low-dimensional control, state-conditioned intervention consequences, and instantaneous local-operator signatures.
-
-Important negative boundaries are preserved: learned self-nudging did not produce a strong practical controller, R4E failed its primary Phase-I nonlinear gate, and JTP-1 did not find the preregistered seed-general instantaneous Jacobian-like trajectory-time signature.
-
-### Reader robustness / affine geometry
-
-AG3–AG5 studied why geometrically small representation errors can be functionally catastrophic and why larger errors can sometimes remain functionally acceptable. Local reader robustness matters; Euclidean distance alone is insufficient.
-
-### Historical attractor-era work
-
-The original attractor/trajectory prototypes motivated the project but contained claims that exceeded the available evidence. They remain preserved as project history rather than current proof.
-
-The motivating observation remains simple: trajectories approaching the same stable endpoint could contain reproducible structure from which the original input could sometimes be recovered before convergence. The current R8 program tests related ideas under learned dynamics with stronger controls.
-
-See [`archive/`](archive/README.md) and [`docs/research_history.md`](docs/research_history.md).
+The motivating historical observation remains simple: trajectories approaching the same stable endpoint could contain reproducible structure from which the original input could sometimes be recovered before convergence. The current R8 program tests related ideas under learned dynamics with much stronger controls.
 
 ## Reproducibility and scientific record
 
-The repository intentionally keeps:
-
-- preregistrations before outcome inspection;
-- deterministic/fresh probe or intervention definitions where appropriate;
-- negative and protocol-limited outcomes;
-- post-run audits labeled separately from primary results;
-- GitHub Actions workflows and authoritative result branches;
-- claim boundaries separate from historical ideas.
+The repository intentionally keeps preregistrations before outcome inspection, deterministic/fresh probe or intervention definitions where appropriate, negative and protocol-limited outcomes, post-run audits labeled separately, workflows and authoritative result records, and explicit claim boundaries.
 
 The project-wide rule remains:
 
