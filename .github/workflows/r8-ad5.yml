@@ -1,0 +1,121 @@
+name: R8-AD5 Causal Motion Intervention
+
+on:
+  push:
+    paths:
+      - 'experiments/r8_ad5/**'
+      - '.github/workflows/r8-ad5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-AD5 outcome-free smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_ad5/requirements.txt
+      - name: Compile implementation
+        run: |
+          python -m py_compile experiments/r8_ad5/run_r8_ad5.py
+          python -m py_compile experiments/r8_ad5/classify_r8_ad5.py
+      - name: Verify parent engine and frozen prior records exist
+        run: |
+          test -f experiments/r8_m10/m7r_base.py
+          test -f results/r8_ad2/aggregate/FINAL_RESULT.json
+          test -f results/r8_ad3/aggregate/FINAL_RESULT.json
+          test -f results/r8_ad4/aggregate/FINAL_RESULT.json
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_ad5/classify_r8_ad5.py --self-check
+      - name: Run smoke path
+        run: python experiments/r8_ad5/run_r8_ad5.py --seed 1782 --outdir /tmp/r8_ad5_smoke --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/r8_ad5_smoke/smoke_summary.json'))
+          assert d['experiment']=='R8-AD5'
+          assert d['all_valid'] is True
+          q=d['diagnostic']
+          assert q['geometry_valid'] is True
+          assert q['finite'] is True
+          assert len(q['phase_a']) == 15
+          assert len(q['phase_b']) == 10
+          assert set(q['primary']) == {'k_dir','k_dir_ce','drop_dir','drop_mag','drop_rand','k_curv','k_curv_ce','drop_az','drop_pol'}
+          print('R8-AD5 smoke structure ok')
+          PY
+
+  family:
+    name: R8-AD5 lineage ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        seed: [1782, 1801, 1819, 1838, 1856, 1875, 1893, 1912, 1930, 1949, 1967, 1986]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_ad5/requirements.txt
+      - name: Execute frozen causal motion family
+        run: |
+          mkdir -p results/r8_ad5/seed_${{ matrix.seed }}
+          python experiments/r8_ad5/run_r8_ad5.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r8_ad5/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-ad5-seed-${{ matrix.seed }}
+          path: results/r8_ad5/seed_${{ matrix.seed }}/seed_summary.json
+          if-no-files-found: error
+
+  classify:
+    name: R8-AD5 frozen cross-lineage classification
+    needs: family
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_ad5/requirements.txt
+      - name: Download family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-ad5-seed-*
+          path: results/r8_ad5/families
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: |
+          mkdir -p results/r8_ad5/aggregate
+          python experiments/r8_ad5/classify_r8_ad5.py \
+            --root results/r8_ad5/families \
+            --outdir results/r8_ad5/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-ad5-aggregate
+          path: results/r8_ad5/aggregate/
+          if-no-files-found: error
+      - name: Commit authoritative R8-AD5 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B r8-ad5-results
+          git add results/r8_ad5/aggregate/FINAL_RESULT.json results/r8_ad5/aggregate/FINAL_RESULT.md
+          git commit -m 'Record frozen R8-AD5 result' || true
+          git push --force origin HEAD:r8-ad5-results
