@@ -1,0 +1,13 @@
+{
+  "experiment":"AR6","status":"LOCKED BEFORE AR6 PRIMARY TEST RUNS","timestamp_local":"2026-09-03T11:25:00-05:00",
+  "systems":[7,19,31,43,59],"upstream":"exact frozen AR2 checkpoints; AR4/AR5 frozen conventions",
+  "representation":"9 normalized directional bins from 10 state progress samples p=0..0.9",
+  "operator":"temporary update-space intervention d'=M_y d, M_y=I+sign*alpha*K_y; K_y from train-only ridge linear map u_p->u_(p+1), K=A-I, normalized so train mean ||K d||/||d||=1 within Y",
+  "stage_candidates":[3,4,5],"window_steps":2,"alpha_candidates":[0.005,0.01,0.02,0.05,0.1],
+  "selection":"validation only: choose candidate with largest alpha passing Y identity>=.99, convergence>=.99, endpoint pass>=.99 and mean relative Jacobian change>=0.0036; ties choose stage closest middle then smaller stage. No downstream C/format effect used.",
+  "geometry_gate":0.0036,"preservation":{"Y_identity":0.99,"convergence":0.99,"endpoint_pass":0.99,"endpoint_tolerance":0.002524},
+  "primary_conditions":["advance","zero","retard","random"],
+  "primary_tests":["P1 geometry gate","P2 downstream raw representation change","P3 frozen prediction cosine","P4 sign reversal","P5 derived vs random","P6 modified-J vs native-J","P7 stage-reader advance/retard","P8 canonical preservation","P9 endpoint/output preservation","P10 static affine equivalence descriptive"],
+  "test_examples_primary":1024,"jacobian_examples":64,"bootstrap_resamples":2000,
+  "stopping":"If no validation candidate passes geometry+preservation gate, stop before primary test. No test-driven alpha/stage/mode tuning."
+}

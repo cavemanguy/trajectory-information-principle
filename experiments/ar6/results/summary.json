@@ -1,0 +1,33 @@
+{
+  "study": "AR6",
+  "classification": [
+    "Outcome C — generic disruption / no demonstrated AR4-mode privilege",
+    "Outcome E — signed raw-coordinate control, but not successful format advance/retard",
+    "Outcome H — canonical content co-moves with raw format",
+    "Modified-J causal advantage unresolved/non-replicating"
+  ],
+  "highest_supported_level": 3,
+  "qualifier": "Level 3 only in the signed-coordinate sense; the mode-specific/format-stage prediction failed. Level 4+ not supported.",
+  "selection": {"stage_bin": 4, "alpha": 0.1, "all_seeds_same": true},
+  "metrics": {
+    "validation_J_change": {"mean": 0.10788290806886477, "sd": 0.01095294501730147},
+    "test_J_change": {"mean": 0.1079768436722673, "sd": 0.011911103557341532},
+    "modifiedJ_cos": {"mean": 0.9916511272351058, "sd": 0.005093490308640955},
+    "nativeJ_cos": {"mean": 0.9915796846151352, "sd": 0.003282194004990168},
+    "modified_minus_native": {"mean": 7.144261997058454e-05, "sd": 0.0024080577699645595},
+    "raw_adv_change": {"mean": 0.081365192, "sd": 0.013334821982263129},
+    "raw_ret_change": {"mean": 0.08471440499999999, "sd": 0.009812239261177849},
+    "canonical_adv_change": {"mean": 0.07383800779999998, "sd": 0.010852204332769642},
+    "canonical_ret_change": {"mean": 0.0779269012, "sd": 0.007909788314691944},
+    "sign_reversal_cos": {"mean": 0.996278204, "sd": 0.0009001536520394463},
+    "Y_same": {"mean": 1.0, "sd": 0.0},
+    "endpoint_pass": {"mean": 1.0, "sd": 0.0},
+    "endpoint_mean": {"mean": 6.198091142550766e-08, "sd": 7.091049788707171e-09},
+    "advance_later_shift": {"mean": -0.0349609375, "sd": 0.028289989153906105, "seed_values": [-0.0048828125,-0.0234375,-0.025390625,-0.041015625,-0.080078125], "same_direction": 5},
+    "retard_later_shift": {"mean": -0.09453125, "sd": 0.028566748371994112, "seed_values": [-0.0693359375,-0.076171875,-0.076171875,-0.1298828125,-0.12109375], "same_direction": 5},
+    "advance_earlier_shift": {"mean": -0.00234375, "sd": 0.009072050126948119, "seed_values": [-0.00390625,-0.0029296875,0.01171875,-0.0029296875,-0.013671875], "same_direction": 4},
+    "retard_earlier_shift": {"mean": 0.005078125, "sd": 0.010413105673879942, "seed_values": [0.0068359375,0.005859375,-0.0078125,0.0205078125,0.0], "same_direction": 3},
+    "random_later_shift": {"mean": -0.03359375, "sd": 0.017354260258538645, "seed_values": [-0.03515625,-0.0302734375,-0.0615234375,-0.0263671875,-0.0146484375]}
+  },
+  "repro_seed7_exact_csv": true
+}
