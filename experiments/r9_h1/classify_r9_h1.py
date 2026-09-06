@@ -46,7 +46,14 @@ def classify_signed(values):
         cls = "A-"
     else:
         cls = "A0"
-    return {"class": cls, "mean": mean, "ci95": [lo, hi], "positive": pos, "negative": neg, "values": list(map(float, values))}
+    return {
+        "class": cls,
+        "mean": mean,
+        "ci95": [lo, hi],
+        "positive": pos,
+        "negative": neg,
+        "values": list(map(float, values)),
+    }
 
 
 def mean_metric(rows, arm, metric):
@@ -59,7 +66,11 @@ def validity(rows):
     for arm in arms:
         data = mean_metric(rows, arm, "DATA_ACC")
         ret = mean_metric(rows, arm, "RETURN_EARLY_ACC")
-        out[arm] = {"class": "V+" if data >= 0.20 and ret >= 0.15 else "V-", "DATA_ACC": data, "RETURN_EARLY_ACC": ret}
+        out[arm] = {
+            "class": "V+" if data >= 0.20 and ret >= 0.15 else "V-",
+            "DATA_ACC": data,
+            "RETURN_EARLY_ACC": ret,
+        }
     return out
 
 
@@ -96,14 +107,14 @@ def aggregate_audits(rows):
     return out
 
 
-def aggregate_history(rows, valid):
+def aggregate_history_field(rows, valid, field):
     out = {}
     for arm, md in rows[0]["anomaly_metrics"].items():
         out[arm] = {}
-        for stream in md["history"]:
+        for stream in md[field]:
             one = {}
             for metric in ("h1", "h2", "hshuf"):
-                vals = [r["anomaly_metrics"][arm]["history"][stream][metric] for r in rows]
+                vals = [r["anomaly_metrics"][arm][field][stream][metric] for r in rows]
                 c = classify_signed(vals)
                 c["qualified_class"] = qualify(c["class"], arm, valid)
                 one[metric] = c
@@ -152,6 +163,32 @@ def aggregate_reactivation(rows, valid):
     return out
 
 
+def aggregate_order_controls(rows, valid):
+    out = {}
+    for arm, md in rows[0]["anomaly_metrics"].items():
+        out[arm] = {}
+        for stream in md["order_controls"]:
+            def vals(diff_to):
+                return [
+                    r["anomaly_metrics"][arm]["order_controls"][stream]["ordered_acc"]
+                    - r["anomaly_metrics"][arm]["order_controls"][stream][diff_to]
+                    for r in rows
+                ]
+            one = {}
+            for label, key in [
+                ("ordered_vs_shuffled", "shuffled_order_acc"),
+                ("ordered_vs_reversed", "reversed_acc"),
+                ("ordered_vs_integrated", "integrated_acc"),
+                ("ordered_vs_first", "first_transient_acc"),
+                ("ordered_vs_final", "final_transient_acc"),
+            ]:
+                c = classify_signed(vals(key))
+                c["qualified_class"] = qualify(c["class"], arm, valid)
+                one[label] = c
+            out[arm][stream] = one
+    return out
+
+
 def aggregate_controls(rows, valid, audits):
     out = {}
     for arm in rows[0]["controls"]:
@@ -175,6 +212,24 @@ def aggregate_controls(rows, valid, audits):
     return out
 
 
+def aggregate_perturbation_response(rows, valid):
+    out = {}
+    for arm in ("TEACHER", "INTERROGATOR"):
+        vals = [r["anomaly_metrics"][arm]["perturbation_response"] for r in rows]
+        key_gain = classify_signed([v["response_key_gain_vs_shuffled"] for v in vals])
+        direction = classify_signed([v["direction_selectivity"] for v in vals])
+        key_gain["qualified_class"] = qualify(key_gain["class"], arm, valid)
+        direction["qualified_class"] = qualify(direction["class"], arm, valid)
+        out[arm] = {
+            "response_key_gain_vs_shuffled": key_gain,
+            "direction_selectivity": direction,
+            "mean_response_norm_native": float(np.mean([v["response_norm_native"] for v in vals])),
+            "mean_response_norm_shuffled": float(np.mean([v["response_norm_shuffled"] for v in vals])),
+            "mean_response_norm_random": float(np.mean([v["response_norm_random"] for v in vals])),
+        }
+    return out
+
+
 def aggregate_teacher_persistence(rows, valid):
     task = classify_signed([r["teacher_persistence"]["persist_task"] for r in rows])
     hist = classify_signed([r["teacher_persistence"]["persist_h"] for r in rows])
@@ -188,19 +243,47 @@ def aggregate_teacher_persistence(rows, valid):
     return {"class": overall, "persist_task": task, "persist_h": hist}
 
 
+def aggregate_path_and_similarity(rows):
+    path = {}
+    similarity = {}
+    for arm, md in rows[0]["anomaly_metrics"].items():
+        pvals = [r["anomaly_metrics"][arm]["path_dependence"] for r in rows]
+        path[arm] = {
+            "mean_matched_groups": float(np.mean([v["matched_groups"] for v in pvals])),
+            "mean_geometry": float(np.mean([v["geometry"] for v in pvals])),
+            "functional_gap": classify_signed([v["functional_gap"] for v in pvals]),
+        }
+        svals = [r["anomaly_metrics"][arm]["pair_similarity"] for r in rows]
+        if svals[0] is None:
+            similarity[arm] = None
+        else:
+            similarity[arm] = {
+                "stream_a": svals[0]["stream_a"],
+                "stream_b": svals[0]["stream_b"],
+                "mean_linear_cka": float(np.mean([v["linear_cka"] for v in svals])),
+            }
+    return path, similarity
+
+
 def aggregate(rows):
     valid = validity(rows)
     audits = aggregate_audits(rows)
-    history = aggregate_history(rows, valid)
+    history = aggregate_history_field(rows, valid, "history")
+    answer_history = aggregate_history_field(rows, valid, "answer_history")
     comp = aggregate_complementarity(rows, valid, audits)
     cross = aggregate_cross(rows, valid)
     react = aggregate_reactivation(rows, valid)
+    order_controls = aggregate_order_controls(rows, valid)
     controls = aggregate_controls(rows, valid, audits)
+    perturb = aggregate_perturbation_response(rows, valid)
     teacher = aggregate_teacher_persistence(rows, valid)
+    path, similarity = aggregate_path_and_similarity(rows)
 
     order_h = classify_signed([r["serial_order"]["order_h"] for r in rows])
     order_x = classify_signed([r["serial_order"]["order_x"] for r in rows])
     par_h = classify_signed([r["parallel_specialization"]["par_h"] for r in rows])
+    par_r = classify_signed([r["parallel_specialization"]["branch_ablation"]["rnn_contribution_return"] for r in rows])
+    par_t = classify_signed([r["parallel_specialization"]["branch_ablation"]["transformer_contribution_return"] for r in rows])
     learn_beta = classify_signed([r["learning_coupling"]["learn_beta"] for r in rows])
 
     arch_means = {}
@@ -208,7 +291,11 @@ def aggregate(rows):
         tests = rows[0]["architecture"][arm]["test"].keys()
         arch_means[arm] = {
             "params_mean": float(np.mean([r["architecture"][arm]["params"] for r in rows])),
-            **{k: float(np.mean([r["architecture"][arm]["test"][k] for r in rows])) for k in tests if not k.endswith("_N")},
+            **{
+                k: float(np.mean([r["architecture"][arm]["test"][k] for r in rows]))
+                for k in tests
+                if not k.endswith("_N")
+            },
         }
 
     return {
@@ -217,15 +304,29 @@ def aggregate(rows):
         "seeds": list(SEEDS),
         "validity": valid,
         "answer_channel_audit": audits,
-        "history_accessibility": history,
+        "hidden_key_history_accessibility": history,
+        "answer_history_accessibility": answer_history,
         "complementary_accessibility": comp,
         "cross_module_transformation": cross,
         "reactivation": react,
+        "local_order_controls": order_controls,
         "controller_dependence": controls,
+        "perturbation_response": perturb,
         "teacher_persistence": teacher,
         "serial_order": {"ORDER_H": order_h, "ORDER_X": order_x},
-        "parallel_specialization": {"PAR_H": par_h, "complementarity": comp.get("PARALLEL")},
-        "learning_trajectory_coupling": {"class": learn_beta["class"], "LEARN_BETA": learn_beta, "status": "exploratory"},
+        "parallel_specialization": {
+            "PAR_H": par_h,
+            "complementarity": comp.get("PARALLEL"),
+            "RNN_RETURN_CONTRIBUTION": par_r,
+            "TRANSFORMER_RETURN_CONTRIBUTION": par_t,
+        },
+        "path_dependence": path,
+        "pair_similarity": similarity,
+        "learning_trajectory_coupling": {
+            "class": learn_beta["class"],
+            "LEARN_BETA": learn_beta,
+            "status": "exploratory",
+        },
         "architecture_means": arch_means,
         "claim_boundary": "R9-H1 is an anomaly screen. Results do not establish an independent trajectory-information substance, universal phase code, architecture novelty, or architecture superiority.",
     }
@@ -244,19 +345,47 @@ def markdown(result):
     ]
     for arm, v in result["validity"].items():
         lines.append(f"| {arm} | {v['class']} | {v['DATA_ACC']:.4f} | {v['RETURN_EARLY_ACC']:.4f} |")
+
     lines += ["", "## Controller / teaching classifications", ""]
     for arm, c in result["controller_dependence"].items():
         lines.append(f"- {arm}: **{c['class']}**")
     lines.append(f"- TEACHER persistence: **{result['teacher_persistence']['class']}**")
+
     lines += ["", "## Serial order", ""]
     for key, c in result["serial_order"].items():
-        lines.append(f"- {key}: **{c['class']}**, mean {c['mean']:+.4f}, 95% CI [{c['ci95'][0]:+.4f}, {c['ci95'][1]:+.4f}]")
+        lines.append(
+            f"- {key}: **{c['class']}**, mean {c['mean']:+.4f}, "
+            f"95% CI [{c['ci95'][0]:+.4f}, {c['ci95'][1]:+.4f}]"
+        )
+
     lines += ["", "## Parallel specialization", ""]
     p = result["parallel_specialization"]["PAR_H"]
-    lines.append(f"- PAR_H: **{p['class']}**, mean {p['mean']:+.4f}, 95% CI [{p['ci95'][0]:+.4f}, {p['ci95'][1]:+.4f}]")
+    lines.append(
+        f"- PAR_H: **{p['class']}**, mean {p['mean']:+.4f}, "
+        f"95% CI [{p['ci95'][0]:+.4f}, {p['ci95'][1]:+.4f}]"
+    )
+    lines.append(
+        f"- RNN branch return contribution: **{result['parallel_specialization']['RNN_RETURN_CONTRIBUTION']['class']}**"
+    )
+    lines.append(
+        f"- Transformer branch return contribution: **{result['parallel_specialization']['TRANSFORMER_RETURN_CONTRIBUTION']['class']}**"
+    )
+
+    lines += ["", "## Perturbation response", ""]
+    for arm, p in result["perturbation_response"].items():
+        k = p["response_key_gain_vs_shuffled"]
+        d = p["direction_selectivity"]
+        lines.append(
+            f"- {arm}: response-key gain **{k['qualified_class']}**, direction selectivity **{d['qualified_class']}**"
+        )
+
     lines += ["", "## Learning-trajectory coupling", ""]
     lb = result["learning_trajectory_coupling"]["LEARN_BETA"]
-    lines.append(f"- LEARN_BETA: **{lb['class']}** (exploratory), mean {lb['mean']:+.4f}, 95% CI [{lb['ci95'][0]:+.4f}, {lb['ci95'][1]:+.4f}]")
+    lines.append(
+        f"- LEARN_BETA: **{lb['class']}** (exploratory), mean {lb['mean']:+.4f}, "
+        f"95% CI [{lb['ci95'][0]:+.4f}, {lb['ci95'][1]:+.4f}]"
+    )
+
     lines += ["", "## Claim boundary", "", result["claim_boundary"], ""]
     return "\n".join(lines)
 
