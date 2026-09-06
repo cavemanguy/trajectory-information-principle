@@ -1,0 +1,126 @@
+name: R9-H1 Hybrid Interaction Anomaly Screen
+
+on:
+  push:
+    branches:
+      - r9-h1-hybrid-interaction
+    paths:
+      - 'experiments/r9_h1/**'
+      - '.github/workflows/r9-h1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R9-H1 outcome-free smoke gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_h1/requirements.txt
+      - name: Compile implementation
+        run: |
+          python -m py_compile experiments/r9_h1/models.py
+          python -m py_compile experiments/r9_h1/diagnostics.py
+          python -m py_compile experiments/r9_h1/diagnostics_extra.py
+          python -m py_compile experiments/r9_h1/run_r9_h1.py
+          python -m py_compile experiments/r9_h1/classify_r9_h1.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r9_h1/classify_r9_h1.py --self-check
+      - name: Run outcome-free smoke path
+        run: python experiments/r9_h1/run_r9_h1.py --seed 2309 --outdir /tmp/r9_h1_smoke --smoke
+      - name: Verify smoke structure only
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/r9_h1_smoke/smoke_summary.json'))
+          expected={
+            'CONTROL_RNN','CONTROL_T','RTR','TRT','PARALLEL','TEACHER',
+            'INTERROGATOR','ATTN_CONTROLLER','LOWRANK_MOD','UPDATE_GATE','MUTUAL'
+          }
+          assert d['experiment']=='R9-H1'
+          assert d['protocol_version']=='R9-H1-v1'
+          assert d['smoke_only'] is True
+          assert d['all_valid'] is True
+          assert set(d['arms']) == expected
+          assert d['checks']['scientific_metrics_emitted'] is False
+          assert d['checks']['model_forward_received_target'] is False
+          assert all(v['finite'] for v in d['arms'].values())
+          print('R9-H1 smoke structure ok')
+          PY
+
+  family:
+    name: R9-H1 seed ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        seed: [2311, 2333, 2357, 2381, 2411, 2437, 2467, 2491]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_h1/requirements.txt
+      - name: Execute frozen family
+        run: |
+          mkdir -p results/r9_h1/seed_${{ matrix.seed }}
+          python experiments/r9_h1/run_r9_h1.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r9_h1/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r9-h1-seed-${{ matrix.seed }}
+          path: results/r9_h1/seed_${{ matrix.seed }}/family_result.json
+          if-no-files-found: error
+
+  classify:
+    name: R9-H1 frozen cross-seed anomaly classification
+    needs: family
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_h1/requirements.txt
+      - name: Download all family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r9-h1-seed-*
+          path: results/r9_h1/families
+          merge-multiple: false
+      - name: Apply frozen aggregate classifier
+        run: |
+          mkdir -p results/r9_h1/aggregate
+          python experiments/r9_h1/classify_r9_h1.py \
+            --root results/r9_h1/families \
+            --outdir results/r9_h1/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r9-h1-aggregate
+          path: results/r9_h1/aggregate/
+          if-no-files-found: error
+      - name: Commit authoritative R9-H1 result record off main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B r9-h1-results
+          git add results/r9_h1/aggregate/FINAL_RESULT.json results/r9_h1/aggregate/FINAL_RESULT.md
+          git commit -m 'Record frozen R9-H1 anomaly screen result' || true
+          git push --force origin HEAD:r9-h1-results
