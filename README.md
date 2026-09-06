@@ -14,13 +14,14 @@ Observers are measurement tools. Perturbations are optional causal/control tools
 
 Start here for the newest R8 synthesis:
 
-- [`docs/R8_CURRENT_SYNTHESIS.md`](docs/R8_CURRENT_SYNTHESIS.md) — **latest synthesis through R8-AD4**
+- [`docs/R8_CURRENT_SYNTHESIS.md`](docs/R8_CURRENT_SYNTHESIS.md) — synthesis through R8-AD4
+- [`docs/R8_AD5_RESULT.md`](docs/R8_AD5_RESULT.md) — **latest causal intervention result**
 - [`docs/CURRENT_CLAIMS.md`](docs/CURRENT_CLAIMS.md) — older claim ledger and boundaries
 - [`docs/EVIDENCE_LEDGER.md`](docs/EVIDENCE_LEDGER.md) — preserved evidence map, negatives, and protocol-limited branches
 - [`RESEARCH_PRIORITIES.md`](RESEARCH_PRIORITIES.md) — scientific rules and experiment priorities
 - [`docs/research_history.md`](docs/research_history.md) — preserved historical development
 
-The newer synthesis supplements older claim/ledger files that were written before M9–M12 and AD1–AD4 completed.
+The newer R8 synthesis/result files supplement older claim/ledger files that were written before M9–M12 and AD1–AD5 completed.
 
 ## Current R8 system
 
@@ -44,7 +45,7 @@ The analysis tracks how natural task distinctions evolve through that trajectory
 Delta_t = h_t(x) - h_t(x')
 ```
 
-and measure how distinctions survive, contract, expand, reorganize, and become accessible to simple readers.
+and measure how distinctions survive, contract, expand, reorganize, become accessible to simple readers, and respond to controlled interventions.
 
 The architecture itself is not claimed to be radically novel. The research question is what ordinary training organizes inside it.
 
@@ -72,7 +73,7 @@ The architecture itself is not claimed to be radically novel. The research quest
 
 A failed predictor is not a failed phenomenon.
 
-## AD1–AD4: what the native motion is doing
+## AD1–AD5: native motion, accessibility, and causality
 
 ### AD1 — no generic fixed-point settling
 
@@ -107,7 +108,7 @@ A much larger quadratic static reader still beat the 32-feature one-step represe
 
 Authoritative result: [`results/r8_ad3/aggregate/FINAL_RESULT.md`](results/r8_ad3/aggregate/FINAL_RESULT.md)
 
-### AD4 — direction carries nearly all of the one-step gain
+### AD4 — direction carries nearly all of the one-step accessibility gain
 
 **D1 — direction-preserving decomposition.** The AD3 effect replicated on fresh AD4 probe data.
 
@@ -130,21 +131,48 @@ Scalar displacement magnitude:
 - retained fraction: **~4.8%**
 - frozen magnitude-preservation gate: **failed**
 
-The higher-order preregistered test also passed. Adding the vector second difference
+Adding the vector second difference
 
 ```text
 a_t = (h_t - h_(t-1)) - (h_(t-1) - h_(t-2))
 ```
 
-to the full one-step representation added another **+4.50 pp** of linear accessibility, CI **[+4.34,+4.66] pp**, positive in **12/12 lineages**.
-
-By contrast, adding only a scalar cosine turning-angle measure added about **+0.08 pp**. The supported higher-order result is therefore about the **vector-valued second difference**, not a single turn-angle scalar.
+to the full one-step representation added another **+4.50 pp** of linear accessibility, CI **[+4.34,+4.66] pp**, positive in **12/12 lineages**. A scalar cosine turning-angle measure added only about **+0.08 pp**.
 
 Authoritative result: [`results/r8_ad4/aggregate/FINAL_RESULT.md`](results/r8_ad4/aggregate/FINAL_RESULT.md)
 
+### AD5 — causal transition splices reverse the accessibility intuition
+
+**K0 — neither preregistered causal contrast supported.** AD5 explicitly intervened on native transitions while keeping the pre-splice state identical and matching Euclidean splice size.
+
+Direction rotation versus magnitude-only change:
+
+- direction-rotation terminal accuracy drop: **+1.92 pp**
+- magnitude-only terminal accuracy drop: **+3.60 pp**
+- generic norm-matched random drop: **+2.01 pp**
+- frozen contrast `K_DIR = DROP_DIR - DROP_MAG`: **-1.68 pp**
+- 95% CI: **[-2.21,-1.15] pp**
+- positive in **1/12** lineages
+
+Turn-orientation versus scalar-turn change:
+
+- azimuth/turn-orientation drop: **+4.80 pp**
+- polar/scalar-turn drop: **+7.85 pp**
+- frozen contrast `K_CURV`: **-3.05 pp**
+- 95% CI: **[-4.00,-2.00] pp**
+- positive in **1/12** lineages
+
+Both preregistered gates failed. The reversal was consistent across all tested splice times and all frozen perturbation scales/angles. Maximum geometry mismatch remained below the preregistered validity tolerance.
+
+AD5 therefore establishes an important **readability–causality dissociation** in this system: displacement direction is highly useful to a simple diagnostic reader, but rotating that direction is not the direction of greatest functional vulnerability. Moving forward/backward along the native transition is more damaging under the tested matched splices.
+
+Authoritative result: [`results/r8_ad5/aggregate/FINAL_RESULT.md`](results/r8_ad5/aggregate/FINAL_RESULT.md)
+
+Interpretive note: [`docs/R8_AD5_RESULT.md`](docs/R8_AD5_RESULT.md)
+
 ## Current compact picture
 
-The strongest current mechanistic chain is:
+The strongest current sequence is:
 
 ```text
 training history
@@ -155,18 +183,10 @@ training history
     -> recent native motion improves simple task readout
     -> one-step accessibility is overwhelmingly directional, not speed-based
     -> a second vector difference exposes additional accessible structure
+    -> but matched causal splices show greater vulnerability along transition magnitude/tangent than under direction rotation
 ```
 
-For simple linear task readout in the tested internal trajectory window, the newest result can be summarized as:
-
-```text
-h_t
-  < [h_t, normalized displacement direction]
-  ~= [h_t, full displacement]
-  < [h_t, full displacement, second vector difference]
-```
-
-while scalar speed adds little.
+This means **what is easiest to read from the motion is not automatically what is most causally fragile**.
 
 ## What this does not establish
 
@@ -176,6 +196,7 @@ The project has **not** established that:
 - chronology itself is an independent information source;
 - displacement direction or second difference is a universal neural code;
 - the AD3/AD4 accessibility features are causally necessary for the trained network's own task solution;
+- AD5 proves a phase code or tangent-manifold mechanism;
 - heterogeneous AD2 regimes are themselves functionally necessary;
 - the system exhibits formal bistability or strict dynamical-systems hysteresis;
 - unresolved long-run dynamics are chaotic;
@@ -184,13 +205,15 @@ The project has **not** established that:
 
 ## Current next question
 
-The next justified experiment is causal rather than another decoder comparison:
+AD5 suggests, but does not prove, a more specific mechanism:
 
-> **If native direction or higher-order trajectory structure is altered while instantaneous-state displacement and frozen-reader boundary distance are tightly controlled, does the system's functional consequence change?**
+> **Are native trajectories transversely robust but tangent/phase sensitive?**
 
-A positive result would move the project from **trajectory accessibility** toward **causal dynamical function**.
+The next justified test is to apply norm-matched tangent and transverse perturbations at the same native state, then follow their error decomposition over every subsequent recurrent step. A phase/tangent account predicts that transverse deviations should preferentially contract or rejoin the native flow while along-trajectory deviations persist as a phase/timing offset and better predict terminal functional damage.
 
-A separate future engineering experiment is preserved for **query-conditioned active interrogation of a learned recurrent vector field**. That experiment should remain downstream of the native-system causal tests so it does not force a preferred geometry into the discovery system.
+This is an exploratory mechanism motivated by the frozen AD5 reversal. It must not be used to rescue the failed AD5 direction/curvature gates.
+
+A separate future engineering experiment is preserved for **query-conditioned active interrogation of a learned recurrent vector field**. That experiment remains downstream of the native-system mechanistic tests so it does not force a preferred geometry into the discovery system.
 
 ## Other preserved research programs
 
@@ -239,7 +262,7 @@ See [`archive/`](archive/README.md) and [`docs/research_history.md`](docs/resear
 The repository intentionally keeps:
 
 - preregistrations before outcome inspection;
-- deterministic/fresh probe or seed definitions where appropriate;
+- deterministic/fresh probe or intervention definitions where appropriate;
 - negative and protocol-limited outcomes;
 - post-run audits labeled separately from primary results;
 - GitHub Actions workflows and authoritative result branches;
