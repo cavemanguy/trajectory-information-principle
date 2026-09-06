@@ -1,0 +1,115 @@
+name: R8-AD1 Learned Long-Run Attractor Diagnostic
+
+on:
+  push:
+    paths:
+      - 'experiments/r8_attractor_diag/**'
+      - '.github/workflows/r8-ad1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R8-AD1 outcome-free smoke gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_attractor_diag/requirements.txt
+      - name: Compile implementation
+        run: |
+          python -m py_compile experiments/r8_attractor_diag/run_r8_ad1.py
+          python -m py_compile experiments/r8_attractor_diag/classify_r8_ad1.py
+      - name: Verify parent R8 engine exists
+        run: test -f experiments/r8_m10/m7r_base.py
+      - name: Outcome-free classifier self-check
+        run: python experiments/r8_attractor_diag/classify_r8_ad1.py --self-check
+      - name: Run smoke path
+        run: python experiments/r8_attractor_diag/run_r8_ad1.py --seed 1561 --outdir /tmp/r8_ad1_smoke --smoke
+      - name: Verify smoke structure
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/r8_ad1_smoke/smoke_summary.json'))
+          assert d['experiment']=='R8-AD1'
+          assert d['all_valid'] is True
+          q=d['diagnostic']
+          assert q['family_class'] in ('FIXED','SHORT_CYCLE','UNRESOLVED')
+          assert 0.0 <= q['fixed_fraction'] <= 1.0
+          assert q['finite'] is True
+          print('R8-AD1 smoke structure ok')
+          PY
+
+  family:
+    name: R8-AD1 fresh family ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        seed: [1561, 1579, 1597, 1616, 1634, 1652, 1671, 1689, 1708, 1726, 1745, 1763]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_attractor_diag/requirements.txt
+      - name: Execute fresh long-run diagnostic family
+        run: |
+          mkdir -p results/r8_ad1/seed_${{ matrix.seed }}
+          python experiments/r8_attractor_diag/run_r8_ad1.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r8_ad1/seed_${{ matrix.seed }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-ad1-seed-${{ matrix.seed }}
+          path: results/r8_ad1/seed_${{ matrix.seed }}/seed_summary.json
+          if-no-files-found: error
+
+  classify:
+    name: R8-AD1 frozen cross-family classification
+    needs: family
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r8_attractor_diag/requirements.txt
+      - name: Download family artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r8-ad1-seed-*
+          path: results/r8_ad1/families
+          merge-multiple: false
+      - name: Apply frozen classifier
+        run: |
+          mkdir -p results/r8_ad1/aggregate
+          python experiments/r8_attractor_diag/classify_r8_ad1.py \
+            --root results/r8_ad1/families \
+            --outdir results/r8_ad1/aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-ad1-aggregate
+          path: results/r8_ad1/aggregate/
+          if-no-files-found: error
+      - name: Commit authoritative R8-AD1 result record
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B r8-ad1-results
+          git add results/r8_ad1/aggregate/FINAL_RESULT.json results/r8_ad1/aggregate/FINAL_RESULT.md
+          git commit -m 'Record frozen R8-AD1 result' || true
+          git push --force origin HEAD:r8-ad1-results
