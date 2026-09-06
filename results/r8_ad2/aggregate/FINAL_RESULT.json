@@ -1,0 +1,290 @@
+{
+  "claim_boundary": "R8-AD2 classifies finite-horizon native encoded-state dynamics. SENSITIVE denotes a positive finite-time Lyapunov-like estimate under the frozen procedure, not formal proof of chaos; QUASIPERIODIC_LIKE denotes low-sensitivity spectrally concentrated nonperiodic motion, not a formal quasiperiodic invariant set; recurrence above period 512 is not excluded.",
+  "classification": "D4 \u2014 heterogeneous learned regimes",
+  "expected_seeds": [
+    1782,
+    1801,
+    1819,
+    1838,
+    1856,
+    1875,
+    1893,
+    1912,
+    1930,
+    1949,
+    1967,
+    1986
+  ],
+  "experiment": "R8-AD2",
+  "family_class_counts": {
+    "FIXED": 0,
+    "MIXED": 3,
+    "PERIODIC": 2,
+    "QUASIPERIODIC_LIKE": 5,
+    "REGULAR_NONPERIODIC": 1,
+    "SENSITIVE": 1
+  },
+  "median_ftle_across_families": {
+    "max": 0.022717876359820366,
+    "mean": -0.010665640205843374,
+    "median": -0.0015504607581533492,
+    "min": -0.06866375356912613,
+    "n": 12
+  },
+  "median_spectral_entropy_across_families": {
+    "max": 0.42050832509994507,
+    "mean": 0.2353925807401538,
+    "median": 0.2504119761288166,
+    "min": 0.08564770221710205,
+    "n": 12
+  },
+  "median_top8_across_families": {
+    "max": 0.9858790040016174,
+    "mean": 0.9166509012381235,
+    "median": 0.9177466183900833,
+    "min": 0.7584338486194611,
+    "n": 12
+  },
+  "n_valid": 12,
+  "rows": [
+    {
+      "M": 100,
+      "dominant_state_fraction": 1.0,
+      "family_class": "QUASIPERIODIC_LIKE",
+      "median_ftle": -0.0011321883648633957,
+      "median_spectral_entropy": 0.22340583056211472,
+      "median_top8": 0.9305769503116608,
+      "seed": 1782,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 1.0,
+        "REGULAR_NONPERIODIC": 0.0,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 120,
+      "dominant_state_fraction": 0.984375,
+      "family_class": "QUASIPERIODIC_LIKE",
+      "median_ftle": -0.0016940279747359455,
+      "median_spectral_entropy": 0.24262165278196335,
+      "median_top8": 0.9169757664203644,
+      "seed": 1801,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 0.984375,
+        "REGULAR_NONPERIODIC": 0.015625,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 100,
+      "dominant_state_fraction": 0.96484375,
+      "family_class": "PERIODIC",
+      "median_ftle": -0.06866375356912613,
+      "median_spectral_entropy": 0.1172172836959362,
+      "median_top8": 0.9723494648933411,
+      "seed": 1819,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.96484375,
+        "QUASIPERIODIC_LIKE": 0.03125,
+        "REGULAR_NONPERIODIC": 0.00390625,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 110,
+      "dominant_state_fraction": 0.6953125,
+      "family_class": "MIXED",
+      "median_ftle": -0.0032553314231336117,
+      "median_spectral_entropy": 0.1752534583210945,
+      "median_top8": 0.9703620672225952,
+      "seed": 1838,
+      "state_class_fractions": {
+        "FIXED": 0.296875,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 0.6953125,
+        "REGULAR_NONPERIODIC": 0.0078125,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 100,
+      "dominant_state_fraction": 1.0,
+      "family_class": "PERIODIC",
+      "median_ftle": -0.05353190749883652,
+      "median_spectral_entropy": 0.13226521015167236,
+      "median_top8": 0.9828080534934998,
+      "seed": 1856,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 1.0,
+        "QUASIPERIODIC_LIKE": 0.0,
+        "REGULAR_NONPERIODIC": 0.0,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 110,
+      "dominant_state_fraction": 0.98046875,
+      "family_class": "SENSITIVE",
+      "median_ftle": 0.022717876359820366,
+      "median_spectral_entropy": 0.42050832509994507,
+      "median_top8": 0.7584338486194611,
+      "seed": 1875,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 0.0,
+        "REGULAR_NONPERIODIC": 0.01953125,
+        "SENSITIVE": 0.98046875
+      },
+      "valid": true
+    },
+    {
+      "M": 100,
+      "dominant_state_fraction": 1.0,
+      "family_class": "QUASIPERIODIC_LIKE",
+      "median_ftle": -0.001640882866922766,
+      "median_spectral_entropy": 0.30997636914253235,
+      "median_top8": 0.9082612991333008,
+      "seed": 1893,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 1.0,
+        "REGULAR_NONPERIODIC": 0.0,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 100,
+      "dominant_state_fraction": 0.99609375,
+      "family_class": "QUASIPERIODIC_LIKE",
+      "median_ftle": -0.0007979311922099441,
+      "median_spectral_entropy": 0.25820229947566986,
+      "median_top8": 0.9185174703598022,
+      "seed": 1912,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 0.99609375,
+        "REGULAR_NONPERIODIC": 0.00390625,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 100,
+      "dominant_state_fraction": 0.60546875,
+      "family_class": "MIXED",
+      "median_ftle": 0.0075411631260067225,
+      "median_spectral_entropy": 0.3068675845861435,
+      "median_top8": 0.857295423746109,
+      "seed": 1930,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 0.07421875,
+        "REGULAR_NONPERIODIC": 0.60546875,
+        "SENSITIVE": 0.3203125
+      },
+      "valid": true
+    },
+    {
+      "M": 120,
+      "dominant_state_fraction": 0.9921875,
+      "family_class": "REGULAR_NONPERIODIC",
+      "median_ftle": -0.0004984554543625563,
+      "median_spectral_entropy": 0.2744946926832199,
+      "median_top8": 0.8905883431434631,
+      "seed": 1949,
+      "state_class_fractions": {
+        "FIXED": 0.0078125,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 0.0,
+        "REGULAR_NONPERIODIC": 0.9921875,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 100,
+      "dominant_state_fraction": 0.98828125,
+      "family_class": "QUASIPERIODIC_LIKE",
+      "median_ftle": -0.0014600386493839324,
+      "median_spectral_entropy": 0.2782505601644516,
+      "median_top8": 0.9077631235122681,
+      "seed": 1967,
+      "state_class_fractions": {
+        "FIXED": 0.0,
+        "PERIODIC": 0.0,
+        "QUASIPERIODIC_LIKE": 0.98828125,
+        "REGULAR_NONPERIODIC": 0.01171875,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    },
+    {
+      "M": 100,
+      "dominant_state_fraction": 0.3046875,
+      "family_class": "MIXED",
+      "median_ftle": -0.02557220496237278,
+      "median_spectral_entropy": 0.08564770221710205,
+      "median_top8": 0.9858790040016174,
+      "seed": 1986,
+      "state_class_fractions": {
+        "FIXED": 0.2421875,
+        "PERIODIC": 0.3046875,
+        "QUASIPERIODIC_LIKE": 0.24609375,
+        "REGULAR_NONPERIODIC": 0.20703125,
+        "SENSITIVE": 0.0
+      },
+      "valid": true
+    }
+  ],
+  "state_fraction_FIXED": {
+    "max": 0.296875,
+    "mean": 0.045572916666666664,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 12
+  },
+  "state_fraction_PERIODIC": {
+    "max": 1.0,
+    "mean": 0.18912760416666666,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 12
+  },
+  "state_fraction_QUASIPERIODIC_LIKE": {
+    "max": 1.0,
+    "mean": 0.5013020833333334,
+    "median": 0.470703125,
+    "min": 0.0,
+    "n": 12
+  },
+  "state_fraction_REGULAR_NONPERIODIC": {
+    "max": 0.9921875,
+    "mean": 0.15559895833333334,
+    "median": 0.009765625,
+    "min": 0.0,
+    "n": 12
+  },
+  "state_fraction_SENSITIVE": {
+    "max": 0.98046875,
+    "mean": 0.1083984375,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 12
+  }
+}
