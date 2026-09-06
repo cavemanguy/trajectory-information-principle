@@ -11,21 +11,21 @@
 
 ## Primary summaries
 
-- DELTA_FULL: mean +0.057168; 95% CI [+0.053932, +0.060424]; positive 12/12
-- DELTA_SHUFFLE: mean +0.058621; 95% CI [+0.055524, +0.061697]; positive 12/12
-- DELTA_DIRECTION: mean +0.054076; 95% CI [+0.050327, +0.058123]; positive 12/12
-- DELTA_MAGNITUDE: mean +0.002780; 95% CI [+0.002189, +0.003365]; positive 12/12
-- RET_DIRECTION: mean +0.943787; 95% CI [+0.922595, +0.964752]; positive 12/12
-- RET_MAGNITUDE: mean +0.048052; 95% CI [+0.039207, +0.056724]; positive 12/12
-- DELTA_CURVATURE: mean +0.044996; 95% CI [+0.043355, +0.046567]; positive 12/12
-- DELTA_TURN: mean +0.000754; 95% CI [+0.000562, +0.000960]; positive 12/12
+- DELTA_FULL: mean +0.057167; 95% CI [+0.053931, +0.060419]; positive 12/12
+- DELTA_SHUFFLE: mean +0.058620; 95% CI [+0.055523, +0.061692]; positive 12/12
+- DELTA_DIRECTION: mean +0.054076; 95% CI [+0.050327, +0.058122]; positive 12/12
+- DELTA_MAGNITUDE: mean +0.002781; 95% CI [+0.002189, +0.003366]; positive 12/12
+- RET_DIRECTION: mean +0.943793; 95% CI [+0.922582, +0.964749]; positive 12/12
+- RET_MAGNITUDE: mean +0.048058; 95% CI [+0.039210, +0.056738]; positive 12/12
+- DELTA_CURVATURE: mean +0.044998; 95% CI [+0.043357, +0.046569]; positive 12/12
+- DELTA_TURN: mean +0.000755; 95% CI [+0.000562, +0.000962]; positive 12/12
 
 ## Per-lineage values
 
 | seed | M | Δfull | Δdir | Δmag | ret dir | ret mag | Δcurv |
 |---:|---:|---:|---:|---:|---:|---:|---:|
 | 1782 | 100 | +0.0494 | +0.0463 | +0.0017 | 0.938 | 0.034 | +0.0423 |
-| 1801 | 120 | +0.0636 | +0.0621 | +0.0043 | 0.978 | 0.068 | +0.0460 |
+| 1801 | 120 | +0.0635 | +0.0621 | +0.0043 | 0.978 | 0.068 | +0.0460 |
 | 1819 | 100 | +0.0562 | +0.0506 | +0.0028 | 0.900 | 0.049 | +0.0432 |
 | 1838 | 110 | +0.0534 | +0.0482 | +0.0021 | 0.902 | 0.040 | +0.0446 |
 | 1856 | 100 | +0.0560 | +0.0538 | +0.0014 | 0.959 | 0.024 | +0.0443 |
