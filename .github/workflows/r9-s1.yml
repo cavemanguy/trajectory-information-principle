@@ -1,0 +1,173 @@
+name: R9-S1 Recurrent Swarm Dynamics
+
+on:
+  push:
+    branches: [r9-s1-recurrent-swarm]
+    paths:
+      - 'experiments/r9_s1/**'
+      - '.github/workflows/r9-s1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r9-s1-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHONHASHSEED: '0'
+
+jobs:
+  smoke:
+    name: R9-S1 outcome-free smoke gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_s1/requirements.txt
+      - name: Compile and classifier self-check
+        run: |
+          python -m py_compile experiments/r9_s1/models.py experiments/r9_s1/diagnostics.py experiments/r9_s1/run_r9_s1.py experiments/r9_s1/classify_r9_s1.py
+          python -m experiments.r9_s1.classify_r9_s1 --self-check
+      - name: Execute outcome-free smoke
+        run: python experiments/r9_s1/run_r9_s1.py --seed 3109 --outdir /tmp/r9_s1_smoke --expected-commit "$GITHUB_SHA" --smoke
+      - name: Verify structural gate only
+        run: |
+          python - <<'PY'
+          import json,os
+          d=json.load(open('/tmp/r9_s1_smoke/smoke_summary.json'))
+          assert d['experiment']=='R9-S1' and d['protocol_version']=='R9-S1-v1'
+          assert d['all_valid'] is True and d['smoke_only'] is True
+          assert d['scientific_metrics_emitted'] is False
+          assert all(d[k] is True for k in ('task_semantics','causal_prefix','synchronous_equivalence','deterministic_replay'))
+          assert len(d['checks'])==8 and all(d['checks'].values())
+          assert d['source']['implementation_commit']==os.environ['GITHUB_SHA']
+          print('R9-S1 smoke structure PASSED')
+          PY
+
+  family:
+    name: R9-S1 seed ${{ matrix.seed }}
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        seed: [3109, 3137, 3163, 3191, 3221, 3251, 3271, 3301]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_s1/requirements.txt
+      - name: Execute frozen family
+        run: |
+          python experiments/r9_s1/run_r9_s1.py \
+            --seed ${{ matrix.seed }} \
+            --outdir results/r9_s1/seed_${{ matrix.seed }} \
+            --expected-commit "$GITHUB_SHA"
+      - name: Preserve complete or partial family record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r9-s1-family-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.seed }}
+          path: results/r9_s1/seed_${{ matrix.seed }}/
+          if-no-files-found: warn
+          retention-days: 90
+
+  classify:
+    name: R9-S1 frozen cross-seed classification
+    needs: [smoke, family]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SMOKE_RESULT: ${{ needs.smoke.result }}
+      FAMILY_RESULT: ${{ needs.family.result }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen dependencies
+        run: pip install -r experiments/r9_s1/requirements.txt
+      - name: Download all available family records
+        if: env.FAMILY_RESULT == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r9-s1-family-${{ github.run_id }}-${{ github.run_attempt }}-*
+          path: /tmp/r9_s1_families
+          merge-multiple: false
+      - name: Apply frozen classifier or preserve invalid gate
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,traceback
+          from pathlib import Path
+          from experiments.r9_s1.classify_r9_s1 import write
+          out=Path('/tmp/r9_s1_aggregate');out.mkdir(parents=True,exist_ok=True)
+          invalid=None
+          if os.environ['SMOKE_RESULT']!='success':
+              invalid='Outcome-free smoke gate did not pass; scientific families were not authorized.'
+          elif os.environ['FAMILY_RESULT']!='success':
+              invalid='One or more frozen family jobs failed, were cancelled, or were skipped. No partial aggregate was classified.'
+          else:
+              try:
+                  write('/tmp/r9_s1_families',out,os.environ['GITHUB_SHA'])
+              except Exception as exc:
+                  invalid='Frozen aggregation rejected the family records: '+type(exc).__name__+': '+str(exc)
+                  traceback.print_exc()
+          if invalid is not None:
+              record={'experiment':'R9-S1','classification':'R9-S1-X','valid':False,'reason':invalid,'implementation_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'run_attempt':os.environ['GITHUB_RUN_ATTEMPT'],'smoke_status':os.environ['SMOKE_RESULT'],'family_status':os.environ['FAMILY_RESULT']}
+              (out/'INVALID_RESULT.json').write_text(json.dumps(record,indent=2,sort_keys=True))
+              (out/'FINAL_RESULT.md').write_text('# R9-S1 — Invalid / stopped\n\n'+invalid+'\n\nNo scientific classification is promoted. Preserve all available logs and artifacts.\n')
+          status={'experiment':'R9-S1','valid':invalid is None,'implementation_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'run_attempt':os.environ['GITHUB_RUN_ATTEMPT']}
+          (out/'CLASSIFICATION_STATUS.json').write_text(json.dumps(status,indent=2,sort_keys=True))
+          manifest={'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'run_attempt':os.environ['GITHUB_RUN_ATTEMPT'],'files':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir() if p.is_file()}}
+          (out/'PUBLICATION_MANIFEST.json').write_text(json.dumps(manifest,indent=2,sort_keys=True))
+          if invalid is not None:raise SystemExit(1)
+          PY
+      - name: Upload frozen aggregate or invalid record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r9-s1-aggregate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/r9_s1_aggregate/
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Publish immutable result record off main
+        if: always()
+        run: |
+          if [ ! -f /tmp/r9_s1_aggregate/CLASSIFICATION_STATUS.json ]; then
+            echo 'No classification status to publish.'
+            exit 0
+          fi
+          cp -a /tmp/r9_s1_aggregate "$RUNNER_TEMP/r9_s1_publication"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code origin refs/heads/r9-s1-results >/dev/null 2>&1; then
+            git fetch origin r9-s1-results
+            git checkout -B r9-s1-results FETCH_HEAD
+          else
+            git checkout -b r9-s1-results
+          fi
+          destination="results/r9_s1/runs/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${GITHUB_SHA:0:12}"
+          mkdir -p "$destination"
+          cp -a "$RUNNER_TEMP/r9_s1_publication/." "$destination/"
+          git add "$destination"
+          git commit -m "Preserve R9-S1 run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT}"
+          git push origin HEAD:r9-s1-results
