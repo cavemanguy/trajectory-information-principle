@@ -1,0 +1,12 @@
+{
+  "files": {
+    "CLASSIFICATION_STATUS.json": "9027ae2232758a5ecdb1dd15db3ed769879c7ddc52bf738ce2bdd7979d45afff",
+    "FAMILY_RESULTS.json": "3c886a504358bb3bf4b9e1fecf6ea707307f889f30d4823f1f13f8dec497d563",
+    "FINAL_RESULT.json": "7a1a4ecc5d5cf4dc0486700f1fc9e3f1c70999a11712d220d24df43bbb18b505",
+    "FINAL_RESULT.md": "e36f90d4a8c7a30abff8e2f6ae5f300b8fbcdac51bd814cd3e3bcd204ceb8feb",
+    "MANIFEST.json": "203aa55f37528d9de5c72fc0cfd2791e3c01c623336307337ab303f5139df911"
+  },
+  "run_attempt": "1",
+  "run_id": "34083819542",
+  "source_commit": "fdf4aa8395e803f3a9c410c032090f4ccc40410b"
+}

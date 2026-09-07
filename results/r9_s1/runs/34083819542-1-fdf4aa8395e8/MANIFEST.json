@@ -1,0 +1,35 @@
+{
+  "experiment": "R9-S1",
+  "family_record_sha256": "3c886a504358bb3bf4b9e1fecf6ea707307f889f30d4823f1f13f8dec497d563",
+  "files": {
+    "FAMILY_RESULTS.json": "3c886a504358bb3bf4b9e1fecf6ea707307f889f30d4823f1f13f8dec497d563",
+    "FINAL_RESULT.json": "7a1a4ecc5d5cf4dc0486700f1fc9e3f1c70999a11712d220d24df43bbb18b505",
+    "FINAL_RESULT.md": "e36f90d4a8c7a30abff8e2f6ae5f300b8fbcdac51bd814cd3e3bcd204ceb8feb"
+  },
+  "implementation_commit": "fdf4aa8395e803f3a9c410c032090f4ccc40410b",
+  "seeds": [
+    3109,
+    3137,
+    3163,
+    3191,
+    3221,
+    3251,
+    3271,
+    3301
+  ],
+  "source": {
+    "implementation_commit": "fdf4aa8395e803f3a9c410c032090f4ccc40410b",
+    "preregistration_commit": "ca4da167c3be7f7b4ff98e11bf969ff41041eb94",
+    "protocol_version": "R9-S1-v1",
+    "source_sha256": {
+      "experiments/r9_s1/PREREGISTRATION.md": "aa0b97b590c3044bc32b3536d24833c16a0a94306703a699e2efcfbc14030a04",
+      "experiments/r9_s1/classify_r9_s1.py": "d7f184c9a0c60cae5c28fe53f267330004034ccf19230603c73da7df329e669d",
+      "experiments/r9_s1/diagnostics.py": "5c28ab55119e4b1041aa56639bea6e92124dcc0860841e3562c819e5f083c600",
+      "experiments/r9_s1/models.py": "597c8d80bb0f2e244e7dbccec36c43aa584841eb004d80c55267c6ae15f915a0",
+      "experiments/r9_s1/requirements.txt": "29d33017a7cf06b1193655f6d84d022ff57c32e7ab7fc6f5bacef3a418a8e419",
+      "experiments/r9_s1/run_r9_s1.py": "fbd14ea25f53ecec5e79484b1c091a3ee9e56fbdcfa835b6c69a1abd565ec2d7"
+    },
+    "task_git_blob": "b9ba7615f5cf70354b6c9b7da6cb13fabea567d6",
+    "task_sha256": "344816574e9f27f504290268e74ea3515418e326fc23b3386818821bd3466b6b"
+  }
+}
